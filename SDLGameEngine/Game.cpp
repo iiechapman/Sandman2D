@@ -101,10 +101,29 @@ void Game::handleEvents(){
         m_pGameStateMachine->changeState(new PlayState());
     }
     
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_F)){
+        if ((SDL_GetWindowFlags(m_pWindow) & SDL_WINDOW_FULLSCREEN) == SDL_TRUE){
+            cout << "Window is already fullscreen\n";
+            SDL_SetWindowFullscreen(m_pWindow, SDL_FALSE);
+        } else {
+            SDL_SetWindowFullscreen(m_pWindow, SDL_TRUE);
+            cout << "Turning fullscreen on\n";
+        }
+        
+        
+    }
+    
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)){
+        SDL_SetWindowFullscreen(m_pWindow, SDL_FALSE);
+    }
+    
+    
+    
 }
 
 void Game::update(){
     m_currentFrame = int((SDL_GetTicks() / 100) % 6 );
+
     m_pGameStateMachine->update();
 }
 

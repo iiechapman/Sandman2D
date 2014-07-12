@@ -16,8 +16,8 @@ Camera* Camera::s_pCamera = 0;
 const Vector2D Camera::getPosition(){
     //If camera target is set, follow it
     if (m_pTarget !=0){
-        Vector2D pos(m_pTarget->getX() - (Game::Instance()->getGameWidth()/2),
-                     m_pTarget->getY() - (Game::Instance()->getGameHeight()/2));
+        Vector2D pos(m_pTarget->getX(),
+                     m_pTarget->getY() - Game::Instance()->getGameHeight()/2);
         
         if (pos.getX() < 0){
             pos.setX(0);
