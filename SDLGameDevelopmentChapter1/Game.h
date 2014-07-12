@@ -1,0 +1,92 @@
+//
+//  Game.h
+//  SDLGameDevelopmentChapter1
+//
+//  Created by Evan Chapman on 4/20/14.
+//  Copyright (c) 2014 Evan Chapman. All rights reserved.
+//
+
+#ifndef __SDLGameDevelopmentChapter1__Game__
+#define __SDLGameDevelopmentChapter1__Game__
+
+#include <iostream>
+#include <vector>
+#include <SDL2/SDL.h>
+#include "TextureManager.h"
+#include "GameStateMachine.h"
+#include "GameObject.h"
+#include "CollisionManager.h"
+
+
+class Game{
+public:
+    ~Game() {};
+    
+    static Game* Instance();
+    SDL_Renderer* getRenderer() const { return m_pRenderer; }
+    
+    bool init(const char* title,
+              int xpos, int ypos,
+              int width, int height, int flags);
+    
+    
+    void render();
+    void update();
+    void handleEvents();
+    void quit();
+    void clean();
+    
+    GameStateMachine* getStateMachine(){ return m_pGameStateMachine;}
+    
+    bool running();
+    
+    int getGameWidth() const{
+        return m_gameWidth;
+    }
+    int getGameHeight() const{
+        return m_gameHeight;
+    }
+    
+    float getZoom() const{
+        return m_zoom;
+    }
+    void setZoom(float zoom){
+        m_zoom = zoom;
+    }
+    
+    void setPlayer(Player* player){
+        m_Player = player;
+        cout << "Player set for level\n";
+    }
+    Player* getPlayer(){
+        return m_Player;
+    }
+
+private:
+    Game() {};
+    static Game* s_pInstance;
+    
+    SDL_Window* m_pWindow;
+    SDL_Renderer* m_pRenderer;
+    
+    int m_currentFrame;
+    int m_gameWidth;
+    int m_gameHeight;
+    float m_zoom;
+        
+    vector<GameObject*> m_gameObjects;
+    
+    bool m_bRunning;
+    
+    Player* m_Player;
+    
+    GameStateMachine* m_pGameStateMachine;
+};
+
+
+
+#endif /* defined(__SDLGameDevelopmentChapter1__Game__) */
+
+
+
+

@@ -1,0 +1,22 @@
+//
+//  GameObjectCreators.pch
+//  SDLGameDevelopmentChapter1
+//
+//  Created by Evan Chapman on 6/21/14.
+//  Copyright (c) 2014 Evan Chapman. All rights reserved.
+//
+
+#ifndef SDLGameDevelopmentChapter1_GameObjectCreators_pch
+#define SDLGameDevelopmentChapter1_GameObjectCreators_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#include "MenuButton.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Light.h"
+#include "AnimatedGraphic.h"
+#include "Level.h"
+
+#endif
