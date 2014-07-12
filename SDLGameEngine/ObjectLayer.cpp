@@ -10,6 +10,8 @@
 #include "Game.h"
 #include "InputHandler.h"
 #include "CollisionManager.h"
+#include "Camera.h"
+#include "Vector2D.h"
 
 void ObjectLayer::update(Level* pLevel){
     for (int i = 0 ; i < m_gameObjects.size() ; i++){
@@ -61,11 +63,11 @@ void ObjectLayer::render(){
             currentShade.b+=2;
         }
         
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
-            currentShade.r = 30;
-            currentShade.g = 30;
-            currentShade.b = 30;
-        }
+//        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
+//            currentShade.r = 30;
+//            currentShade.g = 30;
+//            currentShade.b = 30;
+//        }
         
         
         SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), currentShade.r, currentShade.g, currentShade.b, 255);
@@ -77,13 +79,26 @@ void ObjectLayer::render(){
         for (int i = 0 ; i < m_gameObjects.size(); i++){
             if (m_gameObjects[i]->GetParams().getType() == string("Light")){
                 
+                //Make copy of current params for camera offset
+                GameObjectParams cameraParams = m_gameObjects[i]->GetParams();
+                
+                //If light is meant to scroll, then offset it
+                if (m_gameObjects[i]->GetParams().isScrolling())  {
+                Vector2D pos(cameraParams.getX() - Camera::Instance()->getPosition().getX(),
+                             cameraParams.getY() - Camera::Instance()->getPosition().getY());
+                
+                cameraParams.setX(pos.getX());
+                cameraParams.setY(pos.getY());
+                }
+                
+                
                 //Flip light depending on direction
                 if (m_gameObjects[i]->GetParams().getVelocity().getX() > 0){
                     TextureManager::Instance()->drawFrame
-                    (&m_gameObjects[i]->GetParams(), Game::Instance()->getRenderer(),SDL_FLIP_NONE, Game::Instance()->getZoom());
+                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_NONE, Game::Instance()->getZoom());
                 } else {
                     TextureManager::Instance()->drawFrame
-                    (&m_gameObjects[i]->GetParams(), Game::Instance()->getRenderer(),SDL_FLIP_HORIZONTAL, Game::Instance()->getZoom());
+                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_HORIZONTAL, Game::Instance()->getZoom());
                 }
                 
                 //cout << "Light render\n";

@@ -8,6 +8,7 @@
 
 #include "Player.h"
 #include "InputHandler.h"
+#include "Game.h"
 
 
 Player::Player(){
@@ -29,18 +30,19 @@ void Player::draw(){
 }
 
 void Player::collision(){
-    m_params.setX(m_params.getX() - m_params.getVelocity().getX());
+    //m_params.setX(m_params.getX() - m_params.getVelocity().getX());
     m_params.setY(m_params.getY() - m_params.getVelocity().getY());
     
-    m_params.getVelocity().setX(0);
+    //m_params.getVelocity().setX(0);
     m_params.getVelocity().setY(0);
     
-    m_params.getAcceleration().setX(0);
+    //m_params.getAcceleration().setX(0);
     m_params.getAcceleration().setY(0);
-    
+    m_bIsFalling = false;
 }
 
 void Player::update(){
+    m_bIsFalling = true;
     handleInput();
     handlePhysics();
     handleAnimation();
@@ -58,6 +60,14 @@ void Player::handleAnimation(){
 }
 
 void Player::handleInput(){
+    
+    //Hold shift to run
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LSHIFT)){
+        m_horizontalSpeed = m_runSpeed;
+    } else {
+        m_horizontalSpeed = m_walkSpeed;
+    }
+    
     //Mouse control
     if (InputHandler::Instance()->getMouseButtonState(RIGHT)){
         Vector2D* vec = InputHandler::Instance()->getMousePosition();
@@ -65,44 +75,53 @@ void Player::handleInput(){
         GetParams().setVelocity((*vec - GetParams().getPosition()) / 50 );
         
         //Keyboard control
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
-        GetParams().getAcceleration().setY(-.1);
     } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-        GetParams().getAcceleration().setX(.5);
+        GetParams().getVelocity().setX(m_horizontalSpeed);
     } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)){
-        GetParams().getAcceleration().setX(-.5);
+        GetParams().getVelocity().setX(-m_horizontalSpeed);
+        
+        //Press space for jump, up for jetpack
+    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
+        GetParams().getAcceleration().setY(-m_jumpSpeed);
+        GetParams().getVelocity().setY(-m_jumpSpeed);
     } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
-        GetParams().getAcceleration().setY(-.5);
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)){
-        GetParams().getAcceleration().setY(.5);
+        GetParams().getAcceleration().setY(-m_jetSpeed);
+        
     } else {
-        GetParams().getAcceleration().setX(0);
-        GetParams().getAcceleration().setY(0);
         
-        //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
-        if (GetParams().getVelocity().getX() > 0){
-            GetParams().getVelocity().setX(GetParams().getVelocity().getX() - .1);
-            //cout << "Slowing down right movement\n";
-            if (GetParams().getVelocity().getX() <= 0){
-                GetParams().getVelocity().setX(0);
-            }
-        }
-        
-        if (GetParams().getVelocity().getX() < 0){
-            GetParams().getVelocity().setX(GetParams().getVelocity().getX() + .1);
-            //cout << "Slowing down left movement\n";
-            if (GetParams().getVelocity().getX() >= 0){
-                GetParams().getVelocity().setX(0);
-            }
+    
+    GetParams().getAcceleration().setX(0);
+    GetParams().getAcceleration().setY(0);
+    
+    //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
+    if (GetParams().getVelocity().getX() > 0){
+        GetParams().getVelocity().setX
+        (GetParams().getVelocity().getX() - m_horizontalDrag);
+        //cout << "Slowing down right movement\n";
+        if (GetParams().getVelocity().getX() <= 0){
+            GetParams().getVelocity().setX(0);
         }
     }
+    
+    if (GetParams().getVelocity().getX() < 0){
+        GetParams().getVelocity().setX
+        (GetParams().getVelocity().getX() + m_horizontalDrag);
+        //cout << "Slowing down left movement\n";
+        if (GetParams().getVelocity().getX() >= 0){
+            GetParams().getVelocity().setX(0);
+        }
+    }
+}
 }
 
 void Player::handlePhysics(){
     
     //Handle gravity
+    if (m_bIsFalling){
     if (GetParams().getVelocity().getY() < 3){
-        GetParams().getVelocity().setY(GetParams().getVelocity().getY() + .2);
+        GetParams().getVelocity().setY
+        (GetParams().getVelocity().getY() + m_verticalGravity);
+    }
     }
     
 }

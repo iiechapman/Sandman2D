@@ -19,7 +19,7 @@ using namespace std;
 class TileLayer : public Layer{
 public:
     
-    TileLayer(int tileSize, const vector<Tileset> &tilesets);
+    TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tileset> &tilesets);
     
     virtual void update(Level* pLevel);
     virtual void render();
@@ -65,6 +65,8 @@ private:
     int m_numColumns;
     int m_numRows;
     int m_tileSize;
+    int m_mapWidth;
+    int m_mapHeight;
     
     Vector2D m_position;
     Vector2D m_velocity;

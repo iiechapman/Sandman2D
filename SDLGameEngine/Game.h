@@ -16,6 +16,7 @@
 #include "GameStateMachine.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
+#include "Camera.h"
 
 
 class Game{
@@ -46,6 +47,21 @@ public:
     int getGameHeight() const{
         return m_gameHeight;
     }
+    int getMapWidth() {
+        return m_mapWidth;
+    }
+    
+    int getMapHeight(){
+        return m_mapHeight;
+    }
+    
+    void setMapHeight(int mapHeight){
+        m_mapHeight = mapHeight;
+    }
+    
+    void setMapWidth(int mapWidth){
+        m_mapWidth = mapWidth;
+    }
     
     float getZoom() const{
         return m_zoom;
@@ -56,6 +72,8 @@ public:
     
     void setPlayer(Player* player){
         m_Player = player;
+        
+        Camera::Instance()->setTarget(&player->GetParams().getPosition());
         cout << "Player set for level\n";
     }
     Player* getPlayer(){
@@ -72,6 +90,8 @@ private:
     int m_currentFrame;
     int m_gameWidth;
     int m_gameHeight;
+    int m_mapWidth;
+    int m_mapHeight;
     float m_zoom;
         
     vector<GameObject*> m_gameObjects;

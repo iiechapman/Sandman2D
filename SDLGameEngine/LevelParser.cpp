@@ -24,7 +24,6 @@ Level* LevelParser::parseLevel(const char* levelFile){
     levelDocument.LoadFile(levelFile);
     
     //Create the level object
-    
     Level* pLevel = new Level();
     
     //Get the root node
@@ -146,7 +145,7 @@ void LevelParser::parseTileLayer
 (TiXmlElement *pTileElement, vector<Layer *> *pLayers,
 vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     
-    TileLayer* pTileLayer = new TileLayer(m_tileSize, *pTilesets);
+    TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
     
     //Placeholder for data
     vector<vector<int>> data;

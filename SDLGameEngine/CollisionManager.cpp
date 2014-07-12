@@ -9,6 +9,7 @@
 #include "CollisionManager.h"
 #include "Player.h"
 #include "Game.h"
+#include "Camera.h"
 
 CollisionManager::CollisionManager(){
     //New Collision manager
@@ -55,23 +56,44 @@ void CollisionManager::checkPlayerTileCollision
             pPlayer->GetParams().getVelocity().getY() > 0.0f ){
             
             tileColumn = ((((pPlayer->GetParams().getX()) +
-                           pPlayer->GetParams().getWidth()) / pTileLayer->getTileSize())/ Game::Instance()->getZoom());
+                            Camera::Instance()->getPosition().getX() +
+                           pPlayer->GetParams().getWidth()) /
+                           pTileLayer->getTileSize())/ Game::Instance()->getZoom());
             
             tileRow = (((pPlayer->GetParams().getY() +
-                        pPlayer->GetParams().getHeight()) / pTileLayer->getTileSize())/ Game::Instance()->getZoom());
+                         Camera::Instance()->getPosition().getY() +
+                        pPlayer->GetParams().getHeight()) /
+                        pTileLayer->getTileSize())/ Game::Instance()->getZoom());
             
-            tileID = tiles[tileRow + y][tileColumn + x];
-            
-            
+            //Check tile bounds
+            cout << pTileLayer->getNumColumns() << endl;
+            if ((tileRow + y )< pTileLayer->getNumRows() &&
+                (tileColumn + x) < pTileLayer->getNumColumns()){
+                tileID = tiles[tileRow + y][tileColumn + x];
+            } else {
+                tileID = 0;
+            }
+        
             //If moving downwards or leftwards
         } else if (pPlayer->GetParams().getVelocity().getX() < 0.0f ||
                    pPlayer->GetParams().getVelocity().getY() < 0.0f ){
             
-            tileColumn = (((pPlayer->GetParams().getX() / pTileLayer->getTileSize())/ Game::Instance()->getZoom()));
+            tileColumn = (((pPlayer->GetParams().getX() +
+                            Camera::Instance()->getPosition().getX() /
+                            pTileLayer->getTileSize())/ Game::Instance()->getZoom()));
             
             tileRow = (((pPlayer->GetParams().getY() / pTileLayer->getTileSize())/ Game::Instance()->getZoom()));
             
-            tileID = tiles[tileRow + y][tileColumn + x];
+            //Check tile bounds
+            cout << pTileLayer->getNumColumns() << endl;
+            if ((tileRow + y ) > 0 &&
+                (tileColumn + x) > 0){
+                tileID = tiles[tileRow + y][tileColumn + x];
+            } else {
+                tileID = 0;
+            }
+            
+        
         }
         //If tileID is not blank, collision occured
         if (tileID != 0 ){

@@ -105,6 +105,13 @@ public:
         return m_lockTo;
     }
     
+    bool isScrolling(){
+        return m_bScrolling;
+    }
+    void setScrolling(bool scrolling){
+        m_bScrolling = scrolling;
+    }
+    
     friend class GameObject;
     
 protected:
@@ -133,6 +140,7 @@ protected:
     SDL_BlendMode m_blendMode;
     
     //Updating vars
+    bool m_bScrolling = true;
     bool m_bUpdating;
     bool m_bDead;
     bool m_bDying;
