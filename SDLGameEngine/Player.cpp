@@ -18,8 +18,6 @@ Player::Player(){
 Player::Player(GameObjectParams params , int numberFrames)
 :SDLGameObject(params){
     GetParams().setMaxFrames(numberFrames);
-
-
 }
 
 void Player::load(GameObjectParams params){
