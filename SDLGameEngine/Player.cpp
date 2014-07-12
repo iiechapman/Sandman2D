@@ -81,10 +81,10 @@ void Player::handleInput(){
         GetParams().getAcceleration().setX(0);
         GetParams().getAcceleration().setY(0);
         
-        cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
+        //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
         if (GetParams().getVelocity().getX() > 0){
             GetParams().getVelocity().setX(GetParams().getVelocity().getX() - .1);
-            cout << "Slowing down right movement\n";
+            //cout << "Slowing down right movement\n";
             if (GetParams().getVelocity().getX() <= 0){
                 GetParams().getVelocity().setX(0);
             }
@@ -92,7 +92,7 @@ void Player::handleInput(){
         
         if (GetParams().getVelocity().getX() < 0){
             GetParams().getVelocity().setX(GetParams().getVelocity().getX() + .1);
-            cout << "Slowing down left movement\n";
+            //cout << "Slowing down left movement\n";
             if (GetParams().getVelocity().getX() >= 0){
                 GetParams().getVelocity().setX(0);
             }
@@ -101,6 +101,8 @@ void Player::handleInput(){
 }
 
 void Player::handlePhysics(){
+    
+    //Handle gravity
     if (GetParams().getVelocity().getY() < 3){
         GetParams().getVelocity().setY(GetParams().getVelocity().getY() + .2);
     }
