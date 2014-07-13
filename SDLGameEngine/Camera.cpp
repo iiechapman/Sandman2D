@@ -14,11 +14,29 @@ Camera* Camera::s_pCamera = 0;
 
 //Camera position is updated and sent back to caller
 const Vector2D Camera::getPosition(){
+    
+    
+    /*
+     Camera scroll equation:
+     Current position * ratio of position on view
+     
+     (Current Position / Size of view) * size of map
+    
+     */
+    
     //If camera target is set, follow it
     if (m_pTarget !=0){
-        Vector2D pos(m_pTarget->getX(),
-                     m_pTarget->getY() - Game::Instance()->getGameHeight()/2);
+        Vector2D pos((((m_pTarget->getX() -100) * Game::Instance()->getZoom()) /
+                      Game::Instance()->getGameWidth() * Game::Instance()->getZoom() *
+                      Game::Instance()->getMapWidth()
+                      ),
+                     
+                     (((m_pTarget->getY() -100) * Game::Instance()->getZoom()) /
+                      Game::Instance()->getGameHeight() * Game::Instance()->getZoom() *
+                      Game::Instance()->getMapHeight()
+                      ));
         
+        //Bounds for camera
         if (pos.getX() < 0){
             pos.setX(0);
         }
@@ -27,12 +45,17 @@ const Vector2D Camera::getPosition(){
             pos.setY(0);
         }
         
-        if (pos.getX() > Game::Instance()->getGameWidth()){
-            pos.setX(Game::Instance()->getGameWidth());
+        //Check if camera has scrolled past tiles, rework this equation
+        if (pos.getX() * Game::Instance()->getZoom() >
+            (Game::Instance()->getMapWidth() * Game::Instance()->getZoom() -
+                        Game::Instance()->getGameWidth())* Game::Instance()->getZoom()){
+            
+            pos.setX(Game::Instance()->getMapWidth() * Game::Instance()->getZoom() -
+                     Game::Instance()->getGameWidth()* Game::Instance()->getZoom());
         }
         
-        if (pos.getY() > Game::Instance()->getMapHeight()){
-            pos.setY(Game::Instance()->getMapHeight());
+        if (pos.getY() > Game::Instance()->getMapHeight()* Game::Instance()->getZoom()){
+            pos.setY(Game::Instance()->getMapHeight()* Game::Instance()->getZoom());
         }
         
         

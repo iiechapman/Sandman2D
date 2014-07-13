@@ -40,6 +40,10 @@ private:
     bool m_bIsFalling;
     bool m_bIsRunning;
     
+    bool m_bMoveRight;
+    bool m_bMoveLeft;
+    bool m_bIsJetting;
+    
     float m_runSpeed = 1.3;
     float m_walkSpeed = 0.7;
     float m_jetSpeed = .4;

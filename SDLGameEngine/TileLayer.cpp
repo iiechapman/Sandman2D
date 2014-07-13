@@ -67,8 +67,8 @@ TileLayer::TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tile
     m_mapHeight = mapHeight;
     m_numColumns = mapWidth;
     m_numRows = mapHeight;
-    Game::Instance()->setMapHeight(mapHeight);
-    Game::Instance()->setMapWidth(mapWidth);
+    Game::Instance()->setMapHeight(mapHeight * tileSize);
+    Game::Instance()->setMapWidth(mapWidth * tileSize);
 }
 
 Tileset TileLayer::getTilesetByID(int tileID){

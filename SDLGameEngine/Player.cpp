@@ -68,60 +68,70 @@ void Player::handleInput(){
         m_horizontalSpeed = m_walkSpeed;
     }
     
-    //Mouse control
-    if (InputHandler::Instance()->getMouseButtonState(RIGHT)){
-        Vector2D* vec = InputHandler::Instance()->getMousePosition();
-        
-        GetParams().setVelocity((*vec - GetParams().getPosition()) / 50 );
-        
-        //Keyboard control
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-        GetParams().getVelocity().setX(m_horizontalSpeed);
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)){
-        GetParams().getVelocity().setX(-m_horizontalSpeed);
-        
-        //Press space for jump, up for jetpack
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
-        GetParams().getAcceleration().setY(-m_jumpSpeed);
-        GetParams().getVelocity().setY(-m_jumpSpeed);
-    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
-        GetParams().getAcceleration().setY(-m_jetSpeed);
-        
-    } else {
-        
+    //New Keyboard control
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ? m_bMoveRight = true : m_bMoveRight = false;
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) ? m_bMoveRight = true : m_bMoveRight = false;
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ? m_bMoveRight = true : m_bMoveRight = false;
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE) ? m_bMoveRight = true : m_bMoveRight = false;
     
-    GetParams().getAcceleration().setX(0);
-    GetParams().getAcceleration().setY(0);
+//Old control code
     
-    //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
-    if (GetParams().getVelocity().getX() > 0){
-        GetParams().getVelocity().setX
-        (GetParams().getVelocity().getX() - m_horizontalDrag);
-        //cout << "Slowing down right movement\n";
-        if (GetParams().getVelocity().getX() <= 0){
-            GetParams().getVelocity().setX(0);
-        }
-    }
+//    
+//    //Mouse control
+//    if (InputHandler::Instance()->getMouseButtonState(RIGHT)){
+//        Vector2D* vec = InputHandler::Instance()->getMousePosition();
+//        
+//        GetParams().setVelocity((*vec - GetParams().getPosition()) / 50 );
+//        
+//        //Keyboard control
+//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)){
+//        GetParams().getVelocity().setX(m_horizontalSpeed);
+//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)){
+//        GetParams().getVelocity().setX(-m_horizontalSpeed);
+//        
+//        //Press space for jump, up for jetpack
+//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
+//        GetParams().getAcceleration().setY(-m_jumpSpeed);
+//        GetParams().getVelocity().setY(-m_jumpSpeed);
+//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
+//        GetParams().getAcceleration().setY(-m_jetSpeed);
+//        
+//    } else {
+//        
+//        
+//        GetParams().getAcceleration().setX(0);
+//        GetParams().getAcceleration().setY(0);
+//        
+//        //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
+//        if (GetParams().getVelocity().getX() > 0){
+//            GetParams().getVelocity().setX
+//            (GetParams().getVelocity().getX() - m_horizontalDrag);
+//            //cout << "Slowing down right movement\n";
+//            if (GetParams().getVelocity().getX() <= 0){
+//                GetParams().getVelocity().setX(0);
+//            }
+//        }
+//        
+//        if (GetParams().getVelocity().getX() < 0){
+//            GetParams().getVelocity().setX
+//            (GetParams().getVelocity().getX() + m_horizontalDrag);
+//            //cout << "Slowing down left movement\n";
+//            if (GetParams().getVelocity().getX() >= 0){
+//                GetParams().getVelocity().setX(0);
+//            }
+//        }
+//    }
     
-    if (GetParams().getVelocity().getX() < 0){
-        GetParams().getVelocity().setX
-        (GetParams().getVelocity().getX() + m_horizontalDrag);
-        //cout << "Slowing down left movement\n";
-        if (GetParams().getVelocity().getX() >= 0){
-            GetParams().getVelocity().setX(0);
-        }
-    }
-}
 }
 
 void Player::handlePhysics(){
     
     //Handle gravity
     if (m_bIsFalling){
-    if (GetParams().getVelocity().getY() < 3){
-        GetParams().getVelocity().setY
-        (GetParams().getVelocity().getY() + m_verticalGravity);
-    }
+        if (GetParams().getVelocity().getY() < 3){
+            GetParams().getVelocity().setY
+            (GetParams().getVelocity().getY() + m_verticalGravity);
+        }
     }
     
 }

@@ -10,7 +10,6 @@
 #include "Game.h"
 #include "InputHandler.h"
 
-
 InputHandler* InputHandler::s_pInstance = 0;
 
 InputHandler* InputHandler::Instance(){

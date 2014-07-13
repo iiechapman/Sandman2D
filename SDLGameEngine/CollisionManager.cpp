@@ -47,8 +47,8 @@ void CollisionManager::checkPlayerTileCollision
         int x,y,tileColumn,tileRow,tileID = 0;
         
         //Calculate position on tile map
-        x = (layerPos.getX()) / pTileLayer->getTileSize();
-        y = (layerPos.getY()) / pTileLayer->getTileSize();
+        x = ((layerPos.getX()) / pTileLayer->getTileSize());
+        y = ((layerPos.getY()) / pTileLayer->getTileSize());
     
         
         //If moving upwards or rightwards
@@ -58,12 +58,12 @@ void CollisionManager::checkPlayerTileCollision
             tileColumn = ((((pPlayer->GetParams().getX()) +
                             Camera::Instance()->getPosition().getX() +
                            pPlayer->GetParams().getWidth()) /
-                           pTileLayer->getTileSize())/ Game::Instance()->getZoom());
+                           pTileLayer->getTileSize()));
             
             tileRow = (((pPlayer->GetParams().getY() +
                          Camera::Instance()->getPosition().getY() +
                         pPlayer->GetParams().getHeight()) /
-                        pTileLayer->getTileSize())/ Game::Instance()->getZoom());
+                        pTileLayer->getTileSize()));
             
             //Check tile bounds
             cout << pTileLayer->getNumColumns() << endl;
@@ -78,11 +78,13 @@ void CollisionManager::checkPlayerTileCollision
         } else if (pPlayer->GetParams().getVelocity().getX() < 0.0f ||
                    pPlayer->GetParams().getVelocity().getY() < 0.0f ){
             
-            tileColumn = (((pPlayer->GetParams().getX() +
-                            Camera::Instance()->getPosition().getX() /
-                            pTileLayer->getTileSize())/ Game::Instance()->getZoom()));
+            tileColumn = ((pPlayer->GetParams().getX() +
+                            Camera::Instance()->getPosition().getX())
+                          / pTileLayer->getTileSize());
             
-            tileRow = (((pPlayer->GetParams().getY() / pTileLayer->getTileSize())/ Game::Instance()->getZoom()));
+            tileRow = ((pPlayer->GetParams().getY() +
+                       Camera::Instance()->getPosition().getY())
+                       / pTileLayer->getTileSize());
             
             //Check tile bounds
             cout << pTileLayer->getNumColumns() << endl;
