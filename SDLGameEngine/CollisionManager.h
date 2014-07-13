@@ -27,6 +27,7 @@ public:
     
     void checkPlayerTileCollision
     (Player* pPlayer, const vector<TileLayer*> &collisionLayers);
+
     
 private:
     CollisionManager();

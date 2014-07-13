@@ -42,14 +42,7 @@ void SDLGameObject::draw(){
 }
 
 void SDLGameObject::update(){
-    m_params.getVelocity().setX
-    (m_params.getVelocity().getX() + m_params.getAcceleration().getX());
-    m_params.getVelocity().setY
-    (m_params.getVelocity().getY() + m_params.getAcceleration().getY());
-    
-    
-    m_params.setX(m_params.getX() + m_params.getVelocity().getX());
-    m_params.setY(m_params.getY() + m_params.getVelocity().getY());
+
 }
 
 void SDLGameObject::clean(){

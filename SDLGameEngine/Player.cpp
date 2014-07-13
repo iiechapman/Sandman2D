@@ -38,15 +38,6 @@ void Player::collision(){
     
     //m_params.getAcceleration().setX(0);
     m_params.getAcceleration().setY(0);
-    m_bIsFalling = false;
-}
-
-void Player::update(){
-    m_bIsFalling = true;
-    handleInput();
-    handlePhysics();
-    handleAnimation();
-    SDLGameObject::update();
 }
 
 void Player::handleAnimation(){
@@ -57,6 +48,14 @@ void Player::handleAnimation(){
     } else {
         GetParams().setFrame(0);
     }
+}
+
+void Player::update(){
+    handleInput();
+    handlePhysics();
+    handleMovement();
+    handleAnimation();
+    SDLGameObject::update();
 }
 
 void Player::handleInput(){
@@ -70,71 +69,248 @@ void Player::handleInput(){
     
     //New Keyboard control
     InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ? m_bMoveRight = true : m_bMoveRight = false;
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) ? m_bMoveRight = true : m_bMoveRight = false;
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ? m_bMoveRight = true : m_bMoveRight = false;
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE) ? m_bMoveRight = true : m_bMoveRight = false;
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) ? m_bMoveLeft = true : m_bMoveLeft = false;
     
-//Old control code
+    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ? m_bIsJetting = true : m_bIsJetting = false;
     
-//    
-//    //Mouse control
-//    if (InputHandler::Instance()->getMouseButtonState(RIGHT)){
-//        Vector2D* vec = InputHandler::Instance()->getMousePosition();
-//        
-//        GetParams().setVelocity((*vec - GetParams().getPosition()) / 50 );
-//        
-//        //Keyboard control
-//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)){
-//        GetParams().getVelocity().setX(m_horizontalSpeed);
-//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)){
-//        GetParams().getVelocity().setX(-m_horizontalSpeed);
-//        
-//        //Press space for jump, up for jetpack
-//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
-//        GetParams().getAcceleration().setY(-m_jumpSpeed);
-//        GetParams().getVelocity().setY(-m_jumpSpeed);
-//    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
-//        GetParams().getAcceleration().setY(-m_jetSpeed);
-//        
-//    } else {
-//        
-//        
-//        GetParams().getAcceleration().setX(0);
-//        GetParams().getAcceleration().setY(0);
-//        
-//        //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
-//        if (GetParams().getVelocity().getX() > 0){
-//            GetParams().getVelocity().setX
-//            (GetParams().getVelocity().getX() - m_horizontalDrag);
-//            //cout << "Slowing down right movement\n";
-//            if (GetParams().getVelocity().getX() <= 0){
-//                GetParams().getVelocity().setX(0);
-//            }
-//        }
-//        
-//        if (GetParams().getVelocity().getX() < 0){
-//            GetParams().getVelocity().setX
-//            (GetParams().getVelocity().getX() + m_horizontalDrag);
-//            //cout << "Slowing down left movement\n";
-//            if (GetParams().getVelocity().getX() >= 0){
-//                GetParams().getVelocity().setX(0);
-//            }
-//        }
-//    }
+    (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE) && m_bCanJump) ? m_bIsJumping = true : m_bIsJumping = false;
+    
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
+        cout << "Pressed jump\n";
+    }
+    
+    //Old control code
+    
+    //
+    //    //Mouse control
+    //    if (InputHandler::Instance()->getMouseButtonState(RIGHT)){
+    //        Vector2D* vec = InputHandler::Instance()->getMousePosition();
+    //
+    //        GetParams().setVelocity((*vec - GetParams().getPosition()) / 50 );
+    //
+    //        //Keyboard control
+    //    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)){
+    //        GetParams().getVelocity().setX(m_horizontalSpeed);
+    //    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)){
+    //        GetParams().getVelocity().setX(-m_horizontalSpeed);
+    //
+    //        //Press space for jump, up for jetpack
+    //    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
+    //        GetParams().getAcceleration().setY(-m_jumpSpeed);
+    //        GetParams().getVelocity().setY(-m_jumpSpeed);
+    //    } else if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)){
+    //        GetParams().getAcceleration().setY(-m_jetSpeed);
+    //
+    //    } else {
+    //
+    //
+    //        GetParams().getAcceleration().setX(0);
+    //        GetParams().getAcceleration().setY(0);
+    //
+    //        //cout << "Current XVel: " << GetParams().getVelocity().getX() << endl;
+    //        if (GetParams().getVelocity().getX() > 0){
+    //            GetParams().getVelocity().setX
+    //            (GetParams().getVelocity().getX() - m_horizontalDrag);
+    //            //cout << "Slowing down right movement\n";
+    //            if (GetParams().getVelocity().getX() <= 0){
+    //                GetParams().getVelocity().setX(0);
+    //            }
+    //        }
+    //
+    //        if (GetParams().getVelocity().getX() < 0){
+    //            GetParams().getVelocity().setX
+    //            (GetParams().getVelocity().getX() + m_horizontalDrag);
+    //            //cout << "Slowing down left movement\n";
+    //            if (GetParams().getVelocity().getX() >= 0){
+    //                GetParams().getVelocity().setX(0);
+    //            }
+    //        }
+    //    }
     
 }
 
 void Player::handlePhysics(){
     
-    //Handle gravity
-    if (m_bIsFalling){
-        if (GetParams().getVelocity().getY() < 3){
-            GetParams().getVelocity().setY
-            (GetParams().getVelocity().getY() + m_verticalGravity);
+    if (m_bMoveRight){
+        GetParams().getAcceleration().setX(m_horizontalSpeed);
+        
+    } else if (GetParams().getVelocity().getX() > 0) {
+        //If not moving right, slow down to stop
+        GetParams().getAcceleration().setX(-m_horizontalDrag);
+        
+        //Stop at 0 movement
+        if (GetParams().getVelocity().getX() < m_horizontalSpeed ){
+            GetParams().getVelocity().setX(0);
+            GetParams().getAcceleration().setX(0);
         }
     }
     
+    
+    if (m_bMoveLeft){
+        GetParams().getAcceleration().setX(-m_horizontalSpeed);
+        
+    } else if (GetParams().getVelocity().getX() < 0) {
+        //If not moving left, slow down to stop
+        GetParams().getAcceleration().setX(m_horizontalDrag);
+        
+        //Stop at 0 movement
+        if (GetParams().getVelocity().getX() > m_horizontalSpeed ){
+            GetParams().getVelocity().setX(0);
+            GetParams().getAcceleration().setX(0);
+        }
+    }
+    
+    if (m_bIsJumping){
+        cout << "Jumping!";
+        GetParams().getVelocity().setY(-m_jumpSpeed);
+    }
+    
+    if (m_bIsJetting){
+        GetParams().getAcceleration().setY(-m_jetSpeed);
+    }
+    
+    //Handle gravity
+    if (m_bIsFalling){
+        cout << "Falling!\n";
+        if (GetParams().getVelocity().getY() < 3){
+            GetParams().getAcceleration().setY(m_verticalGravity);
+        }
+    }
 }
+
+void Player::handleMovement(){
+    
+    //Check X movement and collision
+    Vector2D newPos = GetParams().getPosition();
+    newPos.setX(newPos.getX() + GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
+    
+    if (checkCollideTile(newPos)){
+        cout << "X Collision\n";
+        GetParams().getVelocity().setX(0);
+        GetParams().getAcceleration().setX(0);
+    }
+    
+    
+    //Check Y Movement and Collision
+    newPos = GetParams().getPosition();
+    newPos.setY(newPos.getY() + GetParams().getVelocity().getY() + GetParams().getAcceleration().getY());
+    
+    if (checkCollideTile(newPos)){
+        cout << "Y Collision\n";
+        m_bIsFalling = false;
+        m_bCanJump = true;
+        
+        GetParams().getVelocity().setY(0);
+        GetParams().getAcceleration().setY(0);
+    }
+    
+    
+    //Check if no tile below player to make them fall
+    if (!m_bIsFalling){
+        newPos = GetParams().getPosition();
+        newPos.setY(newPos.getY() +1);
+        
+        if (!checkCollideTile(newPos)){
+            cout << "falling!\n";
+            m_bIsFalling = true;
+        } else {
+            m_bIsFalling = false;
+        }
+    }
+    
+    
+    GetParams().getVelocity().setX
+    (GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
+    
+    GetParams().getVelocity().setY
+    (GetParams().getVelocity().getY() + GetParams().getAcceleration().getY());
+    
+    
+    GetParams().setX(GetParams().getX() + GetParams().getVelocity().getX());
+    GetParams().setY(GetParams().getY() + GetParams().getVelocity().getY());
+    
+}
+
+bool Player::checkCollideTile(Vector2D pos){
+    
+    //Iterate through all collision layers
+    for (vector<TileLayer*>::const_iterator it = m_pCollisionLayers.begin();
+         it != m_pCollisionLayers.end() ; it++){
+        
+        TileLayer* pTileLayer = (*it);
+        vector<vector<int>> tiles = pTileLayer->getTileIDs();
+        
+        //Get layers position
+        Vector2D layerPos = pTileLayer->getPosition();
+        
+        int x,y,tileColumn,tileRow,tileID = 0;
+        
+        //If moving downwards or rightwards
+        if (GetParams().getVelocity().getX() > 0.0f ||
+            GetParams().getVelocity().getY() >= 0.0f ){
+            
+            //Calculate position on tile map
+            x = ((layerPos.getX()) / pTileLayer->getTileSize());
+            y = ((layerPos.getY()) / pTileLayer->getTileSize());
+            
+            //Check Right side collision
+            tileColumn = (((pos.getX() +
+                            Camera::Instance()->getPosition().getX() +
+                            GetParams().getWidth()) /
+                           pTileLayer->getTileSize()));
+            
+            //Check bottom side collision
+            tileRow = (((pos.getY() +
+                         Camera::Instance()->getPosition().getY() +
+                         GetParams().getHeight()) /
+                        pTileLayer->getTileSize()));
+            
+            //Check tile bounds
+            //cout << pTileLayer->getNumColumns() << endl;
+            if ((tileRow + y ) > 0 &&
+                (tileColumn + x) > 0 &&
+                tileRow + y < pTileLayer->getNumRows() &&
+                tileColumn + x < pTileLayer->getNumColumns()
+                ){
+                tileID = tiles[tileRow + y][tileColumn + x];
+            } else {
+                tileID = 0;
+            }
+            
+            //If moving upwards or leftwards
+        } else if (GetParams().getVelocity().getX() < 0.0f ||
+                   GetParams().getVelocity().getY() < 0.0f ){
+            
+            //Check left side collision
+            tileColumn = ((pos.getX() + Camera::Instance()->getPosition().getX())
+                          / pTileLayer->getTileSize());
+            
+            //Check bottom side collision
+            tileRow = ((pos.getY() + Camera::Instance()->getPosition().getY())
+                       / pTileLayer->getTileSize());
+            
+            
+            //Check tile bounds
+            //cout << pTileLayer->getNumColumns() << endl;
+            
+            if ((tileRow + y ) > 0 &&
+                (tileColumn + x) > 0 &&
+                tileRow + y < pTileLayer->getNumRows() &&
+                tileColumn + x < pTileLayer->getNumColumns()
+                ){
+                tileID = tiles[tileRow + y][tileColumn + x];
+            } else {
+                tileID = 0;
+            }
+        }
+        //If tileID is not blank, collision occured
+        if (tileID != 0 ){
+            return true;
+        }
+    }
+    return false;
+}
+
 
 void Player::clean(){
     SDLGameObject::clean();

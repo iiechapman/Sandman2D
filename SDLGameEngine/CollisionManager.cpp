@@ -66,7 +66,8 @@ void CollisionManager::checkPlayerTileCollision
                         pTileLayer->getTileSize()));
             
             //Check tile bounds
-            cout << pTileLayer->getNumColumns() << endl;
+            //cout << pTileLayer->getNumColumns() << endl;
+            
             if ((tileRow + y )< pTileLayer->getNumRows() &&
                 (tileColumn + x) < pTileLayer->getNumColumns()){
                 tileID = tiles[tileRow + y][tileColumn + x];
@@ -87,7 +88,8 @@ void CollisionManager::checkPlayerTileCollision
                        / pTileLayer->getTileSize());
             
             //Check tile bounds
-            cout << pTileLayer->getNumColumns() << endl;
+            //cout << pTileLayer->getNumColumns() << endl;
+            
             if ((tileRow + y ) > 0 &&
                 (tileColumn + x) > 0){
                 tileID = tiles[tileRow + y][tileColumn + x];

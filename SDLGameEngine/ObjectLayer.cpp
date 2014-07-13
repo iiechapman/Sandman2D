@@ -19,12 +19,12 @@ void ObjectLayer::update(Level* pLevel){
     }
     
 
-    if (pLevel->getPlayer()){
-        CollisionManager::Instance()->
-        checkPlayerTileCollision(pLevel->getPlayer(),*pLevel->getCollidableLayers());
-    } else {
-        cout << "Could not find player\n";
-    }
+//    if (pLevel->getPlayer()){
+//        CollisionManager::Instance()->
+//        checkPlayerTileCollision(pLevel->getPlayer(),*pLevel->getCollidableLayers());
+//    } else {
+//        cout << "Could not find player\n";
+//    }
     
 }
 

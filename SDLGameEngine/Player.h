@@ -28,29 +28,37 @@ public:
     virtual void load(GameObjectParams params);
     virtual void collision();
     
-    void handleInput();
-    void handlePhysics();
-    void handleAnimation();
+    void setCollisionLayers(vector<TileLayer*> collisionLayers){
+        m_pCollisionLayers = collisionLayers;
+    }
     
 private:
+    void handleInput();
+    void handlePhysics();
+    void handleMovement();
+    void handleAnimation();
+    bool checkCollideTile(Vector2D pos);
+    
     Vector2D m_acceleration{0,0};
     
     bool m_bCanJump;
     bool m_bIsJumping;
-    bool m_bIsFalling;
+    bool m_canJump;
+    bool m_bIsFalling = true;
     bool m_bIsRunning;
     
     bool m_bMoveRight;
     bool m_bMoveLeft;
     bool m_bIsJetting;
     
-    float m_runSpeed = 1.3;
-    float m_walkSpeed = 0.7;
-    float m_jetSpeed = .4;
-    float m_jumpSpeed = 3;
+    float m_runSpeed = .2;
+    float m_walkSpeed = 0.1;
+    
+    float m_jetSpeed = 1;
+    float m_jumpSpeed = 4;
     
     float m_horizontalSpeed = m_runSpeed;
-    float m_verticalSpeed = m_jetSpeed;
+    float m_verticalSpeed = m_jumpSpeed;
     float m_horizontalDrag = .09;
     float m_verticalGravity = .3;
     

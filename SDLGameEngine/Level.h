@@ -41,6 +41,7 @@ public:
 
     void setPlayer(Player* player){
         m_Player = player;
+        m_Player->setCollisionLayers(m_collisionLayers);
         cout << "Player set for level\n";
     }
     Player* getPlayer(){
