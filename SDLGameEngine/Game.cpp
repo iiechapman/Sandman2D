@@ -31,7 +31,7 @@ bool Game::init(const char* title,
         m_gameWidth = width;
         m_gameHeight = height;
         
-        setZoom(1.5);
+        setZoom(1.0);
         
         m_pWindow = SDL_CreateWindow(title, xpos, ypos,
                                      width, height, flags);

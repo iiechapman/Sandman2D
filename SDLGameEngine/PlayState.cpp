@@ -35,9 +35,11 @@ void PlayState::update(){
         }
     }
     
+    Camera::Instance()->update();
+    
     //Look for live mode
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && !m_EnteringLiveMode){
-        m_LiveMode = true;
+        setLiveMode(true);
     }
     
     if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
@@ -47,7 +49,7 @@ void PlayState::update(){
     }
     
     
-    if (m_LiveMode){
+    if (liveModeOn()){
         onExit();
         onEnter();
         SDL_Delay(100);
@@ -79,6 +81,7 @@ bool PlayState::onEnter(){
 
 bool PlayState::onExit(){
     cout << "Exited play state\n";
+    //setLiveMode(false);
     
     while (!m_gameObjects.empty()){
         cout << "Game Objects size: " << m_gameObjects.size() << endl;
@@ -94,6 +97,7 @@ bool PlayState::onExit(){
     
     m_gameObjects.clear();
     
+    Camera::Instance()->reset();
     InputHandler::Instance()->reset();
     return true;
 }

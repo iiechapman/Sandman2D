@@ -54,12 +54,12 @@ private:
     float m_runSpeed = .2;
     float m_walkSpeed = 0.1;
     
-    float m_jetSpeed = 1;
-    float m_jumpSpeed = 4;
+    float m_jetSpeed = .22;
+    float m_jumpSpeed = 7;
     
     float m_horizontalSpeed = m_runSpeed;
     float m_verticalSpeed = m_jumpSpeed;
-    float m_horizontalDrag = .09;
+    float m_horizontalDrag = .3;
     float m_verticalGravity = .3;
     
     

@@ -23,7 +23,8 @@ public:
         return s_pCamera;
     }
     
-    void update(Vector2D velocity);
+    void reset();
+    void update();
     void setTarget(Vector2D* target){
         m_pTarget = target;
     }
@@ -32,6 +33,7 @@ public:
     }
     
     const Vector2D getPosition();
+    
     
 private:
     Camera();

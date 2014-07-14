@@ -27,6 +27,13 @@ public:
     virtual bool onEnter();
     virtual bool onExit();
     
+    void setLiveMode(bool liveMode){
+        m_LiveMode = liveMode;
+    }
+    bool liveModeOn(){
+        return m_LiveMode;
+    }
+    
     virtual string getStateID() const { return s_playID; }
     
     Level* getLevel(){

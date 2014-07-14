@@ -90,7 +90,7 @@ bool MainMenuState::onExit(){
     
     m_gameObjects.clear();
 
-    
+    Camera::Instance()->reset();
     
     return true;
 }
