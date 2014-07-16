@@ -63,6 +63,8 @@ bool Game::init(const char* title,
     }
     
     cout << "SDL Init success\n";
+
+
     
     GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
     GameObjectFactory::Instance()->registerType("Light", new LightCreator());

@@ -84,8 +84,8 @@ void ObjectLayer::render(){
                 
                 //If light is meant to scroll, then offset it
                 if (m_gameObjects[i]->GetParams().isScrolling())  {
-                Vector2D pos(cameraParams.getX() - Camera::Instance()->getPosition().getX(),
-                             cameraParams.getY() - Camera::Instance()->getPosition().getY());
+                Vector2D pos(cameraParams.getX(),
+                             cameraParams.getY());
                 
                 cameraParams.setX(pos.getX());
                 cameraParams.setY(pos.getY());

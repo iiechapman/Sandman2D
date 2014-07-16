@@ -184,35 +184,46 @@ void Player::handleMovement(){
     
     //Check X movement and collision
     Vector2D newPos = GetParams().getPosition();
-//    newPos.setX(newPos.getX() + GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
-//    
-//    if (checkCollideTile(newPos)){
-//        cout << "X Collision\n";
-//        GetParams().getVelocity().setX(0);
-//        GetParams().getAcceleration().setX(0);
-//    }
-//    
+    newPos.setX(newPos.getX() + GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
+    
+    if (checkCollideTile(newPos)){
+        cout << "X Collision\n";
+        GetParams().getVelocity().setX(0);
+        GetParams().getAcceleration().setX(0);
+    }
+    
     
     //Check Y Movement and Collision
     newPos = GetParams().getPosition();
     newPos.setY(newPos.getY() + GetParams().getVelocity().getY() + GetParams().getAcceleration().getY());
+    newPos.setY(newPos.getY());
     
     if (checkCollideTile(newPos)){
         m_bIsFalling = false;
+        
+        if (m_bIsFalling) {
+         m_bCanJump = true;
+        }
+        
         cout << "y Collision \n";
         GetParams().getVelocity().setY(0);
         GetParams().getAcceleration().setY(0);
+    } else {
+        m_bIsFalling = true;
     }
     
     
     //Check if no tile below player to make them fall
     if (!m_bIsFalling){
         newPos = GetParams().getPosition();
-        newPos.setY(newPos.getY() + 10);
+        newPos.setY(newPos.getY() + 1);
         
         if (!checkCollideTile(newPos)){
             m_bIsFalling = true;
         } else {
+            GetParams().getVelocity().setY(0);
+            GetParams().getAcceleration().setY(0);
+            
             m_bIsFalling = false;
             m_bCanJump = true;
             cout << "Can jump!\n";
@@ -244,13 +255,11 @@ bool Player::checkCollideTile(Vector2D pos){
         //Get layers position
         //Vector2D layerPos = pTileLayer->getPosition();
         Vector2D layerPos
-        (pTileLayer->getPosition().getX() + Camera::Instance()->getPosition().getX(),
-         pTileLayer->getPosition().getY() + Camera::Instance()->getPosition().getY());
+        (pTileLayer->getPosition().getX(),
+         pTileLayer->getPosition().getY());
         
         int x,y,tileColumn,tileRow,tileID = 0;
     
-    
-        
         //Calculate position on tile map
         x = ((layerPos.getX()) / pTileLayer->getTileSize());
         y = ((layerPos.getY()) / pTileLayer->getTileSize());
@@ -258,12 +267,12 @@ bool Player::checkCollideTile(Vector2D pos){
         //New collision detection
         Vector2D startPos = pos;
         
-        startPos.setX(startPos.getX() + 1);
-        startPos.setY(startPos.getY() + 1);
+        startPos.setX(startPos.getX() + GetParams().getWidth()/4);
+        startPos.setY(startPos.getY() + GetParams().getHeight()/4);
         
         Vector2D endPos
-        (startPos.getX() + GetParams().getWidth() - 1,
-         pos.getY() + GetParams().getHeight() - 1);
+        (pos.getX() + GetParams().getWidth()- GetParams().getWidth()/4,
+         pos.getY() + GetParams().getHeight());
         
         
         for (int i = startPos.getX(); i < endPos.getX(); i++ ){
@@ -271,14 +280,14 @@ bool Player::checkCollideTile(Vector2D pos){
                 tileColumn = i / pTileLayer->getTileSize();
                 tileRow = j / pTileLayer->getTileSize();
             
-                if (tileColumn + x > Game::Instance()->getMapWidth() ||
+                if (tileColumn + x > Game::Instance()->getMapWidth() / pTileLayer->getTileSize() ||
                     tileColumn + x < 0){
-                    continue;
+                    tileRow = tileColumn = x = y = 0;
                     }
 
-                if (tileRow + y > Game::Instance()->getMapHeight() ||
+                if (tileRow + y > (Game::Instance()->getMapHeight() / pTileLayer->getTileSize()) ||
                     tileRow + y < 0){
-                    continue;
+                    tileRow = tileColumn = x = y = 0;
                 }
 
                 tileID = tiles[tileRow + y][tileColumn + x];

@@ -7,6 +7,7 @@
 //
 
 #include "TextureManager.h"
+#include "Camera.h"
 
 typedef map<string, SDL_Texture*>::iterator textureMapIterator;
 TextureManager* TextureManager::s_pInstance = 0;
@@ -110,6 +111,15 @@ void TextureManager::drawFrame(GameObjectParams* params,
     SDL_Rect srcRect;
     SDL_Rect dstRect;
     
+    SDL_Rect cameraOffset;
+    cameraOffset.x = 0;
+    cameraOffset.y = 0;
+    
+    if (params->isScrolling()){
+        cameraOffset.x = Camera::Instance()->getPosition().getX();
+        cameraOffset.y = Camera::Instance()->getPosition().getY();
+    }
+        
     srcRect.x = params->getWidth() * params->getFrame();
     srcRect.y = params->getHeight() * (params->getRow() - 1);
     srcRect.w = dstRect.w = params->getWidth();
@@ -117,8 +127,8 @@ void TextureManager::drawFrame(GameObjectParams* params,
     
     dstRect.w = params->getWidth() * zoom;
     dstRect.h = params->getHeight() * zoom;
-    dstRect.x = params->getX() * zoom;
-    dstRect.y = params->getY() * zoom;
+    dstRect.x = (params->getX() -cameraOffset.x) * zoom;
+    dstRect.y = (params->getY() -cameraOffset.y) * zoom;
     
     SDL_BlendMode oldBlendMode;
     SDL_Color oldColor;

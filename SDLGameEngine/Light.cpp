@@ -38,7 +38,7 @@ void Light::update(){
     GetParams().setFrame(0);
    // GetParams().setVelocity({-1,0});
     if (GetParams().getLockTo() == string("player")){
-        GetParams().setScrolling(false);
+        //GetParams().setScrolling(false);
         GetParams().setX
         (Game::Instance()->getPlayer()->GetParams().getX() - GetParams().getWidth()/2);
         

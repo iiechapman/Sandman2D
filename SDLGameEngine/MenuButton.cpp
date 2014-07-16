@@ -14,6 +14,7 @@ MenuButton::MenuButton(){
 
 void MenuButton::load(GameObjectParams params){
     SDLGameObject::load(params);
+    GetParams().setScrolling(false);
     GetParams().setFrame(MOUSE_OUT);
     
 }
@@ -26,6 +27,7 @@ void MenuButton::update(){
     Vector2D* pMousePos = InputHandler::Instance()->getMousePosition();
     
     float zoom = Game::Instance()->getZoom();
+
     
     if (pMousePos->getX() < GetParams().getX() +
         GetParams().getWidth() * zoom &&
