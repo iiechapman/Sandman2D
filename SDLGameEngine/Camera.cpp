@@ -64,24 +64,11 @@ void Camera::reset(){
 //Camera position is updated and sent back to caller
 const Vector2D Camera::getPosition(){
     
-    /*
-     Camera scroll equation:
-     Current position * ratio of position on view
-     
-     (Current Position / Size of view) * size of map
-    
-     */
-    
-    
     //If camera target is set, follow it
     if (m_pTarget !=0){
-        Vector2D pos(((m_pTarget->getX()) - Game::Instance()->getGameWidth()/2),
-                     
-                     (m_pTarget->getY()) - Game::Instance()->getGameHeight()/2
-                      );
-
-    
-    
+        Vector2D pos(((m_pTarget->getX()) - ((Game::Instance()->getGameWidth() / Game::Instance()->getZoom())/2)),
+                     (m_pTarget->getY()) - ((Game::Instance()->getGameHeight() / Game::Instance()->getZoom())/2));
+        
     
         //Bounds for camera
         if (pos.getX() < 0){
@@ -96,14 +83,14 @@ const Vector2D Camera::getPosition(){
         
         
         //Check if camera has scrolled past tiles, rework this equation
-        if (pos.getX() > Game::Instance()->getMapWidth() - (Game::Instance()->getGameWidth())){
+        if (pos.getX() > Game::Instance()->getMapWidth() - (Game::Instance()->getGameWidth()/ Game::Instance()->getZoom())){
             
-            pos.setX( Game::Instance()->getMapWidth() - (Game::Instance()->getGameWidth()));
+            pos.setX( Game::Instance()->getMapWidth() - (Game::Instance()->getGameWidth())/ Game::Instance()->getZoom());
         }
         
         
-        if (pos.getY() > Game::Instance()->getMapHeight() - (Game::Instance()->getGameHeight())){
-            pos.setY(Game::Instance()->getMapHeight() - (Game::Instance()->getGameHeight()));
+        if (pos.getY() > Game::Instance()->getMapHeight() - (Game::Instance()->getGameHeight()/ Game::Instance()->getZoom())){
+            pos.setY(Game::Instance()->getMapHeight() - (Game::Instance()->getGameHeight()/ Game::Instance()->getZoom() ));
         }
     
     

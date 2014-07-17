@@ -40,7 +40,6 @@ GameObjectParams::~GameObjectParams(){
     //cout << "Deleted game object parameters\n";
 }
 
-
 void GameObjectParams::operator=(GameObjectParams& rhs){
     m_position      = rhs.m_position;
     m_size          = rhs.m_size;

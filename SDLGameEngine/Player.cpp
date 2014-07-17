@@ -55,7 +55,7 @@ void Player::update(){
     handlePhysics();
     handleMovement();
     handleAnimation();
-    cout << "Current Vel " << GetParams().getVelocity().getX() << endl;
+
     SDLGameObject::update();
 }
 
@@ -146,6 +146,18 @@ void Player::handlePhysics(){
         }
     }
     
+    //Switch flipping according to movement
+    if (m_bMoveRight){
+        GetParams().setRight(true);
+        GetParams().setLeft(false);
+    }
+    
+    if (m_bMoveLeft){
+        GetParams().setRight(false);
+        GetParams().setLeft(true);
+    }
+    
+    
     
     if (m_bMoveLeft){
         GetParams().getAcceleration().setX(-m_horizontalSpeed);
@@ -162,7 +174,6 @@ void Player::handlePhysics(){
     }
     
     if (m_bIsJumping){
-        cout << "Is jumping!\n";
         GetParams().getVelocity().setY(-m_jumpSpeed);
         m_bCanJump = false;
     }
@@ -187,7 +198,6 @@ void Player::handleMovement(){
     newPos.setX(newPos.getX() + GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
     
     if (checkCollideTile(newPos)){
-        cout << "X Collision\n";
         GetParams().getVelocity().setX(0);
         GetParams().getAcceleration().setX(0);
     }
@@ -205,7 +215,6 @@ void Player::handleMovement(){
          m_bCanJump = true;
         }
         
-        cout << "y Collision \n";
         GetParams().getVelocity().setY(0);
         GetParams().getAcceleration().setY(0);
     } else {
@@ -226,7 +235,6 @@ void Player::handleMovement(){
             
             m_bIsFalling = false;
             m_bCanJump = true;
-            cout << "Can jump!\n";
         }
     }
     

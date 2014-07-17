@@ -96,8 +96,8 @@ void TextureManager::drawFrame(string id, int x, int y,
     
     dstRect.w = width * zoom;
     dstRect.h = height * zoom;
-    dstRect.x = x * zoom;
-    dstRect.y = y * zoom;
+    dstRect.x = (x * zoom);
+    dstRect.y = (y * zoom);
     
     
     SDL_RenderCopyEx(pRenderer, m_textureMap[id],
@@ -108,9 +108,7 @@ void TextureManager::drawFrame(string id, int x, int y,
 void TextureManager::drawFrame(GameObjectParams* params,
                                SDL_Renderer* pRenderer,
                                SDL_RendererFlip flip , float zoom){
-    SDL_Rect srcRect;
-    SDL_Rect dstRect;
-    
+    //Set camera offset if scrolling
     SDL_Rect cameraOffset;
     cameraOffset.x = 0;
     cameraOffset.y = 0;
@@ -119,7 +117,11 @@ void TextureManager::drawFrame(GameObjectParams* params,
         cameraOffset.x = Camera::Instance()->getPosition().getX();
         cameraOffset.y = Camera::Instance()->getPosition().getY();
     }
-        
+    
+    //Configure source and destination Rects
+    SDL_Rect srcRect;
+    SDL_Rect dstRect;
+    
     srcRect.x = params->getWidth() * params->getFrame();
     srcRect.y = params->getHeight() * (params->getRow() - 1);
     srcRect.w = dstRect.w = params->getWidth();
@@ -127,13 +129,13 @@ void TextureManager::drawFrame(GameObjectParams* params,
     
     dstRect.w = params->getWidth() * zoom;
     dstRect.h = params->getHeight() * zoom;
-    dstRect.x = (params->getX() -cameraOffset.x) * zoom;
-    dstRect.y = (params->getY() -cameraOffset.y) * zoom;
+    dstRect.x = ((params->getX()) -cameraOffset.x) * zoom;
+    dstRect.y = ((params->getY()) -cameraOffset.y) * zoom;
     
+
+    //Apply Blend modes
     SDL_BlendMode oldBlendMode;
     SDL_Color oldColor;
-    
-    //cout << "Drawing with blend mode: " << params->getBlendMode() << endl;
     
     SDL_GetTextureAlphaMod(m_textureMap[params->getTextureID()], &oldColor.a);
     SDL_GetTextureColorMod(m_textureMap[params->getTextureID()], &oldColor.r, &oldColor.g, &oldColor.b);
@@ -148,6 +150,7 @@ void TextureManager::drawFrame(GameObjectParams* params,
     SDL_RenderCopyEx(pRenderer, m_textureMap[params->getTextureID()],
                      &srcRect, &dstRect, 0.0, 0, flip);
     
+    //Reset Blend Modes
     SDL_SetTextureAlphaMod(m_textureMap[params->getTextureID()], oldColor.a);
     SDL_SetTextureBlendMode(m_textureMap[params->getTextureID()], oldBlendMode);
     SDL_SetTextureColorMod(m_textureMap[params->getTextureID()],

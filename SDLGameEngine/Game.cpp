@@ -31,7 +31,7 @@ bool Game::init(const char* title,
         m_gameWidth = width;
         m_gameHeight = height;
         
-        setZoom(1.0);
+        setZoom(2.0);
         
         m_pWindow = SDL_CreateWindow(title, xpos, ypos,
                                      width, height, flags);
@@ -63,7 +63,6 @@ bool Game::init(const char* title,
     }
     
     cout << "SDL Init success\n";
-
 
     
     GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());

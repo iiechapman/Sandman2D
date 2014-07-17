@@ -112,6 +112,32 @@ public:
         m_bScrolling = scrolling;
     }
     
+    bool dirRight(){
+        return m_bDirRight;
+    }
+    bool dirLeft(){
+        return m_bDirLeft;
+    }
+    bool dirUp(){
+        return m_bDirUp;
+    }
+    bool dirDown(){
+        return m_bDirDown;
+    }
+    
+    void setRight(bool right){
+        m_bDirRight = right;
+    }
+    void setLeft(bool left){
+        m_bDirLeft = left;
+    }
+    void setUp(bool up){
+        m_bDirUp = up;
+    }
+    void setDown(bool down){
+        m_bDirDown = down;
+    }
+    
     friend class GameObject;
     
 protected:
@@ -144,6 +170,12 @@ protected:
     bool m_bUpdating;
     bool m_bDead;
     bool m_bDying;
+    
+    //Direction vars;
+    bool m_bDirRight = true;
+    bool m_bDirLeft = false;
+    bool m_bDirUp = false;
+    bool m_bDirDown = false;
 
 };
 

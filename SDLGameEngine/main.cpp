@@ -8,8 +8,8 @@
 
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
-const int GAME_WIDTH = 800;
-const int GAME_HEIGHT = 600;
+const int GAME_WIDTH = 1280;
+const int GAME_HEIGHT = 720;
 
 int main(int argc, char* args[]){
     

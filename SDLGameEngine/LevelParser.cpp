@@ -239,6 +239,7 @@ void LevelParser::parseTextures(TiXmlElement *pTextureRoot){
      pTextureRoot->Attribute("name"), Game::Instance()->getRenderer());
 }
 
+//For extracting objects from object layers
 void LevelParser::parseObjectLayer
 (TiXmlElement *pObjectElement, vector<Layer *> *pLayers, string layerType, Level* pLevel){
     
@@ -259,6 +260,7 @@ void LevelParser::parseObjectLayer
             SDL_BlendMode blendMode = SDL_BLENDMODE_NONE;
             
             string textureID(""),name(""),lockTo("");
+
             
             //Get initial values
             e->Attribute("x", &x);
@@ -266,8 +268,11 @@ void LevelParser::parseObjectLayer
             //cout << "Y: " << x << "\nY: " << y << endl;
             name = e->Attribute("name");
             
-            GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+            int GID = 0;
+            e->Attribute("gid",&GID);
             
+            GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+
             //Get Property Values
             for (TiXmlElement* properties = e->FirstChildElement();
                  properties != NULL; properties = properties->NextSiblingElement()){
@@ -335,6 +340,10 @@ void LevelParser::parseObjectLayer
                 }
             }
             
+            
+            //pGameObject->GetParams().setRow(GID / height);
+            //pGameObject->GetParams().setFrame(GID / width);
+            
             pGameObject->load
             (*new GameObjectParams
              (name, (x), (y-height),width, height, textureID,callbackID,animSpeed));
@@ -343,7 +352,7 @@ void LevelParser::parseObjectLayer
             pGameObject->GetParams().setLockTo(lockTo);
             
             //If object is player set game player pointer accordingly
-            if (pObjectLayer->getType() == string("Player")){
+            if (pObjectLayer->getType() == string("player")){
                 pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
                 Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
             }

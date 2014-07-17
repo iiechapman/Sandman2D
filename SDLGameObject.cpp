@@ -30,7 +30,7 @@ SDLGameObject::~SDLGameObject(){
 
 void SDLGameObject::draw(){
     //Old draw method, animate and flip left and right depending on velocity
-    if (GetParams().getVelocity().getX() >= 0){
+    if (GetParams().dirRight()){
         TextureManager::Instance()->
         drawFrame(&m_params, Game::Instance()->getRenderer(),
                   SDL_FLIP_NONE,Game::Instance()->getZoom());
