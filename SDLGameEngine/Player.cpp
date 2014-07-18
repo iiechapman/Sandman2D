@@ -55,7 +55,7 @@ void Player::update(){
     handlePhysics();
     handleMovement();
     handleAnimation();
-
+    
     SDLGameObject::update();
 }
 
@@ -212,7 +212,7 @@ void Player::handleMovement(){
         m_bIsFalling = false;
         
         if (m_bIsFalling) {
-         m_bCanJump = true;
+            m_bCanJump = true;
         }
         
         GetParams().getVelocity().setY(0);
@@ -267,7 +267,7 @@ bool Player::checkCollideTile(Vector2D pos){
          pTileLayer->getPosition().getY());
         
         int x,y,tileColumn,tileRow,tileID = 0;
-    
+        
         //Calculate position on tile map
         x = ((layerPos.getX()) / pTileLayer->getTileSize());
         y = ((layerPos.getY()) / pTileLayer->getTileSize());
@@ -287,18 +287,16 @@ bool Player::checkCollideTile(Vector2D pos){
             for (int j = startPos.getY() ; j < endPos.getY() ; j++){
                 tileColumn = i / pTileLayer->getTileSize();
                 tileRow = j / pTileLayer->getTileSize();
-            
-                if (tileColumn + x > Game::Instance()->getMapWidth() / pTileLayer->getTileSize() ||
+                
+                if (tileColumn + x >= Game::Instance()->getMapWidth() / pTileLayer->getTileSize() ||
                     tileColumn + x < 0){
-                    tileRow = tileColumn = x = y = 0;
-                    }
-
-                if (tileRow + y > (Game::Instance()->getMapHeight() / pTileLayer->getTileSize()) ||
-                    tileRow + y < 0){
-                    tileRow = tileColumn = x = y = 0;
+                    tileID = 0;
+                } else if (tileRow + y >= (Game::Instance()->getMapHeight() / pTileLayer->getTileSize()) ||
+                           tileRow + y < 0){
+                    tileID = 0;
+                } else {
+                    tileID = tiles[tileRow + y][tileColumn + x];
                 }
-
-                tileID = tiles[tileRow + y][tileColumn + x];
                 
                 //If tileID is not blank, collision occured
                 if (tileID != 0 ){
@@ -307,67 +305,6 @@ bool Player::checkCollideTile(Vector2D pos){
             }
         }
     }
-    
-        //        //If moving downwards or rightwards
-        //        if (GetParams().getVelocity().getX() > 0.0f ||
-        //            GetParams().getVelocity().getY() > 0.0f ){
-        //
-        //            //Calculate position on tile map
-        //            x = ((layerPos.getX()) / pTileLayer->getTileSize());
-        //            y = ((layerPos.getY()) / pTileLayer->getTileSize());
-        //
-        //            //Check Right side collision
-        //            tileColumn = (((pos.getX() +
-        //                            Camera::Instance()->getPosition().getX() +
-        //                            GetParams().getWidth()) /
-        //                           pTileLayer->getTileSize()));
-        //
-        //            //Check bottom side collision
-        //            tileRow = (((pos.getY() +
-        //                         Camera::Instance()->getPosition().getY() +
-        //                         GetParams().getHeight()) /
-        //                        pTileLayer->getTileSize()));
-        //
-        //            //Check tile bounds
-        //            //cout << pTileLayer->getNumColumns() << endl;
-        //            if ((tileRow + y ) > 0 &&
-        //                (tileColumn + x) > 0 &&
-        //                tileRow + y < pTileLayer->getNumRows() &&
-        //                tileColumn + x < pTileLayer->getNumColumns()
-        //                ){
-        //                tileID = tiles[tileRow + y][tileColumn + x];
-        //            } else {
-        //                tileID = 0;
-        //            }
-        //
-        //            //If moving upwards or leftwards
-        //        } else if (GetParams().getVelocity().getX() < 0.0f ||
-        //                   GetParams().getVelocity().getY() < 0.0f ){
-        //
-        //            //Check left side collision
-        //            tileColumn = ((pos.getX() + Camera::Instance()->getPosition().getX())
-        //                          / pTileLayer->getTileSize());
-        //
-        //            //Check bottom side collision
-        //            tileRow = ((pos.getY() + Camera::Instance()->getPosition().getY())
-        //                       / pTileLayer->getTileSize());
-        //
-        //
-        //            //Check tile bounds
-        //            //cout << pTileLayer->getNumColumns() << endl;
-        //
-        //            if ((tileRow + y ) > 0 &&
-        //                (tileColumn + x) > 0 &&
-        //                tileRow + y < pTileLayer->getNumRows() &&
-        //                tileColumn + x < pTileLayer->getNumColumns()
-        //                ){
-        //                tileID = tiles[tileRow + y][tileColumn + x];
-        //            } else {
-        //                tileID = 0;
-        //            }
-        //        }
-        //
-
     return false;
 }
 
