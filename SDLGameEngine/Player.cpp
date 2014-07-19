@@ -163,10 +163,10 @@ void Player::handlePhysics(){
     if (m_bIsFalling && m_numJumps == 0 && !m_bIsJetting){
         
         if (GetParams().dirLeft()){
-            GetParams().setAngle(GetParams().getAngle() - (GetParams().getVelocity().getY()) - 20);
+            GetParams().setAngle(GetParams().getAngle() - (GetParams().getVelocity().getY()) - 30);
             
         } else if (GetParams().dirRight()){
-            GetParams().setAngle(GetParams().getAngle() + (GetParams().getVelocity().getY()) + 20);
+            GetParams().setAngle(GetParams().getAngle() + (GetParams().getVelocity().getY()) + 30);
         }
     
     }

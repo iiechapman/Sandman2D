@@ -56,7 +56,7 @@ private:
     bool m_bMoveLeft;
 
     float m_jetSpeed = 0.15;
-    float m_maxFuel = 50;
+    float m_maxFuel = 100;
     float m_currentFuel = 0;
     float m_fuelCost = 1;
     bool  m_bIsJetting = false;
