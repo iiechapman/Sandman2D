@@ -46,10 +46,16 @@ private:
     int m_numJumps = m_maxJumps;
     bool m_bJumpHeld;
     bool m_bCanJump;
+    bool m_bOnGround;
     bool m_bIsJumping;
-    bool m_canJump;
     bool m_bIsFalling = true;
     float m_jumpSpeed = 7;
+    bool m_bWallCling = false;
+    
+    bool m_bIsStomping = false;
+    int m_StompCharge = 0;
+    int m_StompReady = 20;
+    bool m_bIsReadyToStomp = false;
     
     bool m_bIsRunning;
     bool m_bMoveRight;
@@ -69,6 +75,11 @@ private:
     float m_verticalSpeed = m_jumpSpeed;
     float m_horizontalDrag = .2;
     
+    float m_maxRunSpeed = 10;
+    float m_maxWalkSpeed = 5;
+    
+    float m_maxVerticalSpeed = 25;
+    float m_maxHorizontalSpeed = m_maxWalkSpeed;
 
     float m_normalGravity = .3;
     float m_jetGravity = 0.1;
