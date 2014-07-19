@@ -48,28 +48,8 @@ void ObjectLayer::render(){
         
         //Set darkness layer as render surface temporarily
         SDL_SetRenderTarget(Game::Instance()->getRenderer(), darknessTexture);
-        
-        
-        //Test out different shade colors, press space to reset to black
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z)){
-            currentShade.r+=2;
-        }
-        
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_X)){
-            currentShade.g+=2;
-        }
-        
-        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_C)){
-            currentShade.b+=2;
-        }
-        
-//        if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)){
-//            currentShade.r = 30;
-//            currentShade.g = 30;
-//            currentShade.b = 30;
-//        }
-        
-        
+    
+    
         SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), currentShade.r, currentShade.g, currentShade.b, 255);
         
         //SDL_RenderClear(Game::Instance()->getRenderer());

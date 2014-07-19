@@ -148,7 +148,7 @@ void TextureManager::drawFrame(GameObjectParams* params,
                            params->getColor().b);
     
     SDL_RenderCopyEx(pRenderer, m_textureMap[params->getTextureID()],
-                     &srcRect, &dstRect, 0.0, 0, flip);
+                     &srcRect, &dstRect, params->getAngle(), 0, flip);
     
     //Reset Blend Modes
     SDL_SetTextureAlphaMod(m_textureMap[params->getTextureID()], oldColor.a);

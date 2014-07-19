@@ -40,27 +40,39 @@ private:
     bool checkCollideTile(Vector2D pos);
     
     Vector2D m_acceleration{0,0};
-    
+
+    bool m_bIsOnGround = false;
+    int m_maxJumps = 2;
+    int m_numJumps = m_maxJumps;
+    bool m_bJumpHeld;
     bool m_bCanJump;
     bool m_bIsJumping;
     bool m_canJump;
     bool m_bIsFalling = true;
-    bool m_bIsRunning;
+    float m_jumpSpeed = 7;
     
+    bool m_bIsRunning;
     bool m_bMoveRight;
     bool m_bMoveLeft;
-    bool m_bIsJetting;
+
+    float m_jetSpeed = 0.15;
+    float m_maxFuel = 50;
+    float m_currentFuel = 0;
+    float m_fuelCost = 1;
+    bool  m_bIsJetting = false;
     
-    float m_runSpeed = .2;
-    float m_walkSpeed = 0.1;
-    
-    float m_jetSpeed = .22;
-    float m_jumpSpeed = 7;
+    float m_runSpeed = .12;
+    float m_walkSpeed = 0.08;
+
     
     float m_horizontalSpeed = m_runSpeed;
     float m_verticalSpeed = m_jumpSpeed;
-    float m_horizontalDrag = .3;
-    float m_verticalGravity = .3;
+    float m_horizontalDrag = .2;
+    
+
+    float m_normalGravity = .3;
+    float m_jetGravity = 0.1;
+    float m_currentGravity = m_normalGravity;
     
     
     vector<TileLayer*> m_pCollisionLayers;

@@ -68,6 +68,13 @@ public:
     void setWidth(float width){ m_size.setX(width); }
     void setHeight(float height){ m_size.setY(height); }
     
+    double getAngle(){
+        return m_Angle;
+    }
+    void setAngle(double angle){
+        m_Angle = angle;
+    }
+    
     void setFrame(int frame){ m_currentCell.setX(frame); }
     void setRow(int row){ m_currentCell.setY(row); }
     
