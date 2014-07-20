@@ -57,10 +57,9 @@ private:
     int m_StompReady = 20;
     bool m_bIsReadyToStomp = false;
     
-    bool m_bIsRunning;
     bool m_bIsBoosting = false;
     int m_BoostTime = 10;
-    int m_BoostTimer = m_BoostTime;
+    int m_BoostTimer = 0;
 
     bool m_bMoveRight;
     bool m_bMoveLeft;    
@@ -74,7 +73,7 @@ private:
     float m_runSpeed = 8;
     float m_walkSpeed = 0.25;
 
-    float m_horizontalSpeed = m_runSpeed;
+    float m_horizontalSpeed = m_walkSpeed;
     float m_verticalSpeed = m_jumpSpeed;
     float m_horizontalDrag = .2;
     

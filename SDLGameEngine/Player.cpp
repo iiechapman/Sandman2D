@@ -62,14 +62,13 @@ void Player::update(){
 void Player::handleInput(){
     
     //Press c to boost
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_C) && !m_bIsBoosting){
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_C)) && !m_bIsBoosting){
         m_BoostTimer = m_BoostTime;
         m_bIsBoosting = true;
     }
     
     if (m_bIsBoosting)
     {
-        
         m_maxHorizontalSpeed = m_maxRunSpeed;
         
         if (GetParams().dirRight()){
@@ -89,6 +88,8 @@ void Player::handleInput(){
             m_maxHorizontalSpeed = m_maxWalkSpeed;
             m_bIsBoosting = false;
         }
+    } else {
+        m_maxHorizontalSpeed = m_maxWalkSpeed;
     }
 
     
@@ -173,7 +174,6 @@ void Player::handlePhysics(){
             //If not moving right, slow down to stop
             GetParams().getAcceleration().setX(-(m_horizontalDrag*4));
             
-            cout << GetParams().getVelocity().getX() << endl;
             //Stop at 0 movement
             if (GetParams().getVelocity().getX() <= m_horizontalDrag*4){
                 GetParams().getVelocity().setX(0);
