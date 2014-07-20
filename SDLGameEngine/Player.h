@@ -58,8 +58,12 @@ private:
     bool m_bIsReadyToStomp = false;
     
     bool m_bIsRunning;
+    bool m_bIsBoosting = false;
     bool m_bMoveRight;
     bool m_bMoveLeft;
+    
+    int m_BoostTime = 10;
+    int m_BoostTimer = m_BoostTime;
 
     float m_jetSpeed = 0.15;
     float m_maxFuel = 100;
@@ -67,10 +71,9 @@ private:
     float m_fuelCost = 1;
     bool  m_bIsJetting = false;
     
-    float m_runSpeed = .12;
-    float m_walkSpeed = 0.08;
+    float m_runSpeed = 8;
+    float m_walkSpeed = 0.25;
 
-    
     float m_horizontalSpeed = m_runSpeed;
     float m_verticalSpeed = m_jumpSpeed;
     float m_horizontalDrag = .2;

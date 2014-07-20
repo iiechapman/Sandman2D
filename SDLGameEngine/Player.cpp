@@ -61,14 +61,37 @@ void Player::update(){
 
 void Player::handleInput(){
     
-    //Hold shift to run
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LSHIFT)){
-        m_horizontalSpeed = m_runSpeed;
-        m_maxHorizontalSpeed = m_maxRunSpeed;
-    } else {
-        m_horizontalSpeed = m_walkSpeed;
-        m_maxHorizontalSpeed = m_maxWalkSpeed;
+    //Press c to boost
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_C) && !m_bIsBoosting){
+        m_BoostTimer = m_BoostTime;
+        m_bIsBoosting = true;
     }
+    
+    if (m_bIsBoosting)
+    {
+        
+        m_maxHorizontalSpeed = m_maxRunSpeed;
+        
+        if (GetParams().dirRight()){
+            GetParams().setAngle(10);
+            GetParams().getVelocity().setX(m_maxHorizontalSpeed);
+        }
+        
+        if (GetParams().dirLeft()){
+            GetParams().setAngle(-10);
+            GetParams().getVelocity().setX(-m_maxHorizontalSpeed);
+        }
+        
+        m_BoostTimer--;
+        if (m_BoostTimer <= 0){
+            m_BoostTimer = 0;
+            m_horizontalSpeed = m_walkSpeed;
+            m_maxHorizontalSpeed = m_maxWalkSpeed;
+            m_bIsBoosting = false;
+        }
+    }
+
+    
     
     //New Keyboard control
     InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ? m_bMoveRight = true : m_bMoveRight = false;
@@ -85,6 +108,8 @@ void Player::handleInput(){
     } else {
         m_bIsStomping = false;
     }
+    
+    
     
     //Check if pressing jump button
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z)) {
@@ -128,36 +153,50 @@ void Player::handlePhysics(){
     if (m_bMoveRight){
         GetParams().getAcceleration().setX(m_horizontalSpeed);
         
-    } else if (GetParams().getVelocity().getX() > 0) {
-        //If not moving right, slow down to stop
-        GetParams().getAcceleration().setX(-m_horizontalDrag*2);
+    } else if (m_bMoveLeft){
+        //Move Left
+        GetParams().getAcceleration().setX(-m_horizontalSpeed);
+    } else {
         
-        //Stop at 0 movement
-        if (GetParams().getVelocity().getX() <= m_horizontalDrag*2 ){
-            GetParams().getVelocity().setX(0);
-            GetParams().getAcceleration().setX(0);
+        if (GetParams().getVelocity().getX() < 0) {
+            //If not moving left, slow down to stop
+            GetParams().getAcceleration().setX(m_horizontalDrag*4);
+            //Stop at 0 movement
+            if (GetParams().getVelocity().getX() >= -(m_horizontalDrag*4)){
+                GetParams().getVelocity().setX(0);
+                GetParams().getAcceleration().setX(0);
+            }
+            
         }
+        
+        if (GetParams().getVelocity().getX() > 0) {
+            //If not moving right, slow down to stop
+            GetParams().getAcceleration().setX(-(m_horizontalDrag*4));
+            
+            cout << GetParams().getVelocity().getX() << endl;
+            //Stop at 0 movement
+            if (GetParams().getVelocity().getX() <= m_horizontalDrag*4){
+                GetParams().getVelocity().setX(0);
+                GetParams().getAcceleration().setX(0);
+            }
+        }
+        
     }
     
-    //Move Left
-    if (m_bMoveLeft){
-        GetParams().getAcceleration().setX(-m_horizontalSpeed);
-        
-    } else if (GetParams().getVelocity().getX() < 0) {
-        //If not moving left, slow down to stop
-        GetParams().getAcceleration().setX(m_horizontalDrag*2);
-        
-        //Stop at 0 movement
-        if (GetParams().getVelocity().getX() >= m_horizontalDrag*2 ){
-            GetParams().getVelocity().setX(0);
-            GetParams().getAcceleration().setX(0);
-        }
-    }
     
     //Jumping
     if (m_bIsJumping){
         GetParams().getVelocity().setY(-(m_jumpSpeed));
         m_bIsJumping = false;
+        
+        if (m_bWallCling){
+            if (GetParams().dirRight()){
+                GetParams().getVelocity().setX((m_jumpSpeed*4));
+                
+            } else if (GetParams().dirLeft()){
+                GetParams().getVelocity().setX(-(m_jumpSpeed*4));
+            }
+        }
     }
     
     
@@ -176,7 +215,7 @@ void Player::handlePhysics(){
         }
         
     } else {
-        if (m_numJumps>0){
+        if (m_numJumps>0 && !m_bIsBoosting){
             GetParams().setAngle(0);
         }
         m_currentGravity = m_normalGravity;
@@ -192,9 +231,9 @@ void Player::handlePhysics(){
         } else if (GetParams().dirRight()){
             GetParams().setAngle(GetParams().getAngle() + (GetParams().getVelocity().getY()) + 30);
         }
-    
+        
     }
-
+    
     
     
     //Handle gravity
@@ -203,14 +242,14 @@ void Player::handlePhysics(){
             GetParams().getAcceleration().setY(m_normalGravity);
         }
         
-        if (m_bIsJetting && GetParams().getVelocity().getY() > 0 ){
+        if ((m_bIsJetting || m_bIsBoosting) && GetParams().getVelocity().getY() > 0 ){
             GetParams().getVelocity().setY(0);
         }
     }
     
     //handle stomping
     
-    if (m_bIsStomping && !m_bIsOnGround){
+    if (m_bIsStomping){
         
         //Make player spin for a moment
         if (GetParams().dirLeft()){
@@ -231,8 +270,8 @@ void Player::handlePhysics(){
         m_bIsFalling = true;
         //GetParams().getVelocity().setX(0);
         
-    
-
+        
+        
         
         if (m_StompCharge >= m_StompReady){
             GetParams().getAcceleration().setY(m_normalGravity*6);
@@ -258,14 +297,15 @@ void Player::handleMovement(){
     //Check X collision
     if (checkCollideTile(newPos)){
         GetParams().getVelocity().setX(0);
-        GetParams().getAcceleration().setX(0);
+        
         
         //if falling downwards cling to wall
-        if (GetParams().getVelocity().getY() > 1){
+        if (GetParams().getVelocity().getY() > 0 && !m_bIsOnGround && m_bIsFalling){
             m_bWallCling = true;
             m_numJumps = m_maxJumps;
-            m_currentFuel = m_maxFuel;
-            GetParams().getVelocity().setY(GetParams().getVelocity().getY()/2);
+            GetParams().getVelocity().setY(GetParams().getVelocity().getY() * .8);
+        } else {
+            GetParams().getAcceleration().setX(0);
         }
         
     } else {
@@ -297,7 +337,7 @@ void Player::handleMovement(){
         m_bIsFalling = true;
         m_bIsOnGround = false;
     }
-
+    
     
     //Alter position based on velocity and acceleration
     GetParams().getVelocity().setX
