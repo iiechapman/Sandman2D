@@ -191,10 +191,12 @@ vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     }
     
     //Decode data and store
+    if (pDataNode){
     for (TiXmlNode* e = pDataNode->FirstChild(); e != NULL; e = e->NextSibling()){
         TiXmlText* text = e ->ToText();
         string t = text->Value();
         decodedIDs = base64_decode(t);
+    }
     }
     
     //Uncompress zlib compression

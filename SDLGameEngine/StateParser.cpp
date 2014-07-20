@@ -49,11 +49,13 @@ bool StateParser::parseState(const char* stateFile,
     TiXmlElement* pTextureRoot = 0;
     
     //Find the texture root
-    for (TiXmlElement* e = pStateRoot->FirstChildElement() ;
-         e != NULL ; e = e->NextSiblingElement()){
-        if (e->Value() == string("TEXTURES")){
-            pTextureRoot = e;
-            cout << "Found Texture Root\n";
+    if (pStateRoot){
+        for (TiXmlElement* e = pStateRoot->FirstChildElement() ;
+             e != NULL ; e = e->NextSiblingElement()){
+            if (e->Value() == string("TEXTURES")){
+                pTextureRoot = e;
+                cout << "Found Texture Root\n";
+            }
         }
     }
     
@@ -65,12 +67,16 @@ bool StateParser::parseState(const char* stateFile,
     TiXmlElement* pObjectRoot = 0;
     
     //Find object root node
-    for ( TiXmlElement* e = pStateRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        if (e->Value() == string("OBJECTS")){
-            pObjectRoot = e;
-            cout << "Found Object Root\n";
+    if (pStateRoot){
+        for ( TiXmlElement* e = pStateRoot->FirstChildElement();
+             e != NULL; e = e->NextSiblingElement()){
+            if (e->Value() == string("OBJECTS")){
+                pObjectRoot = e;
+                cout << "Found Object Root\n";
+            }
         }
+    }else {
+        cout << "State Root Null\n";
     }
     
     //Parse objects
@@ -82,14 +88,18 @@ bool StateParser::parseState(const char* stateFile,
     cout << "Searching for Level Root\n";
     
     //Find object root node
-    for ( TiXmlElement* e = pStateRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        if (e->Value() == string("LEVEL")){
-            pLevelRoot = e;
-            cout << "Found Level Root\n";
-            //Parse objects
-            parseLevel(pLevelRoot, pLevelFile);
+    if (pStateRoot){
+        for ( TiXmlElement* e = pStateRoot->FirstChildElement();
+             e != NULL; e = e->NextSiblingElement()){
+            if (e->Value() == string("LEVEL")){
+                pLevelRoot = e;
+                cout << "Found Level Root\n";
+                //Parse objects
+                parseLevel(pLevelRoot, pLevelFile);
+            }
         }
+    }else {
+        cout << "State Root Null\n";
     }
     
     return true;
@@ -100,26 +110,29 @@ bool StateParser::parseState(const char* stateFile,
 void StateParser::parseTextures(TiXmlElement* pStateRoot,
                                 vector<string>* pTextureIDs){
     
-    for (TiXmlElement* e = pStateRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        string fileNameAttribute = e->Attribute("filename");
-        string idAttribute = e->Attribute("ID");
-        
-        cout << "Found Filename: " << fileNameAttribute << endl;
-        cout << "Found ID: " << idAttribute << endl;
-        
-        
-        pTextureIDs->push_back(idAttribute);
-        
-        TextureManager::Instance()->load
-        (fileNameAttribute, idAttribute, Game::Instance()->getRenderer());
-        
+    if (pStateRoot){
+        for (TiXmlElement* e = pStateRoot->FirstChildElement();
+             e != NULL; e = e->NextSiblingElement()){
+            string fileNameAttribute = e->Attribute("filename");
+            string idAttribute = e->Attribute("ID");
+            
+            cout << "Found Filename: " << fileNameAttribute << endl;
+            cout << "Found ID: " << idAttribute << endl;
+            
+            
+            pTextureIDs->push_back(idAttribute);
+            
+            TextureManager::Instance()->load
+            (fileNameAttribute, idAttribute, Game::Instance()->getRenderer());
+        }
+    } else {
+        cout << "Error: State Root Null\n";
     }
     
 }
 
 void StateParser::parseLevel(TiXmlElement* pStateRoot,
-                                string* pLevelFile){
+                             string* pLevelFile){
     
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
@@ -134,50 +147,54 @@ void StateParser::parseLevel(TiXmlElement* pStateRoot,
 
 void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *pObjects){
     
-    for (TiXmlElement* e = pStateRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        
-        int x, y, width, height, numFrames,callBackID,animSpeed;
-        string textureID, lockTo;
-        GameObjectParams* params = new GameObjectParams();
-        
-        e->Attribute("x", &x);
-        e->Attribute("y", &y);
-        e->Attribute("width", &width);
-        e->Attribute("height", &height);
-        e->Attribute("numFrames", &numFrames);
-        e->Attribute("callBackID", &callBackID);
-        e->Attribute("animSpeed", &animSpeed);
-        
-        textureID = e->Attribute("textureID");
-        
-        //Check if object is locked to other object
-        if (e->Attribute("lockTo")){
-            lockTo = e->Attribute("lockTo");
-            cout << "Locked game object to " << lockTo << endl;
-        } else {
-            lockTo = "NULL";
+    if (pStateRoot){
+        for (TiXmlElement* e = pStateRoot->FirstChildElement();
+             e != NULL; e = e->NextSiblingElement()){
+            
+            int x, y, width, height, numFrames,callBackID,animSpeed;
+            string textureID, lockTo;
+            GameObjectParams* params = new GameObjectParams();
+            
+            e->Attribute("x", &x);
+            e->Attribute("y", &y);
+            e->Attribute("width", &width);
+            e->Attribute("height", &height);
+            e->Attribute("numFrames", &numFrames);
+            e->Attribute("callBackID", &callBackID);
+            e->Attribute("animSpeed", &animSpeed);
+            
+            textureID = e->Attribute("textureID");
+            
+            //Check if object is locked to other object
+            if (e->Attribute("lockTo")){
+                lockTo = e->Attribute("lockTo");
+                cout << "Locked game object to " << lockTo << endl;
+            } else {
+                lockTo = "NULL";
+            }
+            
+            params->setX(x);
+            params->setY(y);
+            params->setWidth(width);
+            params->setHeight(height);
+            params->setMaxFrames(numFrames);
+            params->setAnimSpeed(animSpeed);
+            params->setTextureID(textureID);
+            params->setCallBackID(callBackID);
+            params->setLockTo(lockTo);
+            
+            GameObject* pGameObject  =
+            GameObjectFactory::Instance()->create(e->Attribute("type"));
+            
+            pGameObject->load(*params);
+            
+            pGameObject->GetParams().printOut();
+            
+            pObjects->push_back(pGameObject);
+            
         }
-        
-        params->setX(x);
-        params->setY(y);
-        params->setWidth(width);
-        params->setHeight(height);
-        params->setMaxFrames(numFrames);
-        params->setAnimSpeed(animSpeed);
-        params->setTextureID(textureID);
-        params->setCallBackID(callBackID);
-        params->setLockTo(lockTo);
-         
-        GameObject* pGameObject  =
-        GameObjectFactory::Instance()->create(e->Attribute("type"));
-        
-        pGameObject->load(*params);
-        
-        pGameObject->GetParams().printOut();
-        
-        pObjects->push_back(pGameObject);
-        
+    } else {
+        cout << "State Root Null\n";
     }
 }
 

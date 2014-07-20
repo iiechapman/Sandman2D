@@ -11,11 +11,11 @@
 #include "Camera.h"
 
 void TileLayer::render(){
-    int x, y, x2, y2 = 0;
+    int x, x2, y2 = 0;
     
     //Calculate left/top coord
     x = m_position.getX() / m_tileSize;
-    y = m_position.getY() / m_tileSize;
+    //y = m_position.getY() / m_tileSize;
     
     //Calculate right/bottom coord
     x2 = int(m_position.getX()) % m_tileSize;

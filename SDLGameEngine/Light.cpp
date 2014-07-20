@@ -30,22 +30,26 @@ void Light::draw(){
 }
 
 void Light::collision(){
-    
+    //Need to remove collision from this class
 }
 
 void Light::update(){
     
     GetParams().setFrame(0);
-   // GetParams().setVelocity({-1,0});
+
+    //If the light has a lock, position it to the object
     if (GetParams().getLockTo() == string("player")){
-        //GetParams().setScrolling(false);
+
         GetParams().setX
-        (Game::Instance()->getPlayer()->GetParams().getX() - GetParams().getWidth()/2);
+        (Game::Instance()->getPlayer()->GetParams().getX()
+         + Game::Instance()->getPlayer()->GetParams().getWidth()/2
+         - GetParams().getWidth()/2);
         
         GetParams().setY
-        (Game::Instance()->getPlayer()->GetParams().getY() - GetParams().getHeight()/2);
-        
-        GetParams().setVelocity(Game::Instance()->getPlayer()->GetParams().getVelocity());
+        (Game::Instance()->getPlayer()->GetParams().getY()
+         + Game::Instance()->getPlayer()->GetParams().getHeight()/2
+         - GetParams().getHeight()/2);
+    
     }
     
     
