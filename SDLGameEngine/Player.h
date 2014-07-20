@@ -59,11 +59,11 @@ private:
     
     bool m_bIsRunning;
     bool m_bIsBoosting = false;
-    bool m_bMoveRight;
-    bool m_bMoveLeft;
-    
     int m_BoostTime = 10;
     int m_BoostTimer = m_BoostTime;
+
+    bool m_bMoveRight;
+    bool m_bMoveLeft;    
 
     float m_jetSpeed = 0.15;
     float m_maxFuel = 100;

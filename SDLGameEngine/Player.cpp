@@ -191,10 +191,10 @@ void Player::handlePhysics(){
         
         if (m_bWallCling){
             if (GetParams().dirRight()){
-                GetParams().getVelocity().setX((m_jumpSpeed*4));
+                GetParams().getVelocity().setX((m_jumpSpeed*1.5));
                 
             } else if (GetParams().dirLeft()){
-                GetParams().getVelocity().setX(-(m_jumpSpeed*4));
+                GetParams().getVelocity().setX(-(m_jumpSpeed*1.5));
             }
         }
     }
@@ -302,7 +302,7 @@ void Player::handleMovement(){
         //if falling downwards cling to wall
         if (GetParams().getVelocity().getY() > 0 && !m_bIsOnGround && m_bIsFalling){
             m_bWallCling = true;
-            m_numJumps = m_maxJumps;
+            m_numJumps = 1;
             GetParams().getVelocity().setY(GetParams().getVelocity().getY() * .8);
         } else {
             GetParams().getAcceleration().setX(0);
@@ -356,7 +356,6 @@ void Player::handleMovement(){
     newPos = GetParams().getPosition();
     //Check X collision
     if (checkCollideTile(newPos)){
-        cout << "X Intersect!\n";
         GetParams().setX(GetParams().getX() - GetParams().getVelocity().getX());
         GetParams().getVelocity().setX(0);
         GetParams().getAcceleration().setX(0);
@@ -367,7 +366,6 @@ void Player::handleMovement(){
     newPos = GetParams().getPosition();
     //Check Y collision
     if (checkCollideTile(newPos)){
-        cout << "Y Intersect\n";
         GetParams().setY(GetParams().getY() - GetParams().getVelocity().getY());
         GetParams().getVelocity().setY(0);
         GetParams().getAcceleration().setY(0);
