@@ -44,6 +44,7 @@ private:
     bool m_bIsOnGround = false;
     int m_maxJumps = 2;
     int m_numJumps = m_maxJumps;
+    bool m_bUsedDoubleJump = false;
     bool m_bJumpHeld;
     bool m_bCanJump;
     bool m_bOnGround;

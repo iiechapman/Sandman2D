@@ -61,8 +61,8 @@ void Player::update(){
 
 void Player::handleInput(){
     
-    //Press c to boost
-    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_C)) && !m_bIsBoosting){
+    //Press X to boost
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z)) && !m_bIsBoosting){
         m_BoostTimer = m_BoostTime;
         m_bIsBoosting = true;
     }
@@ -112,9 +112,9 @@ void Player::handleInput(){
     
     
     
-    //Check if pressing jump button
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z)) {
-        if (!m_bJumpHeld && m_numJumps > 0){
+    //Press X for jump button
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_X)) {
+        if (!m_bJumpHeld && m_numJumps > 0 && !m_bUsedDoubleJump){
             m_bIsJumping = true;
             m_numJumps--;
         }
@@ -301,8 +301,14 @@ void Player::handleMovement(){
         
         //if falling downwards cling to wall
         if (GetParams().getVelocity().getY() > 0 && !m_bIsOnGround && m_bIsFalling){
+
+            
+            if (!m_bWallCling){
+                m_numJumps++;
+            }
             m_bWallCling = true;
-            m_numJumps = 1;
+            
+            
             GetParams().getVelocity().setY(GetParams().getVelocity().getY() * .8);
         } else {
             GetParams().getAcceleration().setX(0);
@@ -325,6 +331,7 @@ void Player::handleMovement(){
             m_bCanJump = true;
             m_bIsOnGround = true;
             m_numJumps = m_maxJumps;
+            m_bUsedDoubleJump = false;
             m_currentFuel = m_maxFuel;
             GetParams().setAngle(0);
         }
