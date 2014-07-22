@@ -76,7 +76,7 @@ private:
 
     float m_horizontalSpeed = m_walkSpeed;
     float m_verticalSpeed = m_jumpSpeed;
-    float m_horizontalDrag = .2;
+    float m_horizontalDrag = .1;
     
     float m_maxRunSpeed = 10;
     float m_maxWalkSpeed = 5;

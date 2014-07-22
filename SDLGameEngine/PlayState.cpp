@@ -24,7 +24,9 @@ PlayState::~PlayState(){
 
 void PlayState::update(){
     
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)){
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE) ||
+        InputHandler::Instance()->getButtonState(0, XB_START_BUTTON)
+        ){
         Game::Instance()->getStateMachine()->pushState(new PauseState());
     }
     

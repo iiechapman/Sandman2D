@@ -65,7 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4E0AEB50190421570031C463 /* SDLGameEngine.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.framework; path = SDLGameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E0AEB50190421570031C463 /* SDLGameEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDLGameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0AEB53190421570031C463 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4E0AEB5A1904597F0031C463 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		4E0AEB5B1904597F0031C463 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };

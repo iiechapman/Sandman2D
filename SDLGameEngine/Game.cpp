@@ -98,7 +98,8 @@ void Game::handleEvents(){
     InputHandler::Instance()->update();
 
     
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) ||
+        InputHandler::Instance()->getButtonState(0, XB_START_BUTTON)){
         m_pGameStateMachine->changeState(new PlayState());
     }
     

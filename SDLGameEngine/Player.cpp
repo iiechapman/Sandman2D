@@ -61,12 +61,6 @@ void Player::update(){
 
 void Player::handleInput(){
     
-    //Press X to boost
-    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z)) && !m_bIsBoosting){
-        m_BoostTimer = m_BoostTime;
-        m_bIsBoosting = true;
-    }
-    
     if (m_bIsBoosting)
     {
         m_maxHorizontalSpeed = m_maxRunSpeed;
@@ -94,26 +88,38 @@ void Player::handleInput(){
 
     
     
-    //New Keyboard control
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ? m_bMoveRight = true : m_bMoveRight = false;
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) ? m_bMoveLeft = true : m_bMoveLeft = false;
-    InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ? m_bIsJetting = true : m_bIsJetting = false;
+    //New Keyboard/Gmaepad control
+    //TODO SET A FLAG IF JOYSTICK IS AVAILABLE ELSE APP CRASHES!
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ||
+        InputHandler::Instance()->getButtonState(0, XB_DPAD_RIGHT)){
+        m_bMoveRight = true;
+    } else {
+        m_bMoveRight = false;
+    }
     
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)){
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT) ||
+        InputHandler::Instance()->getButtonState(0, XB_DPAD_LEFT)){
+        m_bMoveLeft = true;
+    } else {
+        m_bMoveLeft = false;
+    }
+    
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ||
+        InputHandler::Instance()->getButtonState(0, XB_DPAD_UP)){
+        m_bIsJetting = true;
+    } else {
+        m_bIsJetting = false;
+    }
+    
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) ||
+        InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)){
         m_bIsStomping = true;
     }
     
-    //Check if on ground
-    if (m_numJumps < m_maxJumps){
-        m_bOnGround = false;
-    } else {
-        m_bIsStomping = false;
-    }
     
-    
-    
-    //Press X for jump button
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_X)) {
+    //Jump Button
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_X) ||
+        InputHandler::Instance()->getButtonState(0, XB_A_BUTTON)){
         if (!m_bJumpHeld && m_numJumps > 0 && !m_bUsedDoubleJump){
             m_bIsJumping = true;
             m_numJumps--;
@@ -121,6 +127,14 @@ void Player::handleInput(){
         m_bJumpHeld = true;
     } else {
         m_bJumpHeld = false;
+    }
+    
+    
+    //Slide Button
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z) ||
+        InputHandler::Instance()->getButtonState(0, XB_B_BUTTON) )&& !m_bIsBoosting){
+        m_BoostTimer = m_BoostTime;
+        m_bIsBoosting = true;
     }
     
 }
@@ -394,6 +408,15 @@ void Player::handleMovement(){
     if (GetParams().getVelocity().getY() > m_maxVerticalSpeed){
         GetParams().getVelocity().setY(m_maxVerticalSpeed);
     }
+    
+    
+    //Check if on ground
+    if (m_numJumps < m_maxJumps){
+        m_bOnGround = false;
+    } else {
+        m_bIsStomping = false;
+    }
+    
     
 }
 

@@ -25,34 +25,39 @@
 
 //Generic Controller
 //XBOX/360 Controller
-#define X_BUTTON             0
-#define A_BUTTON             1
-#define B_BUTTON             2
+#define A_BUTTON             0
+#define B_BUTTON             1
+#define X_BUTTON             2
 #define Y_BUTTON             3
 #define L1_BUTTON            4
 #define R1_BUTTON            5
 #define L2_BUTTON            6
 #define R2_BUTTON            7
-#define SELECT_BUTTON        8
-#define START_BUTTON         9
+#define START_BUTTON         8
+#define SELECT_BUTTON        9
 #define L3_BUTTON            10
 #define R3_BUTTON            11
 #define HOME_BUTTON          12
 
 //XBOX/360 Controller
-#define XB_X_BUTTON             0
-#define XB_A_BUTTON             1
-#define XB_B_BUTTON             2
+#define XB_A_BUTTON             0
+#define XB_B_BUTTON             1
+#define XB_X_BUTTON             2
 #define XB_Y_BUTTON             3
 #define XB_L1_BUTTON            4
 #define XB_R1_BUTTON            5
-#define XB_L2_BUTTON            6
-#define XB_R2_BUTTON            7
-#define XB_BACK_BUTTON          8
-#define XB_START_BUTTON         9
-#define XB_L3_BUTTON            10
-#define XB_R3_BUTTON            11
-#define XB_HOME_BUTTON          12
+#define XB_L2_BUTTON            99
+#define XB_R2_BUTTON            99
+#define XB_L3_BUTTON            6
+#define XB_R3_BUTTON            7
+#define XB_START_BUTTON         8
+#define XB_BACK_BUTTON          9
+#define XB_HOME_BUTTON          10
+#define XB_DPAD_UP              11
+#define XB_DPAD_DOWN            12
+#define XB_DPAD_LEFT            13
+#define XB_DPAD_RIGHT           14
+
 
 //XBOXONE Controller
 #define XBO_X_BUTTON             0
