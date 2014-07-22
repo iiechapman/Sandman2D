@@ -245,7 +245,7 @@ int InputHandler::yvalue(int joy, int stick){
 }
 
 bool InputHandler::getButtonState(int joy, int buttonNumber){
-    if (m_buttonStates[joy][buttonNumber]){
+    if (SDL_NumJoysticks() > 0 ){
         return m_buttonStates[joy][buttonNumber];
     }
     return 0;
