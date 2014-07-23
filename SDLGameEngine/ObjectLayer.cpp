@@ -34,8 +34,8 @@ void ObjectLayer::render(){
         //Create darkness texture
         SDL_Texture* darknessTexture =
         SDL_CreateTexture(Game::Instance()->getRenderer(), SDL_PIXELFORMAT_RGBA8888,
-                          SDL_TEXTUREACCESS_TARGET,Game::Instance()->getGameWidth(),
-                          Game::Instance()->getGameHeight());
+                          SDL_TEXTUREACCESS_TARGET,Game::Instance()->getGameWidth()+200,
+                          Game::Instance()->getGameHeight()+200);
         
         //Store Old Color and Blendmode to restore later
         SDL_BlendMode oldBlend;
@@ -96,8 +96,8 @@ void ObjectLayer::render(){
         SDL_Rect src,dest;
         dest.x = dest.y = src.y = src.x = 0;
         
-        dest.w = src.w = Game::Instance()->getGameWidth()/1;
-        dest.h = src.h = Game::Instance()->getGameHeight()/1;
+        dest.w = src.w = Game::Instance()->getGameWidth() + 200;
+        dest.h = src.h = Game::Instance()->getGameHeight() + 200;
         
         SDL_RenderCopyEx
         (Game::Instance()->getRenderer(), darknessTexture, &src, &dest, 0, 0, SDL_FLIP_NONE);
