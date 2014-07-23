@@ -53,6 +53,8 @@ private:
     bool m_LiveMode = false;
     bool m_EnteringLiveMode = false;
     
+    //Tests
+    int rumbleFactor = 1;
 
 };
 

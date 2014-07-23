@@ -37,6 +37,31 @@ void PlayState::update(){
         setLiveMode(true);
     }
     
+    
+    if (InputHandler::Instance()->getButtonState(0, XB_R1_BUTTON)){
+        //Game::Instance()->setZoom(Game::Instance()->getZoom() + 0.25);
+        rumbleFactor++;
+        
+    }
+    
+    if (InputHandler::Instance()->getButtonState(0, XB_L1_BUTTON)){
+        //Game::Instance()->setZoom(Game::Instance()->getZoom() - 0.25);
+        rumbleFactor--;
+        if (rumbleFactor <= 0){
+            rumbleFactor =1;
+        }
+    }
+    
+    
+    if (InputHandler::Instance()->getButtonState(0, XB_Y_BUTTON)){
+        Camera::Instance()->setHorizontalRumble(-rand()% rumbleFactor + rand()% rumbleFactor);
+        Camera::Instance()->setVerticalRumble(-rand()% rumbleFactor+ rand()% rumbleFactor);
+    } else {
+        Camera::Instance()->resetRumble();
+    }
+    
+    
+    
     //Press enter to go into live mode
     if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
         m_EnteringLiveMode = false;

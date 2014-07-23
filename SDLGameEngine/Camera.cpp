@@ -69,6 +69,7 @@ const Vector2D Camera::getPosition(){
         Vector2D pos(((m_pTarget->getX()) - ((Game::Instance()->getGameWidth() / Game::Instance()->getZoom())/2)),
                      (m_pTarget->getY()) - ((Game::Instance()->getGameHeight() / Game::Instance()->getZoom())/2));
         
+        
     
         //Bounds for camera
         if (pos.getX() < 0){
@@ -78,6 +79,7 @@ const Vector2D Camera::getPosition(){
         if (pos.getY() < 0){
             pos.setY(0);
         }
+        
         
         // cout << "Pos x: " << ((Game::Instance()->getGameWidth()/2)) << endl;
         
@@ -93,7 +95,10 @@ const Vector2D Camera::getPosition(){
             pos.setY(Game::Instance()->getMapHeight() - (Game::Instance()->getGameHeight()/ Game::Instance()->getZoom() ));
         }
     
-    
+        pos.setX(pos.getX() + m_rumbleHorizontal);
+        pos.setY(pos.getY() + m_rumbleVertical);
+        
+        
         //If target is farther than camera move towards it
         if (m_position.getX() < pos.getX()) {
             m_position.setX(m_position.getX() + .001);

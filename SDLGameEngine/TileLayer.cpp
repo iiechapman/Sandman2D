@@ -32,10 +32,17 @@ void TileLayer::render(){
             }
             
             //Check if tile is outside of viewable area
-            if (((j * m_tileSize) - x2)
-                - Camera::Instance()->getPosition().getX() <-m_tileSize ||
-                ((j * m_tileSize - x2 - Camera::Instance()->getPosition().getX()
-                     > Game::Instance()->getGameWidth()))){
+            if (
+                ((j * m_tileSize) - x2)
+                - Camera::Instance()->getPosition().getX() < -m_tileSize ||
+                ((j * m_tileSize - x2) - Camera::Instance()->getPosition().getX()
+                     > Game::Instance()->getGameWidth() -m_tileSize
+                 *Game::Instance()->getZoom()) ||
+                
+                ((i * m_tileSize) - y2) - Camera::Instance()->getPosition().getY() < -m_tileSize ||
+                ((i * m_tileSize - y2) - Camera::Instance()->getPosition().getY()) >
+                  Game::Instance()->getGameHeight() + m_tileSize *Game::Instance()->getZoom())
+            {
                 continue;
             }
             
