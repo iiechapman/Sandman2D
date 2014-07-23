@@ -6,14 +6,17 @@
 #include <unistd.h>
 #include <stdio.h>
 
-const int FPS = 60;
-const int DELAY_TIME = 1000.0f / FPS;
+const int DESIRED_FPS = 60;
+const int DELAY_TIME = 1000.0f / DESIRED_FPS;
 const int GAME_WIDTH = 1280;
 const int GAME_HEIGHT = 720;
 
 int main(int argc, char* args[]){
     
     Uint32 frameStart,frameTime;
+    Uint32 secondTimer = 0;
+    int totalFrames = 0;
+    int FPS = 0;
     
     char filenameMax[FILENAME_MAX];
     
@@ -22,21 +25,33 @@ int main(int argc, char* args[]){
     
     cout << "Current working directory: " << filenameMax << endl;
     
-    if (Game::Instance()->init("SDL Game Engine" ,
+    if (Game::Instance()->init("Sandman Engine v.01" ,
                  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                GAME_WIDTH, GAME_HEIGHT , SDL_RENDERER_ACCELERATED)){
         cout << "Game init success\n";
         
         while(Game::Instance()->running()){
-            
+            string title = "Sandman Engine v.01 - FPS: " + to_string(FPS);
             frameStart = SDL_GetTicks();
             
             Game::Instance()->handleEvents();
             Game::Instance()->update();
             Game::Instance()->render();
             
+            //Count frames and frametime
+            totalFrames++;
             frameTime = SDL_GetTicks() - frameStart;
             
+            //Count seconds
+            secondTimer += frameTime;
+            if (secondTimer >= 1000){
+                FPS = totalFrames;
+                Game::Instance()->setTitle(string(title));
+                secondTimer = 0;
+                totalFrames = 0;
+            }
+            
+            //Delay processing to match desired FPS
             if (frameTime < DELAY_TIME){
              SDL_Delay(int(DELAY_TIME - frameTime));
             }

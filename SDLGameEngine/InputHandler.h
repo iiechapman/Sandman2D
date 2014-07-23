@@ -75,7 +75,7 @@ private:
     const int m_joystickDeadZone = 10000;
     vector<vector<bool>> m_buttonStates;
     
-    
+    bool m_bJoystickInitialized = false;
 };
 
 

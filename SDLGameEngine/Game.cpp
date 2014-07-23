@@ -35,7 +35,7 @@ bool Game::init(const char* title,
         
         m_pWindow = SDL_CreateWindow(title, xpos, ypos,
                                      width, height, flags);
-        
+
         //Window creation successful
         if (m_pWindow != 0){
             cout << "Window creation success\n";
@@ -144,6 +144,10 @@ void Game::clean(){
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
+}
+
+void Game::setTitle(string title){
+    SDL_SetWindowTitle(m_pWindow, title.c_str());
 }
 
 Game* Game::Instance(){

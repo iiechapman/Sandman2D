@@ -51,6 +51,8 @@ public:
         return m_mapWidth;
     }
     
+    void setTitle(string title);
+    
     int getMapHeight(){
         return m_mapHeight;
     }

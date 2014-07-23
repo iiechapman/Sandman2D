@@ -38,6 +38,19 @@ InputHandler::~InputHandler(){
 }
 
 void InputHandler::update(){
+    
+    if (SDL_NumJoysticks() < 1){
+        if (m_bJoystickInitialized){
+            cout << "Joystick Disconnected!\n";
+        }
+        
+        m_bJoystickInitialized = false;
+        
+    } else if (!m_bJoystickInitialized){
+        initializeJoysticks();
+        cout << "Joystick Connected!\n";
+    }
+    
     SDL_Event p_event;
     
     while (SDL_PollEvent(&p_event)) {
@@ -205,6 +218,7 @@ void InputHandler::initializeJoysticks(){
                     tempButtons.push_back(false);
                 }
                 m_buttonStates.push_back(tempButtons);
+                m_bJoystickInitialized = true;
             } else {
                 cout << "Failed to init joystick: " << SDL_GetError() << endl;
             }
@@ -245,7 +259,7 @@ int InputHandler::yvalue(int joy, int stick){
 }
 
 bool InputHandler::getButtonState(int joy, int buttonNumber){
-    if (SDL_NumJoysticks() > 0 ){
+    if (m_bJoystickInitialized){
         return m_buttonStates[joy][buttonNumber];
     }
     return 0;

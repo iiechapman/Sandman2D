@@ -59,7 +59,7 @@ private:
     bool m_bIsReadyToStomp = false;
     
     bool m_bIsBoosting = false;
-    int m_BoostTime = 10;
+    int m_BoostTime = 15;
     int m_BoostTimer = 0;
 
     bool m_bMoveRight;
@@ -72,19 +72,19 @@ private:
     bool  m_bIsJetting = false;
     
     float m_runSpeed = 8;
-    float m_walkSpeed = 0.25;
+    float m_walkSpeed = 0.30;
 
     float m_horizontalSpeed = m_walkSpeed;
     float m_verticalSpeed = m_jumpSpeed;
-    float m_horizontalDrag = .1;
+    float m_horizontalDrag = .09;
     
-    float m_maxRunSpeed = 10;
-    float m_maxWalkSpeed = 5;
+    float m_maxRunSpeed = 8;
+    float m_maxWalkSpeed = 4.5;
     
-    float m_maxVerticalSpeed = 25;
+    float m_maxVerticalSpeed = 20;
     float m_maxHorizontalSpeed = m_maxWalkSpeed;
 
-    float m_normalGravity = .3;
+    float m_normalGravity = .40;
     float m_jetGravity = 0.1;
     float m_currentGravity = m_normalGravity;
     

@@ -13,9 +13,16 @@
 #include "Game.h"
 #include "GameObjectFactory.h"
 
+/*
+ Parses the library XML file for state
+ 
+ Pass in stateID string and it looks for that state to load
+ 
+ */
+
 bool StateParser::parseState(const char* stateFile,
                              string stateID, vector<GameObject *>* pObjects,
-                             vector<string>* pTextureIDs, string* pLevelFile){
+                             vector<string>* pTextureIDs, map<string,string>* pLevelFiles){
     
     
     //Create an XML document
@@ -29,77 +36,31 @@ bool StateParser::parseState(const char* stateFile,
         return false;
     }
     
-    
-    //Get the root element
+
+    //Find root element
     TiXmlElement* pRoot = xmlDoc.RootElement();
     
-    //Pre declare states root node
-    TiXmlElement* pStateRoot = 0;
+    //Find state root
+    TiXmlElement* pStateRoot = findElement(stateID, pRoot);
+
     
-    //Find root node
-    for (TiXmlElement* e = pRoot->FirstChildElement() ;
-         e!= NULL; e = e->NextSiblingElement()){
-        if (e->Value() == stateID ){
-            pStateRoot = e;
-            cout << "Found State Root\n";
-        }
-    }
-    
-    //Pre declare the texture root
-    TiXmlElement* pTextureRoot = 0;
-    
-    //Find the texture root
-    if (pStateRoot){
-        for (TiXmlElement* e = pStateRoot->FirstChildElement() ;
-             e != NULL ; e = e->NextSiblingElement()){
-            if (e->Value() == string("TEXTURES")){
-                pTextureRoot = e;
-                cout << "Found Texture Root\n";
-            }
-        }
-    }
-    
-    //Parse all textures
+    //Find texture root and parse
+    TiXmlElement* pTextureRoot = findElement(string("TEXTURES"), pStateRoot);
     parseTextures(pTextureRoot, pTextureIDs);
     
-    
-    //Pre declare object root node
-    TiXmlElement* pObjectRoot = 0;
-    
-    //Find object root node
-    if (pStateRoot){
-        for ( TiXmlElement* e = pStateRoot->FirstChildElement();
-             e != NULL; e = e->NextSiblingElement()){
-            if (e->Value() == string("OBJECTS")){
-                pObjectRoot = e;
-                cout << "Found Object Root\n";
-            }
-        }
-    }else {
-        cout << "State Root Null\n";
-    }
-    
-    //Parse objects
+    //Find object root parse
+    TiXmlElement* pObjectRoot = findElement(string("OBJECTS"), pStateRoot);
     parseObjects(pObjectRoot, pObjects);
     
-    
-    //Pre declare object root node
-    TiXmlElement* pLevelRoot = 0;
+    //Find Level Root and parse
+    TiXmlElement* pLevelRoot = findElement(string("LEVELS"), pStateRoot);
     cout << "Searching for Level Root\n";
     
-    //Find object root node
-    if (pStateRoot){
-        for ( TiXmlElement* e = pStateRoot->FirstChildElement();
-             e != NULL; e = e->NextSiblingElement()){
-            if (e->Value() == string("LEVEL")){
-                pLevelRoot = e;
-                cout << "Found Level Root\n";
-                //Parse objects
-                parseLevel(pLevelRoot, pLevelFile);
-            }
-        }
-    }else {
-        cout << "State Root Null\n";
+    //Parse Level and create
+    if (pLevelRoot){
+        parseLevels(pLevelRoot, pLevelFiles);
+    } else {
+        cout << "No levels in this state\n";
     }
     
     return true;
@@ -131,15 +92,15 @@ void StateParser::parseTextures(TiXmlElement* pStateRoot,
     
 }
 
-void StateParser::parseLevel(TiXmlElement* pStateRoot,
-                             string* pLevelFile){
+void StateParser::parseLevels(TiXmlElement* pStateRoot,
+                             map<string,string>* pLevelFiles){
     
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         string fileNameAttribute = e->Attribute("filename");
         string idAttribute = e->Attribute("ID");
         
-        *pLevelFile = fileNameAttribute;
+        (*pLevelFiles)[idAttribute] = fileNameAttribute;
     }
     
 }
@@ -200,7 +161,16 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
 
 
 
-
+TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
+    for (TiXmlElement* e = root->FirstChildElement() ;
+         e!= NULL; e = e->NextSiblingElement()){
+        if (e->Value() == element ){
+            cout << "Found State Root\n";
+            return e;
+        }
+    }
+    return 0;
+}
 
 
 

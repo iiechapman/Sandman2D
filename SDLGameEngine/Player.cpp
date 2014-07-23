@@ -205,10 +205,10 @@ void Player::handlePhysics(){
         
         if (m_bWallCling){
             if (GetParams().dirRight()){
-                GetParams().getVelocity().setX((m_jumpSpeed*1.5));
+                GetParams().getVelocity().setX((m_jumpSpeed*2));
                 
             } else if (GetParams().dirLeft()){
-                GetParams().getVelocity().setX(-(m_jumpSpeed*1.5));
+                GetParams().getVelocity().setX(-(m_jumpSpeed*2));
             }
         }
     }

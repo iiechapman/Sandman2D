@@ -24,10 +24,55 @@ PlayState::~PlayState(){
 
 void PlayState::update(){
     
+    //Pause game if start/escape pressed
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE) ||
         InputHandler::Instance()->getButtonState(0, XB_START_BUTTON)
         ){
         Game::Instance()->getStateMachine()->pushState(new PauseState());
+    }
+    
+    
+    //Look for live mode
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && !m_EnteringLiveMode){
+        setLiveMode(true);
+    }
+    
+    //Press enter to go into live mode
+    if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
+        m_EnteringLiveMode = false;
+    } else {
+        m_EnteringLiveMode = true;
+    }
+    
+    //Press button to go to next level (For Testing)
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_EQUALS)||
+        InputHandler::Instance()->getButtonState(0, XB_HOME_BUTTON)){
+        
+        if (!m_bSwitchingLevels){
+            m_bSwitchingLevels = true;
+            //Setup Level from file retrieved in state
+            m_currentLevel++;
+            
+            cout << "Max Levels = " << pLevelFiles.size() << endl;
+            if (m_currentLevel > pLevelFiles.size()-1){
+                m_currentLevel = 1;
+            }
+            
+            onExit();
+            LevelParser levelParser;
+            string levelNumber = "level" + to_string(m_currentLevel);
+            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str());
+        }
+    } else {
+        m_bSwitchingLevels = false;
+    }
+    
+    
+    //Live Mode sequence
+    if (liveModeOn()){
+        onExit();
+        onEnter();
+        SDL_Delay(100);
     }
     
     //Update all objects
@@ -37,26 +82,7 @@ void PlayState::update(){
         }
     }
     
-    Camera::Instance()->update();
-    
-    //Look for live mode
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && !m_EnteringLiveMode){
-        setLiveMode(true);
-    }
-    
-    if (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
-        m_EnteringLiveMode = false;
-    } else {
-        m_EnteringLiveMode = true;
-    }
-    
-    
-    if (liveModeOn()){
-        onExit();
-        onEnter();
-        SDL_Delay(100);
-    }
-    
+    //Update levels elements
     pLevel->update();
 }
 
@@ -68,13 +94,17 @@ void PlayState::render(){
 bool PlayState::onEnter(){
     cout << "Entering play state\n";
     
+    //Load the state from library file
+    string pLevelFile;
+    
+    //Load levels from state file
     StateParser parser;
     parser.parseState("scripts/xm1.xml", s_playID,
-                      &m_gameObjects, &m_textureIDList,&pLevelFile);
+                      &m_gameObjects, &m_textureIDList,&pLevelFiles);
     
+    //Setup Level from file retrieved in state
     LevelParser levelParser;
-    
-    pLevel = levelParser.parseLevel(pLevelFile.c_str());
+    pLevel = levelParser.parseLevel(pLevelFiles["init"].c_str());
     
     cout << "Entered play state\n";
     

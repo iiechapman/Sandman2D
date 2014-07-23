@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include "GameObject.h"
 #include "GameState.h"
 #include "Level.h"
@@ -44,9 +45,11 @@ private:
     static const string s_playID;
     vector<GameObject*> m_gameObjects;
     
+    int m_currentLevel = 0;
     Level* pLevel;
-    string pLevelFile;
+    map<string,string> pLevelFiles;
     
+    bool m_bSwitchingLevels = false;
     bool m_LiveMode = false;
     bool m_EnteringLiveMode = false;
     
