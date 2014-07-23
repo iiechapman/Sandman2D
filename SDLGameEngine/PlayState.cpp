@@ -54,8 +54,8 @@ void PlayState::update(){
     
     
     if (InputHandler::Instance()->getButtonState(0, XB_Y_BUTTON)){
-        Camera::Instance()->setHorizontalRumble(-rand()% rumbleFactor + rand()% rumbleFactor);
-        Camera::Instance()->setVerticalRumble(-rand()% rumbleFactor+ rand()% rumbleFactor);
+        Camera::Instance()->setHorizontalRumble(rumbleFactor);
+        Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {
         Camera::Instance()->resetRumble();
     }

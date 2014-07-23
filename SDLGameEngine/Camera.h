@@ -35,13 +35,13 @@ public:
     const Vector2D getPosition();
     void resetRumble(){
         
-        m_rumbleVertical-=2;
+        m_rumbleVertical-=1;
         
         if (m_rumbleVertical< 0 ){
             m_rumbleVertical = 0;
         }
         
-        m_rumbleHorizontal-=2;
+        m_rumbleHorizontal-=1;
         
         if (m_rumbleHorizontal< 0 ){
             m_rumbleHorizontal = 0;
@@ -63,6 +63,7 @@ private:
     ~Camera();
     
     int m_rumbleVertical,m_rumbleHorizontal;
+    int m_currentVertRumble, m_currentHorRumble;
     
     //Cameras target to follow
     Vector2D* m_pTarget;

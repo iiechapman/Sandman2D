@@ -36,6 +36,7 @@ int main(int argc, char* args[]){
             
             Game::Instance()->handleEvents();
             Game::Instance()->update();
+            Camera::Instance()->update();
             Game::Instance()->render();
             
             //Count frames and frametime
