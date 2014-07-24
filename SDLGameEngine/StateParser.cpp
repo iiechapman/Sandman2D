@@ -43,7 +43,6 @@ bool StateParser::parseState(const char* stateFile,
     //Find state root
     TiXmlElement* pStateRoot = findElement(stateID, pRoot);
 
-    
     //Find texture root and parse
     TiXmlElement* pTextureRoot = findElement(string("TEXTURES"), pStateRoot);
     parseTextures(pTextureRoot, pTextureIDs);
@@ -115,6 +114,7 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
             int x, y, width, height, numFrames,callBackID,animSpeed;
             string textureID, lockTo;
             GameObjectParams* params = new GameObjectParams();
+
             
             e->Attribute("x", &x);
             e->Attribute("y", &y);
@@ -126,14 +126,6 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
             
             textureID = e->Attribute("textureID");
             
-            //Check if object is locked to other object
-            if (e->Attribute("lockTo")){
-                lockTo = e->Attribute("lockTo");
-                cout << "Locked game object to " << lockTo << endl;
-            } else {
-                lockTo = "NULL";
-            }
-            
             params->setX(x);
             params->setY(y);
             params->setWidth(width);
@@ -142,7 +134,6 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
             params->setAnimSpeed(animSpeed);
             params->setTextureID(textureID);
             params->setCallBackID(callBackID);
-            params->setLockTo(lockTo);
             
             GameObject* pGameObject  =
             GameObjectFactory::Instance()->create(e->Attribute("type"));
@@ -165,7 +156,7 @@ TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
     for (TiXmlElement* e = root->FirstChildElement() ;
          e!= NULL; e = e->NextSiblingElement()){
         if (e->Value() == element ){
-            cout << "Found State Root\n";
+            cout << "Found " << element << " root!\n";
             return e;
         }
     }
