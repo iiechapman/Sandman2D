@@ -84,7 +84,6 @@ void LevelParser::parseLibrary(const char* levelFile){
 void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTilesets){
     
     //Store element for parsing;
-    
     TiXmlElement* image = pTileSetRoot->FirstChildElement();
     
     //Reformat file source
@@ -342,9 +341,7 @@ void LevelParser::parseObjectLayer
                 }
             }
             
-            
-            //pGameObject->GetParams().setRow(GID / height);
-            //pGameObject->GetParams().setFrame(GID / width);
+
             
             pGameObject->load
             (*new GameObjectParams
