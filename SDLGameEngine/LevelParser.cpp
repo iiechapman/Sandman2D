@@ -34,25 +34,29 @@ Level* LevelParser::parseLevel(const char* levelFile){
     pRoot->Attribute("height", &m_height);
     //ToDo add orientation and version number
     
-    //Parse the textures
-    for (TiXmlElement* e = pRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        cout << "Parsing for textures\n";
-                if (e->Value() == string("properties")){
-                    for (TiXmlElement* property = e->FirstChildElement();
-                         property != NULL; property = property->NextSiblingElement()){
-                        parseTextures(property);
-                    }
-                }
-            }
     
-    //parse the tilesets
-    for (TiXmlElement* e = pRoot->FirstChildElement();
-         e != NULL; e = e->NextSiblingElement()){
-        if (e->Value() == string("tileset")){
-            parseTilesets(e, pLevel->getTilesets());
-        }
+    //Look for then parse textures
+    TiXmlElement* textureRoot = findElement(string("properties"), pRoot)->FirstChildElement();
+
+    while (textureRoot != NULL) {
+        parseTextures(textureRoot);
+        textureRoot = textureRoot->NextSiblingElement();
     }
+
+    //Look for then parse textures
+    TiXmlElement* tilesetRoot = findElement(string("tileset"), pRoot)->FirstChildElement();
+    
+        parseTilesets(tilesetRoot,pLevel->getTilesets());
+
+
+    
+//    //parse the tilesets
+//    for (TiXmlElement* e = pRoot->FirstChildElement();
+//         e != NULL; e = e->NextSiblingElement()){
+//        if (e->Value() == string("tileset")){
+//            parseTilesets(e, pLevel->getTilesets());
+//        }
+//    }
     
     //Parse level layers
     for (TiXmlElement* e = pRoot->FirstChildElement();
@@ -128,7 +132,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
     } else {
         tileset.margin = 0;
     }
-
+    
     
     tileset.name = pTileSetRoot->Attribute("name");
     
@@ -143,7 +147,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
 
 void LevelParser::parseTileLayer
 (TiXmlElement *pTileElement, vector<Layer *> *pLayers,
-vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
+ vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     
     TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
     
@@ -181,7 +185,7 @@ vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
         }
     }
     
-
+    
     //Find data node then store it
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
@@ -192,11 +196,11 @@ vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     
     //Decode data and store
     if (pDataNode){
-    for (TiXmlNode* e = pDataNode->FirstChild(); e != NULL; e = e->NextSibling()){
-        TiXmlText* text = e ->ToText();
-        string t = text->Value();
-        decodedIDs = base64_decode(t);
-    }
+        for (TiXmlNode* e = pDataNode->FirstChild(); e != NULL; e = e->NextSibling()){
+            TiXmlText* text = e ->ToText();
+            string t = text->Value();
+            decodedIDs = base64_decode(t);
+        }
     }
     
     //Uncompress zlib compression
@@ -207,7 +211,7 @@ vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     ((Bytef*)&gids[0], &numGids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
     
     vector<int> layerRow(m_width);
-
+    
     //assign decompressed data
     for(int j = 0 ; j < m_height; j++){
         data.push_back(layerRow);
@@ -262,7 +266,7 @@ void LevelParser::parseObjectLayer
             SDL_BlendMode blendMode = SDL_BLENDMODE_NONE;
             
             string textureID(""),name(""),lockTo("");
-
+            
             
             //Get initial values
             e->Attribute("x", &x);
@@ -274,7 +278,7 @@ void LevelParser::parseObjectLayer
             e->Attribute("gid",&GID);
             
             GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
-
+            
             //Get Property Values
             for (TiXmlElement* properties = e->FirstChildElement();
                  properties != NULL; properties = properties->NextSiblingElement()){
@@ -326,16 +330,16 @@ void LevelParser::parseObjectLayer
                                 int temp;
                                 property->Attribute("value",&temp);
                                 color.r = temp;
-                               
+                                
                             }  else if (property->Attribute("name") == string("green")){
                                 int temp;
                                 property->Attribute("value",&temp);
                                 color.g = temp;
-                               
+                                
                             }  else if (property->Attribute("name") == string("blue")){
                                 int temp;
                                 property->Attribute("value",&temp);
-                                color.b = temp;  
+                                color.b = temp;
                             }
                         }
                     }
@@ -372,7 +376,16 @@ void LevelParser::parseObjectLayer
 
 
 
-
+TiXmlElement* LevelParser::findElement(string element,TiXmlElement* root){
+    for (TiXmlElement* e = root->FirstChildElement() ;
+         e!= NULL; e = e->NextSiblingElement()){
+        if (e->Value() == element ){
+            cout << "Found " << element << " root!\n";
+            return e;
+        }
+    }
+    return 0;
+}
 
 
 

@@ -43,6 +43,8 @@ private:
     void parseObjectLayer
     (TiXmlElement* pObjectElement, vector<Layer*>* pLayers,string type, Level* pLevel);
     
+    TiXmlElement* findElement(string element,TiXmlElement* root);
+    
     int m_tileSize;
     int m_width;
     int m_height;
