@@ -139,7 +139,7 @@ void Player::handleInput(){
     
     //Ghost mode
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_T) ||
-         InputHandler::Instance()->getButtonState(0, XB_R3_BUTTON))){
+         InputHandler::Instance()->getButtonState(0, XB_L1_BUTTON))){
         m_bCheckCollision = false;
     } else {
         m_bCheckCollision = true;
@@ -147,12 +147,10 @@ void Player::handleInput(){
     
     //Fly mode
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Y) ||
-         InputHandler::Instance()->getButtonState(0, XB_L3_BUTTON))){
+         InputHandler::Instance()->getButtonState(0, XB_R1_BUTTON))){
         GetParams().setY(GetParams().getY()-10);
         GetParams().getAcceleration().setY(0);
     }
-    
-    
 }
 
 void Player::handlePhysics(){
