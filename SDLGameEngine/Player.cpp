@@ -61,33 +61,6 @@ void Player::update(){
 
 void Player::handleInput(){
     
-    if (m_bIsBoosting)
-    {
-        m_maxHorizontalSpeed = m_maxRunSpeed;
-        
-        if (GetParams().dirRight()){
-            GetParams().setAngle(10);
-            GetParams().getVelocity().setX(m_maxHorizontalSpeed);
-        }
-        
-        if (GetParams().dirLeft()){
-            GetParams().setAngle(-10);
-            GetParams().getVelocity().setX(-m_maxHorizontalSpeed);
-        }
-        
-        m_BoostTimer--;
-        if (m_BoostTimer <= 0){
-            m_BoostTimer = 0;
-            m_horizontalSpeed = m_walkSpeed;
-            m_maxHorizontalSpeed = m_maxWalkSpeed;
-            m_bIsBoosting = false;
-        }
-    } else {
-        m_maxHorizontalSpeed = m_maxWalkSpeed;
-    }
-    
-    
-    
     //New Keyboard/Gamepad control
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ||
         InputHandler::Instance()->getButtonState(0, XB_DPAD_RIGHT)){
@@ -318,6 +291,32 @@ void Player::handlePhysics(){
         m_StompCharge = 0;
     }
     
+    //Handle Boosting
+    if (m_bIsBoosting)
+    {
+        m_maxHorizontalSpeed = m_maxRunSpeed;
+        
+        if (GetParams().dirRight()){
+            GetParams().setAngle(10);
+            GetParams().getVelocity().setX(m_maxHorizontalSpeed);
+        }
+        
+        if (GetParams().dirLeft()){
+            GetParams().setAngle(-10);
+            GetParams().getVelocity().setX(-m_maxHorizontalSpeed);
+        }
+        
+        m_BoostTimer--;
+        if (m_BoostTimer <= 0){
+            m_BoostTimer = 0;
+            m_horizontalSpeed = m_walkSpeed;
+            m_maxHorizontalSpeed = m_maxWalkSpeed;
+            m_bIsBoosting = false;
+        }
+    } else {
+        m_maxHorizontalSpeed = m_maxWalkSpeed;
+    }
+    
 }
 
 void Player::handleMovement(){
@@ -394,6 +393,7 @@ void Player::handleMovement(){
     GetParams().setX(GetParams().getX() + GetParams().getVelocity().getX());
     GetParams().setY(GetParams().getY() + GetParams().getVelocity().getY());
     
+
     
     if (m_bCheckCollision){
         //Check intersection and fix

@@ -49,7 +49,17 @@ void ObjectLayer::render(){
         //Set darkness layer as render surface temporarily
         SDL_SetRenderTarget(Game::Instance()->getRenderer(), darknessTexture);
     
-    
+//        if (Game::Instance()->getPlayer()->GetParams().getY() < 600){
+//            currentShade.r = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
+//            currentShade.g = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
+//            currentShade.b = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
+//        } else {
+//            currentShade.r = 50;
+//            currentShade.g = 50;
+//            currentShade.b = 50;
+//        }
+        
+        
         SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), currentShade.r, currentShade.g, currentShade.b, 255);
         
         //SDL_RenderClear(Game::Instance()->getRenderer());
