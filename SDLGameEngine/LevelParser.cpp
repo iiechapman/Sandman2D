@@ -37,28 +37,18 @@ Level* LevelParser::parseLevel(const char* levelFile){
     
     //Look for then parse textures
     TiXmlElement* textureRoot = findElement(string("properties"), pRoot)->FirstChildElement();
-
+    
     while (textureRoot != NULL) {
         parseTextures(textureRoot);
         textureRoot = textureRoot->NextSiblingElement();
     }
-
-    //Look for then parse textures
-    TiXmlElement* tilesetRoot = findElement(string("tileset"), pRoot)->FirstChildElement();
     
-        parseTilesets(tilesetRoot,pLevel->getTilesets());
-
-
+    //Look for then parse tilesets
+    TiXmlElement* tilesetRoot = findElement(string("tileset"), pRoot);
+    parseTilesets(tilesetRoot,pLevel->getTilesets());
     
-//    //parse the tilesets
-//    for (TiXmlElement* e = pRoot->FirstChildElement();
-//         e != NULL; e = e->NextSiblingElement()){
-//        if (e->Value() == string("tileset")){
-//            parseTilesets(e, pLevel->getTilesets());
-//        }
-//    }
     
-    //Parse level layers
+    //Look for and Parse level layers
     for (TiXmlElement* e = pRoot->FirstChildElement();
          e != NULL ; e = e->NextSiblingElement()){
         if (e->Value() == string("layer") ||
@@ -74,7 +64,6 @@ Level* LevelParser::parseLevel(const char* levelFile){
             }
         }
     }
-    
     return pLevel;
 }
 
@@ -186,6 +175,9 @@ void LevelParser::parseTileLayer
     
     
     //Find data node then store it
+    
+    //pDataNode = findElement("data", pTileElement->FirstChildElement());
+    
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         if (e->Value() == string("data")){
@@ -228,11 +220,13 @@ void LevelParser::parseTileLayer
     pTileLayer->setNumRows(m_height);
     
     //Save new tile layer to Level
+    cout << "Added new layer\n";
     pLayers->push_back(pTileLayer);
     
     //Add collision tiles to collision layer
     if (collidable){
         pCollisionLayers->push_back(pTileLayer);
+        cout << "Added new collision layer\n";
     }
     
 }
@@ -345,7 +339,7 @@ void LevelParser::parseObjectLayer
                 }
             }
             
-
+            
             
             pGameObject->load
             (*new GameObjectParams

@@ -66,7 +66,7 @@ private:
     int m_currentVertRumble, m_currentHorRumble;
     
     //Cameras target to follow
-    Vector2D* m_pTarget;
+    Vector2D* m_pTarget = 0;
     
     //Cameras position
     Vector2D m_position;
