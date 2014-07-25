@@ -132,7 +132,8 @@ void Player::handleInput(){
     
     //Slide Button
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z) ||
-         InputHandler::Instance()->getButtonState(0, XB_B_BUTTON) )&& !m_bIsBoosting){
+         InputHandler::Instance()->getButtonState(0, XB_B_BUTTON) )
+        && !m_bIsBoosting && !m_bIsStomping){
         m_BoostTimer = m_BoostTime;
         m_bIsBoosting = true;
     }

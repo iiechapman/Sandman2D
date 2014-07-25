@@ -38,7 +38,7 @@ void GameStateMachine::changeState(GameState* pState){
     if (!m_gameStates.empty()){
         if (m_gameStates.back()->getStateID() == pState->getStateID()){
             //Same state, do nothing
-            cout << "Same state!\n";
+            //cout << "Same state!\n";
             return;
         }
         cout << "DELETING " << m_gameStates.back()->getStateID() << endl;

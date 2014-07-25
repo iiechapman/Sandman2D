@@ -87,7 +87,7 @@ void PlayState::update(){
             
             cout << "Max Levels = " << pLevelFiles.size() << endl;
             if (m_currentLevel > pLevelFiles.size()-1){
-                m_currentLevel = 1;
+                m_currentLevel = 0;
             }
             
             onExit();
