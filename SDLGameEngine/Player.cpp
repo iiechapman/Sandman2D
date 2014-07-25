@@ -111,8 +111,9 @@ void Player::handleInput(){
         m_bIsJetting = false;
     }
     
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) ||
-        InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)){
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) ||
+        InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)) &&
+        m_bIsStomping == false){
         m_bIsStomping = true;
     }
     
@@ -263,7 +264,8 @@ void Player::handlePhysics(){
     
     //handle stomping
     
-    if (m_bIsStomping){
+    if (m_bIsStomping && (!InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) &&
+                          !InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN))){
         
         //Make player spin for a moment
         if (GetParams().dirLeft()){
@@ -272,6 +274,8 @@ void Player::handlePhysics(){
             
         } else if (GetParams().dirRight()){
             GetParams().setAngle(GetParams().getAngle() + (GetParams().getVelocity().getY()) + 10);
+        } else {
+           // m_bIsStomping = false;
         }
         
         
