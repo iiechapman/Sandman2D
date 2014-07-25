@@ -139,7 +139,8 @@ bool PlayState::onEnter(){
     
     //Setup Level from file retrieved in state
     LevelParser levelParser;
-    pLevel = levelParser.parseLevel(pLevelFiles["init"].c_str());
+    string levelNumber = "level" + to_string(m_currentLevel);
+    pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str());
     
     cout << "Entered play state\n";
     

@@ -203,10 +203,10 @@ void InputHandler::initializeJoysticks(){
         SDL_InitSubSystem(SDL_INIT_JOYSTICK);
     }
     
-    if (SDL_WasInit(SDL_INIT_HAPTIC)==0){
-        SDL_InitSubSystem(SDL_INIT_HAPTIC);
-    }
-    
+//    if (SDL_WasInit(SDL_INIT_HAPTIC)==0){
+//        SDL_InitSubSystem(SDL_INIT_HAPTIC);
+//    }
+//    
     
     if (SDL_NumJoysticks() > 0 ){
         for (int i = 0 ; i < SDL_NumJoysticks() ; i++){
@@ -331,45 +331,45 @@ void InputHandler::onJoystickMotion(SDL_Event &event){
 
 
 int InputHandler::rumbleJoystick(){
-    //Try to init haptic
-    SDL_HapticEffect effect;
-    int effect_id;
-    
-    cout << "Attempting haptic!!\n";
-
-    // Open the device
-    SDL_Haptic* haptic = SDL_HapticOpenFromJoystick( m_joysticks[0] );
-    
-    if (haptic == NULL) {
-        cout << "No haptic feedback!\n";
-        return -1; // Most likely joystick isn't haptic
-    }
-    
-    // See if it can do sine waves
-    if ((SDL_HapticQuery(haptic) & SDL_HAPTIC_SINE)==0) {
-        SDL_HapticClose(haptic); // No sine effect
-        cout << "No sine haptic!\n";
-        return -1;
-    }
-    
-    // Create the effect
-    memset( &effect, 0, sizeof(SDL_HapticEffect) ); // 0 is safe default
-    effect.type = SDL_HAPTIC_DAMPER;
-    effect.periodic.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
-    effect.periodic.direction.dir[0] = 18000; // Force comes from south
-    effect.periodic.period = 1000; // 1000 ms
-    effect.periodic.magnitude = 20000; // 20000/32767 strength
-    effect.periodic.length = 5000; // 5 seconds long
-    effect.periodic.attack_length = 1000; // Takes 1 second to get max strength
-    effect.periodic.fade_length = 1000; // Takes 1 second to fade away
-    
-    // Upload the effect
-    effect_id = SDL_HapticNewEffect( haptic, &effect );
-    
-    // Test the effect
-    SDL_HapticRunEffect( haptic, effect_id, 2 );
-
-    SDL_HapticDestroyEffect(haptic, effect_id);
+//    //Try to init haptic
+//    SDL_HapticEffect effect;
+//    int effect_id;
+//    
+//    cout << "Attempting haptic!!\n";
+//
+//    // Open the device
+//    SDL_Haptic* haptic = SDL_HapticOpenFromJoystick( m_joysticks[0] );
+//    
+//    if (haptic == NULL) {
+//        cout << "No haptic feedback!\n";
+//        return -1; // Most likely joystick isn't haptic
+//    }
+//    
+//    // See if it can do sine waves
+//    if ((SDL_HapticQuery(haptic) & SDL_HAPTIC_SINE)==0) {
+//        SDL_HapticClose(haptic); // No sine effect
+//        cout << "No sine haptic!\n";
+//        return -1;
+//    }
+//    
+//    // Create the effect
+//    memset( &effect, 0, sizeof(SDL_HapticEffect) ); // 0 is safe default
+//    effect.type = SDL_HAPTIC_DAMPER;
+//    effect.periodic.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
+//    effect.periodic.direction.dir[0] = 18000; // Force comes from south
+//    effect.periodic.period = 1000; // 1000 ms
+//    effect.periodic.magnitude = 20000; // 20000/32767 strength
+//    effect.periodic.length = 5000; // 5 seconds long
+//    effect.periodic.attack_length = 1000; // Takes 1 second to get max strength
+//    effect.periodic.fade_length = 1000; // Takes 1 second to fade away
+//    
+//    // Upload the effect
+//    effect_id = SDL_HapticNewEffect( haptic, &effect );
+//    
+//    // Test the effect
+//    SDL_HapticRunEffect( haptic, effect_id, 2 );
+//
+//    SDL_HapticDestroyEffect(haptic, effect_id);
     return 0;
 }
 
