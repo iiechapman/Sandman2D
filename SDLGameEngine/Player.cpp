@@ -85,7 +85,7 @@ void Player::handleInput(){
     } else {
         m_maxHorizontalSpeed = m_maxWalkSpeed;
     }
-
+    
     
     
     //New Keyboard/Gamepad control
@@ -111,7 +111,7 @@ void Player::handleInput(){
     }
     
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) ||
-        InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)) &&
+         InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)) &&
         m_bIsStomping == false){
         m_bIsStomping = true;
     }
@@ -132,10 +132,26 @@ void Player::handleInput(){
     
     //Slide Button
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z) ||
-        InputHandler::Instance()->getButtonState(0, XB_B_BUTTON) )&& !m_bIsBoosting){
+         InputHandler::Instance()->getButtonState(0, XB_B_BUTTON) )&& !m_bIsBoosting){
         m_BoostTimer = m_BoostTime;
         m_bIsBoosting = true;
     }
+    
+    //Ghost mode
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_T) ||
+         InputHandler::Instance()->getButtonState(0, XB_R3_BUTTON))){
+        m_bCheckCollision = false;
+    } else {
+        m_bCheckCollision = true;
+    }
+    
+    //Fly mode
+    if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Y) ||
+         InputHandler::Instance()->getButtonState(0, XB_L3_BUTTON))){
+        GetParams().setY(GetParams().getY()-10);
+        GetParams().getAcceleration().setY(0);
+    }
+    
     
 }
 
@@ -274,7 +290,7 @@ void Player::handlePhysics(){
         } else if (GetParams().dirRight()){
             GetParams().setAngle(GetParams().getAngle() + (GetParams().getVelocity().getY()) + 10);
         } else {
-           // m_bIsStomping = false;
+            // m_bIsStomping = false;
         }
         
         
@@ -313,12 +329,14 @@ void Player::handleMovement(){
     
     //Check X collision
     if (checkCollideTile(newPos)){
-        GetParams().getVelocity().setX(0);
         
+        if (m_bCheckCollision){
+        GetParams().getVelocity().setX(0);
+        }
         
         //if falling downwards cling to wall
         if (GetParams().getVelocity().getY() > 0 && !m_bIsOnGround && m_bIsFalling){
-
+            
             
             if (!m_bWallCling){
                 m_numJumps++;
@@ -328,7 +346,9 @@ void Player::handleMovement(){
             
             GetParams().getVelocity().setY(GetParams().getVelocity().getY() * .8);
         } else {
-            GetParams().getAcceleration().setX(0);
+            if (m_bCheckCollision){
+                GetParams().getAcceleration().setX(0);
+            }
         }
         
     } else {
@@ -354,9 +374,10 @@ void Player::handleMovement(){
         }
         
         m_bIsFalling = false;
-        
-        GetParams().getVelocity().setY(0);
-        GetParams().getAcceleration().setY(0);
+        if (m_bCheckCollision){
+            GetParams().getVelocity().setY(0);
+            GetParams().getAcceleration().setY(0);
+        }
     } else {
         m_bIsFalling = true;
         m_bIsOnGround = false;
@@ -374,16 +395,18 @@ void Player::handleMovement(){
     GetParams().setX(GetParams().getX() + GetParams().getVelocity().getX());
     GetParams().setY(GetParams().getY() + GetParams().getVelocity().getY());
     
-    //Check intersection and fix
     
-    //Check X intersection after move
-    newPos = GetParams().getPosition();
-    //Check X collision
-    if (checkCollideTile(newPos)){
-        GetParams().setX(GetParams().getX() - GetParams().getVelocity().getX());
-        GetParams().getVelocity().setX(0);
-        GetParams().getAcceleration().setX(0);
-    }
+    if (m_bCheckCollision){
+        //Check intersection and fix
+        
+        //Check X intersection after move
+        newPos = GetParams().getPosition();
+        //Check X collision
+        if (checkCollideTile(newPos)){
+            GetParams().setX(GetParams().getX() - GetParams().getVelocity().getX());
+            GetParams().getVelocity().setX(0);
+            GetParams().getAcceleration().setX(0);
+        }
     
     
     //Check Y intersection after move
@@ -393,6 +416,7 @@ void Player::handleMovement(){
         GetParams().setY(GetParams().getY() - GetParams().getVelocity().getY());
         GetParams().getVelocity().setY(0);
         GetParams().getAcceleration().setY(0);
+    }
     }
     
     //Cap speed
@@ -420,8 +444,9 @@ void Player::handleMovement(){
         m_bIsStomping = false;
     }
     
-    
 }
+
+
 
 bool Player::checkCollideTile(Vector2D pos){
     

@@ -88,6 +88,7 @@ private:
     float m_jetGravity = 0.1;
     float m_currentGravity = m_normalGravity;
     
+    bool m_bCheckCollision = true;
     
     vector<TileLayer*> m_pCollisionLayers;
 
