@@ -38,13 +38,15 @@ void PlayState::update(){
     }
     
     
-    if (InputHandler::Instance()->getButtonState(0, XB_R1_BUTTON)){
+    //Check for modifier buttons
+    if (InputHandler::Instance()->getButtonState(0, XB_R1_BUTTON)||
+        InputHandler::Instance()->isKeyDown(SDL_SCANCODE_W)){
         //Game::Instance()->setZoom(Game::Instance()->getZoom() + 0.25);
         rumbleFactor++;
-        
     }
     
-    if (InputHandler::Instance()->getButtonState(0, XB_L1_BUTTON)){
+    if (InputHandler::Instance()->getButtonState(0, XB_L1_BUTTON) ||
+        InputHandler::Instance()->isKeyDown(SDL_SCANCODE_S)){
         //Game::Instance()->setZoom(Game::Instance()->getZoom() - 0.25);
         rumbleFactor--;
         if (rumbleFactor <= 0){
@@ -53,7 +55,8 @@ void PlayState::update(){
     }
     
     
-    if (InputHandler::Instance()->getButtonState(0, XB_Y_BUTTON)){
+    if (InputHandler::Instance()->getButtonState(0, XB_Y_BUTTON) ||
+        InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A)){
         Camera::Instance()->setHorizontalRumble(rumbleFactor);
         Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {

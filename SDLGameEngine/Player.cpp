@@ -88,8 +88,7 @@ void Player::handleInput(){
 
     
     
-    //New Keyboard/Gmaepad control
-    //TODO SET A FLAG IF JOYSTICK IS AVAILABLE ELSE APP CRASHES!
+    //New Keyboard/Gamepad control
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT) ||
         InputHandler::Instance()->getButtonState(0, XB_DPAD_RIGHT)){
         m_bMoveRight = true;

@@ -97,12 +97,13 @@ void Game::render(){
 void Game::handleEvents(){
     InputHandler::Instance()->update();
 
-    
+    //Check for level change button
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) ||
         InputHandler::Instance()->getButtonState(0, XB_START_BUTTON)){
         m_pGameStateMachine->changeState(new PlayState());
     }
     
+    //Check for fullscreen
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_F)){
         if ((SDL_GetWindowFlags(m_pWindow) & SDL_WINDOW_FULLSCREEN) == SDL_TRUE){
             cout << "Window is already fullscreen\n";
@@ -115,6 +116,7 @@ void Game::handleEvents(){
         
     }
     
+    //Check for escape
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)){
         SDL_SetWindowFullscreen(m_pWindow, SDL_FALSE);
     }
