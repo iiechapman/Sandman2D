@@ -150,12 +150,12 @@ void LevelParser::parseTileLayer
     //Check for layer properties
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
-        cout << "Checking " << e->Value() << endl;
+        //cout << "Checking " << e->Value() << endl;
         if (e->Value() == string("properties")){
             for (TiXmlElement* p = e->FirstChildElement();
                  p != NULL; p = p->NextSiblingElement()){
                 if (p->Value() == string("property")){
-                    cout << "Now checking " << p->Value() << endl;
+                    //cout << "Now checking " << p->Value() << endl;
                     string currentProperty = p->Attribute("name");
                     
                     if (currentProperty == string("collidable")){
@@ -251,7 +251,7 @@ void LevelParser::parseObjectLayer
     
     for (TiXmlElement* e = pObjectElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
-        cout << "Checking " << e->Value() << endl;
+        //cout << "Checking " << e->Value() << endl;
         if (e->Value() == string("object")){
             int x(0), y(0), width(0), height(0), numFrames(1), callbackID(0), animSpeed(1);
             

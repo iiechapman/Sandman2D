@@ -76,7 +76,7 @@ public:
         m_Player = player;
         
         Camera::Instance()->setTarget(&player->GetParams().getPosition());
-        cout << "Player set for level\n";
+        cout << "Camera locked to player\n";
     }
     Player* getPlayer(){
         return m_Player;

@@ -11,7 +11,7 @@
 #include "Game.h"
 
 Light::Light(){
-    cout << "Created new Light\n";
+    //cout << "Created new Light\n";
     m_params.setType("Light");
 }
 
