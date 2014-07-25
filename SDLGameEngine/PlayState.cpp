@@ -33,10 +33,16 @@ void PlayState::update(){
     
     
     //Look for live mode
-    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN) && !m_EnteringLiveMode){
-        setLiveMode(true);
+    if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
+        if (!m_bEnterHeld){
+            setLiveMode(!liveModeOn());
+        }
+        m_bEnterHeld = true;
+    } else {
+        m_bEnterHeld = false;
     }
     
+
     
     //Check for modifier buttons
     if (InputHandler::Instance()->getButtonState(0, XB_R1_BUTTON)||
@@ -57,6 +63,7 @@ void PlayState::update(){
     
     if (InputHandler::Instance()->getButtonState(0, XB_Y_BUTTON) ||
         InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A)){
+        InputHandler::Instance()->rumbleJoystick();
         Camera::Instance()->setHorizontalRumble(rumbleFactor);
         Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {

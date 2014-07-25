@@ -44,6 +44,7 @@ public:
     //Gamepad/Joystick Handling
     void initializeJoysticks();
     bool joysticksInitialized();
+    int rumbleJoystick();
     int xvalue(int joy, int stick);
     int yvalue(int joy, int stick);
     bool getButtonState(int joy, int buttonNumber); 
@@ -76,6 +77,8 @@ private:
     vector<vector<bool>> m_buttonStates;
     
     bool m_bJoystickInitialized = false;
+    
+    bool m_bHapticAvailable = false;
 };
 
 

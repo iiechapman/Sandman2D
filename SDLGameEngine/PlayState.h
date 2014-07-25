@@ -52,6 +52,7 @@ private:
     bool m_bSwitchingLevels = false;
     bool m_LiveMode = false;
     bool m_EnteringLiveMode = false;
+    bool m_bEnterHeld = false;
     
     //Tests
     int rumbleFactor = 1;
