@@ -302,7 +302,7 @@ void LevelParser::parseObjectLayer
             SDL_Color color;
             SDL_BlendMode blendMode = SDL_BLENDMODE_NONE;
             
-            string textureID(""),name(""),lockTo("");
+            string textureID(""),name(""),lockTo(""),scrollLock("");
             
             
             //Get initial values
@@ -326,8 +326,7 @@ void LevelParser::parseObjectLayer
                         
                         if (property->Value() == string("property")){
                             
-                            if (property->Attribute("name") ==
-                                string("numFrames")){
+                            if (property->Attribute("name") == string("numFrames")){
                                 property->Attribute("value",&numFrames);
                                 
                             } else if (property->Attribute("name") == string("lockTo")){
@@ -336,6 +335,9 @@ void LevelParser::parseObjectLayer
                             } else if (property->Attribute("name") == string("textureHeight")){
                                 property->Attribute("value",&height);
                                 
+                            } else if (property->Attribute("name") == string("scrollLock")){
+                                scrollLock = property->Attribute("value");
+                            
                             } else if (property->Attribute("name") == string("textureWidth")){
                                 property->Attribute("value",&width);
                                 
@@ -391,6 +393,10 @@ void LevelParser::parseObjectLayer
             
             //Set additional properties;
             pGameObject->GetParams().setLockTo(lockTo);
+            
+            cout << "Scroll lock " << scrollLock << endl;
+            pGameObject->GetParams().setScrolling(scrollLock != string("true"));
+            
             
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
