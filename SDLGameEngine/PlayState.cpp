@@ -131,7 +131,7 @@ bool PlayState::onEnter(){
     
     //Load levels from state file
     StateParser parser;
-    parser.parseState("scripts/xm1.xml", s_playID,
+    parser.parseState("scripts/library.xml", s_playID,
                       &m_gameObjects, &m_textureIDList,&pLevelFiles);
     
     //Setup Level from file retrieved in state

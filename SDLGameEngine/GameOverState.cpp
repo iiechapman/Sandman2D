@@ -48,7 +48,7 @@ bool GameOverState::onEnter(){
 
     //Load parser with XML file and create objects/textures for scene
     StateParser parser;
-    parser.parseState("scripts/xm1.xml", s_gameOverID, &m_gameObjects, &m_textureIDList,NULL);
+    parser.parseState("scripts/library.xml", s_gameOverID, &m_gameObjects, &m_textureIDList,NULL);
     
     cout << "Game Objects on enter " << m_gameObjects.size() << endl;
     
