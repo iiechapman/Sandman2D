@@ -144,15 +144,10 @@ void LevelParser::parseTileLayer
     
     TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
     
-    //Placeholder for data
-    vector<vector<int>> data;
-    
-    string decodedIDs;
-    TiXmlElement* pDataNode= 0;
-    
-    bool collidable(false);
     
     //Check for layer properties
+    bool collidable(false);
+    
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         //cout << "Checking " << e->Value() << endl;
@@ -180,18 +175,37 @@ void LevelParser::parseTileLayer
     
     
     //Find data node then store it
-    
     //pDataNode = findElement("data", pTileElement->FirstChildElement());
+    bool isBase64  = false ;
+    bool isZlibCompressed = false;
+    
+    TiXmlElement* pDataNode= 0;
     
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         if (e->Value() == string("data")){
             pDataNode = e;
+            
+            //Check if encoded/compressed
+            if (e->Attribute("encoding")){
+                if (e->Attribute("encoding") == string("base64")){
+                    isBase64 = true;
+                }
+            }
+            
+            if (e->Attribute("compression")){
+                if (e->Attribute("compression") == string("zlib")){
+                    isZlibCompressed = true;
+                }
+            }
         }
     }
     
+    
     //Decode data and store
-    if (pDataNode){
+    string decodedIDs;
+    
+    if (pDataNode && isBase64){
         for (TiXmlNode* e = pDataNode->FirstChild(); e != NULL; e = e->NextSibling()){
             TiXmlText* text = e ->ToText();
             string t = text->Value();
@@ -199,25 +213,50 @@ void LevelParser::parseTileLayer
         }
     }
     
-    //Uncompress zlib compression
+    //Placeholder for data
+    vector<vector<int>> data;
+    
+    //Calculate number of GIDS present
     uLongf numGids = m_width * m_height * sizeof(int);
     vector<unsigned> gids(numGids);
     
-    uncompress
-    ((Bytef*)&gids[0], &numGids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
     
+    //Horizontal register for vector
     vector<int> layerRow(m_width);
     
-    //assign decompressed data
+    //Build empty data vector to fill
     for(int j = 0 ; j < m_height; j++){
         data.push_back(layerRow);
     }
     
-    for (int rows = 0 ; rows <m_height; rows++){
-        for (int cols = 0; cols < m_width; cols++){
-            data[rows][cols] = gids[rows * m_width + cols];
+    //Compressed data assignment
+    if (isZlibCompressed){
+        uncompress
+        ((Bytef*)&gids[0], &numGids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
+        
+
+        
+        for (int rows = 0 ; rows <m_height; rows++){
+            for (int cols = 0; cols < m_width; cols++){
+                data[rows][cols] = gids[rows * m_width + cols];
+            }
         }
+    } else {
+        //Uncompressed data assignment
+        int index = 0;
+        int tileID = 0;
+        
+        //Find all tiles, assign GID to proper data vector place
+        for (TiXmlElement* e = pDataNode->FirstChildElement();
+             e != NULL; e = e->NextSiblingElement()){
+
+            e->Attribute("gid",&tileID);
+            data[index / m_width][index % m_width] = tileID;
+            index++;
+        }
+        
     }
+    
     
     //Set Tile Layer properties
     pTileLayer->setTileIDs(data);
