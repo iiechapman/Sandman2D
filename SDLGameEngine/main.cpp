@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-const int BUILD_NUMBER = 0002;
+const int VERSION_NUMBER = 0;
+const int BUILD_NUMBER = 2;
 const int DESIRED_FPS = 60;
 const int DELAY_TIME = 1000.0f / DESIRED_FPS;
 const int GAME_WIDTH = 1024;
@@ -32,7 +33,9 @@ int main(int argc, char* args[]){
         cout << "Game init success\n";
         
         while(Game::Instance()->running()){
-            string title = "Sandman Engine Build: " + to_string(BUILD_NUMBER)
+            string title = "Sandman Engine Build: "
+            + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
+            
             + " FPS: "+ to_string(FPS);
             
             frameStart = SDL_GetTicks();
