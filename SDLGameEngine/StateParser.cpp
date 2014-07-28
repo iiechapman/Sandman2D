@@ -43,9 +43,14 @@ bool StateParser::parseState(const char* stateFile,
     //Find state root
     TiXmlElement* pStateRoot = findElement(stateID, pRoot);
 
+    
+    //Parse library for all assets
+    
     //Find texture root and parse
     TiXmlElement* pTextureRoot = findElement(string("TEXTURES"), pStateRoot);
     parseTextures(pTextureRoot, pTextureIDs);
+    
+    //TODO: add song,sound and element parsing here
     
     //Find object root parse
     TiXmlElement* pObjectRoot = findElement(string("OBJECTS"), pStateRoot);
