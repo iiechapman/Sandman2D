@@ -52,7 +52,6 @@ Level* LevelParser::parseLevel(const char* levelFile){
     }
     
     
-    
     //Look for and Parse level layers
     for (TiXmlElement* e = pRoot->FirstChildElement();
          e != NULL ; e = e->NextSiblingElement()){
@@ -314,6 +313,7 @@ void LevelParser::parseObjectLayer
             int GID = 0;
             e->Attribute("gid",&GID);
             
+            
             GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
             
             //Get Property Values
@@ -386,7 +386,6 @@ void LevelParser::parseObjectLayer
             }
             
             
-            
             pGameObject->load
             (*new GameObjectParams
              (name, (x), (y-height),width, height, textureID,callbackID,animSpeed));
@@ -396,6 +395,15 @@ void LevelParser::parseObjectLayer
             
             cout << "Scroll lock " << scrollLock << endl;
             pGameObject->GetParams().setScrolling(scrollLock != string("true"));
+            
+            
+//            (id - (tileset.firstGridID - 1)) / tileset.numColumns,
+//            (id - (tileset.firstGridID - 1)) % tileset.numColumns,
+            
+        
+            
+            //pGameObject->GetParams().setFrame(GID);
+            //pGameObject->GetParams().setRow(GID);
             
             
             //If object is player set game player pointer accordingly
