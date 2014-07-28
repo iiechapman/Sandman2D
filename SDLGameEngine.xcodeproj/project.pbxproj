@@ -37,7 +37,6 @@
 		4E859D631916C5C8005F17D4 /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E859D611916C5C8005F17D4 /* InputHandler.cpp */; };
 		4EAF14C11978327C00D46F7B /* TilesetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF14BF1978327C00D46F7B /* TilesetManager.cpp */; };
 		4EB8FD2519250CFC00C38B4F /* GameObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */; };
-		4EC6DF24197B5DD600267709 /* xm1.xml in Scripts */ = {isa = PBXBuildFile; fileRef = 4EC6DEEF197B5C6700267709 /* xm1.xml */; };
 		4ECABB1E196B05E600CA4AB7 /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ECABB1C196B05E600CA4AB7 /* CollisionHandler.cpp */; };
 		4EE05B9019084E99001C07B3 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EE05B8E19084E99001C07B3 /* Enemy.cpp */; };
 		4EED8E6A192041FC00EE5E8F /* MenuButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EED8E68192041FC00EE5E8F /* MenuButton.cpp */; };
@@ -57,7 +56,6 @@
 			dstPath = scripts;
 			dstSubfolderSpec = 7;
 			files = (
-				4EC6DF24197B5DD600267709 /* xm1.xml in Scripts */,
 			);
 			name = Scripts;
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +92,7 @@
 		4E5A76011911872500DB9464 /* GameObjectParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectParams.h; sourceTree = "<group>"; };
 		4E5A76061911891E00DB9464 /* SDLGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLGameObject.cpp; path = ../SDLGameObject.cpp; sourceTree = "<group>"; };
 		4E5A76071911891E00DB9464 /* SDLGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLGameObject.h; path = ../SDLGameObject.h; sourceTree = "<group>"; };
+		4E5B514C198695780018C0C9 /* library.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = library.xml; path = "../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/scripts/library.xml"; sourceTree = "<group>"; };
 		4E5C08531970A29C00A4917B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		4E5C08541970A29C00A4917B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		4E5C789C192843D300005DE3 /* StateParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateParser.cpp; sourceTree = "<group>"; };
@@ -124,7 +123,6 @@
 		4EAF14C01978327C00D46F7B /* TilesetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TilesetManager.h; sourceTree = "<group>"; };
 		4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectFactory.cpp; sourceTree = "<group>"; };
 		4EB8FD2419250CFC00C38B4F /* GameObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectFactory.h; sourceTree = "<group>"; };
-		4EC6DEEF197B5C6700267709 /* xm1.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = xm1.xml; sourceTree = "<group>"; };
 		4ECABB1C196B05E600CA4AB7 /* CollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionHandler.cpp; sourceTree = "<group>"; };
 		4ECABB1D196B05E600CA4AB7 /* CollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionHandler.h; sourceTree = "<group>"; };
 		4ED242CF19202CD30091132D /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
@@ -357,7 +355,7 @@
 		4EC6DEF2197B5D5200267709 /* scripts */ = {
 			isa = PBXGroup;
 			children = (
-				4EC6DEEF197B5C6700267709 /* xm1.xml */,
+				4E5B514C198695780018C0C9 /* library.xml */,
 			);
 			name = scripts;
 			sourceTree = "<group>";

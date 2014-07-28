@@ -9,6 +9,11 @@
 #ifndef __LudumDare29__InputHandler__
 #define __LudumDare29__InputHandler__
 
+/*
+ TODO:
+ Add SDL "GameController" code to update joystick
+ 
+ */
 
 
 #include <iostream>
@@ -45,9 +50,10 @@ public:
     void initializeJoysticks();
     bool joysticksInitialized();
     int rumbleJoystick();
-    int xvalue(int joy, int stick);
-    int yvalue(int joy, int stick);
-    bool getButtonState(int joy, int buttonNumber); 
+    float xvalue(int joy, int stick);
+    float yvalue(int joy, int stick);
+    bool getButtonState(int joy, int buttonNumber);
+    void printJoyStats(int joy);
 
 private:
     InputHandler();

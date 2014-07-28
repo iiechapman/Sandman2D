@@ -238,7 +238,7 @@ void InputHandler::initializeJoysticks(){
     }
 }
 
-int InputHandler::xvalue(int joy, int stick){
+float InputHandler::xvalue(int joy, int stick){
     if (m_joystickValues.size() > 0 ){
         if (stick == 1){
             return m_joystickValues[joy].first->getX();
@@ -251,7 +251,14 @@ int InputHandler::xvalue(int joy, int stick){
     return 0;
 }
 
-int InputHandler::yvalue(int joy, int stick){
+void InputHandler::printJoyStats(int joy){
+    for (int i = 0 ; i < 15 ;i++){
+        cout << "Button " << i << ": " << getButtonState(0, i) << endl;
+    }
+}
+
+
+float InputHandler::yvalue(int joy, int stick){
     if (m_joystickValues.size() > 0 ){
         if (stick == 1){
             return m_joystickValues[joy].first->getY();

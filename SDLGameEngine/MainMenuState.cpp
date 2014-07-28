@@ -29,7 +29,7 @@ bool MainMenuState::onEnter(){
     StateParser parser;
     
     parser.parseState
-    ("scripts/library.xml", s_mainMenuID, &m_gameObjects, &m_textureIDList,NULL);
+    ("scripts/Library.xml", s_mainMenuID, &m_gameObjects, &m_textureIDList,NULL);
 
     //Load callback functions to list of callbacks
     m_callbacks.push_back(0);
