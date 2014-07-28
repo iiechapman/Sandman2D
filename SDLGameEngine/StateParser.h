@@ -13,7 +13,7 @@
 #include <vector>
 #include <map>
 #include "tinyxml.h"
-
+#include "PlayState.h"
 
 using namespace std;
 
@@ -26,6 +26,8 @@ public:
                     string stateID, vector<GameObject*>* pObjects,
                     vector<string>* pTextureIDs, map<string,string>* pLevelFiles);
     
+    bool loadState(const char* stateFile, PlayState* newState);
+    
 private:
     void parseObjects(TiXmlElement* pStateRoot,
                       vector<GameObject*>* pObjects);
@@ -34,6 +36,10 @@ private:
                        vector<string>* pTextureIDs);
     
     void parseLevels(TiXmlElement* pStateRoot, map<string,string>* pLevelFiles);
+    
+    void parseSounds(TiXmlElement* pStateRoot ,PlayState* currentState);
+    void parseSongs(TiXmlElement* pStateRoot, PlayState* currentState);
+    void parseElements(TiXmlElement* pStateRoot, PlayState* currentState);
     
     
     TiXmlElement* findElement(string element,TiXmlElement* root);

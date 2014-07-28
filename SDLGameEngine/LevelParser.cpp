@@ -233,7 +233,6 @@ void LevelParser::parseTileLayer
         uncompress
         ((Bytef*)&gids[0], &numGids, (const Bytef*)decodedIDs.c_str(), decodedIDs.size());
         
-
         
         for (int rows = 0 ; rows <m_height; rows++){
             for (int cols = 0; cols < m_width; cols++){

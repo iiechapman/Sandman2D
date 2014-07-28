@@ -41,6 +41,14 @@ public:
         return pLevel;
     }
     
+    map<string,string>* getLevelFiles(){
+        return &pLevelFiles;
+    }
+    
+    vector<GameObject*>* getGameObjects(){
+        return &m_gameObjects;
+    }
+    
 private:
     static const string s_playID;
     vector<GameObject*> m_gameObjects;

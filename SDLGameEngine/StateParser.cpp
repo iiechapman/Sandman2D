@@ -52,6 +52,15 @@ bool StateParser::parseState(const char* stateFile,
     
     //TODO: add song,sound and element parsing here
     
+    //Find and parse sounds
+    //TiXmlElement* pSoundRoot = findElement(string("SOUNDS"), pStateRoot);
+    
+    //Find and parse songs
+    //TiXmlElement* pSongRoot = findElement(string("SONGS"), pStateRoot);
+    
+    //Find and parse elements
+    //TiXmlElement* pElementRoot = findElement(string("ELEMENTS"), pStateRoot);
+    
     //Find object root parse
     TiXmlElement* pObjectRoot = findElement(string("OBJECTS"), pStateRoot);
     parseObjects(pObjectRoot, pObjects);
@@ -63,6 +72,66 @@ bool StateParser::parseState(const char* stateFile,
     //Parse Level and create
     if (pLevelRoot){
         parseLevels(pLevelRoot, pLevelFiles);
+    } else {
+        cout << "No levels in this state\n";
+    }
+    
+    return true;
+}
+
+
+bool StateParser::loadState(const char* stateFile, PlayState* newState){
+    
+    //Create an XML document
+    TiXmlDocument xmlDoc;
+    
+    //Load the XML file
+    cout << "Loading XML file\n";
+    if (! xmlDoc.LoadFile(stateFile)){
+        cout << "XML ERROR-\n";
+        cout << xmlDoc.ErrorDesc() << endl;
+        return false;
+    }
+    
+    
+    //Find root element
+    TiXmlElement* pRoot = xmlDoc.RootElement();
+    
+    //Find state root
+    TiXmlElement* pStateRoot = findElement(newState->getStateID(), pRoot);
+    
+    
+    //Parse library for all assets
+    
+    //Find texture root and parse
+    TiXmlElement* pTextureRoot = findElement(string("TEXTURES"), pStateRoot);
+    parseTextures(pTextureRoot, newState->getTextureList());
+    
+    
+    //Find and parse sounds
+    TiXmlElement* pSoundRoot = findElement(string("SOUNDS"), pStateRoot);
+    parseSounds(pSoundRoot, newState);
+    
+    //Find and parse songs
+    TiXmlElement* pSongRoot = findElement(string("SONGS"), pStateRoot);
+    parseSongs(pSongRoot, newState);
+    
+    //Find and parse elements
+    TiXmlElement* pElementRoot = findElement(string("ELEMENTS"), pStateRoot);
+    parseElements(pElementRoot, newState);
+    
+    
+    //Find object root parse
+    TiXmlElement* pObjectRoot = findElement(string("OBJECTS"), pStateRoot);
+    parseObjects(pObjectRoot, newState->getGameObjects());
+    
+    //Find Level Root and parse
+    TiXmlElement* pLevelRoot = findElement(string("LEVELS"), pStateRoot);
+    cout << "Searching for Level Root\n";
+    
+    //Parse Level and create
+    if (pLevelRoot){
+        parseLevels(pLevelRoot, newState->getLevelFiles());
     } else {
         cout << "No levels in this state\n";
     }
@@ -170,7 +239,17 @@ TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
 
 
 
+void StateParser::parseSongs(TiXmlElement *pStateRoot, PlayState *currentState){
+    
+}
 
+void StateParser::parseSounds(TiXmlElement *pStateRoot, PlayState *currentState){
+    
+}
+
+void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentState){
+    
+}
 
 
 

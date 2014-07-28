@@ -27,6 +27,10 @@ public:
     
     virtual string getStateID() const = 0;
     
+    vector<string>* getTextureList(){
+        return &m_textureIDList;
+    }
+    
 protected:
     vector<string> m_textureIDList;
     
