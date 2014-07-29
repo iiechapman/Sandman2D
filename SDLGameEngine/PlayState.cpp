@@ -93,7 +93,7 @@ void PlayState::update(){
             onExit();
             LevelParser levelParser;
             string levelNumber = "level" + to_string(m_currentLevel);
-            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str());
+            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str() , this);
         }
     } else {
         m_bSwitchingLevels = false;
@@ -139,7 +139,7 @@ bool PlayState::onEnter(){
     //Setup Level from file retrieved in state
     LevelParser levelParser;
     string levelNumber = "level" + to_string(m_currentLevel);
-    pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str());
+    pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str(), this);
     
     cout << "Entered play state\n";
     

@@ -48,10 +48,14 @@ public:
     vector<GameObject*>* getGameObjects(){
         return &m_gameObjects;
     }
+    map<int,GameObjectParams*>* getElements(){
+        return &m_Elements;
+    }
     
 private:
     static const string s_playID;
     vector<GameObject*> m_gameObjects;
+    map<int,GameObjectParams*> m_Elements;
     
     int m_currentLevel = 0;
     Level* pLevel;

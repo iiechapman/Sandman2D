@@ -17,7 +17,7 @@
 #include "base64.h"
 
 
-Level* LevelParser::parseLevel(const char* levelFile){
+Level* LevelParser::parseLevel(const char* levelFile, PlayState* newState){
     
     //Create the XML document and load from file
     TiXmlDocument levelDocument;
@@ -311,7 +311,7 @@ void LevelParser::parseObjectLayer
             
             int GID = 0;
             e->Attribute("gid",&GID);
-            
+           
             
             GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
             
@@ -389,10 +389,10 @@ void LevelParser::parseObjectLayer
             (*new GameObjectParams
              (name, (x), (y-height),width, height, textureID,callbackID,animSpeed));
             
+        
+            
             //Set additional properties;
             pGameObject->GetParams().setLockTo(lockTo);
-            
-            cout << "Scroll lock " << scrollLock << endl;
             pGameObject->GetParams().setScrolling(scrollLock != string("true"));
             
             
@@ -428,7 +428,7 @@ TiXmlElement* LevelParser::findElement(string element,TiXmlElement* root){
     for (TiXmlElement* e = root->FirstChildElement() ;
          e!= NULL; e = e->NextSiblingElement()){
         if (e->Value() == element ){
-            cout << "Found " << element << " root!\n";
+            cout << "Found \"" << element << "\" root!\n";
             return e;
         }
     }

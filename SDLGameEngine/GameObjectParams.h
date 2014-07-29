@@ -56,10 +56,12 @@ public:
     Vector2D& getPosition(){ return m_position; }
     
     string getName() const { return m_name; }
+    void setName(string name){
+        m_name = name;
+    }
     string getTextureID() const { return m_textureID; }
     
     void setTextureID(string textureID){ m_textureID = textureID; }
-    
     void setVelocity(Vector2D velocity){ m_velocity = velocity;}
     
     void setX(float x){ m_position.setX(x);}

@@ -10,8 +10,10 @@
 #include "StateParser.h"
 #include "GameObjectParams.h"
 #include "TextureManager.h"
+#include "SoundManager.h"
 #include "Game.h"
 #include "GameObjectFactory.h"
+
 
 /*
  Parses the library XML file for state
@@ -50,7 +52,6 @@ bool StateParser::parseState(const char* stateFile,
     TiXmlElement* pTextureRoot = findElement(string("TEXTURES"), pStateRoot);
     parseTextures(pTextureRoot, pTextureIDs);
     
-    //TODO: add song,sound and element parsing here
     
     //Find and parse sounds
     //TiXmlElement* pSoundRoot = findElement(string("SOUNDS"), pStateRoot);
@@ -127,9 +128,7 @@ bool StateParser::loadState(const char* stateFile, PlayState* newState){
     
     //Find Level Root and parse
     TiXmlElement* pLevelRoot = findElement(string("LEVELS"), pStateRoot);
-    cout << "Searching for Level Root\n";
-    
-    //Parse Level and create
+
     if (pLevelRoot){
         parseLevels(pLevelRoot, newState->getLevelFiles());
     } else {
@@ -160,7 +159,7 @@ void StateParser::parseTextures(TiXmlElement* pStateRoot,
             (fileNameAttribute, idAttribute, Game::Instance()->getRenderer());
         }
     } else {
-        cout << "Error: State Root Null\n";
+        cout << "Error: State Root Null, or no Textures\n";
     }
     
 }
@@ -220,7 +219,7 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
             
         }
     } else {
-        cout << "State Root Null\n";
+        cout << "Object Root Null or no objects\n";
     }
 }
 
@@ -230,7 +229,7 @@ TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
     for (TiXmlElement* e = root->FirstChildElement() ;
          e!= NULL; e = e->NextSiblingElement()){
         if (e->Value() == element ){
-            cout << "Found " << element << " root!\n";
+            cout << "Found \"" << element << "\" root!\n";
             return e;
         }
     }
@@ -240,15 +239,70 @@ TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
 
 
 void StateParser::parseSongs(TiXmlElement *pStateRoot, PlayState *currentState){
-    
+    for (TiXmlElement* e = pStateRoot->FirstChildElement();
+         e != NULL; e = e->NextSiblingElement()){
+        string fileName = "";
+        string songID =  "";
+        
+        fileName = e->Attribute("filename");
+        songID   = e->Attribute("ID");
+        
+        SoundManager::Instance()->loadSong(fileName, songID);
+    }
 }
 
 void StateParser::parseSounds(TiXmlElement *pStateRoot, PlayState *currentState){
-    
+    for (TiXmlElement* e = pStateRoot->FirstChildElement();
+         e != NULL; e = e->NextSiblingElement()){
+        string fileName = "";
+        string soundID =  "";
+        
+        fileName = e->Attribute("filename");
+        soundID   = e->Attribute("ID");
+        
+        SoundManager::Instance()->loadSound(fileName, soundID);
+    }
 }
 
 void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentState){
-    
+    for (TiXmlElement* e = pStateRoot->FirstChildElement();
+         e != NULL; e = e->NextSiblingElement()){
+        GameObjectParams* params = new GameObjectParams();
+        
+        string name;
+        string textureID;
+        int GID;
+        string type;
+        int column = 0;
+        int frame = 0;
+        int animSpeed = 0;
+        
+        SDL_Color color;
+        SDL_BlendMode blendMode;
+        
+        color.r = 255;
+        color.g = 255;
+        color.b = 255;
+        color.a = 255;
+        blendMode = SDL_BLENDMODE_BLEND;
+        
+        e->Attribute("GID",&GID);
+        e->Attribute("column",&column);
+        e->Attribute("frame",&frame);
+        
+        name = e->Attribute("type");
+        textureID = e->Attribute("textureID");
+        
+        params->setName(name);
+        params->setRow(column);
+        params->setFrame(frame);
+        params->setAnimSpeed(animSpeed);
+        params->setColor(color);
+        params->setBlendMode(blendMode);
+        params->setTextureID(textureID);
+        
+        (*currentState->getElements())[GID] = params;
+    }
 }
 
 

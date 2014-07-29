@@ -13,10 +13,12 @@
 #include <vector>
 #include "tinyxml.h"
 
+
 class Level;
 struct Tileset;
 class Layer;
 class TileLayer;
+class PlayState;
 
 using namespace std;
 
@@ -24,7 +26,7 @@ using namespace std;
 class LevelParser{
 public:
     
-    Level* parseLevel(const char* levelFile);
+    Level* parseLevel(const char* levelFile , PlayState* newState);
     
 private:
     
