@@ -93,6 +93,7 @@
 		4E5A76061911891E00DB9464 /* SDLGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLGameObject.cpp; path = ../SDLGameObject.cpp; sourceTree = "<group>"; };
 		4E5A76071911891E00DB9464 /* SDLGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLGameObject.h; path = ../SDLGameObject.h; sourceTree = "<group>"; };
 		4E5B514C198695780018C0C9 /* library.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = library.xml; path = "../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/scripts/library.xml"; sourceTree = "<group>"; };
+		4E5B514D19896E0B0018C0C9 /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ToDo; path = "../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/misc/ToDo"; sourceTree = "<group>"; };
 		4E5C08531970A29C00A4917B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		4E5C08541970A29C00A4917B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		4E5C789C192843D300005DE3 /* StateParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateParser.cpp; sourceTree = "<group>"; };
@@ -347,6 +348,7 @@
 		4EC6DEF1197B5D4E00267709 /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				4E5B514D19896E0B0018C0C9 /* ToDo */,
 				4EC6DEF2197B5D5200267709 /* scripts */,
 			);
 			name = assets;

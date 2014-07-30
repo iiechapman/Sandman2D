@@ -10,6 +10,7 @@
 #include <vector>
 #include <zlib.h>
 #include "LevelParser.h"
+#include "PlayState.h"
 #include "TextureManager.h"
 #include "Game.h"
 #include "TileLayer.h"
@@ -61,7 +62,7 @@ Level* LevelParser::parseLevel(const char* levelFile, PlayState* newState){
             
             if (e->FirstChildElement()->Value() == string("object")){
                 //Parse Object layer
-                parseObjectLayer(e, pLevel->getLayers(),layerType,pLevel);
+                parseObjectLayer(e, pLevel->getLayers(),layerType,pLevel,newState);
             } else if (e->FirstChildElement()->Value() == string("properties")){
                 //Parse Tile Layer
                 parseTileLayer(e, pLevel->getLayers(),pLevel->getCollisionLayers(), pLevel->getTilesets());
@@ -98,6 +99,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
     }
     
     cout << "Final Source -\n" << finalSource << endl;
+    cout << "Loaded in as \"" << pTileSetRoot->Attribute("name") << "\"\n";
     
     //Add tileset to texture manager
     TextureManager::Instance()->load
@@ -282,7 +284,8 @@ void LevelParser::parseTextures(TiXmlElement *pTextureRoot){
 
 //For extracting objects from object layers
 void LevelParser::parseObjectLayer
-(TiXmlElement *pObjectElement, vector<Layer *> *pLayers, string layerType, Level* pLevel){
+(TiXmlElement *pObjectElement, vector<Layer *> *pLayers,
+ string layerType, Level* pLevel ,PlayState* newState){
     
     //Create an object layer
     ObjectLayer* pObjectLayer = new ObjectLayer();
@@ -312,10 +315,34 @@ void LevelParser::parseObjectLayer
             int GID = 0;
             e->Attribute("gid",&GID);
            
+
+            //Check if object exists in element library
+            GameObject* pGameObject;
+            if ((*newState->getElements())[name]){
+                GameObjectParams* elementParams = (*newState->getElements())[name];
+                cout << "Loaded from library: " << elementParams->getName() << endl;
+                pGameObject = GameObjectFactory::Instance()->create(elementParams->getType());
+            } else {
+                cout << "Object \"" << e->Attribute("name") << "\" not found in library!\n";
+                pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
+            }
             
-            GameObject* pGameObject = GameObjectFactory::Instance()->create(e->Attribute("type"));
             
-            //Get Property Values
+            //Prep game object params
+            pGameObject->load
+            (*new GameObjectParams
+             (name, (x), (y-height),width, height, textureID,callbackID,animSpeed));
+            
+            //Load default params per element library
+            if ((*newState->getElements())[name]){
+                pGameObject->GetParams() = *(*newState->getElements())[name];
+            }
+            
+            
+            pGameObject->GetParams().getPosition().setX(x);
+            pGameObject->GetParams().getPosition().setY(y);
+            
+            //Overload properties based on unique object params
             for (TiXmlElement* properties = e->FirstChildElement();
                  properties != NULL; properties = properties->NextSiblingElement()){
                 if (properties->Value() == string("properties")){
@@ -327,43 +354,52 @@ void LevelParser::parseObjectLayer
                             
                             if (property->Attribute("name") == string("numFrames")){
                                 property->Attribute("value",&numFrames);
+                                pGameObject->GetParams().setMaxFrames(numFrames);
+                                cout << "Set frames to " << numFrames << endl;
                                 
                             } else if (property->Attribute("name") == string("lockTo")){
                                 lockTo = property->Attribute("value");
+                                pGameObject->GetParams().setLockTo(lockTo);
                                 
                             } else if (property->Attribute("name") == string("textureHeight")){
                                 property->Attribute("value",&height);
+                                pGameObject->GetParams().setHeight(height);
                                 
                             } else if (property->Attribute("name") == string("scrollLock")){
                                 scrollLock = property->Attribute("value");
+                                pGameObject->GetParams().setScrolling(scrollLock != string("true"));
                             
                             } else if (property->Attribute("name") == string("textureWidth")){
                                 property->Attribute("value",&width);
+                                pGameObject->GetParams().setWidth(width);
                                 
                             } else if (property->Attribute("name") == string("animSpeed")){
                                 property->Attribute("value",&animSpeed);
+                                pGameObject->GetParams().setAnimSpeed(animSpeed);
                                 
                             } else if (property->Attribute("name") == string("callbackID")){
                                 property->Attribute("value",&callbackID);
+                                pGameObject->GetParams().setCallBackID(callbackID);
                                 
                             } else if (property->Attribute("name") == string("textureID")){
                                 textureID = property->Attribute("value");
+                                pGameObject->GetParams().setTextureID(textureID);
                                 
                             } else if (property->Attribute("name") == string("blendMode")){
                                 if (property->Attribute("value") == string("add")){
                                     blendMode = SDL_BLENDMODE_ADD;
-                                    //cout << "Set Blendmode!\n";
                                 } else if (property->Attribute("value") == string("blend")){
                                     blendMode = SDL_BLENDMODE_BLEND;
                                 } else if (property->Attribute("value") == string("mod")){
                                     blendMode = SDL_BLENDMODE_MOD;
                                 }
+                                pGameObject->GetParams().setBlendMode(blendMode);
                                 
                             } else if (property->Attribute("name") == string("alpha")){
                                 int temp;
                                 property->Attribute("value",&temp);
                                 color.a = temp;
-                                //cout << "Set alpha to " << temp << endl;
+
                             }  else if (property->Attribute("name") == string("red")){
                                 int temp;
                                 property->Attribute("value",&temp);
@@ -379,32 +415,15 @@ void LevelParser::parseObjectLayer
                                 property->Attribute("value",&temp);
                                 color.b = temp;
                             }
+                            pGameObject->GetParams().setColor(color);
+                            
                         }
                     }
                 }
             }
             
             
-            pGameObject->load
-            (*new GameObjectParams
-             (name, (x), (y-height),width, height, textureID,callbackID,animSpeed));
-            
-        
-            
-            //Set additional properties;
-            pGameObject->GetParams().setLockTo(lockTo);
-            pGameObject->GetParams().setScrolling(scrollLock != string("true"));
-            
-            
-//            (id - (tileset.firstGridID - 1)) / tileset.numColumns,
-//            (id - (tileset.firstGridID - 1)) % tileset.numColumns,
-            
-        
-            
-            //pGameObject->GetParams().setFrame(GID);
-            //pGameObject->GetParams().setRow(GID);
-            
-            
+
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
                 pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
@@ -412,16 +431,14 @@ void LevelParser::parseObjectLayer
             }
             
             pObjectLayer->getGameObjects()->push_back(pGameObject);
-            pGameObject->GetParams().setMaxFrames(numFrames);
-            pGameObject->GetParams().setColor(color);
-            pGameObject->GetParams().setBlendMode(blendMode);
+            //pGameObject->GetParams().setMaxFrames(numFrames);
+            //pGameObject->GetParams().setColor(color);
+            //pGameObject->GetParams().setBlendMode(blendMode);
             cout << "Created new " << pGameObject->GetParams().getType() << endl;
         }
     }
     pLayers->push_back(pObjectLayer);
 }
-
-
 
 
 TiXmlElement* LevelParser::findElement(string element,TiXmlElement* root){

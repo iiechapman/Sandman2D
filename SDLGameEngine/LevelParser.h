@@ -39,11 +39,11 @@ private:
     
     void parseLibrary(const char* fileName);
     void parseTextures(TiXmlElement* pTextureRoot);
-    void parseSongs(TiXmlElement* pSongRoot);
-    void parseSounds(TiXmlElement* pSoundRoot);
+    //void parseSongs(TiXmlElement* pSongRoot);
+    //void parseSounds(TiXmlElement* pSoundRoot);
     
     void parseObjectLayer
-    (TiXmlElement* pObjectElement, vector<Layer*>* pLayers,string type, Level* pLevel);
+    (TiXmlElement* pObjectElement, vector<Layer*>* pLayers,string type, Level* pLevel,PlayState* newState);
     
     TiXmlElement* findElement(string element,TiXmlElement* root);
     

@@ -10,7 +10,7 @@
 #include "InputHandler.h"
 
 Enemy::Enemy(){
-    cout << "Created new enemy\n";
+    //cout << "Created new enemy\n";
     //m_params = new GameObjectParams();
     m_params.setType("Enemy");
 }
@@ -34,9 +34,11 @@ void Enemy::draw(){
 }
 
 void Enemy::update(){
+    //cout << "Total Frames: " << GetParams().getTotalFrames() << " Speed: " << GetParams().getAnimSpeed() << endl;
     
-    if (GetParams().getVelocity().getX() != 0){
-        GetParams().setFrame(int((SDL_GetTicks()/100) % GetParams().getTotalFrames()));
+    if (GetParams().getTotalFrames()>0 && GetParams().getAnimSpeed()>0){
+        GetParams().setFrame
+        (GetParams().getStartFrame() +(int((SDL_GetTicks()/ ((1000 / GetParams().getAnimSpeed())) % GetParams().getTotalFrames()))));
     } else {
         GetParams().setFrame(0);
     }

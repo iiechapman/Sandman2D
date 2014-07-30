@@ -49,6 +49,14 @@ void GameObjectParams::operator=(GameObjectParams& rhs){
     m_textureID     = rhs.m_textureID;
     m_animSpeed     = rhs.m_animSpeed;
     m_callbackID    = rhs.m_callbackID;
+    m_blendMode     = rhs.m_blendMode;
+    m_animSpeed     = rhs.m_animSpeed;
+    m_startFrame    = rhs.m_startFrame;
+    
+    setRow(rhs.getRow());
+    setFrame(rhs.getFrame());
+    setMaxFrames(rhs.getTotalFrames());
+    
 }
 
 void GameObjectParams::printOut(){

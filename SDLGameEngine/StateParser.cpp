@@ -273,9 +273,14 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         string textureID;
         int GID;
         string type;
-        int column = 0;
+        int row = 0;
+        int numFrames = 0;
         int frame = 0;
         int animSpeed = 0;
+        int width = 0;
+        int height = 0;
+        int x = 0;
+        int y = 0;
         
         SDL_Color color;
         SDL_BlendMode blendMode;
@@ -287,21 +292,33 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         blendMode = SDL_BLENDMODE_BLEND;
         
         e->Attribute("GID",&GID);
-        e->Attribute("column",&column);
+        e->Attribute("row",&row);
         e->Attribute("frame",&frame);
+        e->Attribute("width",&width);
+        e->Attribute("height",&height);
+        e->Attribute("numFrames",&numFrames);
+        e->Attribute("animSpeed",&animSpeed);
         
-        name = e->Attribute("type");
+        name = e->Attribute("name");
+        type = e->Attribute("type");
         textureID = e->Attribute("textureID");
         
         params->setName(name);
-        params->setRow(column);
+        params->setMaxFrames(numFrames);
+        params->getPosition().setX(x);
+        params->getPosition().setY(y);
+        params->setWidth(width);
+        params->setHeight(height);
+        params->setType(type);
+        params->setRow(row);
         params->setFrame(frame);
+        params->setStartFrame(frame);
         params->setAnimSpeed(animSpeed);
         params->setColor(color);
         params->setBlendMode(blendMode);
         params->setTextureID(textureID);
         
-        (*currentState->getElements())[GID] = params;
+        (*currentState->getElements())[name] = params;
     }
 }
 

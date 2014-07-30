@@ -10,7 +10,7 @@
 #include "InputHandler.h"
 
 AnimatedGraphic::AnimatedGraphic(){
-    cout << "Created new animated graphic\n";
+    //cout << "Created new animated graphic\n";
 }
 
 AnimatedGraphic::AnimatedGraphic

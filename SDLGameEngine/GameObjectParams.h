@@ -83,6 +83,13 @@ public:
     void setMaxFrames(int frames){ m_frameMax.setX(frames); }
     void setMaxRows(int rows){ m_frameMax.setY(rows); }
 
+    void setStartFrame(int frame){
+        m_startFrame = frame;
+    }
+    int getStartFrame(){
+        return m_startFrame;
+    }
+    
     void setAnimSpeed(int speed) { m_animSpeed = speed; }
     int getAnimSpeed() { return m_animSpeed; }
     
@@ -160,6 +167,7 @@ protected:
     bool m_bIsCollidable;
     
     //Animation vars
+    int m_startFrame;
     Vector2D m_currentCell;
     Vector2D m_frameMax;
     int m_callbackID;
@@ -167,8 +175,8 @@ protected:
 
     //Texture vars
     string m_name;
-    string m_textureID;
     string m_type;
+    string m_textureID;
     string m_lockTo;
     double m_Angle;
     SDL_Color m_color;
