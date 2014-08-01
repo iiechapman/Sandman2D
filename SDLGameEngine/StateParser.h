@@ -45,7 +45,6 @@ private:
     TiXmlElement* findElement(string element,TiXmlElement* root);
     
     
-    
 };
 
 

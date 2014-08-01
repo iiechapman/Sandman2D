@@ -23,6 +23,7 @@ public:
     
     virtual void update(Level* pLevel);
     virtual void render();
+    virtual void clean();
     
     void setTileIDs(const vector<vector<int>>& data){
         m_tileIDs = data;

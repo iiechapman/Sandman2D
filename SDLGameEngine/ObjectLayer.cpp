@@ -128,3 +128,7 @@ void ObjectLayer::render(){
         }
     }
 }
+
+void ObjectLayer::clean(){
+    //TODO: Fill this in
+}

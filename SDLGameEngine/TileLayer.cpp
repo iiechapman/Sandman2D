@@ -95,7 +95,9 @@ Tileset TileLayer::getTilesetByID(int tileID){
     return t;
 }
 
-
+void TileLayer::clean(){
+ //TODO: Fill this in and clean
+}
 
 
 

@@ -81,7 +81,13 @@ public:
     Player* getPlayer(){
         return m_Player;
     }
-
+    
+    void setLiveMode(bool liveMode){
+        m_bLiveMode = liveMode;
+    }
+    bool isLiveModeOn(){
+        return m_bLiveMode;
+    }
 private:
     Game() {};
     static Game* s_pInstance;
@@ -95,10 +101,12 @@ private:
     int m_mapWidth;
     int m_mapHeight;
     float m_zoom;
-        
+    
+    
     vector<GameObject*> m_gameObjects;
     
     bool m_bRunning;
+    bool m_bLiveMode;
     
     Player* m_Player;
     

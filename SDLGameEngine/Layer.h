@@ -18,6 +18,7 @@ class Layer{
 public:
     
     virtual void render() = 0;
+    virtual void clean() = 0;
     virtual void update(Level* pLevel) = 0;
     
     void setType(string type) {

@@ -95,7 +95,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
         if (source[i] == '/'){
             tempSource = "";
         }
-        finalSource = "assets/tiles/" + tempSource;
+        finalSource = "res/art/til/" + tempSource;
     }
     
     cout << "Final Source -\n" << finalSource << endl;
@@ -249,7 +249,7 @@ void LevelParser::parseTileLayer
         //Find all tiles, assign GID to proper data vector place
         for (TiXmlElement* e = pDataNode->FirstChildElement();
              e != NULL; e = e->NextSiblingElement()){
-
+            
             e->Attribute("gid",&tileID);
             data[index / m_width][index % m_width] = tileID;
             index++;
@@ -314,8 +314,8 @@ void LevelParser::parseObjectLayer
             
             int GID = 0;
             e->Attribute("gid",&GID);
-           
-
+            
+            
             //Check if object exists in element library
             GameObject* pGameObject;
             if ((*newState->getElements())[name]){
@@ -368,7 +368,7 @@ void LevelParser::parseObjectLayer
                             } else if (property->Attribute("name") == string("scrollLock")){
                                 scrollLock = property->Attribute("value");
                                 pGameObject->GetParams().setScrolling(scrollLock != string("true"));
-                            
+                                
                             } else if (property->Attribute("name") == string("textureWidth")){
                                 property->Attribute("value",&width);
                                 pGameObject->GetParams().setWidth(width);
@@ -399,7 +399,7 @@ void LevelParser::parseObjectLayer
                                 int temp;
                                 property->Attribute("value",&temp);
                                 color.a = temp;
-
+                                
                             }  else if (property->Attribute("name") == string("red")){
                                 int temp;
                                 property->Attribute("value",&temp);
@@ -423,18 +423,31 @@ void LevelParser::parseObjectLayer
             }
             
             
-
+            
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
-                pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
-                Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
+                if (Game::Instance()->isLiveModeOn()){
+                    pGameObject = 0;
+                } else {
+                    pLevel->setPlayer(dynamic_cast<Player*>(pGameObject));
+                    Game::Instance()->setPlayer(dynamic_cast<Player*>(pGameObject));
+                }
             }
             
-            pObjectLayer->getGameObjects()->push_back(pGameObject);
-            //pGameObject->GetParams().setMaxFrames(numFrames);
-            //pGameObject->GetParams().setColor(color);
-            //pGameObject->GetParams().setBlendMode(blendMode);
-            cout << "Created new " << pGameObject->GetParams().getType() << endl;
+            if (pGameObject){
+                if(pGameObject->GetParams().getType() == string("Light")){
+                    pGameObject->GetParams().getPosition().setX
+                    (pGameObject->GetParams().getPosition().getX() - pGameObject->GetParams().getWidth()/2);
+                    
+                    pGameObject->GetParams().getPosition().setY
+                    (pGameObject->GetParams().getPosition().getY() - pGameObject->GetParams().getHeight()/2);
+                }
+            }
+            
+            if (pGameObject){
+                pObjectLayer->getGameObjects()->push_back(pGameObject);
+                cout << "Created new " << pGameObject->GetParams().getType() << endl;
+            }
         }
     }
     pLayers->push_back(pObjectLayer);

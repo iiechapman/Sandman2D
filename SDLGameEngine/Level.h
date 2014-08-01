@@ -38,7 +38,8 @@ public:
     
     void update();
     void render();
-
+    void clean();
+    
     void setPlayer(Player* player){
         m_Player = player;
         m_Player->setCollisionLayers(m_collisionLayers);

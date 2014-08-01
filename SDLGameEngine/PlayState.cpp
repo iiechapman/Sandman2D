@@ -35,7 +35,7 @@ void PlayState::update(){
     //Look for live mode
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)){
         if (!m_bEnterHeld){
-            setLiveMode(!liveModeOn());
+            Game::Instance()->setLiveMode(!Game::Instance()->isLiveModeOn());
         }
         m_bEnterHeld = true;
     } else {
@@ -101,18 +101,18 @@ void PlayState::update(){
     
     
     //Live Mode sequence
-    if (liveModeOn()){
+    if (Game::Instance()->isLiveModeOn()){
         onExit();
         onEnter();
         SDL_Delay(100);
     }
     
-    //Update all objects
-    if ( !m_gameObjects.empty()){
-        for (int i = 0 ; i < m_gameObjects.size(); i++){
-            m_gameObjects[i]->update();
-        }
-    }
+    //Update all objects OLD
+//    if ( !m_gameObjects.empty()){
+//        for (int i = 0 ; i < m_gameObjects.size(); i++){
+//            m_gameObjects[i]->update();
+//        }
+//    }
     
     //Update levels elements
     pLevel->update();
@@ -134,7 +134,7 @@ bool PlayState::onEnter(){
 //    parser.parseState("scripts/library.xml", s_playID,
 //                      &m_gameObjects, &m_textureIDList,&pLevelFiles);
     
-    parser.loadState("scripts/library.xml", this);
+    parser.loadState("res/lib/xml/library.xml", this);
     
     //Setup Level from file retrieved in state
     LevelParser levelParser;
@@ -147,14 +147,21 @@ bool PlayState::onEnter(){
 }
 
 bool PlayState::onExit(){
-    cout << "Exited play state\n";
-    //setLiveMode(false);
+    cout << "Exiting play state\n";
     
-    while (!m_gameObjects.empty()){
-        cout << "Game Objects size: " << m_gameObjects.size() << endl;
-        m_gameObjects.back()->clean();
-        m_gameObjects.pop_back();
-    }
+//    while (!m_gameObjects.empty()){
+//        cout << "Game Objects size: " << m_gameObjects.size() << endl;
+//        if (m_gameObjects.back()->GetParams().getName() != "Player"){
+//            cout << "Deleting " <<m_gameObjects.back()->GetParams().getName() << endl;
+//            m_gameObjects.back()->clean();
+//            m_gameObjects.pop_back();
+//            
+//        } else {
+//            cout << "Not Deleting the player!\n";
+//        }
+//    }
+    
+    pLevel->clean();
     
     for (int i = 0 ; i < m_textureIDList.size() ; i++){
         TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
@@ -162,10 +169,12 @@ bool PlayState::onExit(){
     
     cout << "Game Objects size: " << m_gameObjects.size() << endl;
     
-    m_gameObjects.clear();
+    //m_gameObjects.clear();
     
-    Camera::Instance()->reset();
-    InputHandler::Instance()->reset();
+    if (!Game::Instance()->isLiveModeOn()){
+        Camera::Instance()->reset();
+        InputHandler::Instance()->reset();
+    }
     return true;
 }
 

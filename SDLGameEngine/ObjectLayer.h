@@ -21,6 +21,7 @@ class ObjectLayer : public Layer{
 public:
     virtual void update(Level* pLevel);
     virtual void render();
+    virtual void clean();
     
     vector<GameObject*>* getGameObjects(){
         return &m_gameObjects;

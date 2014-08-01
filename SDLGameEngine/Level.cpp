@@ -40,3 +40,10 @@ void Level::update(){
         m_layers[i]->update(this);
     }
 }
+
+void Level::clean(){
+    while (!m_layers.empty()) {
+        m_layers.back()->clean();
+        m_layers.pop_back();
+    }
+}

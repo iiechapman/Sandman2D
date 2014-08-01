@@ -50,7 +50,7 @@ bool PauseState::onEnter(){
     cout << "Entered menu\n";
     
     StateParser parser;
-    parser.parseState("scripts/library.xml", s_pauseID, &m_gameObjects, &m_textureIDList,NULL);
+    parser.parseState("res/lib/xml/library.xml", s_pauseID, &m_gameObjects, &m_textureIDList,NULL);
     
     m_callbacks.push_back(0);
     m_callbacks.push_back(s_ResumeButton);  // Resume Button = 1

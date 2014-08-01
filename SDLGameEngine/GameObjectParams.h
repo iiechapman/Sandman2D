@@ -43,7 +43,7 @@ public:
     
     int getCallbackID() const { return m_callbackID;}
     
-    void setCallBackID(int ID) { m_callbackID = ID; }
+    void setCallBackID(int ID) { m_callbackID = ID; } 
     
     string getType() const { return m_type; }
     

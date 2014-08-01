@@ -92,8 +92,6 @@
 		4E5A76011911872500DB9464 /* GameObjectParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectParams.h; sourceTree = "<group>"; };
 		4E5A76061911891E00DB9464 /* SDLGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDLGameObject.cpp; path = ../SDLGameObject.cpp; sourceTree = "<group>"; };
 		4E5A76071911891E00DB9464 /* SDLGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDLGameObject.h; path = ../SDLGameObject.h; sourceTree = "<group>"; };
-		4E5B514C198695780018C0C9 /* library.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = library.xml; path = "../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/scripts/library.xml"; sourceTree = "<group>"; };
-		4E5B514D19896E0B0018C0C9 /* ToDo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ToDo; path = "../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/misc/ToDo"; sourceTree = "<group>"; };
 		4E5C08531970A29C00A4917B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		4E5C08541970A29C00A4917B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		4E5C789C192843D300005DE3 /* StateParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StateParser.cpp; sourceTree = "<group>"; };
@@ -124,6 +122,7 @@
 		4EAF14C01978327C00D46F7B /* TilesetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TilesetManager.h; sourceTree = "<group>"; };
 		4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectFactory.cpp; sourceTree = "<group>"; };
 		4EB8FD2419250CFC00C38B4F /* GameObjectFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObjectFactory.h; sourceTree = "<group>"; };
+		4EC0757C198ACA870055E3A9 /* library.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = library.xml; path = "../../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/res/lib/xml/library.xml"; sourceTree = "<group>"; };
 		4ECABB1C196B05E600CA4AB7 /* CollisionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CollisionHandler.cpp; sourceTree = "<group>"; };
 		4ECABB1D196B05E600CA4AB7 /* CollisionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionHandler.h; sourceTree = "<group>"; };
 		4ED242CF19202CD30091132D /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
@@ -162,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				4E0AEB52190421570031C463 /* SDLGameEngine */,
-				4EC6DEF1197B5D4E00267709 /* assets */,
 				4E5A76091911893000DB9464 /* Frameworks */,
 				4E0AEB51190421570031C463 /* Products */,
 			);
@@ -179,6 +177,7 @@
 		4E0AEB52190421570031C463 /* SDLGameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				4EC0757B1989C7440055E3A9 /* res */,
 				4E1F09CE1958801000F8C945 /* level */,
 				4E5C789A192843B500005DE3 /* script */,
 				4E5FFD5B192031A2002C1A3B /* main */,
@@ -345,21 +344,12 @@
 			name = ui;
 			sourceTree = "<group>";
 		};
-		4EC6DEF1197B5D4E00267709 /* assets */ = {
+		4EC0757B1989C7440055E3A9 /* res */ = {
 			isa = PBXGroup;
 			children = (
-				4E5B514D19896E0B0018C0C9 /* ToDo */,
-				4EC6DEF2197B5D5200267709 /* scripts */,
+				4EC0757C198ACA870055E3A9 /* library.xml */,
 			);
-			name = assets;
-			sourceTree = "<group>";
-		};
-		4EC6DEF2197B5D5200267709 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				4E5B514C198695780018C0C9 /* library.xml */,
-			);
-			name = scripts;
+			name = res;
 			sourceTree = "<group>";
 		};
 		4EFB1A9B19666AA90099F295 /* layers */ = {
