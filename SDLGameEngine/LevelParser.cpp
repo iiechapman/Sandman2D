@@ -426,6 +426,9 @@ void LevelParser::parseObjectLayer
             
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
+                cout << "Adding player to object spot "
+                << pObjectLayer->getGameObjects()->size() << endl;
+                
                 if (Game::Instance()->isLiveModeOn()){
                     pGameObject = 0;
                 } else {

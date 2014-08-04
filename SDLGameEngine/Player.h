@@ -59,6 +59,7 @@ private:
     bool m_bIsReadyToStomp = false;
     
     bool m_bIsBoosting = false;
+    bool m_bBoostHeld = false;
     int m_BoostTime = 15;
     int m_BoostTimer = 0;
 

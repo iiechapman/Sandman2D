@@ -29,6 +29,8 @@ public:
     void stopSong();
     void stopSound(int channel);
     
+    void setSongVolume(int volume);
+    
     void clearSoundMap();
     void clean();
     

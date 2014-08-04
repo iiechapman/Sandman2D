@@ -15,6 +15,7 @@
 #include "StateParser.h"
 #include "LevelParser.h"
 #include "CollisionManager.h"
+#include "SoundManager.h"
 
 const string PlayState::s_playID = "PLAY";
 
@@ -91,9 +92,10 @@ void PlayState::update(){
             }
             
             onExit();
-            LevelParser levelParser;
-            string levelNumber = "level" + to_string(m_currentLevel);
-            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str() , this);
+            onEnter();
+//            LevelParser levelParser;
+//            string levelNumber = "level" + to_string(m_currentLevel);
+//            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str() , this);
         }
     } else {
         m_bSwitchingLevels = false;
@@ -107,12 +109,6 @@ void PlayState::update(){
         SDL_Delay(100);
     }
     
-    //Update all objects OLD
-//    if ( !m_gameObjects.empty()){
-//        for (int i = 0 ; i < m_gameObjects.size(); i++){
-//            m_gameObjects[i]->update();
-//        }
-//    }
     
     //Update levels elements
     pLevel->update();
@@ -129,7 +125,6 @@ bool PlayState::onEnter(){
     //Load the state from library file
     string pLevelFile;
     
-    
     //Load levels from state file
     StateParser parser;
     parser.loadState("res/lib/xml/library.xml", this);
@@ -138,6 +133,9 @@ bool PlayState::onEnter(){
     LevelParser levelParser;
     string levelNumber = "level" + to_string(m_currentLevel);
     pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str(), this);
+    
+    SoundManager::Instance()->playSong("level_song");
+    SoundManager::Instance()->setSongVolume(30);
     
     cout << "Entered play state\n";
     
@@ -173,6 +171,8 @@ bool PlayState::onExit(){
         Camera::Instance()->reset();
         InputHandler::Instance()->reset();
     }
+    
+    SoundManager::Instance()->stopSong();
     return true;
 }
 

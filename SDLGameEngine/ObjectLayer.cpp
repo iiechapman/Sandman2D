@@ -18,13 +18,12 @@ void ObjectLayer::update(Level* pLevel){
         m_gameObjects[i]->update();
     }
     
-
-//    if (pLevel->getPlayer()){
-//        CollisionManager::Instance()->
-//        checkPlayerTileCollision(pLevel->getPlayer(),*pLevel->getCollidableLayers());
-//    } else {
-//        cout << "Could not find player\n";
-//    }
+    //    if (pLevel->getPlayer()){
+    //        CollisionManager::Instance()->
+    //        checkPlayerTileCollision(pLevel->getPlayer(),*pLevel->getCollidableLayers());
+    //    } else {
+    //        cout << "Could not find player\n";
+    //    }
     
 }
 
@@ -40,7 +39,7 @@ void ObjectLayer::render(){
         //Store Old Color and Blendmode to restore later
         SDL_BlendMode oldBlend;
         SDL_Color oldColor;
-    
+        
         SDL_GetRenderDrawBlendMode(Game::Instance()->getRenderer(), &oldBlend);
         SDL_GetRenderDrawColor(Game::Instance()->getRenderer(),
                                &oldColor.r, &oldColor.g, &oldColor.b, &oldColor.a);
@@ -48,17 +47,6 @@ void ObjectLayer::render(){
         
         //Set darkness layer as render surface temporarily
         SDL_SetRenderTarget(Game::Instance()->getRenderer(), darknessTexture);
-    
-//        if (Game::Instance()->getPlayer()->GetParams().getY() < 600){
-//            currentShade.r = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
-//            currentShade.g = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
-//            currentShade.b = 255 -  Game::Instance()->getPlayer()->GetParams().getY() - 600;
-//        } else {
-//            currentShade.r = 50;
-//            currentShade.g = 50;
-//            currentShade.b = 50;
-//        }
-        
         
         SDL_SetRenderDrawColor(Game::Instance()->getRenderer(), currentShade.r, currentShade.g, currentShade.b, 255);
         
@@ -74,11 +62,11 @@ void ObjectLayer::render(){
                 
                 //If light is meant to scroll, then offset it
                 if (m_gameObjects[i]->GetParams().isScrolling())  {
-                Vector2D pos(cameraParams.getX(),
-                             cameraParams.getY());
-                
-                cameraParams.setX(pos.getX());
-                cameraParams.setY(pos.getY());
+                    Vector2D pos(cameraParams.getX(),
+                                 cameraParams.getY());
+                    
+                    cameraParams.setX(pos.getX());
+                    cameraParams.setY(pos.getY());
                 }
                 
                 
@@ -90,12 +78,9 @@ void ObjectLayer::render(){
                     TextureManager::Instance()->drawFrame
                     (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_HORIZONTAL, Game::Instance()->getZoom());
                 }
-                
-                //cout << "Light render\n";
-                //m_gameObjects[i]->draw();
             }
         }
-    
+        
         
         //Reset Render surface
         SDL_SetRenderTarget(Game::Instance()->getRenderer(), NULL);
@@ -111,7 +96,7 @@ void ObjectLayer::render(){
         
         SDL_RenderCopyEx
         (Game::Instance()->getRenderer(), darknessTexture, &src, &dest, 0, 0, SDL_FLIP_NONE);
-
+        
         //Reset renderer and clear texture
         SDL_SetRenderDrawBlendMode(Game::Instance()->getRenderer(), oldBlend);
         SDL_SetRenderDrawColor(Game::Instance()->getRenderer(),
@@ -124,7 +109,7 @@ void ObjectLayer::render(){
     } else {
         //If not dealing with lights, render as normal
         for (int i = 0 ; i < m_gameObjects.size() ; i++){
-        m_gameObjects[i]->draw();
+            m_gameObjects[i]->draw();
         }
     }
 }

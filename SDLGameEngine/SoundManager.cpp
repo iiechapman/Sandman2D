@@ -113,6 +113,10 @@ void SoundManager::stopSound(int channel){
     Mix_HaltChannel(channel);
 }
 
+void SoundManager::setSongVolume(int volume){
+    Mix_VolumeMusic(volume);
+}
+
 
 void SoundManager::clearSoundMap(){
     m_soundMap.clear();
