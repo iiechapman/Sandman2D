@@ -77,7 +77,7 @@ void MainMenuState::setCallbacks(const vector<Callback> &callbacks){
 bool MainMenuState::onExit(){
     //Run through all textures, and clear them out of texture manager
     for (int i = 0 ; i < m_textureIDList.size() ; i++){
-        TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+        //TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
     }
     
     while (!m_gameObjects.empty()){

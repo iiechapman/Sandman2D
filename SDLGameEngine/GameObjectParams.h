@@ -32,8 +32,11 @@ public:
     float getX() const { return m_position.getX(); }
     float getY() const { return m_position.getY(); }
     
-    float getWidth() const { return m_size.getX(); }
-    float getHeight() const { return m_size.getY(); }
+    float getWidth() const { return m_size.getX() * m_scale; }
+    float getHeight() const { return m_size.getY() * m_scale; }
+    
+    float getSourceWidth() const {return m_size.getX(); }
+    float getSourceHeight() const {return m_size.getY(); }
     
     int getFrame() const { return m_currentCell.getX(); }
     int getRow() const { return m_currentCell.getY(); }
@@ -66,6 +69,13 @@ public:
     
     void setX(float x){ m_position.setX(x);}
     void setY(float y){ m_position.setY(y);}
+    
+    void setScale(float scale){
+        m_scale = scale;
+    }
+    float getScale(){
+        return m_scale;
+    }
     
     void setWidth(float width){ m_size.setX(width); }
     void setHeight(float height){ m_size.setY(height); }
@@ -181,6 +191,7 @@ protected:
     double m_Angle;
     SDL_Color m_color;
     SDL_BlendMode m_blendMode;
+    float m_scale = 1;
     
     //Updating vars
     bool m_bScrolling = true;

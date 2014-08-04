@@ -154,9 +154,10 @@ void StateParser::parseTextures(TiXmlElement* pStateRoot,
             
             
             pTextureIDs->push_back(idAttribute);
-            
+
             TextureManager::Instance()->load
             (fileNameAttribute, idAttribute, Game::Instance()->getRenderer());
+
         }
     } else {
         cout << "Error: State Root Null, or no Textures\n";
@@ -281,6 +282,7 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         int height = 0;
         int x = 0;
         int y = 0;
+        double scale = 1;
         
         SDL_Color color;
         SDL_BlendMode blendMode;
@@ -298,6 +300,7 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         e->Attribute("height",&height);
         e->Attribute("numFrames",&numFrames);
         e->Attribute("animSpeed",&animSpeed);
+        e->Attribute("scale",&scale);
         
         name = e->Attribute("name");
         type = e->Attribute("type");
@@ -307,6 +310,7 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         params->setMaxFrames(numFrames);
         params->getPosition().setX(x);
         params->getPosition().setY(y);
+        params->setScale(scale);
         params->setWidth(width);
         params->setHeight(height);
         params->setType(type);

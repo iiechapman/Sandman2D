@@ -129,11 +129,9 @@ bool PlayState::onEnter(){
     //Load the state from library file
     string pLevelFile;
     
+    
     //Load levels from state file
     StateParser parser;
-//    parser.parseState("scripts/library.xml", s_playID,
-//                      &m_gameObjects, &m_textureIDList,&pLevelFiles);
-    
     parser.loadState("res/lib/xml/library.xml", this);
     
     //Setup Level from file retrieved in state
@@ -164,7 +162,7 @@ bool PlayState::onExit(){
     pLevel->clean();
     
     for (int i = 0 ; i < m_textureIDList.size() ; i++){
-        TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+        //TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
     }
     
     cout << "Game Objects size: " << m_gameObjects.size() << endl;

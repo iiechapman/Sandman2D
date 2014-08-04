@@ -16,6 +16,7 @@ void MenuButton::load(GameObjectParams params){
     SDLGameObject::load(params);
     GetParams().setScrolling(false);
     GetParams().setFrame(MOUSE_OUT);
+    GetParams().setScale(.5);
     
 }
 
@@ -29,11 +30,11 @@ void MenuButton::update(){
     float zoom = Game::Instance()->getZoom();
 
     
-    if (pMousePos->getX() < GetParams().getX() +
+    if (pMousePos->getX() < GetParams().getX() * zoom +
         GetParams().getWidth() * zoom &&
         pMousePos->getX() > GetParams().getX() * zoom  &&
-        pMousePos->getY() < GetParams().getY() * zoom +
-        GetParams().getHeight()* zoom  &&
+        pMousePos->getY() < GetParams().getY()  * zoom +
+        GetParams().getHeight() * zoom  &&
         pMousePos->getY() > GetParams().getY() * zoom
         ){
         GetParams().setFrame(MOUSE_OVER);

@@ -56,6 +56,8 @@ public:
 
     
     void clean();
+
+    bool doesTextureExist(string id);
     
     void clearFromTextureMap(string id);
     

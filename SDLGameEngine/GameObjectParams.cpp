@@ -52,7 +52,8 @@ void GameObjectParams::operator=(GameObjectParams& rhs){
     m_blendMode     = rhs.m_blendMode;
     m_animSpeed     = rhs.m_animSpeed;
     m_startFrame    = rhs.m_startFrame;
-    
+    m_scale         = rhs.m_scale;
+
     setRow(rhs.getRow());
     setFrame(rhs.getFrame());
     setMaxFrames(rhs.getTotalFrames());
