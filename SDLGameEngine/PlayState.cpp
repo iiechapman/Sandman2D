@@ -62,6 +62,7 @@ void PlayState::update(){
     
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A)){
         InputHandler::Instance()->rumbleJoystick();
+        SoundManager::Instance()->playSound("explosion_sound");
         Camera::Instance()->setHorizontalRumble(rumbleFactor);
         Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {
@@ -135,7 +136,7 @@ bool PlayState::onEnter(){
     pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str(), this);
     
     SoundManager::Instance()->playSong("level_song");
-    SoundManager::Instance()->setSongVolume(30);
+    SoundManager::Instance()->setSongVolume(5);
     
     cout << "Entered play state\n";
     
