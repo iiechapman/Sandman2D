@@ -136,7 +136,7 @@ bool PlayState::onEnter(){
     pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str(), this);
     
     SoundManager::Instance()->playSong("level_song");
-    SoundManager::Instance()->setSongVolume(5);
+    SoundManager::Instance()->setSongVolume(30);
     
     cout << "Entered play state\n";
     
