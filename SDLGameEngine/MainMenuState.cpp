@@ -12,6 +12,7 @@
 #include "TextureManager.h"
 #include "Game.h"
 #include "PlayState.h"
+#include "SoundManager.h"
 
 const string MainMenuState::s_mainMenuID = "MAINMENU";
 
@@ -41,6 +42,7 @@ bool MainMenuState::onEnter(){
     cout << "Game Objects on enter " << m_gameObjects.size() << endl;
     
     cout << "Entering Main Menu State\n";
+
     
     return true;
 }
