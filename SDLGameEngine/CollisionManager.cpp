@@ -44,7 +44,7 @@ void CollisionManager::checkPlayerTileCollision
         //Get layers position
         Vector2D layerPos = pTileLayer->getPosition();
 
-        int x,y,tileColumn,tileRow,tileID = 0;
+        float x,y,tileColumn,tileRow,tileID = 0;
         
         //Calculate position on tile map
         x = ((layerPos.getX()) / pTileLayer->getTileSize());

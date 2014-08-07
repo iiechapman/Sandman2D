@@ -15,6 +15,7 @@
 		4E1F09DC1958B23A00F8C945 /* LevelParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F09DA1958B23A00F8C945 /* LevelParser.cpp */; };
 		4E1F09E01958C5A200F8C945 /* base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F09DE1958C5A200F8C945 /* base64.cpp */; };
 		4E1F09E31958CD2300F8C945 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1F09E21958CD2300F8C945 /* libz.dylib */; };
+		4E228D2D1993F29F0015B26D /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E228D2B1993F29F0015B26D /* EventHandler.cpp */; };
 		4E239BA4195A4DC70084874F /* ObjectLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E239BA2195A4DC70084874F /* ObjectLayer.cpp */; };
 		4E2CB06519649E7F00A6B8FF /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2CB06319649E7F00A6B8FF /* Light.cpp */; };
 		4E458E5B1907E78100BE4CB3 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E591907E78100BE4CB3 /* GameObject.cpp */; };
@@ -78,6 +79,8 @@
 		4E1F09DE1958C5A200F8C945 /* base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base64.cpp; sourceTree = "<group>"; };
 		4E1F09DF1958C5A200F8C945 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
 		4E1F09E21958CD2300F8C945 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		4E228D2B1993F29F0015B26D /* EventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventHandler.cpp; sourceTree = "<group>"; };
+		4E228D2C1993F29F0015B26D /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
 		4E239BA2195A4DC70084874F /* ObjectLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectLayer.cpp; sourceTree = "<group>"; };
 		4E239BA3195A4DC70084874F /* ObjectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectLayer.h; sourceTree = "<group>"; };
 		4E2CB06319649E7F00A6B8FF /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
@@ -251,6 +254,8 @@
 				4E5C08541970A29C00A4917B /* Camera.h */,
 				4EAF14BF1978327C00D46F7B /* TilesetManager.cpp */,
 				4EAF14C01978327C00D46F7B /* TilesetManager.h */,
+				4E228D2B1993F29F0015B26D /* EventHandler.cpp */,
+				4E228D2C1993F29F0015B26D /* EventHandler.h */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -450,6 +455,7 @@
 				4EB8FD2519250CFC00C38B4F /* GameObjectFactory.cpp in Sources */,
 				4E0AEB5C1904597F0031C463 /* Game.cpp in Sources */,
 				4E69DA5B19074510006E1788 /* TextureManager.cpp in Sources */,
+				4E228D2D1993F29F0015B26D /* EventHandler.cpp in Sources */,
 				4E859D631916C5C8005F17D4 /* InputHandler.cpp in Sources */,
 				4EAF14C11978327C00D46F7B /* TilesetManager.cpp in Sources */,
 				4EFDF78E1923FDB1007B7624 /* AnimatedGraphic.cpp in Sources */,

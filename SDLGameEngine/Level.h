@@ -59,6 +59,8 @@ private:
     friend class LevelParser;
     Level();
     
+    void checkCollisions();
+    
     vector<Tileset> m_tilesets;
     vector<Layer*> m_layers;
     vector<TileLayer*> m_collisionLayers;

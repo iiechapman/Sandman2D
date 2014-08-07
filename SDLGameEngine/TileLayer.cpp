@@ -11,7 +11,7 @@
 #include "Camera.h"
 
 void TileLayer::render(){
-    int x, x2, y2 = 0;
+    float x, x2, y2 = 0;
     
     //Calculate left/top coord
     x = m_position.getX() / m_tileSize;

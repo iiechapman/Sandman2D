@@ -40,10 +40,16 @@ void Level::render(){
 }
 
 void Level::update(){
+    //Update all layers
     for (int i = 0 ; i <m_layers.size() ;i++){
         m_layers[i]->update(this);
     }
     
+    checkCollisions();
+}
+
+
+void Level::checkCollisions(){
     //Check each layer for collision of objects
     for (int i = 0 ; i < m_layers.size() ; i++){
         for (int j = 0 ; j < m_layers.size() ; j++){
@@ -64,19 +70,17 @@ void Level::update(){
                             if (object1 != object2 &&
                                 (object1->GetParams().getName() != string("Light")&&
                                  object2->GetParams().getName() != string("Light"))){
-                                if (CollisionHandler::checkCollision(object1, object2)){
-                                    if (object1->GetParams().getName() == string("Player")&&
-                                        object2->GetParams().getName() == string("Apple")){
-                                        SoundManager::Instance()->playSound("pickup_sound");
-                                        object2->GetParams().getPosition().setX(-99999);
-                                    }
+                                    if (CollisionHandler::checkCollision(object1, object2)){
+                                        //TODO Send to event handler
+                                        //Handle Event
+                                        if (object1->GetParams().getName() == string("Player")&&
+                                            object2->GetParams().getName() == string("Apple")){
+                                            SoundManager::Instance()->playSound("pickup_sound");
+                                            object2->GetParams().getPosition().setX(-99999);
+                                        }
                                         
-//                                    cout << object1->GetParams().getName();
-//                                    cout << " collided with ";
-//                                    cout << object2->GetParams().getName();
-//                                    cout << endl;
+                                    }
                                 }
-                            }
                         }
                     }
                 }
@@ -85,10 +89,82 @@ void Level::update(){
     }
 }
 
-
 void Level::clean(){
     while (!m_layers.empty()) {
         m_layers.back()->clean();
         m_layers.pop_back();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

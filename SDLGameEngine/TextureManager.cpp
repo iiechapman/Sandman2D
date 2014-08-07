@@ -47,7 +47,7 @@ bool TextureManager::load(string fileName, string id,
     return false;
 }
 
-void TextureManager::draw(string id, int x, int y,
+void TextureManager::draw(string id, float x, float y,
                           int width, int height,
                           SDL_Renderer* pRenderer, SDL_RendererFlip flip){
     if (doesTextureExist(id)){
@@ -87,7 +87,7 @@ void TextureManager::draw(string id, Vector2D pos,
 
 
 
-void TextureManager::drawFrame(string id, int x, int y,
+void TextureManager::drawFrame(string id, float x, float y,
                                int width, int height,
                                int currentRow, int currentFrame,float zoom,
                                SDL_Renderer* pRenderer, SDL_RendererFlip flip){
@@ -193,8 +193,8 @@ void TextureManager::drawFrame(string id, Vector2D pos,
     
 }
 
-void TextureManager::drawTile(string id, int margin, int spacing, int x,
-                              int y, int width, int height, int currentRow,
+void TextureManager::drawTile(string id, int margin, int spacing, float x,
+                              float y, int width, int height, int currentRow,
                               int currentFrame,float zoom, SDL_Renderer *pRenderer){
     
     if (doesTextureExist(id)){
