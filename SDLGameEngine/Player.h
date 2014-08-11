@@ -37,9 +37,9 @@ private:
     void handlePhysics();
     void handleMovement();
     void handleAnimation();
-    bool checkCollideTile(Vector2D pos);
+    bool checkCollideTile(Vector2D<float> pos);
     
-    Vector2D m_acceleration{0,0};
+    Vector2D<float> m_acceleration{0,0};
 
     bool m_bIsOnGround = false;
     int m_maxJumps = 2;

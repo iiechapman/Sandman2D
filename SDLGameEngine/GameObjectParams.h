@@ -54,9 +54,9 @@ public:
         m_type = type;
     }
 
-    Vector2D& getVelocity(){ return m_velocity; }
-    Vector2D& getAcceleration(){ return m_acceleration; }
-    Vector2D& getPosition(){ return m_position; }
+    Vector2D<float>& getVelocity(){ return m_velocity; }
+    Vector2D<float>& getAcceleration(){ return m_acceleration; }
+    Vector2D<float>& getPosition(){ return m_position; }
     
     string getName() const { return m_name; }
     void setName(string name){
@@ -65,7 +65,7 @@ public:
     string getTextureID() const { return m_textureID; }
     
     void setTextureID(string textureID){ m_textureID = textureID; }
-    void setVelocity(Vector2D velocity){ m_velocity = velocity;}
+    void setVelocity(Vector2D<float> velocity){ m_velocity = velocity;}
     
     void setX(float x){ m_position.setX(x);}
     void setY(float y){ m_position.setY(y);}
@@ -168,18 +168,18 @@ public:
     
 protected:
     //Size vars
-    Vector2D m_position;
-    Vector2D m_size;
+    Vector2D<float> m_position;
+    Vector2D<float> m_size;
     
     //Physics vars
-    Vector2D m_velocity;
-    Vector2D m_acceleration;
+    Vector2D<float> m_velocity;
+    Vector2D<float> m_acceleration;
     bool m_bIsCollidable;
     
     //Animation vars
     int m_startFrame;
-    Vector2D m_currentCell;
-    Vector2D m_frameMax;
+    Vector2D<float> m_currentCell;
+    Vector2D<float> m_frameMax;
     int m_callbackID;
     int m_animSpeed;
 

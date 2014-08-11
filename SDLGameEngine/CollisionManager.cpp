@@ -42,7 +42,7 @@ void CollisionManager::checkPlayerTileCollision
         vector<vector<int>> tiles = pTileLayer->getTileIDs();
         
         //Get layers position
-        Vector2D layerPos = pTileLayer->getPosition();
+        Vector2D<float> layerPos = pTileLayer->getPosition();
 
         float x,y,tileColumn,tileRow,tileID = 0;
         

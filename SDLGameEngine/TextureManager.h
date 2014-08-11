@@ -30,7 +30,7 @@ public:
               int width, int height,
               SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
     
-    void draw(string id, Vector2D pos,
+    void draw(string id, Vector2D<float> pos,
               int width, int height,
               SDL_Renderer* pRenderer, SDL_RendererFlip flip);
 
@@ -45,7 +45,7 @@ public:
                    SDL_RendererFlip flip = SDL_FLIP_NONE,
                    float zoom = 1.0);
     
-    void drawFrame(string id, Vector2D pos,
+    void drawFrame(string id, Vector2D<float> pos,
                    int width, int height,
                    int currentRow, int currentFrame,
                    SDL_Renderer* pRenderer, SDL_RendererFlip flip);

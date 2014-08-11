@@ -44,10 +44,10 @@ public:
         return m_tileIDs;
     };
     
-    Vector2D getPosition(){
+    Vector2D<float> getPosition(){
         return m_position;
     }
-    Vector2D getVelocity(){
+    Vector2D<float> getVelocity(){
         return m_velocity;
     }
     
@@ -69,8 +69,8 @@ private:
     int m_mapWidth;
     int m_mapHeight;
     
-    Vector2D m_position;
-    Vector2D m_velocity;
+    Vector2D<float> m_position;
+    Vector2D<float> m_velocity;
     
     const vector<Tileset> &m_tilesets;
     vector<vector<int>> m_tileIDs;

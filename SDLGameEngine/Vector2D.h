@@ -11,53 +11,106 @@
 
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
+template <class Type>
 class Vector2D{
 public:
     Vector2D();
-    Vector2D(float x ,float y): m_x(x),m_y(y){};
+    Vector2D(Type x ,Type y): m_x(x),m_y(y){};
     ~Vector2D();
     
-    float getX() const { return m_x; }
-    float getY() const { return m_y; }
+    Type getX() const { return m_x; }
+    Type getY() const { return m_y; }
     
-    void setX(float x) { m_x = x; }
-    void setY(float y) { m_y = y; }
+    void setX(Type x) { m_x = x; }
+    void setY(Type y) { m_y = y; }
     
-    float length();
+    Type length();
     
     void normalize();
     
-    Vector2D operator+(const Vector2D& v2) const;
-    friend Vector2D& operator+=(Vector2D& v1, const Vector2D& v2){
+    Vector2D<Type> operator+(const Vector2D<Type>& v2) const;
+    friend Vector2D<Type>& operator+=(Vector2D<Type>& v1, const Vector2D<Type>& v2){
         v1.m_x += v2.m_x;
         v1.m_y += v2.m_y;
         
         return v1;
     }
     
-    Vector2D operator-(const Vector2D& v2) const;
-    friend Vector2D& operator-=(Vector2D& v1, const Vector2D& v2){
+    Vector2D<Type> operator-(const Vector2D<Type>& v2) const;
+    friend Vector2D<Type>& operator-=(Vector2D<Type>& v1, const Vector2D<Type>& v2){
         v1.m_x -= v2.m_x;
         v1.m_y -= v2.m_y;
         
         return v1;
     }
     
-    Vector2D operator*(float scalar);
-    Vector2D& operator*=(float scalar);
+    Vector2D<Type> operator*(Type scalar);
+    Vector2D<Type>& operator*=(Type scalar);
     
-    Vector2D operator/(float scalar);
-    Vector2D& operator/=(float scalar);
+    Vector2D<Type> operator/(Type scalar);
+    Vector2D<Type>& operator/=(Type scalar);
     
 private:
-    float m_x;
-    float m_y;
-    
-    
-    
+    Type m_x;
+    Type m_y;
 };
+
+
+
+template <class Type> Vector2D<Type>::Vector2D(): Vector2D<Type>(0,0){
+}
+
+template <class Type> Vector2D<Type>::~Vector2D(){
+    
+    //cout << "Deleted vector2d\n";
+}
+
+template <class Type> Type Vector2D<Type>::length(){
+    return sqrt(m_x * m_x + m_y + m_y);
+}
+
+template <class Type> Vector2D<Type> Vector2D<Type>::operator+(const Vector2D& v2) const {
+    return Vector2D(m_x + v2.m_x, m_y + v2.m_y);
+}
+
+template <class Type> Vector2D<Type> Vector2D<Type>::operator-(const Vector2D& v2) const{
+    return Vector2D(m_x - v2.m_x , m_y - v2.m_y);
+}
+
+template <class Type> Vector2D<Type> Vector2D<Type>::operator*(Type scalar){
+    return Vector2D(m_x * scalar , m_y * scalar);
+}
+
+template <class Type> Vector2D<Type>& Vector2D<Type>::operator*=(Type scalar){
+    m_x *= scalar;
+    m_y *= scalar;
+    
+    return *this;
+}
+
+template <class Type> Vector2D<Type> Vector2D<Type>::operator/(Type scalar){
+    return Vector2D(m_x/scalar , m_y/scalar);
+}
+
+template <class Type> Vector2D<Type>& Vector2D<Type>::operator/=(Type scalar){
+    m_x/=scalar;
+    m_y/=scalar;
+    
+    return *this;
+}
+
+template <class Type> void Vector2D<Type>::normalize(){
+    Type len = length();
+    
+    if (len > 0){
+        (*this) *= 1 / len ;
+    }
+}
+
+
 
 
 #endif /* defined(__LudumDare29__Vector2D__) */

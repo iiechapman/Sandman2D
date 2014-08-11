@@ -43,7 +43,7 @@ public:
     bool isKeyDown(SDL_Scancode key) const;
     
     //Mouse Handling
-    Vector2D* getMousePosition();
+    Vector2D<float>* getMousePosition();
     bool getMouseButtonState(int buttonNumber);
 
     //Gamepad/Joystick Handling
@@ -68,7 +68,7 @@ private:
     void onMouseButtonUp(SDL_Event &event);
     
     void updateMousePosition(SDL_Event &event);
-    Vector2D* m_mousePosition;
+    Vector2D<float>* m_mousePosition;
     vector<bool>m_mouseButtonStates;
     
     //Gamepad/Joystick handling
@@ -77,7 +77,7 @@ private:
     void onJoystickMotion(SDL_Event &event);
     
     vector<SDL_Joystick*> m_joysticks;
-    vector<pair<Vector2D*, Vector2D*>> m_joystickValues;
+    vector<pair<Vector2D<float>*, Vector2D<float>*>> m_joystickValues;
     bool m_bJoysticksInitialized;
     const int m_joystickDeadZone = 10000;
     vector<vector<bool>> m_buttonStates;
