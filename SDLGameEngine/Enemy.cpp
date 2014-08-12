@@ -36,6 +36,8 @@ void Enemy::draw(){
 void Enemy::update(){
     //cout << "Total Frames: " << GetParams().getTotalFrames() << " Speed: " << GetParams().getAnimSpeed() << endl;
     
+    
+    
     if (GetParams().getTotalFrames()>0 && GetParams().getAnimSpeed()>0){
         GetParams().setFrame
         (GetParams().getStartFrame() +(int((SDL_GetTicks()/ ((1000 / GetParams().getAnimSpeed())) % GetParams().getTotalFrames()))));

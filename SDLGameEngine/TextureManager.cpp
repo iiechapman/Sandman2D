@@ -165,7 +165,17 @@ bool TextureManager::doesTextureExist(string id){
 
 
 
-//Deprecated
+
+
+
+
+
+/*
+ *********************
+ Deprecated
+ *********************
+*/
+
 //void TextureManager::drawFrame(string id, Vector2D<double> pos,
 //                               int width, int height,
 //                               int currentRow, int currentFrame,

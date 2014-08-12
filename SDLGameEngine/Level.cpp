@@ -11,8 +11,10 @@
 #include "ObjectLayer.h"
 #include "CollisionHandler.h"
 #include "SoundManager.h"
+#include "EventManager.h"
+#include <vector>
 
-
+using namespace std;
 vector<Tileset>* Level::getTilesets(){
     return &m_tilesets;
 }
@@ -71,12 +73,15 @@ void Level::checkCollisions(){
                                 (object1->GetParams().getName() != string("Light")&&
                                  object2->GetParams().getName() != string("Light"))){
                                     if (CollisionHandler::checkCollision(object1, object2)){
-                                        //TODO Send to event handler
-                                        //Handle Event
+
                                         if (object1->GetParams().getName() == string("Player")&&
                                             object2->GetParams().getName() == string("Apple")){
                                             SoundManager::Instance()->playSound("pickup_sound");
                                             object2->GetParams().getPosition().setX(-99999);
+                                            
+                                            //Testing sending to event manager
+                                            EventManager::Instance()->receiveEvent
+                                            ("apple", "collect", 0, vector<string>());
                                         }
                                     }
                                 }
