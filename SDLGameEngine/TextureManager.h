@@ -26,7 +26,7 @@ public:
     
     bool load(string fileName, string id, SDL_Renderer* pRenderer);
     
-    void draw(string id, float x, float y,
+    void draw(string id, double x, double y,
               int width, int height,
               SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
     
@@ -35,24 +35,24 @@ public:
               SDL_Renderer* pRenderer, SDL_RendererFlip flip);
 
     
-    void drawFrame(string id, float x, float y,
+    void drawFrame(string id, double x, double y,
                    int width, int height,int currentRow, int currentFrame,
-                   float zoom ,SDL_Renderer* pRenderer,
+                   double zoom ,SDL_Renderer* pRenderer,
                    SDL_RendererFlip flip = SDL_FLIP_NONE);
     
     void drawFrame(GameObjectParams* params,
                    SDL_Renderer* pRenderer,
                    SDL_RendererFlip flip = SDL_FLIP_NONE,
-                   float zoom = 1.0);
+                   double zoom = 1.0);
     
     void drawFrame(string id, Vector2D pos,
                    int width, int height,
                    int currentRow, int currentFrame,
                    SDL_Renderer* pRenderer, SDL_RendererFlip flip);
     
-    void drawTile(string id, int margin, int spacing, float x,
-                  float y, int width, int height,int currentRow,
-                  int currentFrame, float zoom, SDL_Renderer* pRenderer);
+    void drawTile(string id, int margin, int spacing, double x,
+                  double y, int width, int height,int currentRow,
+                  int currentFrame, double zoom, SDL_Renderer* pRenderer);
 
     
     void clean();

@@ -50,8 +50,8 @@ public:
     void initializeJoysticks();
     bool joysticksInitialized();
     int rumbleJoystick();
-    float xvalue(int joy, int stick);
-    float yvalue(int joy, int stick);
+    double xvalue(int joy, int stick);
+    double yvalue(int joy, int stick);
     bool getButtonState(int joy, int buttonNumber);
     void printJoyStats(int joy);
 

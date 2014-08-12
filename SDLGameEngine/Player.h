@@ -50,7 +50,7 @@ private:
     bool m_bOnGround;
     bool m_bIsJumping;
     bool m_bIsFalling = true;
-    float m_jumpSpeed = 7;
+    double m_jumpSpeed = 7;
     bool m_bWallCling = false;
     
     bool m_bIsStomping = false;
@@ -66,28 +66,28 @@ private:
     bool m_bMoveRight;
     bool m_bMoveLeft;    
 
-    float m_jetSpeed = 0.15;
-    float m_maxFuel = 100;
-    float m_currentFuel = 0;
-    float m_fuelCost = 1;
+    double m_jetSpeed = 0.15;
+    double m_maxFuel = 100;
+    double m_currentFuel = 0;
+    double m_fuelCost = 1;
     bool  m_bIsJetting = false;
     
-    float m_runSpeed = 8;
-    float m_walkSpeed = 0.30;
+    double m_runSpeed = 8;
+    double m_walkSpeed = 0.30;
 
-    float m_horizontalSpeed = m_walkSpeed;
-    float m_verticalSpeed = m_jumpSpeed;
-    float m_horizontalDrag = .09;
+    double m_horizontalSpeed = m_walkSpeed;
+    double m_verticalSpeed = m_jumpSpeed;
+    double m_horizontalDrag = .09;
     
-    float m_maxRunSpeed = 8;
-    float m_maxWalkSpeed = 4.5;
+    double m_maxRunSpeed = 8;
+    double m_maxWalkSpeed = 4.5;
     
-    float m_maxVerticalSpeed = 20;
-    float m_maxHorizontalSpeed = m_maxWalkSpeed;
+    double m_maxVerticalSpeed = 20;
+    double m_maxHorizontalSpeed = m_maxWalkSpeed;
 
-    float m_normalGravity = .40;
-    float m_jetGravity = 0.1;
-    float m_currentGravity = m_normalGravity;
+    double m_normalGravity = .40;
+    double m_jetGravity = 0.1;
+    double m_currentGravity = m_normalGravity;
     
     bool m_bCheckCollision = true;
     

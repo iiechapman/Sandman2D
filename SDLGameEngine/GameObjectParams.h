@@ -19,8 +19,8 @@ using namespace std;
 class GameObjectParams{
 public:
     GameObjectParams();
-    GameObjectParams(string name,float x, float y,
-                     float width, float height,
+    GameObjectParams(string name,double x, double y,
+                     double width, double height,
                      string textureID,int callbackID = 0 , int animSpeed = 1);
     
     ~GameObjectParams();
@@ -29,14 +29,14 @@ public:
     
     void printOut();
     
-    float getX() const { return m_position.getX(); }
-    float getY() const { return m_position.getY(); }
+    double getX() const { return m_position.getX(); }
+    double getY() const { return m_position.getY(); }
     
-    float getWidth() const { return m_size.getX() * m_scale; }
-    float getHeight() const { return m_size.getY() * m_scale; }
+    double getWidth() const { return m_size.getX() * m_scale; }
+    double getHeight() const { return m_size.getY() * m_scale; }
     
-    float getSourceWidth() const {return m_size.getX(); }
-    float getSourceHeight() const {return m_size.getY(); }
+    double getSourceWidth() const {return m_size.getX(); }
+    double getSourceHeight() const {return m_size.getY(); }
     
     int getFrame() const { return m_currentCell.getX(); }
     int getRow() const { return m_currentCell.getY(); }
@@ -67,18 +67,18 @@ public:
     void setTextureID(string textureID){ m_textureID = textureID; }
     void setVelocity(Vector2D velocity){ m_velocity = velocity;}
     
-    void setX(float x){ m_position.setX(x);}
-    void setY(float y){ m_position.setY(y);}
+    void setX(double x){ m_position.setX(x);}
+    void setY(double y){ m_position.setY(y);}
     
-    void setScale(float scale){
+    void setScale(double scale){
         m_scale = scale;
     }
-    float getScale(){
+    double getScale(){
         return m_scale;
     }
     
-    void setWidth(float width){ m_size.setX(width); }
-    void setHeight(float height){ m_size.setY(height); }
+    void setWidth(double width){ m_size.setX(width); }
+    void setHeight(double height){ m_size.setY(height); }
     
     double getAngle(){
         return m_Angle;
@@ -191,7 +191,7 @@ protected:
     double m_Angle;
     SDL_Color m_color;
     SDL_BlendMode m_blendMode;
-    float m_scale = 1;
+    double m_scale = 1;
     
     //Updating vars
     bool m_bScrolling = true;

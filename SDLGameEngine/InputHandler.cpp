@@ -238,7 +238,7 @@ void InputHandler::initializeJoysticks(){
     }
 }
 
-float InputHandler::xvalue(int joy, int stick){
+double InputHandler::xvalue(int joy, int stick){
     if (m_joystickValues.size() > 0 ){
         if (stick == 1){
             return m_joystickValues[joy].first->getX();
@@ -258,7 +258,7 @@ void InputHandler::printJoyStats(int joy){
 }
 
 
-float InputHandler::yvalue(int joy, int stick){
+double InputHandler::yvalue(int joy, int stick){
     if (m_joystickValues.size() > 0 ){
         if (stick == 1){
             return m_joystickValues[joy].first->getY();

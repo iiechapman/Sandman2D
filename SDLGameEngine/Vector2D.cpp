@@ -15,7 +15,7 @@ Vector2D::~Vector2D(){
     //cout << "Deleted vector2d\n";
 }
 
-float Vector2D::length(){
+double Vector2D::length(){
     return sqrt(m_x * m_x + m_y + m_y);
 }
 
@@ -27,22 +27,22 @@ Vector2D Vector2D::operator-(const Vector2D& v2) const{
     return Vector2D(m_x - v2.m_x , m_y - v2.m_y);
 }
 
-Vector2D Vector2D::operator*(float scalar){
+Vector2D Vector2D::operator*(double scalar){
     return Vector2D(m_x * scalar , m_y * scalar);
 }
 
-Vector2D& Vector2D::operator*=(float scalar){
+Vector2D& Vector2D::operator*=(double scalar){
     m_x *= scalar;
     m_y *= scalar;
     
     return *this;
 }
 
-Vector2D Vector2D::operator/(float scalar){
+Vector2D Vector2D::operator/(double scalar){
     return Vector2D(m_x/scalar , m_y/scalar);
 }
 
-Vector2D& Vector2D::operator/=(float scalar){
+Vector2D& Vector2D::operator/=(double scalar){
     m_x/=scalar;
     m_y/=scalar;
     
@@ -50,7 +50,7 @@ Vector2D& Vector2D::operator/=(float scalar){
 }
 
 void Vector2D::normalize(){
-    float len = length();
+    double len = length();
     
     if (len > 0){
         (*this) *= 1 / len ;

@@ -10,10 +10,10 @@
 
 
 bool CollisionHandler::checkCollision(GameObject *p1, GameObject *p2){
-    float leftA,leftB;
-    float rightA,rightB;
-    float topA, topB;
-    float bottomA,bottomB;
+    double leftA,leftB;
+    double rightA,rightB;
+    double topA, topB;
+    double bottomA,bottomB;
     
     leftA = p1->GetParams().getPosition().getX() + 10;
     leftB = p2->GetParams().getPosition().getX() + 10;

@@ -105,6 +105,7 @@ void PlayState::update(){
     
     //Live Mode sequence
     if (Game::Instance()->isLiveModeOn()){
+        cout << "Live mode enabled\n";
         onExit();
         onEnter();
         SDL_Delay(100);

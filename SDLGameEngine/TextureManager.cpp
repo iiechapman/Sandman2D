@@ -47,7 +47,7 @@ bool TextureManager::load(string fileName, string id,
     return false;
 }
 
-void TextureManager::draw(string id, float x, float y,
+void TextureManager::draw(string id, double x, double y,
                           int width, int height,
                           SDL_Renderer* pRenderer, SDL_RendererFlip flip){
     if (doesTextureExist(id)){
@@ -87,9 +87,9 @@ void TextureManager::draw(string id, Vector2D pos,
 
 
 
-void TextureManager::drawFrame(string id, float x, float y,
+void TextureManager::drawFrame(string id, double x, double y,
                                int width, int height,
-                               int currentRow, int currentFrame,float zoom,
+                               int currentRow, int currentFrame,double zoom,
                                SDL_Renderer* pRenderer, SDL_RendererFlip flip){
     if (doesTextureExist(id)){
         SDL_Rect srcRect;
@@ -114,7 +114,7 @@ void TextureManager::drawFrame(string id, float x, float y,
 
 void TextureManager::drawFrame(GameObjectParams* params,
                                SDL_Renderer* pRenderer,
-                               SDL_RendererFlip flip , float zoom){
+                               SDL_RendererFlip flip , double zoom){
     if (doesTextureExist(params->getTextureID())){
         //Set camera offset if scrolling
         SDL_Rect cameraOffset;
@@ -193,9 +193,9 @@ void TextureManager::drawFrame(string id, Vector2D pos,
     
 }
 
-void TextureManager::drawTile(string id, int margin, int spacing, float x,
-                              float y, int width, int height, int currentRow,
-                              int currentFrame,float zoom, SDL_Renderer *pRenderer){
+void TextureManager::drawTile(string id, int margin, int spacing, double x,
+                              double y, int width, int height, int currentRow,
+                              int currentFrame,double zoom, SDL_Renderer *pRenderer){
     
     if (doesTextureExist(id)){
         SDL_Rect srcRect;

@@ -479,7 +479,7 @@ bool Player::checkCollideTile(Vector2D pos){
         (pTileLayer->getPosition().getX(),
          pTileLayer->getPosition().getY());
         
-        int x,y,tileColumn,tileRow,tileID = 0;
+        double x,y,tileColumn,tileRow,tileID = 0;
         
         //Calculate position on tile map
         x = ((layerPos.getX()) / pTileLayer->getTileSize());

@@ -15,8 +15,8 @@ GameObjectParams("null object",0,0,20,20, "null")
 }
 
 
-GameObjectParams::GameObjectParams(string name,float x, float y,
-                                   float width, float height, string textureID,
+GameObjectParams::GameObjectParams(string name,double x, double y,
+                                   double width, double height, string textureID,
                                    int callBackID , int animSpeed):
 m_name(name),
 m_position(x,y),

@@ -65,10 +65,10 @@ public:
         m_mapWidth = mapWidth;
     }
     
-    float getZoom() const{
+    double getZoom() const{
         return m_zoom;
     }
-    void setZoom(float zoom){
+    void setZoom(double zoom){
         m_zoom = zoom;
     }
     
@@ -100,13 +100,13 @@ private:
     int m_gameHeight;
     int m_mapWidth;
     int m_mapHeight;
-    float m_zoom;
+    double m_zoom;
     
     
     vector<GameObject*> m_gameObjects;
     
     bool m_bRunning;
-    bool m_bLiveMode;
+    bool m_bLiveMode = false;
     
     Player* m_Player;
     

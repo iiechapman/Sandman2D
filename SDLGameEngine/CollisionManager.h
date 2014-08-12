@@ -34,7 +34,7 @@ private:
     
     static CollisionManager* s_pInstance;
     
-    const int m_Buffer = 2;
+    const double m_Buffer = 2;
     
     
 };

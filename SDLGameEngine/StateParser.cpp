@@ -280,8 +280,8 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         int animSpeed = 0;
         int width = 0;
         int height = 0;
-        float x = 0;
-        float y = 0;
+        double x = 0;
+        double y = 0;
         double scale = 1;
         
         SDL_Color color;
