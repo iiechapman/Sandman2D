@@ -55,4 +55,3 @@ void Vector2D::normalize(){
     if (len > 0){
         (*this) *= 1 / len ;
     }
-}

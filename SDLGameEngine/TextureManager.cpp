@@ -66,7 +66,7 @@ void TextureManager::draw(string id, double x, double y,
     }
 }
 
-void TextureManager::draw(string id, Vector2D pos,
+void TextureManager::draw(string id, Vector2D<float> pos,
                           int width, int height,
                           SDL_Renderer* pRenderer, SDL_RendererFlip flip){
     if (doesTextureExist(id)){
@@ -170,7 +170,7 @@ void TextureManager::drawFrame(GameObjectParams* params,
 
 
 
-void TextureManager::drawFrame(string id, Vector2D pos,
+void TextureManager::drawFrame(string id, Vector2D<float> pos,
                                int width, int height,
                                int currentRow, int currentFrame,
                                SDL_Renderer* pRenderer, SDL_RendererFlip flip){
