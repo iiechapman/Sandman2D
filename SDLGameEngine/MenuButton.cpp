@@ -25,7 +25,7 @@ void MenuButton::draw(){
 }
 
 void MenuButton::update(){
-    Vector2D<float>* pMousePos = InputHandler::Instance()->getMousePosition();
+    Vector2D<double>* pMousePos = InputHandler::Instance()->getMousePosition();
     
     double zoom = Game::Instance()->getZoom();
 

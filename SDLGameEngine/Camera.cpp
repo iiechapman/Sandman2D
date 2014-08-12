@@ -28,11 +28,11 @@ void Camera::reset(){
 }
 
 //Camera position is updated and sent back to caller
-const Vector2D<float> Camera::getPosition(){
+const Vector2D<double> Camera::getPosition(){
     
     //If camera target is set, follow it
     if (m_pTarget !=0){
-        Vector2D<float> pos(((m_pTarget->getX()) - ((Game::Instance()->getGameWidth() / Game::Instance()->getZoom())/2)),
+        Vector2D<double> pos(((m_pTarget->getX()) - ((Game::Instance()->getGameWidth() / Game::Instance()->getZoom())/2)),
                      (m_pTarget->getY()) - ((Game::Instance()->getGameHeight() / Game::Instance()->getZoom())/2));
         
         

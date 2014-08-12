@@ -37,9 +37,9 @@ private:
     void handlePhysics();
     void handleMovement();
     void handleAnimation();
-    bool checkCollideTile(Vector2D<float> pos);
+    bool checkCollideTile(Vector2D<double> pos);
     
-    Vector2D<float> m_acceleration{0,0};
+    Vector2D<double> m_acceleration{0,0};
 
     bool m_bIsOnGround = false;
     int m_maxJumps = 2;
@@ -66,7 +66,7 @@ private:
     bool m_bMoveRight;
     bool m_bMoveLeft;    
 
-    double m_jetSpeed = 0.15;
+    double m_jetSpeed = 0.25;
     double m_maxFuel = 100;
     double m_currentFuel = 0;
     double m_fuelCost = 1;

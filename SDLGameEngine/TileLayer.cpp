@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Evan Chapman. All rights reserved.
 //
 
+#include <cmath>
 #include "TileLayer.h"
 #include "Game.h"
 #include "Camera.h"
+using namespace std;
 
 void TileLayer::render(){
     double x, x2, y2 = 0;
@@ -18,9 +20,12 @@ void TileLayer::render(){
     //y = m_position.getY() / m_tileSize;
     
     //Calculate right/bottom coord
-    x2 = int(m_position.getX()) % m_tileSize;
-    y2 = int(m_position.getY()) % m_tileSize;
+    x2 = fmod(m_position.getX(), double(m_tileSize));
+    y2 = fmod(m_position.getY(), double(m_tileSize));
     
+    //x2 = int(m_position.getX()) % m_tileSize;
+    //y2 = int(m_position.getY()) % m_tileSize;
+
     
     for (int i = 0 ; i < m_numRows; i++){
         for (int j = 0 ; j < m_numColumns; j++){
@@ -41,19 +46,19 @@ void TileLayer::render(){
                 
                 ((i * m_tileSize) - y2) - Camera::Instance()->getPosition().getY() < -m_tileSize ||
                 ((i * m_tileSize - y2) - Camera::Instance()->getPosition().getY()) >
-                  Game::Instance()->getGameHeight() + m_tileSize *Game::Instance()->getZoom())
+                  Game::Instance()->getGameHeight() + m_tileSize * Game::Instance()->getZoom())
             {
                 continue;
             }
             
             Tileset tileset = getTilesetByID(id);
             id--;
-        
+
             //Drawtile, offset by camera
             TextureManager::Instance()->drawTile
             (tileset.name, tileset.margin, tileset.spacing,
-             (((j * m_tileSize) - x2) - Camera::Instance()->getPosition().getX()),
-             (((i * m_tileSize) - y2) - Camera::Instance()->getPosition().getY()),
+             (((j * m_tileSize) - x2)),
+             (((i * m_tileSize) - y2)),
              (m_tileSize), (m_tileSize),
              (id - (tileset.firstGridID - 1)) / tileset.numColumns,
              (id - (tileset.firstGridID - 1)) % tileset.numColumns,
@@ -80,7 +85,7 @@ TileLayer::TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tile
 
 Tileset TileLayer::getTilesetByID(int tileID){
     for (int i = 0; i < m_tilesets.size() ; i++){
-        if (i + 1 <=m_tilesets.size() - 1){
+        if (i + 1 <= m_tilesets.size() - 1){
             if (tileID >= m_tilesets[i].firstGridID &&
                 tileID < m_tilesets[i+1].firstGridID){
                 return m_tilesets[i];

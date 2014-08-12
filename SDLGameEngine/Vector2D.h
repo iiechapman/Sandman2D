@@ -18,18 +18,7 @@ template <class Type>
 class Vector2D{
 public:
     Vector2D();
-<<<<<<< HEAD
-    Vector2D(double x ,double y): m_x(x),m_y(y){};
-    ~Vector2D();
-    
-    double getX() const { return m_x; }
-    double getY() const { return m_y; }
-    
-    void setX(double x) { m_x = x; }
-    void setY(double y) { m_y = y; }
-    
-    double length();
-=======
+
     Vector2D(Type x ,Type y): m_x(x),m_y(y){};
     ~Vector2D();
     
@@ -40,7 +29,6 @@ public:
     void setY(Type y) { m_y = y; }
     
     Type length();
->>>>>>> 01592973136412738e1b3cd3181cef456b96cc90
     
     void normalize();
     
@@ -59,25 +47,15 @@ public:
         
         return v1;
     }
-    
-<<<<<<< HEAD
-    Vector2D operator*(double scalar);
-    Vector2D& operator*=(double scalar);
-    
-    Vector2D operator/(double scalar);
-    Vector2D& operator/=(double scalar);
+
     
 private:
-    double m_x;
-    double m_y;
-=======
     Vector2D<Type> operator*(Type scalar);
     Vector2D<Type>& operator*=(Type scalar);
     
     Vector2D<Type> operator/(Type scalar);
     Vector2D<Type>& operator/=(Type scalar);
     
-private:
     Type m_x;
     Type m_y;
 };
@@ -88,7 +66,7 @@ template <class Type> Vector2D<Type>::Vector2D(): Vector2D<Type>(0,0){
 }
 
 template <class Type> Vector2D<Type>::~Vector2D(){
->>>>>>> 01592973136412738e1b3cd3181cef456b96cc90
+
     
     //cout << "Deleted vector2d\n";
 }

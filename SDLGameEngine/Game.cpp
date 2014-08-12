@@ -40,7 +40,8 @@ bool Game::init(const char* title,
         if (m_pWindow != 0){
             cout << "Window creation success\n";
             m_pRenderer = SDL_CreateRenderer
-            (m_pWindow, -1, SDL_RENDERER_ACCELERATED
+            (m_pWindow, -1, SDL_RENDERER_ACCELERATED |
+             SDL_RENDERER_PRESENTVSYNC
              | SDL_RENDERER_TARGETTEXTURE);
             
             //Render creation successful

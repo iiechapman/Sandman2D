@@ -30,7 +30,7 @@ public:
 private:
     vector<GameObject*> m_gameObjects;
     
-    SDL_Color currentShade{80,80,80};
+    SDL_Color currentShade{100,100,100};
 };
 
 

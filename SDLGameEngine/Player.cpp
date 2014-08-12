@@ -335,7 +335,7 @@ void Player::handlePhysics(){
 void Player::handleMovement(){
     //Check Tile Collision
     //Check X movement and collision
-    Vector2D<float> newPos = GetParams().getPosition();
+    Vector2D<double> newPos = GetParams().getPosition();
     newPos.setX(newPos.getX() + GetParams().getVelocity().getX() + GetParams().getAcceleration().getX());
     
     //Check X collision
@@ -464,7 +464,7 @@ void Player::handleMovement(){
 }
 
 
-bool Player::checkCollideTile(Vector2D<float> pos){
+bool Player::checkCollideTile(Vector2D<double> pos){
     
     //Iterate through all collision layers
     for (vector<TileLayer*>::const_iterator it = m_pCollisionLayers.begin();
@@ -475,7 +475,7 @@ bool Player::checkCollideTile(Vector2D<float> pos){
         
         //Get layers position
         //Vector2D layerPos = pTileLayer->getPosition();
-        Vector2D<float> layerPos
+        Vector2D<double> layerPos
         (pTileLayer->getPosition().getX(),
          pTileLayer->getPosition().getY());
         
@@ -486,12 +486,12 @@ bool Player::checkCollideTile(Vector2D<float> pos){
         y = ((layerPos.getY()) / pTileLayer->getTileSize());
         
         //New collision detection
-        Vector2D<float> startPos = pos;
+        Vector2D<double> startPos = pos;
         
         startPos.setX(startPos.getX() + GetParams().getWidth()/4);
         startPos.setY(startPos.getY() + GetParams().getHeight()/4);
         
-        Vector2D<float> endPos
+        Vector2D<double> endPos
         (pos.getX() + GetParams().getWidth() - GetParams().getWidth()/4,
          pos.getY() + GetParams().getHeight());
         

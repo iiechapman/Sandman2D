@@ -26,7 +26,7 @@ InputHandler::InputHandler()
         m_mouseButtonStates.push_back(false);
     }
     
-    m_mousePosition = new Vector2D<float>(0,0);
+    m_mousePosition = new Vector2D<double>(0,0);
     
     updateKeys();
     
@@ -147,7 +147,7 @@ bool InputHandler::isKeyDown(SDL_Scancode key) const {
 }
 
 //Mouse Handling
-Vector2D<float>* InputHandler::getMousePosition(){
+Vector2D<double>* InputHandler::getMousePosition(){
     return m_mousePosition;
 }
 
@@ -216,7 +216,7 @@ void InputHandler::initializeJoysticks(){
                 
                 m_joysticks.push_back(joy);
                 m_joystickValues.push_back
-                (make_pair(new Vector2D<float>(0,0), new Vector2D<float>(0,0)));
+                (make_pair(new Vector2D<double>(0,0), new Vector2D<double>(0,0)));
                 
                 vector<bool> tempButtons;
                 

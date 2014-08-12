@@ -54,9 +54,9 @@ public:
         m_type = type;
     }
 
-    Vector2D<float>& getVelocity(){ return m_velocity; }
-    Vector2D<float>& getAcceleration(){ return m_acceleration; }
-    Vector2D<float>& getPosition(){ return m_position; }
+    Vector2D<double>& getVelocity(){ return m_velocity; }
+    Vector2D<double>& getAcceleration(){ return m_acceleration; }
+    Vector2D<double>& getPosition(){ return m_position; }
     
     string getName() const { return m_name; }
     void setName(string name){
@@ -65,7 +65,7 @@ public:
     string getTextureID() const { return m_textureID; }
     
     void setTextureID(string textureID){ m_textureID = textureID; }
-    void setVelocity(Vector2D<float> velocity){ m_velocity = velocity;}
+    void setVelocity(Vector2D<double> velocity){ m_velocity = velocity;}
     
     void setX(double x){ m_position.setX(x);}
     void setY(double y){ m_position.setY(y);}
@@ -168,18 +168,18 @@ public:
     
 protected:
     //Size vars
-    Vector2D<float> m_position;
-    Vector2D<float> m_size;
+    Vector2D<double> m_position;
+    Vector2D<double> m_size;
     
     //Physics vars
-    Vector2D<float> m_velocity;
-    Vector2D<float> m_acceleration;
+    Vector2D<double> m_velocity;
+    Vector2D<double> m_acceleration;
     bool m_bIsCollidable;
     
     //Animation vars
     int m_startFrame;
-    Vector2D<float> m_currentCell;
-    Vector2D<float> m_frameMax;
+    Vector2D<double> m_currentCell;
+    Vector2D<double> m_frameMax;
     int m_callbackID;
     int m_animSpeed;
 
@@ -191,7 +191,7 @@ protected:
     double m_Angle;
     SDL_Color m_color;
     SDL_BlendMode m_blendMode;
-    double m_scale = 1;
+    double m_scale = 1.0;
     
     //Updating vars
     bool m_bScrolling = true;

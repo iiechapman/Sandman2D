@@ -78,7 +78,6 @@ void Level::checkCollisions(){
                                             SoundManager::Instance()->playSound("pickup_sound");
                                             object2->GetParams().getPosition().setX(-99999);
                                         }
-                                        
                                     }
                                 }
                         }

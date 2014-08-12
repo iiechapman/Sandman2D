@@ -25,14 +25,14 @@ public:
     
     void reset();
     void update();
-    void setTarget(Vector2D<float>* target){
+    void setTarget(Vector2D<double>* target){
         m_pTarget = target;
     }
-    void setPosition(Vector2D<float>& position){
+    void setPosition(Vector2D<double>& position){
         m_position = position;
     }
     
-    const Vector2D<float> getPosition();
+    const Vector2D<double> getPosition();
     void resetRumble(){
         
         m_rumbleVertical-=1;
@@ -66,10 +66,10 @@ private:
     int m_currentVertRumble, m_currentHorRumble;
     
     //Cameras target to follow
-    Vector2D<float>* m_pTarget = 0;
+    Vector2D<double>* m_pTarget = 0;
     
     //Cameras position
-    Vector2D<float> m_position;
+    Vector2D<double> m_position;
     
     //Singleton
     static Camera* s_pCamera;

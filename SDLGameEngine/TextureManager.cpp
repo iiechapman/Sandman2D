@@ -47,70 +47,7 @@ bool TextureManager::load(string fileName, string id,
     return false;
 }
 
-void TextureManager::draw(string id, double x, double y,
-                          int width, int height,
-                          SDL_Renderer* pRenderer, SDL_RendererFlip flip){
-    if (doesTextureExist(id)){
-        SDL_Rect srcRect;
-        SDL_Rect dstRect;
-        
-        srcRect.x = 0;
-        srcRect.y = 0;
-        srcRect.w = dstRect.w = width;
-        srcRect.h = dstRect.h = height;
-        dstRect.x = x;
-        dstRect.y = y;
-        
-        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
-                         &srcRect, &dstRect, 0.0, 0, flip);
-    }
-}
 
-void TextureManager::draw(string id, Vector2D<float> pos,
-                          int width, int height,
-                          SDL_Renderer* pRenderer, SDL_RendererFlip flip){
-    if (doesTextureExist(id)){
-        SDL_Rect srcRect;
-        SDL_Rect dstRect;
-        
-        srcRect.x = 0;
-        srcRect.y = 0;
-        srcRect.w = dstRect.w = width;
-        srcRect.h = dstRect.h = height;
-        dstRect.x = pos.getX();
-        dstRect.y = pos.getY();
-        
-        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
-                         &srcRect, &dstRect, 0.0, 0, flip);
-    }
-}
-
-
-
-void TextureManager::drawFrame(string id, double x, double y,
-                               int width, int height,
-                               int currentRow, int currentFrame,double zoom,
-                               SDL_Renderer* pRenderer, SDL_RendererFlip flip){
-    if (doesTextureExist(id)){
-        SDL_Rect srcRect;
-        SDL_Rect dstRect;
-        
-        srcRect.x = width * currentFrame;
-        srcRect.y = height * (currentRow - 1);
-        srcRect.w = dstRect.w = width;
-        srcRect.h = dstRect.h = height;
-        
-        dstRect.w = width * zoom;
-        dstRect.h = height * zoom;
-        dstRect.x = (x * zoom);
-        dstRect.y = (y * zoom);
-        
-        
-        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
-                         &srcRect, &dstRect, 0.0, 0, flip);
-    }
-    
-}
 
 void TextureManager::drawFrame(GameObjectParams* params,
                                SDL_Renderer* pRenderer,
@@ -169,35 +106,18 @@ void TextureManager::drawFrame(GameObjectParams* params,
 }
 
 
-
-void TextureManager::drawFrame(string id, Vector2D<float> pos,
-                               int width, int height,
-                               int currentRow, int currentFrame,
-                               SDL_Renderer* pRenderer, SDL_RendererFlip flip){
-    if (doesTextureExist(id)){
-        SDL_Rect srcRect;
-        SDL_Rect dstRect;
-        
-        srcRect.x = width * currentFrame;
-        srcRect.y = height * (currentRow - 1);
-        srcRect.w = dstRect.w = width;
-        srcRect.h = dstRect.h = height;
-        
-        dstRect.w = width;
-        dstRect.h = height;
-        dstRect.x = pos.getX();
-        dstRect.y = pos.getY();
-        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
-                         &srcRect, &dstRect, 0.0, 0, flip);
-    }
-    
-}
-
 void TextureManager::drawTile(string id, int margin, int spacing, double x,
                               double y, int width, int height, int currentRow,
                               int currentFrame,double zoom, SDL_Renderer *pRenderer){
     
     if (doesTextureExist(id)){
+        SDL_Rect cameraOffset;
+        cameraOffset.x = 0;
+        cameraOffset.y = 0;
+        
+        cameraOffset.x = Camera::Instance()->getPosition().getX();
+        cameraOffset.y = Camera::Instance()->getPosition().getY();
+        
         SDL_Rect srcRect;
         SDL_Rect destRect;
         srcRect.x = margin + (spacing + width) * currentFrame;
@@ -207,8 +127,8 @@ void TextureManager::drawTile(string id, int margin, int spacing, double x,
         
         destRect.h = height * zoom;
         destRect.w = width * zoom;
-        destRect.x = x * zoom;
-        destRect.y = y * zoom;
+        destRect.x = (x - cameraOffset.x) * zoom;
+        destRect.y = (y - cameraOffset.y) * zoom;
         
         
         SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect,
@@ -245,8 +165,94 @@ bool TextureManager::doesTextureExist(string id){
 
 
 
+//Deprecated
+//void TextureManager::drawFrame(string id, Vector2D<double> pos,
+//                               int width, int height,
+//                               int currentRow, int currentFrame,
+//                               SDL_Renderer* pRenderer, SDL_RendererFlip flip){
+//    if (doesTextureExist(id)){
+//        SDL_Rect srcRect;
+//        SDL_Rect dstRect;
+//
+//        srcRect.x = width * currentFrame;
+//        srcRect.y = height * (currentRow - 1);
+//        srcRect.w = dstRect.w = width;
+//        srcRect.h = dstRect.h = height;
+//
+//        dstRect.w = width;
+//        dstRect.h = height;
+//        dstRect.x = pos.getX();
+//        dstRect.y = pos.getY();
+//        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
+//                         &srcRect, &dstRect, 0.0, 0, flip);
+//    }
+//
+//}
 
 
+//void TextureManager::draw(string id, double x, double y,
+//                          int width, int height,
+//                          SDL_Renderer* pRenderer, SDL_RendererFlip flip){
+//    if (doesTextureExist(id)){
+//        SDL_Rect srcRect;
+//        SDL_Rect dstRect;
+//
+//        srcRect.x = 0;
+//        srcRect.y = 0;
+//        srcRect.w = dstRect.w = width;
+//        srcRect.h = dstRect.h = height;
+//        dstRect.x = x;
+//        dstRect.y = y;
+//
+//        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
+//                         &srcRect, &dstRect, 0.0, 0, flip);
+//    }
+//}
+
+//void TextureManager::draw(string id, Vector2D<double> pos,
+//                          int width, int height,
+//                          SDL_Renderer* pRenderer, SDL_RendererFlip flip){
+//    if (doesTextureExist(id)){
+//        SDL_Rect srcRect;
+//        SDL_Rect dstRect;
+//
+//        srcRect.x = 0;
+//        srcRect.y = 0;
+//        srcRect.w = dstRect.w = width;
+//        srcRect.h = dstRect.h = height;
+//        dstRect.x = pos.getX();
+//        dstRect.y = pos.getY();
+//
+//        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
+//                         &srcRect, &dstRect, 0.0, 0, flip);
+//    }
+//}
+
+
+//void TextureManager::drawFrame(string id, double x, double y,
+//                               int width, int height,
+//                               int currentRow, int currentFrame,double zoom,
+//                               SDL_Renderer* pRenderer, SDL_RendererFlip flip){
+//    if (doesTextureExist(id)){
+//        SDL_Rect srcRect;
+//        SDL_Rect dstRect;
+//
+//        srcRect.x = width * currentFrame;
+//        srcRect.y = height * (currentRow - 1);
+//        srcRect.w = dstRect.w = width;
+//        srcRect.h = dstRect.h = height;
+//
+//        dstRect.w = width * zoom;
+//        dstRect.h = height * zoom;
+//        dstRect.x = (x * zoom);
+//        dstRect.y = (y * zoom);
+//
+//
+//        SDL_RenderCopyEx(pRenderer, m_textureMap[id],
+//                         &srcRect, &dstRect, 0.0, 0, flip);
+//    }
+//
+//}
 
 
 
