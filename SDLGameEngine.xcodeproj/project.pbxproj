@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E01FCC2199A890000D023E3 /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E01FCC0199A890000D023E3 /* EventHandler.cpp */; };
+		4E01FCC5199A8AD100D023E3 /* TypeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E01FCC3199A8AD100D023E3 /* TypeInfo.cpp */; };
 		4E0AEB54190421570031C463 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0AEB53190421570031C463 /* main.cpp */; };
 		4E0AEB5C1904597F0031C463 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E0AEB5A1904597F0031C463 /* Game.cpp */; };
 		4E1F09D11958803500F8C945 /* Level.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E1F09CF1958803500F8C945 /* Level.cpp */; };
@@ -36,8 +38,6 @@
 		4E7DAC571921615300FE5BBB /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DAC561921615300FE5BBB /* GameState.cpp */; };
 		4E7DAC5A1923077700FE5BBB /* PauseState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DAC581923077700FE5BBB /* PauseState.cpp */; };
 		4E859D631916C5C8005F17D4 /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E859D611916C5C8005F17D4 /* InputHandler.cpp */; };
-		4E9C5CCD19999E1900EAB417 /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C5CCB19999E1900EAB417 /* EventHandler.cpp */; };
-		4E9C5CD11999A15A00EAB417 /* EnemyEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E9C5CCF1999A15A00EAB417 /* EnemyEventHandler.cpp */; };
 		4EAF14C11978327C00D46F7B /* TilesetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF14BF1978327C00D46F7B /* TilesetManager.cpp */; };
 		4EB8FD2519250CFC00C38B4F /* GameObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */; };
 		4ECABB1E196B05E600CA4AB7 /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ECABB1C196B05E600CA4AB7 /* CollisionHandler.cpp */; };
@@ -66,6 +66,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E01FCC0199A890000D023E3 /* EventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventHandler.cpp; sourceTree = "<group>"; };
+		4E01FCC1199A890000D023E3 /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
+		4E01FCC3199A8AD100D023E3 /* TypeInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TypeInfo.cpp; sourceTree = "<group>"; };
+		4E01FCC4199A8AD100D023E3 /* TypeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeInfo.h; sourceTree = "<group>"; };
 		4E0AEB50190421570031C463 /* SDLGameEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDLGameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E0AEB53190421570031C463 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4E0AEB5A1904597F0031C463 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -125,8 +129,6 @@
 		4E985D7A1917D0E800EDCADD /* ControllerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControllerConfig.h; sourceTree = "<group>"; };
 		4E9C5CCB19999E1900EAB417 /* EventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventHandler.cpp; sourceTree = "<group>"; };
 		4E9C5CCC19999E1900EAB417 /* EventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHandler.h; sourceTree = "<group>"; };
-		4E9C5CCF1999A15A00EAB417 /* EnemyEventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EnemyEventHandler.cpp; sourceTree = "<group>"; };
-		4E9C5CD01999A15A00EAB417 /* EnemyEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyEventHandler.h; sourceTree = "<group>"; };
 		4EAF14BF1978327C00D46F7B /* TilesetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TilesetManager.cpp; sourceTree = "<group>"; };
 		4EAF14C01978327C00D46F7B /* TilesetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TilesetManager.h; sourceTree = "<group>"; };
 		4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObjectFactory.cpp; sourceTree = "<group>"; };
@@ -263,6 +265,8 @@
 				4EAF14C01978327C00D46F7B /* TilesetManager.h */,
 				4E228D2B1993F29F0015B26D /* EventManager.cpp */,
 				4E228D2C1993F29F0015B26D /* EventManager.h */,
+				4E01FCC3199A8AD100D023E3 /* TypeInfo.cpp */,
+				4E01FCC4199A8AD100D023E3 /* TypeInfo.h */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -370,8 +374,8 @@
 		4E9C5CCE1999A14700EAB417 /* eventhandlers */ = {
 			isa = PBXGroup;
 			children = (
-				4E9C5CCF1999A15A00EAB417 /* EnemyEventHandler.cpp */,
-				4E9C5CD01999A15A00EAB417 /* EnemyEventHandler.h */,
+				4E01FCC0199A890000D023E3 /* EventHandler.cpp */,
+				4E01FCC1199A890000D023E3 /* EventHandler.h */,
 			);
 			name = eventhandlers;
 			sourceTree = "<group>";
@@ -487,12 +491,12 @@
 				4EFDF78E1923FDB1007B7624 /* AnimatedGraphic.cpp in Sources */,
 				4EFDF79C192505C2007B7624 /* tinyxmlparser.cpp in Sources */,
 				4EFDF79B192505C2007B7624 /* tinyxmlerror.cpp in Sources */,
+				4E01FCC2199A890000D023E3 /* EventHandler.cpp in Sources */,
 				4E5FFD611920342B002C1A3B /* PlayState.cpp in Sources */,
+				4E01FCC5199A8AD100D023E3 /* TypeInfo.cpp in Sources */,
 				4E1F09D7195893FF00F8C945 /* TileLayer.cpp in Sources */,
 				4E1F09D91958957900F8C945 /* Layer.cpp in Sources */,
-				4E9C5CD11999A15A00EAB417 /* EnemyEventHandler.cpp in Sources */,
 				4E5FFD64192034E2002C1A3B /* GameStateMachine.cpp in Sources */,
-				4E9C5CCD19999E1900EAB417 /* EventHandler.cpp in Sources */,
 				4EFDF791192423BF007B7624 /* GameOverState.cpp in Sources */,
 				4E5A76081911891E00DB9464 /* SDLGameObject.cpp in Sources */,
 				4E458E5E1907EFA800BE4CB3 /* Player.cpp in Sources */,

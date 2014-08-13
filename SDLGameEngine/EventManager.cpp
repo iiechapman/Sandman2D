@@ -19,13 +19,9 @@ EventManager::EventManager(){
 void EventManager::handleEvent(string target,string event, int argCount , vector<string> arguments){
     //Send event to all listeners
     for (int i = 0 ; i < m_Handlers.size(); i++){
-        if (m_Handlers[i]->isTarget(target)){
-            if (m_Handlers[i]->respondsToEvent(event)){
-                m_Handlers[i]->handleEvent(event,argCount, arguments);
-            }
         }
     }
-}
+
 
 
 

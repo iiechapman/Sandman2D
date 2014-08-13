@@ -12,7 +12,7 @@
 #include <iostream>
 #include "SDLGameObject.h"
 #include "GameObjectFactory.h"
-#include "EventHandler.h"
+
 //inherit from sdlgameobject
 class Enemy : public SDLGameObject {
 public:
