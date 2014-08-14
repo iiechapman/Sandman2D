@@ -13,8 +13,11 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "Vector2D.h"
+#include "EventHandler.h"
 
 using namespace std;
+
+//TODO: Seperate out functions to header file
 
 class GameObjectParams{
 public:
@@ -164,6 +167,10 @@ public:
         m_bDirDown = down;
     }
     
+    EventHandler* getEvents(){
+        return &m_EventHandler;
+    }
+    
     friend class GameObject;
     
 protected:
@@ -205,6 +212,9 @@ protected:
     bool m_bDirUp = false;
     bool m_bDirDown = false;
 
+    //Event Handling
+    EventHandler m_EventHandler;
+    
 };
 
 #endif /* defined(__LudumDare29__GameObjectParams__) */

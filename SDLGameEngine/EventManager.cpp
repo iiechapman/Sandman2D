@@ -16,15 +16,26 @@ EventManager::EventManager(){
     cout << "New event handler\n";
 }
 
-void EventManager::handleEvent(string target,string event, int argCount , vector<string> arguments){
-    //Send event to all listeners
-    for (int i = 0 ; i < m_Handlers.size(); i++){
+void EventManager::handleEvent
+(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments){
+    //Send event to all targets
+    for (int i = 0 ; i < targets.size(); i++){
+        targets[i]->handleEvent(event);
         }
     }
 
 
 
 
-void EventManager::receiveEvent(string target,string event, int argCount , vector<string> arguments){
-    handleEvent(target, event, argCount, arguments);
+void EventManager::receiveEvent(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments){
+    handleEvent(targets, event, argCount, arguments);
+}
+
+
+void EventManager::addHandler(EventHandler *handler){
+    m_Handlers.push_back(handler);
+}
+
+void EventManager::removeHandler(EventHandler *handler){
+    //remove handler here
 }

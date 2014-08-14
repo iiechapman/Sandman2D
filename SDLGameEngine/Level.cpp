@@ -77,11 +77,16 @@ void Level::checkCollisions(){
                                         if (object1->GetParams().getName() == string("Player")&&
                                             object2->GetParams().getName() == string("Apple")){
                                             SoundManager::Instance()->playSound("pickup_sound");
-                                            object2->GetParams().getPosition().setX(-99999);
+                                            //object2->GetParams().getPosition().setX(-99999);
                                             
+                                            vector<EventHandler*> targets;
+                                            
+                                            targets.push_back(object2->GetParams().getEvents());
                                             //Testing sending to event manager
                                             EventManager::Instance()->receiveEvent
-                                            ("apple", "collect", 0, vector<string>());
+                                            (targets, "collect", 0, vector<string>());
+                                            
+                                            targets.clear();
                                         }
                                     }
                                 }

@@ -14,19 +14,31 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "GameObject.h"
-using namespace std;
 
+using namespace std;
 
 class EventHandler{
 public:
     EventHandler();
     ~EventHandler();
+    
+    void handleEvent(string event);
+    
+    void registerHandler();
+    void deregisterHandler();
+    
+    unsigned long getSize(){
+        return m_events.size();
+    }
+    
+    string getTopEvent(){
+        string topEvent = m_events.back();
+        m_events.pop_back();
+        return topEvent;
+    }
+    
 private:
-    map<TypeInfo , int> handlers;
-    
-
-    
+    vector<string> m_events;
 };
 
 #endif /* defined(__SDLGameEngine__EventHandler__) */

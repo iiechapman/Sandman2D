@@ -8,6 +8,8 @@
 
 #include "TypeInfo.h"
 
-TypeInfo::TypeInfo(type_info& input): info(input)){
+TypeInfo::TypeInfo(){
 
+
+    
 }

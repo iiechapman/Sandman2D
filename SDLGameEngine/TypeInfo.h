@@ -9,17 +9,16 @@
 #ifndef __SDLGameEngine__TypeInfo__
 #define __SDLGameEngine__TypeInfo__
 
-#include <iostream>
 #include <typeinfo>
-using namespace std;
 
+using namespace std;
 
 class TypeInfo{
 public:
     
-    TypeInfo(type_info& input);
-    type_info info;
-    
+    TypeInfo();
+
+    type_info* info;
     
     
 };

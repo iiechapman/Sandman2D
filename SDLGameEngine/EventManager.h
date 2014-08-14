@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "EventHandler.h"
+#include "InputHandler.h"
 
 using namespace std;
 
@@ -26,13 +26,17 @@ public:
         return s_pInstance;
     }
 
-    void receiveEvent(string target,string event, int argCount , vector<string> arguments);
+    void receiveEvent
+    (vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
+    
+    void addHandler(EventHandler* handler);
+    void removeHandler(EventHandler* handler);
     
     ~EventManager();
 private:
     EventManager();
     
-    void handleEvent(string target,string event, int argCount , vector<string> arguments);
+    void handleEvent(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
     
     static EventManager* s_pInstance;
     
