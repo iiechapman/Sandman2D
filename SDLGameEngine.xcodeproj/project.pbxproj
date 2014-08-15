@@ -20,6 +20,7 @@
 		4E228D2D1993F29F0015B26D /* EventManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E228D2B1993F29F0015B26D /* EventManager.cpp */; };
 		4E239BA4195A4DC70084874F /* ObjectLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E239BA2195A4DC70084874F /* ObjectLayer.cpp */; };
 		4E2CB06519649E7F00A6B8FF /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2CB06319649E7F00A6B8FF /* Light.cpp */; };
+		4E2D1239199D4A6000702F86 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D1237199D4A6000702F86 /* Event.cpp */; };
 		4E458E5B1907E78100BE4CB3 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E591907E78100BE4CB3 /* GameObject.cpp */; };
 		4E458E5E1907EFA800BE4CB3 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E5C1907EFA800BE4CB3 /* Player.cpp */; };
 		4E5A75FF191186E300DB9464 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A75FD191186E300DB9464 /* Vector2D.cpp */; };
@@ -91,6 +92,8 @@
 		4E239BA3195A4DC70084874F /* ObjectLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectLayer.h; sourceTree = "<group>"; };
 		4E2CB06319649E7F00A6B8FF /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		4E2CB06419649E7F00A6B8FF /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		4E2D1237199D4A6000702F86 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
+		4E2D1238199D4A6000702F86 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		4E458E591907E78100BE4CB3 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		4E458E5A1907E78100BE4CB3 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
 		4E458E5C1907EFA800BE4CB3 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				4E228D2C1993F29F0015B26D /* EventManager.h */,
 				4E01FCC3199A8AD100D023E3 /* TypeInfo.cpp */,
 				4E01FCC4199A8AD100D023E3 /* TypeInfo.h */,
+				4E2D1237199D4A6000702F86 /* Event.cpp */,
+				4E2D1238199D4A6000702F86 /* Event.h */,
 			);
 			name = managers;
 			sourceTree = "<group>";
@@ -489,6 +494,7 @@
 				4E859D631916C5C8005F17D4 /* InputHandler.cpp in Sources */,
 				4EAF14C11978327C00D46F7B /* TilesetManager.cpp in Sources */,
 				4EFDF78E1923FDB1007B7624 /* AnimatedGraphic.cpp in Sources */,
+				4E2D1239199D4A6000702F86 /* Event.cpp in Sources */,
 				4EFDF79C192505C2007B7624 /* tinyxmlparser.cpp in Sources */,
 				4EFDF79B192505C2007B7624 /* tinyxmlerror.cpp in Sources */,
 				4E01FCC2199A890000D023E3 /* EventHandler.cpp in Sources */,
