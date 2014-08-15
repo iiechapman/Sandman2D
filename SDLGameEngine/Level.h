@@ -15,6 +15,7 @@
 #include "Layer.h"
 #include "Player.h"
 #include "LevelParser.h"
+#include "Event.h"
 
 using namespace std;
 

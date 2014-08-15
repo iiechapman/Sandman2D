@@ -15,6 +15,8 @@
 #include <vector>
 #include <map>
 
+class Event;
+
 using namespace std;
 
 class EventHandler{

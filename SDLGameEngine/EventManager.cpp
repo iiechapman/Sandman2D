@@ -20,12 +20,20 @@ void EventManager::handleEvent
 (vector<EventHandler*> targets,string event, int argCount , vector<string> arguments){
     //Send event to all targets
     for (int i = 0 ; i < targets.size(); i++){
+        //Pass event to intended target
         targets[i]->handleEvent(event);
         }
     }
 
+void EventManager::handleEvent(vector<Event>* events){
+    for (int i = 0 ; i < events->size() ; i++){
+        (*events)[i].getTarget()->handleEvent((*events)[i].getEventName());
+    }
+}
 
-
+void EventManager::receiveEvent(vector<Event> *events){
+    handleEvent(events);
+}
 
 void EventManager::receiveEvent(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments){
     handleEvent(targets, event, argCount, arguments);

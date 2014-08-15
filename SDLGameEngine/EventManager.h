@@ -12,7 +12,8 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "InputHandler.h"
+#include "EventHandler.h"
+#include "Event.h"
 
 using namespace std;
 
@@ -29,6 +30,8 @@ public:
     void receiveEvent
     (vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
     
+    void receiveEvent(vector<Event>* events);
+    
     void addHandler(EventHandler* handler);
     void removeHandler(EventHandler* handler);
     
@@ -37,6 +40,7 @@ private:
     EventManager();
     
     void handleEvent(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
+    void handleEvent(vector<Event>* events);
     
     static EventManager* s_pInstance;
     

@@ -79,14 +79,20 @@ void Level::checkCollisions(){
                                             SoundManager::Instance()->playSound("pickup_sound");
                                             //object2->GetParams().getPosition().setX(-99999);
                                             
-                                            vector<EventHandler*> targets;
+                                            vector<Event> events;
+                                            vector<string> arguments;
                                             
-                                            targets.push_back(object2->GetParams().getEvents());
+                                            Event* event = new Event
+                                            ("apple", object2->GetParams().getEvents(),
+                                             "collect", 0, arguments);
+                                    
+                                            events.push_back(*event);
+                                            
+                                            //targets.push_back(object2->GetParams().getEvents());
                                             //Testing sending to event manager
-                                            EventManager::Instance()->receiveEvent
-                                            (targets, "collect", 0, vector<string>());
+                                            EventManager::Instance()->receiveEvent(&events);
                                             
-                                            targets.clear();
+
                                         }
                                     }
                                 }
