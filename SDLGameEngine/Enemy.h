@@ -13,6 +13,7 @@
 #include "SDLGameObject.h"
 #include "GameObjectFactory.h"
 #include "EventHandler.h"
+#include "Event.h"
 
 //inherit from sdlgameobject
 class Enemy : public SDLGameObject {
@@ -24,9 +25,6 @@ public:
     void update();
     void clean();
     virtual void collision();
-    
-
-  
     
 private:
 

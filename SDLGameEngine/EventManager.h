@@ -9,14 +9,16 @@
 #ifndef __SDLGameEngine__EventManager__
 #define __SDLGameEngine__EventManager__
 
+#define EVENT_TYPE_BROADCAST 0
+
 #include <iostream>
 #include <vector>
 #include <map>
-#include "EventHandler.h"
-#include "Event.h"
 
 using namespace std;
 
+class EventHandler;
+class Event;
 
 class EventManager{
 public:
@@ -28,9 +30,9 @@ public:
     }
 
     void receiveEvent
-    (vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
+    (vector<EventHandler*> targets,Event* event, int argCount , vector<string> arguments);
     
-    void receiveEvent(vector<Event>* events);
+    void receiveEvent(vector<Event*>* events);
     
     void addHandler(EventHandler* handler);
     void removeHandler(EventHandler* handler);
@@ -39,12 +41,13 @@ public:
 private:
     EventManager();
     
-    void handleEvent(vector<EventHandler*> targets,string event, int argCount , vector<string> arguments);
-    void handleEvent(vector<Event>* events);
+    void handleEvent(vector<EventHandler*> targets,Event* event, int argCount , vector<string> arguments);
+    void handleEvent(vector<Event*>* events);
     
     static EventManager* s_pInstance;
     
     vector<EventHandler*> m_Handlers;
+    vector<Event*> m_eventQueue;
     
 };
 

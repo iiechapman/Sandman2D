@@ -8,6 +8,8 @@
 
 
 #include "SoundManager.h"
+#include "Event.h"
+
 
 SoundManager* SoundManager::s_pInstance = 0;
 
@@ -45,10 +47,16 @@ SoundManager::SoundManager(){
     Mix_Volume(0, 50);
     Mix_Volume(1, 50);
     Mix_Volume(2, 50);
+    
+    m_eventHandler.registerHandler();
+    m_eventHandler.registerEvent("play_sound");
+    m_eventHandler.registerEvent("play_song");
+    m_eventHandler.registerEvent("song_volume");
 }
 
 SoundManager::~SoundManager(){
     cout << "Deleting sound manager\n";
+    m_eventHandler.deregisterHandler();
 }
 
 
@@ -95,7 +103,7 @@ void SoundManager::playSong(string ID){
 void SoundManager::playSound(string ID){
     m_currentChannel++;
     if (m_currentChannel >= m_totalChannels){
-        m_currentChannel = 0;
+        m_currentChannel = -1;
     }
     
     if (m_soundMap[ID]){
@@ -117,7 +125,6 @@ void SoundManager::setSongVolume(int volume){
     Mix_VolumeMusic(volume);
 }
 
-
 void SoundManager::clearSoundMap(){
     m_soundMap.clear();
 }
@@ -125,4 +132,35 @@ void SoundManager::clearSoundMap(){
 void SoundManager::clean(){
     cout << "Cleaning texture manager\n";
 }
+
+void SoundManager::update(){
+    while (m_eventHandler.hasEvents()) {
+        //cout << "Handling event from SM!\n";
+        Event* currentEvent = m_eventHandler.getTopEvent();
+        
+        if (currentEvent->getEventName() == string("play_sound")){
+            string argument = (*currentEvent->getArguments())[0];
+            playSound(argument);
+        }
+        
+        if (currentEvent->getEventName() == string("play_song")){
+            string argument = (*currentEvent->getArguments())[0];
+            playSong(argument);
+        }
+        
+        if (currentEvent->getEventName() == string("song_volume")){
+            string argument = (*currentEvent->getArguments())[0];
+            setSongVolume(atoi(argument.c_str()));
+        }
+        
+        
+    }
+}
+
+
+
+
+
+
+
 

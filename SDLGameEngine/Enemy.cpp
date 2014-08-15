@@ -38,10 +38,10 @@ void Enemy::update(){
     
     //Check events
     while (GetParams().getEvents()->getSize() > 0) {
-        string event = GetParams().getEvents()->getTopEvent();
-        cout << "Checking event " << event << endl;
+        Event* event = GetParams().getEvents()->getTopEvent();
+        cout << "Checking event " << event->getEventName() << endl;
         //Collect event moves object away
-        if (event == string("collect")){
+        if (event->getEventName() == string("collect")){
             GetParams().getPosition().setX(-99999);
         }
         

@@ -10,7 +10,7 @@
 #include "InputHandler.h"
 #include "Game.h"
 #include "SoundManager.h"
-
+#include "EventManager.h"
 
 Player::Player(){
     cout << "Created player object\n";
@@ -80,7 +80,15 @@ void Player::handleInput(){
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP) ||
         InputHandler::Instance()->getButtonState(0, XB_DPAD_UP)){
         m_bIsJetting = true;
-        SoundManager::Instance()->playSound("jet_sound");
+        
+
+        //Testing sending to event manager
+        EventManager::Instance()->receiveEvent
+        (new vector<Event*>
+         {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                    1, vector<string>{"jet_sound"})});
+        
+    
     } else {
         m_bIsJetting = false;
     }
@@ -88,7 +96,12 @@ void Player::handleInput(){
     if ((InputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN) ||
          InputHandler::Instance()->getButtonState(0, XB_DPAD_DOWN)) &&
         m_bIsStomping == false){
-        SoundManager::Instance()->playSound("stomp_sound");
+        
+        //Testing sending to event manager
+        EventManager::Instance()->receiveEvent
+        (new vector<Event*>
+         {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                    1, vector<string>{"stomp_sound"})});
         m_bIsStomping = true;
     }
     
@@ -99,7 +112,12 @@ void Player::handleInput(){
         if (!m_bJumpHeld && m_numJumps > 0 && !m_bUsedDoubleJump){
             m_bIsJumping = true;
             m_numJumps--;
-            SoundManager::Instance()->playSound("jump_sound");
+            
+            //Testing sending to event manager
+            EventManager::Instance()->receiveEvent
+            (new vector<Event*>
+            {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                       1, vector<string>{"jump_sound"})});
         }
         m_bJumpHeld = true;
     } else {
@@ -114,7 +132,11 @@ void Player::handleInput(){
         m_BoostTimer = m_BoostTime;
         m_bIsBoosting = true;
         m_bBoostHeld = true;
-        SoundManager::Instance()->playSound("boost_sound");
+        //Testing sending to event manager
+        EventManager::Instance()->receiveEvent
+        (new vector<Event*>
+         {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                    1, vector<string>{"boost_sound"})});
     }
     
     if (!(InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z) ||
@@ -384,7 +406,11 @@ void Player::handleMovement(){
             GetParams().setAngle(0);
             
             if (GetParams().getVelocity().getY() > 1){
-                SoundManager::Instance()->playSound("land_sound");
+                //Testing sending to event manager
+                EventManager::Instance()->receiveEvent
+                (new vector<Event*>
+                 {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                            1, vector<string>{"land_sound"})});
             }
         }
         

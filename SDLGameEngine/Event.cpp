@@ -9,7 +9,6 @@
 #include "Event.h"
 
 
-
 Event::Event(string caller, EventHandler* target, string eventName,
              int argCount, vector<string> arguments):
 m_caller(caller), m_target(target), m_eventName(eventName), m_argCount(argCount),

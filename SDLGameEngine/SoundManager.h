@@ -12,6 +12,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2_mixer/SDL_mixer.h>
 
+#include "EventHandler.h"
+
 using namespace std;
 
 class SoundManager{
@@ -34,6 +36,7 @@ public:
     void clearSoundMap();
     void clean();
     
+    void update();
     
 private:
     SoundManager();
@@ -41,8 +44,10 @@ private:
     
     map<string, Mix_Music*> m_songMap;
     map<string, Mix_Chunk*> m_soundMap;
-    int m_totalChannels = 2;
+    int m_totalChannels = -1;
     int m_currentChannel = 0;
+    
+    EventHandler m_eventHandler;
 };
 
 

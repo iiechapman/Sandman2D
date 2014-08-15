@@ -16,6 +16,7 @@
 #include "LevelParser.h"
 #include "CollisionManager.h"
 #include "SoundManager.h"
+#include "EventManager.h"
 
 const string PlayState::s_playID = "PLAY";
 
@@ -62,7 +63,14 @@ void PlayState::update(){
     
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_A)){
         InputHandler::Instance()->rumbleJoystick();
-        SoundManager::Instance()->playSound("explosion_sound");
+        
+        //Testing sending to event manager
+        EventManager::Instance()->receiveEvent
+        (new vector<Event*>
+         {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                    1, vector<string>{"explosion_sound"})});
+        
+        
         Camera::Instance()->setHorizontalRumble(rumbleFactor);
         Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {
@@ -136,8 +144,19 @@ bool PlayState::onEnter(){
     string levelNumber = "level" + to_string(m_currentLevel);
     pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str(), this);
     
-    SoundManager::Instance()->playSong("level_song");
-    SoundManager::Instance()->setSongVolume(30);
+    //Testing sending to event manager
+    EventManager::Instance()->receiveEvent
+    (new vector<Event*>
+     {new Event("play_state", EVENT_TYPE_BROADCAST,"play_song",
+                1, vector<string>{"level_song"})});
+    
+    
+    //Testing sending to event manager
+    EventManager::Instance()->receiveEvent
+    (new vector<Event*>
+     {new Event("play_state", EVENT_TYPE_BROADCAST,"song_volume",
+                1, vector<string>{"40"})});
+    
     
     cout << "Entered play state\n";
     

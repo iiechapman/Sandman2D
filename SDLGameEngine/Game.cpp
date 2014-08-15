@@ -13,7 +13,7 @@
 #include "GameObjectCreators.pch"
 #include "MainMenuState.h"
 #include "PlayState.h"
-
+#include "SoundManager.h"
 
 using namespace std;
 
@@ -129,6 +129,7 @@ void Game::update(){
     m_currentFrame = int((SDL_GetTicks() / 100) % 6 );
 
     m_pGameStateMachine->update();
+    SoundManager::Instance()->update();
 }
 
 void Game::quit(){

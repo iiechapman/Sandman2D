@@ -2,9 +2,7 @@
 //  EventHandler.h
 //  SDLGameEngine
 //
-
 //  Created by Evan Chapman on 8/3/14.
-
 //  Copyright (c) 2014 Evan Chapman. All rights reserved.
 //
 
@@ -24,23 +22,32 @@ public:
     EventHandler();
     ~EventHandler();
     
-    void handleEvent(string event);
+    void handleEvent(Event* event);
+    
+    bool hasEvents(){
+        return (m_events.size()>0);
+    }
     
     void registerHandler();
     void deregisterHandler();
     
+    void registerEvent(string eventName);
+    void deregisterEvent(string eventName);
+    
+    bool handlesEvent(string eventName);
+    
     unsigned long getSize(){
         return m_events.size();
     }
-    
-    string getTopEvent(){
-        string topEvent = m_events.back();
+    Event* getTopEvent(){
+        Event* topEvent = m_events.back();
         m_events.pop_back();
         return topEvent;
     }
     
 private:
-    vector<string> m_events;
+    vector<Event*> m_events;
+    vector<string> m_registeredEvents;
 };
 
 #endif /* defined(__SDLGameEngine__EventHandler__) */

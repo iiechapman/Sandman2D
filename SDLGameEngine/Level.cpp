@@ -76,19 +76,30 @@ void Level::checkCollisions(){
 
                                         if (object1->GetParams().getName() == string("Player")&&
                                             object2->GetParams().getName() == string("Apple")){
-                                            SoundManager::Instance()->playSound("pickup_sound");
-                                            //object2->GetParams().getPosition().setX(-99999);
-                                            
-                                            vector<Event> events;
+
+                                            //Create two events
+                                            vector<Event*> events;
                                             vector<string> arguments;
+                                            string argument = "";
                                             
+                                            //Collect event
                                             Event* event = new Event
                                             ("apple", object2->GetParams().getEvents(),
                                              "collect", 0, arguments);
                                     
-                                            events.push_back(*event);
+                                            events.push_back(event);
+                                            event = 0;
+                                            arguments.clear();
                                             
-                                            //targets.push_back(object2->GetParams().getEvents());
+                                            //Sound effect event
+                                            argument = "pickup_sound";
+                                            arguments.push_back(argument);
+                                            event = new Event
+                                            ("apple", 0,"play_sound", 1, arguments);
+                                            
+                                            cout << "Sent Event!\n";
+                                            events.push_back(event);
+                                            
                                             //Testing sending to event manager
                                             EventManager::Instance()->receiveEvent(&events);
                                             
