@@ -44,7 +44,7 @@ private:
     
     map<string, Mix_Music*> m_songMap;
     map<string, Mix_Chunk*> m_soundMap;
-    int m_totalChannels = -1;
+    int m_totalChannels = 4;
     int m_currentChannel = 0;
     
     EventHandler m_eventHandler;

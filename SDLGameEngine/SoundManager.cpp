@@ -25,11 +25,12 @@ SoundManager::SoundManager(){
     cout << "Initializing sound Manager\n";
     
 
-    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, (4096 / 2))==-1) {
+    if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2,1024)==-1) {
         printf("Mix_OpenAudio: %s\n", Mix_GetError());
         exit(2);
     } else {
         cout << "opened audio" << endl;
+        cout << "Allocated " << Mix_AllocateChannels(m_totalChannels) << " channels of audio\n";
     }
     
     
@@ -103,7 +104,7 @@ void SoundManager::playSong(string ID){
 void SoundManager::playSound(string ID){
     m_currentChannel++;
     if (m_currentChannel >= m_totalChannels){
-        m_currentChannel = -1;
+        m_currentChannel = 0;
     }
     
     if (m_soundMap[ID]){

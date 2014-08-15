@@ -20,6 +20,8 @@ Player::Player(){
 Player::Player(GameObjectParams params , int numberFrames)
 :SDLGameObject(params){
     GetParams().setMaxFrames(numberFrames);
+    EventManager::Instance()->addHandler(GetParams().getEvents());
+    GetParams().getEvents()->registerEvent("set_position");
 }
 
 void Player::load(GameObjectParams params){
@@ -52,12 +54,30 @@ void Player::handleAnimation(){
 }
 
 void Player::update(){
+    handleEvents();
     handleInput();
     handlePhysics();
     handleMovement();
     handleAnimation();
     
     SDLGameObject::update();
+    
+    //cout << "Posx: " << GetParams().getPosition().getX() << endl;
+    //cout << "Posy: " << GetParams().getPosition().getY() << endl;
+}
+
+void Player::handleEvents(){
+    while (GetParams().getEvents()->hasEvents()) {
+        cout << "Handling event for player!\n";
+        Event* currentEvent = GetParams().getEvents()->getTopEvent();
+        
+        if (currentEvent->getEventName() == string("set_position")){
+            string posX = (*currentEvent->getArguments())[0];
+            string posY = (*currentEvent->getArguments())[1];
+            GetParams().getPosition().setX(atoi(posX.c_str()));
+            GetParams().getPosition().setY(atoi(posY.c_str()));
+        }
+    }
 }
 
 void Player::handleInput(){

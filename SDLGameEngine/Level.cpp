@@ -102,9 +102,42 @@ void Level::checkCollisions(){
                                             
                                             //Testing sending to event manager
                                             EventManager::Instance()->receiveEvent(&events);
-                                            
-
                                         }
+                                        
+                                        if (object1->GetParams().getName() == string("Player")&&
+                                           object2->GetParams().getName() == string("Crystal")){
+                                            
+                                            //Create two events
+                                            vector<Event*> events;
+                                            vector<string> arguments;
+                                            string argument1 = "800";
+                                            string argument2 = "440";
+                                            arguments.push_back(argument1);
+                                            arguments.push_back(argument2);
+                                            
+                                            //Teleport event
+                                            Event* event = new Event
+                                            ("crystal", object1->GetParams().getEvents(),
+                                             "set_position", 2, arguments);
+                                            
+                                            arguments.clear();
+                                            
+                                            //Sound effect event
+                                            argument1 = "teleport_sound";
+                                            arguments.push_back(argument1);
+                                            
+                                            event = new Event
+                                            ("crystal", 0,"play_sound", 1, arguments);
+                                            
+                                            cout << "Sent Event!\n";
+                                            events.push_back(event);
+                                            
+                                            //Testing sending to event manager
+                                            EventManager::Instance()->receiveEvent(&events);
+                                        }
+                                        
+                                        
+                                        
                                     }
                                 }
                         }

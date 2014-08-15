@@ -8,7 +8,7 @@
 
 #include "Camera.h"
 #include "Game.h"
-
+#include "EventManager.h"
 
 Camera* Camera::s_pCamera = 0;
 
@@ -16,6 +16,7 @@ void Camera::update(){
     
     //Set rumble factor
     if (m_rumbleVertical != 0 && m_rumbleHorizontal !=0){
+        
         m_currentHorRumble = -rand() % m_rumbleHorizontal + rand() % m_rumbleHorizontal;
         m_currentVertRumble =-rand() % m_rumbleVertical + rand() % m_rumbleVertical;
     }

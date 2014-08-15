@@ -70,7 +70,6 @@ void PlayState::update(){
          {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
                     1, vector<string>{"explosion_sound"})});
         
-        
         Camera::Instance()->setHorizontalRumble(rumbleFactor);
         Camera::Instance()->setVerticalRumble(rumbleFactor);
     } else {

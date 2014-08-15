@@ -33,6 +33,7 @@ public:
     }
     
 private:
+    void handleEvents();
     void handleInput();
     void handlePhysics();
     void handleMovement();
