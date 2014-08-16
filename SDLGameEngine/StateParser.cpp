@@ -266,14 +266,17 @@ void StateParser::parseSounds(TiXmlElement *pStateRoot, PlayState *currentState)
 }
 
 void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentState){
+    //Load up prototype elements for later use in map loading
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         GameObjectParams* params = new GameObjectParams();
         
-        string name;
-        string textureID;
-        int GID;
-        string type;
+        //Setup local values to hold state
+        string name = "";
+        string textureID = "";
+        string ai = "";
+        int GID = -1;
+        string type = "";
         int row = 0;
         int numFrames = 0;
         int frame = 0;
@@ -293,6 +296,7 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         color.a = 255;
         blendMode = SDL_BLENDMODE_BLEND;
         
+        //Load attributes from XML
         e->Attribute("GID",&GID);
         e->Attribute("row",&row);
         e->Attribute("frame",&frame);
@@ -306,6 +310,17 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         type = e->Attribute("type");
         textureID = e->Attribute("textureID");
         
+        if (e->Attribute("ai")){
+            ai = e->Attribute("ai");
+            
+            if (ai == string("true")){
+                params->setAI(true);
+            } else {
+                params->setAI(false);
+            }
+        }
+        
+        //Set object parameters with values loaded in from XML
         params->setName(name);
         params->setMaxFrames(numFrames);
         params->getPosition().setX(x);
@@ -321,6 +336,7 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         params->setColor(color);
         params->setBlendMode(blendMode);
         params->setTextureID(textureID);
+        
         
         (*currentState->getElements())[name] = params;
     }

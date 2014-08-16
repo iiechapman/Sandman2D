@@ -53,7 +53,8 @@ void GameObjectParams::operator=(GameObjectParams& rhs){
     m_animSpeed     = rhs.m_animSpeed;
     m_startFrame    = rhs.m_startFrame;
     m_scale         = rhs.m_scale;
-
+    
+    setAI(rhs.aiEnabled());
     setRow(rhs.getRow());
     setFrame(rhs.getFrame());
     setMaxFrames(rhs.getTotalFrames());

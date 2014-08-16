@@ -215,20 +215,20 @@ protected:
     int m_animSpeed;
 
     //Texture vars
-    string m_name;
-    string m_type;
-    string m_textureID;
-    string m_lockTo;
-    double m_Angle;
-    SDL_Color m_color;
-    SDL_BlendMode m_blendMode;
+    string m_name = "";
+    string m_type = "";
+    string m_textureID = "";
+    string m_lockTo = "";
+    double m_Angle = 0.0;
+    SDL_Color m_color = SDL_Color{200,100,90};
+    SDL_BlendMode m_blendMode = SDL_BLENDMODE_BLEND;
     double m_scale = 1.0;
     
     //Updating vars
     bool m_bScrolling = true;
-    bool m_bUpdating;
-    bool m_bDead;
-    bool m_bDying;
+    bool m_bUpdating = false;
+    bool m_bDead = false;
+    bool m_bDying = false;
     
     //Direction vars;
     bool m_bDirRight = true;

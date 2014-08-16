@@ -23,7 +23,7 @@ Enemy::Enemy(GameObjectParams params , int numberFrames)
 
 void Enemy::load(GameObjectParams params){
     SDLGameObject::load(params);
-    GetParams().setAI(true);
+    //GetParams().setAI(true);
 }
 
 void Enemy::collision(){
@@ -50,7 +50,7 @@ void Enemy::update(){
     
     if (GetParams().aiEnabled()){
         
-        int switchState = rand() % 100;
+        int switchState = rand() % 200;
         
         switch (switchState) {
             case 0:

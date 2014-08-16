@@ -303,7 +303,7 @@ void LevelParser::parseObjectLayer
             SDL_Color color;
             SDL_BlendMode blendMode = SDL_BLENDMODE_NONE;
             
-            string textureID(""),name(""),lockTo(""),scrollLock("");
+            string textureID(""),name(""),lockTo(""),scrollLock(""),ai("");
             
             
             //Get initial values
@@ -342,7 +342,7 @@ void LevelParser::parseObjectLayer
             pGameObject->GetParams().getPosition().setX(x);
             pGameObject->GetParams().getPosition().setY(y);
             
-            //Overload properties based on unique object params
+            //Overload properties based on unique object params IN TILED
             for (TiXmlElement* properties = e->FirstChildElement();
                  properties != NULL; properties = properties->NextSiblingElement()){
                 if (properties->Value() == string("properties")){
@@ -360,6 +360,17 @@ void LevelParser::parseObjectLayer
                             } else if (property->Attribute("name") == string("lockTo")){
                                 lockTo = property->Attribute("value");
                                 pGameObject->GetParams().setLockTo(lockTo);
+                                
+                            } else if (property->Attribute("name") == string("ai")){
+                                ai = property->Attribute("value");
+                                
+                                cout << "checking ai flag\n";
+                                
+                                if (ai == string("true")){
+                                    pGameObject->GetParams().setAI(true);
+                                } else {
+                                    pGameObject->GetParams().setAI(false);
+                                }
                                 
                             } else if (property->Attribute("name") == string("textureHeight")){
                                 property->Attribute("value",&height);
