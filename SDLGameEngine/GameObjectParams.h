@@ -17,6 +17,14 @@
 
 using namespace std;
 
+
+enum AI_State{
+    MOVE_NONE,
+    MOVE_LEFT,
+    MOVE_RIGHT,
+    MOVE_STOP
+};
+
 //TODO: Seperate out functions to header file
 
 class GameObjectParams{
@@ -171,6 +179,22 @@ public:
         return &m_EventHandler;
     }
     
+    bool aiEnabled(){
+        return m_bAI;
+    }
+    
+    AI_State getAIState(){
+        return m_AIState;
+    }
+    
+    void setAIState(AI_State newState){
+        m_AIState = newState;
+    }
+    
+    void setAI(bool AIFlag){
+        m_bAI = AIFlag;
+    }
+
     friend class GameObject;
     
 protected:
@@ -214,6 +238,11 @@ protected:
 
     //Event Handling
     EventHandler m_EventHandler;
+    
+    
+    //AI testing
+    bool m_bAI = false;
+    AI_State m_AIState = MOVE_NONE;
     
 };
 

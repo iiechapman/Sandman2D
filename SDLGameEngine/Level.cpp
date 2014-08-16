@@ -110,16 +110,16 @@ void Level::checkCollisions(){
                                             //Create two events
                                             vector<Event*> events;
                                             vector<string> arguments;
-                                            string argument1 = "800";
-                                            string argument2 = "440";
-                                            arguments.push_back(argument1);
-                                            arguments.push_back(argument2);
+                                            string argument1 = "";
+                                            string argument2 = "";
+
                                             
-                                            //Teleport event
+                                            //Next Level event
                                             Event* event = new Event
-                                            ("crystal", object1->GetParams().getEvents(),
-                                             "set_position", 2, arguments);
-                                            
+                                            ("crystal", EVENT_TYPE_BROADCAST,
+                                             "next_level", 0, arguments);
+
+                                            events.push_back(event);
                                             arguments.clear();
                                             
                                             //Sound effect event
@@ -135,6 +135,41 @@ void Level::checkCollisions(){
                                             //Testing sending to event manager
                                             EventManager::Instance()->receiveEvent(&events);
                                         }
+                                        
+                                        if (object1->GetParams().getName() == string("Player")&&
+                                            (object2->GetParams().getName() == string("Blob") ||
+                                             object2->GetParams().getName() == string("Flame"))){
+                                            
+                                            //Create two events
+                                            vector<Event*> events;
+                                            vector<string> arguments;
+                                            string argument1 = "800";
+                                            string argument2 = "440";
+                                            arguments.push_back(argument1);
+                                            arguments.push_back(argument2);
+                                            
+                                            //Death event
+                                            Event* event = new Event
+                                            ("blob", object1->GetParams().getEvents(),
+                                            "set_position", 2, arguments);
+                                            
+                                            events.push_back(event);
+                                            arguments.clear();
+                                            
+                                            //Sound effect event
+                                            argument1 = "explosion_sound";
+                                            arguments.push_back(argument1);
+                                            
+                                            event = new Event
+                                            ("enemy", 0,"play_sound", 1, arguments);
+                                            
+                                            cout << "Sent Event!\n";
+                                            events.push_back(event);
+                                            
+                                            //Testing sending to event manager
+                                            EventManager::Instance()->receiveEvent(&events);
+                                        }
+                                        
                                         
                                         
                                         

@@ -17,14 +17,30 @@
 #include "CollisionManager.h"
 #include "SoundManager.h"
 #include "EventManager.h"
+#include "EventHandler.h"
 
 const string PlayState::s_playID = "PLAY";
+
+PlayState::PlayState(){
+    m_handler.registerEvent("next_level");
+    EventManager::Instance()->addHandler(&m_handler);
+}
 
 PlayState::~PlayState(){
     cout << "Deleted play state\n";
 }
 
 void PlayState::update(){
+    //handle Events
+    while (m_handler.hasEvents()) {
+        cout << "Handling event for player!\n";
+        Event* currentEvent = m_handler.getTopEvent();
+        
+        if (currentEvent->getEventName() == string("next_level")){
+            loadNextLevel();
+        }
+        
+    }
     
     //Pause game if start/escape pressed
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE) ||
@@ -44,7 +60,7 @@ void PlayState::update(){
         m_bEnterHeld = false;
     }
     
-
+    
     
     //Check for modifier buttons
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_W)){
@@ -88,25 +104,7 @@ void PlayState::update(){
     //Press button to go to next level (For Testing)
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_EQUALS)||
         InputHandler::Instance()->getButtonState(0, XB_HOME_BUTTON)){
-        
-        if (!m_bSwitchingLevels){
-            m_bSwitchingLevels = true;
-            //Setup Level from file retrieved in state
-            m_currentLevel++;
-            
-            cout << "Max Levels = " << pLevelFiles.size() << endl;
-            if (m_currentLevel > pLevelFiles.size()-1){
-                m_currentLevel = 0;
-            }
-            
-            onExit();
-            onEnter();
-//            LevelParser levelParser;
-//            string levelNumber = "level" + to_string(m_currentLevel);
-//            pLevel = levelParser.parseLevel(pLevelFiles[levelNumber].c_str() , this);
-        }
-    } else {
-        m_bSwitchingLevels = false;
+        loadNextLevel();
     }
     
     
@@ -165,17 +163,17 @@ bool PlayState::onEnter(){
 bool PlayState::onExit(){
     cout << "Exiting play state\n";
     
-//    while (!m_gameObjects.empty()){
-//        cout << "Game Objects size: " << m_gameObjects.size() << endl;
-//        if (m_gameObjects.back()->GetParams().getName() != "Player"){
-//            cout << "Deleting " <<m_gameObjects.back()->GetParams().getName() << endl;
-//            m_gameObjects.back()->clean();
-//            m_gameObjects.pop_back();
-//            
-//        } else {
-//            cout << "Not Deleting the player!\n";
-//        }
-//    }
+    //    while (!m_gameObjects.empty()){
+    //        cout << "Game Objects size: " << m_gameObjects.size() << endl;
+    //        if (m_gameObjects.back()->GetParams().getName() != "Player"){
+    //            cout << "Deleting " <<m_gameObjects.back()->GetParams().getName() << endl;
+    //            m_gameObjects.back()->clean();
+    //            m_gameObjects.pop_back();
+    //
+    //        } else {
+    //            cout << "Not Deleting the player!\n";
+    //        }
+    //    }
     
     pLevel->clean();
     
@@ -196,9 +194,23 @@ bool PlayState::onExit(){
     return true;
 }
 
-
-
-
+void PlayState::loadNextLevel(){
+    if (!m_bSwitchingLevels){
+        m_bSwitchingLevels = true;
+        
+        m_currentLevel++;
+        
+        cout << "Max Levels = " << pLevelFiles.size() << endl;
+        if (m_currentLevel > pLevelFiles.size()-1){
+            m_currentLevel = 0;
+        }
+        
+        onExit();
+        onEnter();
+    } else {
+        m_bSwitchingLevels = false;
+    }
+}
 
 
 

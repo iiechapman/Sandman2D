@@ -16,11 +16,14 @@
 #include "GameState.h"
 #include "Level.h"
 
+class EventHandler;
+
 using namespace std;
 
 class PlayState : public GameState{
     
 public:
+    PlayState();
     ~PlayState();
     virtual void update();
     virtual void render();
@@ -53,6 +56,8 @@ public:
     }
     
 private:
+    void loadNextLevel();
+    
     static const string s_playID;
     vector<GameObject*> m_gameObjects;
     map<string,GameObjectParams*> m_Elements;
@@ -66,8 +71,12 @@ private:
     bool m_EnteringLiveMode = false;
     bool m_bEnterHeld = false;
     
-    //Tests
+    EventHandler m_handler;
+    
+    //Camera Shake
     int rumbleFactor = 1;
+    
+    
 
 };
 

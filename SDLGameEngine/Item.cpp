@@ -1,40 +1,39 @@
 //
-//  Enemy.cpp
+//  Item.cpp
 //  SDLGameDevelopmentChapter1
 //
 //  Created by Evan Chapman on 4/23/14.
 //  Copyright (c) 2014 Evan Chapman. All rights reserved.
 //
 
-#include "Enemy.h"
+#include "Item.h"
 #include "InputHandler.h"
 
-Enemy::Enemy(){
-    //cout << "Created new enemy\n";
+Item::Item(){
+    //cout << "Created new Item\n";
     //m_params = new GameObjectParams();
-    m_params.setType("Enemy");
+    m_params.setType("Item");
 }
 
-Enemy::Enemy(GameObjectParams params , int numberFrames)
+Item::Item(GameObjectParams params , int numberFrames)
 :SDLGameObject(params){
     GetParams().setVelocity({0,0});
     GetParams().setMaxFrames(numberFrames);
 }
 
-void Enemy::load(GameObjectParams params){
+void Item::load(GameObjectParams params){
     SDLGameObject::load(params);
-    GetParams().setAI(true);
 }
 
-void Enemy::collision(){
+void Item::collision(){
     
 }
 
-void Enemy::draw(){
+void Item::draw(){
     SDLGameObject::draw();
 }
 
-void Enemy::update(){
+void Item::update(){
     //cout << "Total Frames: " << GetParams().getTotalFrames() << " Speed: " << GetParams().getAnimSpeed() << endl;
     
     //Check events
@@ -94,7 +93,7 @@ void Enemy::update(){
     SDLGameObject::update();
 }
 
-void Enemy::clean(){
+void Item::clean(){
     SDLGameObject::clean();
-    cout << "Cleaning Enemy\n";
+    cout << "Cleaning Item\n";
 }

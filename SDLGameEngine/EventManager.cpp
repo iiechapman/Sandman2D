@@ -50,18 +50,17 @@ void EventManager::handleEvent(vector<Event*>* events){
         
         //Send targeted message
         if ((*events)[i]->getTarget()){
-            cout << "Targeted message\n";
+            //cout << "Targeted message\n";
             (*events)[i]->getTarget()->handleEvent((*events)[i]);
             
         } else {
             //broadcast message
-            cout << "Broadcast message\n";
+            //cout << "Broadcast message\n";
+            bool foundResponder = false;
             for (int j = 0 ; j < m_Handlers.size() ; j++){
-                bool foundResponder = false;
-                
                 if (m_Handlers[j]->handlesEvent((*events)[i]->getEventName())){
                     //handle event
-                    cout << "Found registered event handler!\n";
+                    //cout << "Found registered event handler!\n";
                     m_Handlers[j]->handleEvent((*events)[i]);
                     foundResponder = true;
                 }

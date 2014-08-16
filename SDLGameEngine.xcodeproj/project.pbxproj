@@ -39,6 +39,7 @@
 		4E7DAC571921615300FE5BBB /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DAC561921615300FE5BBB /* GameState.cpp */; };
 		4E7DAC5A1923077700FE5BBB /* PauseState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E7DAC581923077700FE5BBB /* PauseState.cpp */; };
 		4E859D631916C5C8005F17D4 /* InputHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E859D611916C5C8005F17D4 /* InputHandler.cpp */; };
+		4E91951B199F9B2F00401C02 /* Item.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E919519199F9B2F00401C02 /* Item.cpp */; };
 		4EAF14C11978327C00D46F7B /* TilesetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF14BF1978327C00D46F7B /* TilesetManager.cpp */; };
 		4EB8FD2519250CFC00C38B4F /* GameObjectFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EB8FD2319250CFC00C38B4F /* GameObjectFactory.cpp */; };
 		4ECABB1E196B05E600CA4AB7 /* CollisionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ECABB1C196B05E600CA4AB7 /* CollisionHandler.cpp */; };
@@ -128,6 +129,8 @@
 		4E7DAC591923077700FE5BBB /* PauseState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseState.h; sourceTree = "<group>"; };
 		4E859D611916C5C8005F17D4 /* InputHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputHandler.cpp; sourceTree = "<group>"; };
 		4E859D621916C5C8005F17D4 /* InputHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputHandler.h; sourceTree = "<group>"; };
+		4E919519199F9B2F00401C02 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
+		4E91951A199F9B2F00401C02 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		4E9692391955E2E500C437AB /* GameObjectCreators.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObjectCreators.pch; sourceTree = "<group>"; };
 		4E985D7A1917D0E800EDCADD /* ControllerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControllerConfig.h; sourceTree = "<group>"; };
 		4E9C5CCB19999E1900EAB417 /* EventHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EventHandler.cpp; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 				4E2CB06419649E7F00A6B8FF /* Light.h */,
 				4EE05B8E19084E99001C07B3 /* Enemy.cpp */,
 				4EE05B8F19084E99001C07B3 /* Enemy.h */,
+				4E919519199F9B2F00401C02 /* Item.cpp */,
+				4E91951A199F9B2F00401C02 /* Item.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				4E1F09D11958803500F8C945 /* Level.cpp in Sources */,
 				4E5C08551970A29C00A4917B /* Camera.cpp in Sources */,
 				4EFDF79A192505C2007B7624 /* tinyxml.cpp in Sources */,
+				4E91951B199F9B2F00401C02 /* Item.cpp in Sources */,
 				4E7DAC571921615300FE5BBB /* GameState.cpp in Sources */,
 				4E7D79A3195B6DA9009A4353 /* SoundManager.cpp in Sources */,
 				4ECABB1E196B05E600CA4AB7 /* CollisionHandler.cpp in Sources */,

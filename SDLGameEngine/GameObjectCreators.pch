@@ -15,6 +15,7 @@
 #include "MenuButton.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Item.h"
 #include "Light.h"
 #include "AnimatedGraphic.h"
 #include "Level.h"

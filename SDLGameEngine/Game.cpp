@@ -69,6 +69,7 @@ bool Game::init(const char* title,
     GameObjectFactory::Instance()->registerType("Light", new LightCreator());
     GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
     GameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
+    GameObjectFactory::Instance()->registerType("Item", new ItemCreator());
     GameObjectFactory::Instance()->registerType("AnimatedGraphic", new AnimatedGraphicCreator());
     
     
