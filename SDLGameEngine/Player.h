@@ -36,7 +36,7 @@ private:
     void handlePhysics();
     void handleMovement();
     void handleAnimation();
-    bool checkCollideTile(Vector2D<double> pos);
+    //bool checkCollideTile(Vector2D<double> pos);
     
     
     //TODO MOVE ALL THIS STATE TO OBJECTS
