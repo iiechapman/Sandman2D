@@ -11,10 +11,9 @@
 
 #include <iostream>
 #include <vector>
-#include "CollisionHandler.h"
-#include "SDLGameObject.h"
-#include "TileLayer.h"
-#include "Player.h"
+
+class TileLayer;
+class Player;
 
 using namespace std;
 
@@ -28,13 +27,17 @@ public:
     void checkPlayerTileCollision
     (Player* pPlayer, const vector<TileLayer*> &collisionLayers);
 
+    void setCollisionLayers(vector<TileLayer*> collisionLayers);
+    
+    vector<TileLayer*>* getCollisionLayers();
     
 private:
     CollisionManager();
     
     static CollisionManager* s_pInstance;
-    
     const double m_Buffer = 2;
+    
+    vector<TileLayer*> m_pCollisionLayers;
     
     
 };

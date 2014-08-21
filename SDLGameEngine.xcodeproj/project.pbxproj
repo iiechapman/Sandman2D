@@ -129,6 +129,7 @@
 		4E7DAC591923077700FE5BBB /* PauseState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseState.h; sourceTree = "<group>"; };
 		4E859D611916C5C8005F17D4 /* InputHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputHandler.cpp; sourceTree = "<group>"; };
 		4E859D621916C5C8005F17D4 /* InputHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputHandler.h; sourceTree = "<group>"; };
+		4E88C54919A6A4B8007BFD57 /* TileSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileSet.h; sourceTree = "<group>"; };
 		4E919519199F9B2F00401C02 /* Item.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Item.cpp; sourceTree = "<group>"; };
 		4E91951A199F9B2F00401C02 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		4E9692391955E2E500C437AB /* GameObjectCreators.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObjectCreators.pch; sourceTree = "<group>"; };
@@ -215,6 +216,7 @@
 				4E1F09D01958803500F8C945 /* Level.h */,
 				4E1F09DA1958B23A00F8C945 /* LevelParser.cpp */,
 				4E1F09DB1958B23A00F8C945 /* LevelParser.h */,
+				4E88C54919A6A4B8007BFD57 /* TileSet.h */,
 			);
 			name = level;
 			sourceTree = "<group>";

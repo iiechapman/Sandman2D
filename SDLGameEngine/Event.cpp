@@ -21,3 +21,105 @@ m_arguments(arguments)
 Event::~Event(){
     //deleted object
 }
+
+
+string Event::getCaller(){
+    return m_caller;
+}
+
+EventHandler* Event::getTarget(){
+    return m_target;
+}
+
+string Event::getEventName(){
+    return m_eventName;
+}
+
+int Event::getArgCount(){
+    return m_argCount;
+}
+
+vector<string>* Event::getArguments(){
+    return &m_arguments;
+}
+
+void Event::printOut(){
+    cout << "Event--" << endl;
+    cout << "Name: " << m_eventName << endl;
+    cout << "Caller: " << m_caller << endl;
+    cout << "Target: " << m_target << endl;
+    cout << "ArgC: " << m_argCount << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

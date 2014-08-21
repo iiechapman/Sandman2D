@@ -13,6 +13,7 @@
 #include "Game.h"
 #include "PlayState.h"
 #include "SoundManager.h"
+#include "GameStateMachine.h"
 
 const string MainMenuState::s_mainMenuID = "MAINMENU";
 

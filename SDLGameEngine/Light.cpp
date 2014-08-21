@@ -7,7 +7,6 @@
 //
 
 #include "Light.h"
-#include "InputHandler.h"
 #include "Game.h"
 
 Light::Light(){

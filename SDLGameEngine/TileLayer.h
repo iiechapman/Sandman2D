@@ -10,56 +10,44 @@
 #define __SDLGameDevelopmentChapter1__TileLayer__
 
 #include <iostream>
+#include <vector>
 #include "Layer.h"
-#include "Level.h"
+#include "TileSet.h"
 #include "Vector2D.h"
 
 using namespace std;
 
+class Level;
+
 class TileLayer : public Layer{
 public:
+    friend class CollisionManager;
     
     TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tileset> &tilesets);
     
-    virtual void update(Level* pLevel);
-    virtual void render();
-    virtual void clean();
+    void update(Level* pLevel);
+    void render();
+    void clean();
     
-    void setTileIDs(const vector<vector<int>>& data){
-        m_tileIDs = data;
-    }
-    void setTileSize(int tileSize){
-        m_tileSize = tileSize;
-    }
-    void setNumColumns(int numColumns){
-        m_numColumns = numColumns;
-    }
-    void setNumRows(int numRows){
-        m_numRows = numRows;
-    }
+    void setTileIDs(const vector<vector<int>>& data);
+    
+    void setTileSize(int tileSize);
+    
+    void setNumColumns(int numColumns);
+    
+    void setNumRows(int numRows);
     
     Tileset getTilesetByID(int tileID);
     
-    vector<vector<int>> getTileIDs(){
-        return m_tileIDs;
-    };
+    vector<vector<int>> getTileIDs();
     
-    Vector2D<double> getPosition(){
-        return m_position;
-    }
-    Vector2D<double> getVelocity(){
-        return m_velocity;
-    }
+    Vector2D<double> getPosition();
     
-    int getTileSize(){
-        return m_tileSize;
-    }
-    int getNumColumns(){
-        return m_numColumns;
-    }
-    int getNumRows(){
-        return m_numRows;
-    }
+    Vector2D<double> getVelocity();
+    
+    int getTileSize();
+    int getNumColumns();
+    int getNumRows();
     
 private:
     
@@ -76,6 +64,28 @@ private:
     vector<vector<int>> m_tileIDs;
     
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__TileLayer__) */

@@ -28,9 +28,7 @@ public:
     virtual void load(GameObjectParams params);
     virtual void collision();
     
-    void setCollisionLayers(vector<TileLayer*> collisionLayers){
-        m_pCollisionLayers = collisionLayers;
-    }
+    void setCollisionLayers(vector<TileLayer*> collisionLayers);
     
 private:
     void handleEvents();
@@ -39,6 +37,9 @@ private:
     void handleMovement();
     void handleAnimation();
     bool checkCollideTile(Vector2D<double> pos);
+    
+    
+    //TODO MOVE ALL THIS STATE TO OBJECTS
     
     Vector2D<double> m_acceleration{0,0};
 

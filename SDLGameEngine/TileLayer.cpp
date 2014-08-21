@@ -1,3 +1,4 @@
+
 //
 //  TileLayer.cpp
 //  SDLGameDevelopmentChapter1
@@ -10,6 +11,7 @@
 #include "TileLayer.h"
 #include "Game.h"
 #include "Camera.h"
+
 using namespace std;
 
 void TileLayer::render(){
@@ -25,7 +27,7 @@ void TileLayer::render(){
     
     //x2 = int(m_position.getX()) % m_tileSize;
     //y2 = int(m_position.getY()) % m_tileSize;
-
+    
     
     for (int i = 0 ; i < m_numRows; i++){
         for (int j = 0 ; j < m_numColumns; j++){
@@ -41,19 +43,19 @@ void TileLayer::render(){
                 ((j * m_tileSize) - x2)
                 - Camera::Instance()->getPosition().getX() < -m_tileSize ||
                 ((j * m_tileSize - x2) - Camera::Instance()->getPosition().getX()
-                     > Game::Instance()->getGameWidth() -m_tileSize
+                 > Game::Instance()->getGameWidth() -m_tileSize
                  *Game::Instance()->getZoom()) ||
                 
                 ((i * m_tileSize) - y2) - Camera::Instance()->getPosition().getY() < -m_tileSize ||
                 ((i * m_tileSize - y2) - Camera::Instance()->getPosition().getY()) >
-                  Game::Instance()->getGameHeight() + m_tileSize * Game::Instance()->getZoom())
+                Game::Instance()->getGameHeight() + m_tileSize * Game::Instance()->getZoom())
             {
                 continue;
             }
             
             Tileset tileset = getTilesetByID(id);
             id--;
-
+            
             //Drawtile, offset by camera
             TextureManager::Instance()->drawTile
             (tileset.name, tileset.margin, tileset.spacing,
@@ -68,8 +70,8 @@ void TileLayer::render(){
 }
 
 void TileLayer::update(Level* pLevel){
-//    m_position += m_velocity;
-//    m_velocity.setX(1);
+    //    m_position += m_velocity;
+    //    m_velocity.setX(1);
 }
 
 TileLayer::TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tileset> &tilesets)
@@ -101,23 +103,44 @@ Tileset TileLayer::getTilesetByID(int tileID){
 }
 
 void TileLayer::clean(){
- //TODO: Fill this in and clean
+    //TODO: Fill this in and clean
 }
 
 
 
+void TileLayer::setTileIDs(const vector<vector<int>>& data){
+    m_tileIDs = data;
+}
+void TileLayer::setTileSize(int tileSize){
+    m_tileSize = tileSize;
+}
+void TileLayer::setNumColumns(int numColumns){
+    m_numColumns = numColumns;
+}
+void TileLayer::setNumRows(int numRows){
+    m_numRows = numRows;
+}
 
+vector<vector<int>> TileLayer::getTileIDs(){
+    return m_tileIDs;
+};
 
+Vector2D<double> TileLayer::getPosition(){
+    return m_position;
+}
+Vector2D<double> TileLayer::getVelocity(){
+    return m_velocity;
+}
 
-
-
-
-
-
-
-
-
-
+int TileLayer::getTileSize(){
+    return m_tileSize;
+}
+int TileLayer::getNumColumns(){
+    return m_numColumns;
+}
+int TileLayer::getNumRows(){
+    return m_numRows;
+}
 
 
 

@@ -8,7 +8,6 @@
 
 #include "CollisionHandler.h"
 
-
 bool CollisionHandler::checkCollision(GameObject *p1, GameObject *p2){
     double leftA,leftB;
     double rightA,rightB;

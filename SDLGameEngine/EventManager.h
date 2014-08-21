@@ -14,11 +14,11 @@
 #include <iostream>
 #include <vector>
 #include <map>
-
+#include "EventHandler.h"
+#include "Event.h"
 using namespace std;
 
-class EventHandler;
-class Event;
+
 
 class EventManager{
 public:

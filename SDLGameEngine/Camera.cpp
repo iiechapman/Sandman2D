@@ -88,3 +88,41 @@ Camera::Camera(){
 Camera::~Camera(){
     //Deleted camera
 }
+
+void Camera::setTarget(Vector2D<double>* target){
+    m_pTarget = target;
+}
+
+void Camera::setPosition(Vector2D<double>& position){
+    m_position = position;
+}
+
+void Camera::resetRumble(){
+    
+    m_rumbleVertical-=1;
+    
+    if (m_rumbleVertical< 0 ){
+        m_rumbleVertical = 0;
+    }
+    
+    m_rumbleHorizontal-=1;
+    
+    if (m_rumbleHorizontal< 0 ){
+        m_rumbleHorizontal = 0;
+    }
+}
+
+
+void Camera::setVerticalRumble(int rumble){
+    m_rumbleVertical = rumble;
+}
+void Camera::setHorizontalRumble(int rumble){
+    m_rumbleHorizontal = rumble;
+}
+
+
+
+
+
+
+

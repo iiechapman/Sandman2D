@@ -7,8 +7,7 @@
 //
 
 #include "EventManager.h"
-#include "EventHandler.h"
-#include "Event.h"
+
 
 
 EventManager* EventManager::s_pInstance = 0;

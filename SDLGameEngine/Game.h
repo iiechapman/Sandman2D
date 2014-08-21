@@ -12,19 +12,14 @@
 #include <iostream>
 #include <vector>
 #include <SDL2/SDL.h>
-#include "TextureManager.h"
-#include "GameStateMachine.h"
-#include "GameObject.h"
-#include "CollisionManager.h"
+#include "Player.h"
 #include "Camera.h"
-
+#include "GameStateMachine.h"
 
 class Game{
-public:
-    ~Game() {};
-    
+public:    
     static Game* Instance();
-    SDL_Renderer* getRenderer() const { return m_pRenderer; }
+    SDL_Renderer* getRenderer() const;
     
     bool init(const char* title,
               int xpos, int ypos,
@@ -37,59 +32,34 @@ public:
     void quit();
     void clean();
     
-    GameStateMachine* getStateMachine(){ return m_pGameStateMachine;}
+    GameStateMachine* getStateMachine();
     
     bool running();
-    
-    int getGameWidth() const{
-        return m_gameWidth;
-    }
-    int getGameHeight() const{
-        return m_gameHeight;
-    }
-    int getMapWidth() {
-        return m_mapWidth;
-    }
-    
     void setTitle(string title);
     
-    int getMapHeight(){
-        return m_mapHeight;
-    }
+    int getGameWidth() const;
+    int getGameHeight() const;
+    int getMapWidth();
+
     
-    void setMapHeight(int mapHeight){
-        m_mapHeight = mapHeight;
-    }
+    int getMapHeight();
     
-    void setMapWidth(int mapWidth){
-        m_mapWidth = mapWidth;
-    }
+    void setMapHeight(int mapHeight);
+    void setMapWidth(int mapWidth);
     
-    double getZoom() const{
-        return m_zoom;
-    }
-    void setZoom(double zoom){
-        m_zoom = zoom;
-    }
+    double getZoom() const;
+    void setZoom(double zoom);
     
-    void setPlayer(Player* player){
-        m_Player = player;
-        
-        Camera::Instance()->setTarget(&player->GetParams().getPosition());
-        cout << "Camera locked to player\n";
-    }
-    Player* getPlayer(){
-        return m_Player;
-    }
+    void setPlayer(Player* player);
     
-    void setLiveMode(bool liveMode){
-        m_bLiveMode = liveMode;
-    }
-    bool isLiveModeOn(){
-        return m_bLiveMode;
-    }
+    Player* getPlayer();
+    
+    void setLiveMode(bool liveMode);
+    bool isLiveModeOn();
+    
 private:
-    Game() {};
+    ~Game();
+    Game();
     static Game* s_pInstance;
     
     SDL_Window* m_pWindow;

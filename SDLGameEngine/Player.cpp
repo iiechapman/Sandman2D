@@ -11,6 +11,8 @@
 #include "Game.h"
 #include "SoundManager.h"
 #include "EventManager.h"
+#include "CollisionManager.h"
+#include "TileLayer.h"
 
 Player::Player(){
     cout << "Created player object\n";
@@ -509,12 +511,12 @@ void Player::handleMovement(){
     
 }
 
-
 bool Player::checkCollideTile(Vector2D<double> pos){
     
     //Iterate through all collision layers
-    for (vector<TileLayer*>::const_iterator it = m_pCollisionLayers.begin();
-         it != m_pCollisionLayers.end() ; it++){
+    for (vector<TileLayer*>::const_iterator it
+         = CollisionManager::Instance()->getCollisionLayers()->begin();
+         it !=  CollisionManager::Instance()->getCollisionLayers()->end() ; it++){
         
         TileLayer* pTileLayer = (*it);
         vector<vector<int>> tiles = pTileLayer->getTileIDs();
@@ -567,12 +569,14 @@ bool Player::checkCollideTile(Vector2D<double> pos){
     return false;
 }
 
-
 void Player::clean(){
     SDLGameObject::clean();
     cout << "Cleaning player\n";
 }
 
+void Player::setCollisionLayers(vector<TileLayer*> collisionLayers){
+    m_pCollisionLayers = collisionLayers;
+}
 
 
 

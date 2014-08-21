@@ -8,19 +8,18 @@
 
 #include "CollisionManager.h"
 #include "Player.h"
-#include "Game.h"
 #include "Camera.h"
+#include "TileLayer.h"
 
 CollisionManager::CollisionManager(){
     //New Collision manager
 }
 
-CollisionManager* CollisionManager::s_pInstance = 0;
-
 CollisionManager::~CollisionManager(){
     //Clean up collision manager
     //updating
 }
+CollisionManager* CollisionManager::s_pInstance = 0;
 
 CollisionManager* CollisionManager::Instance(){
     if (!s_pInstance){
@@ -104,6 +103,15 @@ void CollisionManager::checkPlayerTileCollision
             pPlayer->collision();
         }
     }
+}
+
+
+void CollisionManager::setCollisionLayers(vector<TileLayer*> collisionLayers){
+    m_pCollisionLayers = collisionLayers;
+}
+
+vector<TileLayer*>* CollisionManager::getCollisionLayers(){
+    return &m_pCollisionLayers;
 }
 
 

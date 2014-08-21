@@ -14,6 +14,7 @@
 #include "MainMenuState.h"
 #include "PlayState.h"
 #include "SoundManager.h"
+#include "CollisionManager.h"
 
 using namespace std;
 
@@ -161,16 +162,66 @@ Game* Game::Instance(){
     return s_pInstance;
 }
 
+GameStateMachine* Game::getStateMachine(){ return m_pGameStateMachine;}
 
+SDL_Renderer* Game::getRenderer() const { return m_pRenderer; }
 
+int Game::getGameWidth() const{
+    return m_gameWidth;
+}
+int Game::getGameHeight() const{
+    return m_gameHeight;
+}
 
+int Game::getMapWidth() {
+    return m_mapWidth;
+}
 
+int Game::getMapHeight(){
+    return m_mapHeight;
+}
 
+void Game::setMapHeight(int mapHeight){
+    m_mapHeight = mapHeight;
+}
 
+void Game::setMapWidth(int mapWidth){
+    m_mapWidth = mapWidth;
+}
 
+double Game::getZoom() const{
+    return m_zoom;
+}
+void Game::setZoom(double zoom){
+    m_zoom = zoom;
+}
 
+void Game::setPlayer(Player* player){
+    m_Player = player;
+    
+    Camera::Instance()->setTarget(&player->GetParams().getPosition());
+    cout << "Camera locked to player\n";
+}
 
+Player* Game::getPlayer(){
+    return m_Player;
+}
 
+void Game::setLiveMode(bool liveMode){
+    m_bLiveMode = liveMode;
+}
+
+bool Game::isLiveModeOn(){
+    return m_bLiveMode;
+}
+
+Game::Game(){
+    
+}
+
+Game::~Game(){
+    
+}
 
 
 

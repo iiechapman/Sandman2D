@@ -51,6 +51,7 @@ void Enemy::update(){
     if (GetParams().aiEnabled()){
         
         int switchState = rand() % 200;
+        //AI_State prevState = GetParams().getAIState();
         
         switch (switchState) {
             case 0:

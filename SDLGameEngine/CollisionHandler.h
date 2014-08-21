@@ -12,6 +12,7 @@
 #include <iostream>
 #include "GameObject.h"
 
+
 class CollisionHandler{
 public:
     static bool checkCollision(GameObject *p1, GameObject *p2);

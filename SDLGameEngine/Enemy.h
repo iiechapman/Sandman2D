@@ -26,6 +26,7 @@ public:
     void clean();
     virtual void collision();
     
+    
 private:
 
 

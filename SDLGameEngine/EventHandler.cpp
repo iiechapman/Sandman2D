@@ -32,6 +32,10 @@ void EventHandler::handleEvent(Event* event){
 }
 
 
+bool EventHandler::hasEvents(){
+    return (m_events.size()>0);
+}
+
 //Check if handler handles specific event
 bool EventHandler::handlesEvent(string eventName){
     for (int i = 0 ; i < m_registeredEvents.size() ; i++){
@@ -52,3 +56,79 @@ void EventHandler::deregisterEvent(string eventName){
     find(m_registeredEvents.begin(), m_registeredEvents.end(), eventName);
     m_registeredEvents.erase(deadValue);
 }
+
+
+unsigned long EventHandler::getSize(){
+    return m_events.size();
+}
+
+
+Event* EventHandler::getTopEvent(){
+    Event* topEvent = m_events.back();
+    m_events.pop_back();
+    return topEvent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -25,37 +25,15 @@ public:
     
     void reset();
     void update();
-    void setTarget(Vector2D<double>* target){
-        m_pTarget = target;
-    }
-    void setPosition(Vector2D<double>& position){
-        m_position = position;
-    }
+    void setTarget(Vector2D<double>* target);
+    
+    void setPosition(Vector2D<double>& position);
     
     const Vector2D<double> getPosition();
-    void resetRumble(){
-        
-        m_rumbleVertical-=1;
-        
-        if (m_rumbleVertical< 0 ){
-            m_rumbleVertical = 0;
-        }
-        
-        m_rumbleHorizontal-=1;
-        
-        if (m_rumbleHorizontal< 0 ){
-            m_rumbleHorizontal = 0;
-        }
-        
-        
-    }
+    void resetRumble();
     
-    void setVerticalRumble(int rumble){
-        m_rumbleVertical = rumble;
-    }
-    void setHorizontalRumble(int rumble){
-        m_rumbleHorizontal = rumble;
-    }
+    void setVerticalRumble(int rumble);
+    void setHorizontalRumble(int rumble);
     
     
 private:

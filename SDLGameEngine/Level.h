@@ -16,20 +16,11 @@
 #include "Player.h"
 #include "LevelParser.h"
 #include "Event.h"
+#include "CollisionManager.h"
+#include "TileSet.h"
 
 using namespace std;
 
-struct Tileset{
-    int firstGridID;
-    int tileWidth;
-    int tileHeight;
-    int spacing;
-    int margin;
-    int width;
-    int height;
-    int numColumns;
-    string name;
-};
 
 class TileLayer;
 
@@ -43,7 +34,8 @@ public:
     
     void setPlayer(Player* player){
         m_Player = player;
-        m_Player->setCollisionLayers(m_collisionLayers);
+        CollisionManager::Instance()->setCollisionLayers(m_collisionLayers);
+        //m_Player->setCollisionLayers(m_collisionLayers);
         cout << "Player set for level\n";
     }
     Player* getPlayer(){
@@ -73,24 +65,6 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Level__) */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

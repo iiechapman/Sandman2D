@@ -12,8 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
-class EventHandler;
+#include "EventHandler.h"
 
 using namespace std;
 
@@ -23,33 +22,17 @@ public:
     Event(string caller, EventHandler* target, string eventName,
           int argCount, vector<string> arguments);
     
-    string getCaller(){
-        return m_caller;
-    }
+    string getCaller();
     
-    EventHandler* getTarget(){
-        return m_target;
-    }
+    EventHandler* getTarget();
     
-    string getEventName(){
-        return m_eventName;
-    }
+    string getEventName();
     
-    int getArgCount(){
-        return m_argCount;
-    }
+    int getArgCount();
     
-    vector<string>* getArguments(){
-        return &m_arguments;
-    }
+    vector<string>* getArguments();
     
-    void printOut(){
-        cout << "Event--" << endl;
-        cout << "Name: " << m_eventName << endl;
-        cout << "Caller: " << m_caller << endl;
-        cout << "Target: " << m_target << endl;
-        cout << "ArgC: " << m_argCount << endl;
-    }
+    void printOut();
     
     ~Event();
     

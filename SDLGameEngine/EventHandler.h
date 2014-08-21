@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <vector>
-#include <map>
 
 class Event;
 
@@ -24,9 +23,7 @@ public:
     
     void handleEvent(Event* event);
     
-    bool hasEvents(){
-        return (m_events.size()>0);
-    }
+    bool hasEvents();
     
     void registerHandler();
     void deregisterHandler();
@@ -36,14 +33,9 @@ public:
     
     bool handlesEvent(string eventName);
     
-    unsigned long getSize(){
-        return m_events.size();
-    }
-    Event* getTopEvent(){
-        Event* topEvent = m_events.back();
-        m_events.pop_back();
-        return topEvent;
-    }
+    unsigned long getSize();
+    
+    Event* getTopEvent();
     
 private:
     vector<Event*> m_events;
