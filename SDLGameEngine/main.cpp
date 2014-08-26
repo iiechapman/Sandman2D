@@ -21,105 +21,62 @@ int main(int argc, char* args[]){
     int totalFrames = 0;
     int FPS = 0;
     
+    //Capture and print the current working directory
     char filenameMax[FILENAME_MAX];
-    
-    
     getcwd(filenameMax, sizeof(filenameMax));
-    
     cout << "Current working directory: " << filenameMax << endl;
     
-    if (Game::Instance()->init("Sandman Engine" ,
-                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                               GAME_WIDTH, GAME_HEIGHT , SDL_RENDERER_ACCELERATED)){
-        cout << "Game init success\n";
-        
-        while(Game::Instance()->running()){
-            string title = "Sandman Engine Build: "
-            + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
+    //If Game Inititalizes, beging game loop
+    if (Game::Instance()->init
+        ("Sandman Engine",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+         GAME_WIDTH, GAME_HEIGHT , SDL_RENDERER_ACCELERATED)){
             
-            + " FPS: "+ to_string(FPS);
+            cout << "Game init success\n";
             
-            frameStart = SDL_GetTicks();
-            
-            Game::Instance()->handleEvents();
-            Game::Instance()->update();
-            Camera::Instance()->update();
-            Game::Instance()->render();
-            
-            //Count frames and frametime
-            totalFrames++;
-            frameTime = SDL_GetTicks() - frameStart;
-            
-            //Count seconds
-            secondTimer += frameTime;
-            if (secondTimer >= 1000){
-                FPS = totalFrames;
-                Game::Instance()->setTitle(string(title));
-                secondTimer = 0;
-                totalFrames = 0;
+            //Begin Game Loop
+            while(Game::Instance()->isRunning()){
+                string title = "Sandman Engine Build: "
+                + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
+                + " FPS: "+ to_string(FPS);
+                
+                //Capture time before update
+                frameStart = SDL_GetTicks();
+                
+                //Game Loop
+                Game::Instance()->handleEvents();
+                Game::Instance()->update();
+                Camera::Instance()->update();
+                Game::Instance()->render();
+                
+                //Count frames and frametime after update
+                totalFrames++;
+                frameTime = SDL_GetTicks() - frameStart;
+                
+                //Count seconds
+                secondTimer += frameTime;
+                if (secondTimer >= 1000){
+                    FPS = totalFrames;
+                    Game::Instance()->setTitle(string(title));
+                    secondTimer = 0;
+                    totalFrames = 0;
+                }
+                
+                //Delay processing to match desired FPS
+                if (frameTime < DELAY_TIME){
+                    SDL_Delay(int(DELAY_TIME - frameTime));
+                }
             }
-            
-            //Delay processing to match desired FPS
-            if (frameTime < DELAY_TIME){
-             SDL_Delay(int(DELAY_TIME - frameTime));
-            }
-            
-            
+            //End Game Loop
+            cout << "Game ended, cleaning up\n";
+            Game::Instance()->clean();
+        } else {
+            //If game doesn't initialize, exit
+            cout << "Game init fail - " << SDL_GetError() << endl;
+            return -1;
         }
-        cout << "Game ended, cleaning up\n";
-        Game::Instance()->clean();
-    } else {
-        cout << "Game init fail - " << SDL_GetError() << endl;
-        return -1;
-    }
-
-    return 0;
     
+    return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -48,6 +48,7 @@ void Enemy::update(){
         
     }
     
+    //Update AI state
     if (GetParams().aiEnabled()){
         
         int switchState = rand() % 200;
@@ -66,17 +67,19 @@ void Enemy::update(){
                 GetParams().setAIState(MOVE_LEFT);
                 break;
                 
+                
             default:
+                GetParams().setAIState(MOVE_NONE);
                 break;
         }
         
         switch (GetParams().getAIState()) {
             case MOVE_RIGHT:
-                GetParams().getPosition().setX(GetParams().getPosition().getX()+1);
+                GetParams().getAcceleration().setX(1);
                 break;
                 
             case MOVE_LEFT:
-                GetParams().getPosition().setX(GetParams().getPosition().getX()-1);
+                GetParams().getAcceleration().setX(-1);
                 break;
                 
                 
@@ -85,6 +88,38 @@ void Enemy::update(){
         }
     }
     
+    
+    //Update position
+    Vector2D<double> newPos = GetParams().getPosition();
+    Vector2D<double> newYPos = GetParams().getPosition();
+    
+    newPos.setX(newPos.getX() + GetParams().getAcceleration().getX());
+    
+    newYPos.setY(newYPos.getY() + GetParams().getHeight());
+    newYPos.setX(newYPos.getX() + GetParams().getWidth()/2 * GetParams().getAcceleration().getX());
+    
+    if (checkCollideWithTile(newPos) || !checkCollideWithTile(newYPos)){
+    newPos.setX(newPos.getX() - GetParams().getAcceleration().getX());
+        
+        switch (GetParams().getAIState()) {
+            case MOVE_RIGHT:
+                GetParams().setAIState(MOVE_LEFT);
+                break;
+                
+            case MOVE_LEFT:
+                GetParams().setAIState(MOVE_RIGHT);
+                break;
+                
+                
+            default:
+                break;
+        }
+    }
+    
+    //Set new position
+    GetParams().getPosition().setX(newPos.getX());
+    
+    //Update animation
     if (GetParams().getTotalFrames()>0 && GetParams().getAnimSpeed()>0){
         GetParams().setFrame
         (GetParams().getStartFrame() +(int((SDL_GetTicks()/ ((1000 / GetParams().getAnimSpeed())) % GetParams().getTotalFrames()))));

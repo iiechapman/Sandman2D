@@ -64,12 +64,12 @@ void PlayState::update(){
     
     //Check for modifier buttons
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_W)){
-        //Game::Instance()->setZoom(Game::Instance()->getZoom() + 0.25);
+        //Game::Instance()->setZoom(Game::Instance()->getGlobalZoom() + 0.25);
         rumbleFactor++;
     }
     
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_S)){
-        //Game::Instance()->setZoom(Game::Instance()->getZoom() - 0.25);
+        //Game::Instance()->setZoom(Game::Instance()->getGlobalZoom() - 0.25);
         rumbleFactor--;
         if (rumbleFactor <= 0){
             rumbleFactor =1;

@@ -34,21 +34,20 @@ public:
     
     GameStateMachine* getStateMachine();
     
-    bool running();
+    bool isRunning();
+    void setRunning(bool running);
     void setTitle(string title);
     
     int getGameWidth() const;
     int getGameHeight() const;
     int getMapWidth();
-
-    
     int getMapHeight();
     
     void setMapHeight(int mapHeight);
     void setMapWidth(int mapWidth);
     
-    double getZoom() const;
-    void setZoom(double zoom);
+    double getGlobalZoom() const;
+    void setGlobalZoom(double zoom);
     
     void setPlayer(Player* player);
     

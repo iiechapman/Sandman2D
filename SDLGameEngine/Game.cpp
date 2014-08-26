@@ -27,12 +27,12 @@ bool Game::init(const char* title,
     
     if (SDL_Init(SDL_INIT_VIDEO) == 0) {
         //Successful init
-        cout << "SDL Init successful \n";
+        cout << "SDL Init successful\n";
         
         m_gameWidth = width;
         m_gameHeight = height;
         
-        setZoom(3.0);
+        setGlobalZoom(3.0);
         
         m_pWindow = SDL_CreateWindow(title, xpos, ypos,
                                      width, height, flags);
@@ -65,7 +65,6 @@ bool Game::init(const char* title,
     
     cout << "SDL Init success\n";
 
-    
     GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
     GameObjectFactory::Instance()->registerType("Light", new LightCreator());
     GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
@@ -81,17 +80,21 @@ bool Game::init(const char* title,
     InputHandler::Instance()->update();
     InputHandler::Instance()->initializeJoysticks();
 
-    m_bRunning = true;
+    setRunning(true);
     
     return true;
 }
 
 
+void Game::setRunning(bool running){
+    m_bRunning = running;
+}
+
 void Game::render(){
-    //Begin
+    //Render frame
     SDL_RenderClear(m_pRenderer); //Clear renderer
     
-    m_pGameStateMachine->render();
+    m_pGameStateMachine->render(); //Render Current scene
 
     SDL_RenderPresent(m_pRenderer); //Draw to screen
 }
@@ -114,22 +117,18 @@ void Game::handleEvents(){
             SDL_SetWindowFullscreen(m_pWindow, SDL_TRUE);
             cout << "Turning fullscreen on\n";
         }
-        
-        
     }
     
-    //Check for escape
+    //Check for escape key to quit app
     if (InputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)){
         SDL_SetWindowFullscreen(m_pWindow, SDL_FALSE);
     }
     
-    
-    
 }
 
 void Game::update(){
+    //Capture current frame time
     m_currentFrame = int((SDL_GetTicks() / 100) % 6 );
-
     m_pGameStateMachine->update();
     SoundManager::Instance()->update();
 }
@@ -138,7 +137,7 @@ void Game::quit(){
     m_bRunning = false;
 }
 
-bool Game::running(){
+bool Game::isRunning(){
     return m_bRunning;
 }
 
@@ -189,10 +188,10 @@ void Game::setMapWidth(int mapWidth){
     m_mapWidth = mapWidth;
 }
 
-double Game::getZoom() const{
+double Game::getGlobalZoom() const{
     return m_zoom;
 }
-void Game::setZoom(double zoom){
+void Game::setGlobalZoom(double zoom){
     m_zoom = zoom;
 }
 

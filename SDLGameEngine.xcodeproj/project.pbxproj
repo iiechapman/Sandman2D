@@ -244,8 +244,7 @@
 		4E5C789A192843B500005DE3 /* script */ = {
 			isa = PBXGroup;
 			children = (
-				4E1F09DD1958C59A00F8C945 /* compression */,
-				4EFDF792192505A0007B7624 /* xml */,
+				4EF1BCB819ABE37A0060BD3B /* ThirdParty */,
 				4E5C789C192843D300005DE3 /* StateParser.cpp */,
 				4E5C789D192843D300005DE3 /* StateParser.h */,
 			);
@@ -255,6 +254,7 @@
 		4E5FFD581920314A002C1A3B /* managers */ = {
 			isa = PBXGroup;
 			children = (
+				4E9C5CCA19999E0D00EAB417 /* protocols */,
 				4E9C5CCE1999A14700EAB417 /* eventhandlers */,
 				4E7D79A1195B6DA9009A4353 /* SoundManager.cpp */,
 				4E7D79A2195B6DA9009A4353 /* SoundManager.h */,
@@ -284,7 +284,6 @@
 		4E5FFD591920315E002C1A3B /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				4E9C5CCA19999E0D00EAB417 /* protocols */,
 				4E7D79A9195B706A009A4353 /* ui */,
 				4E7D79A8195B704D009A4353 /* generics */,
 				4E7D79A7195B7045009A4353 /* audio */,
@@ -399,6 +398,15 @@
 				4EC0757C198ACA870055E3A9 /* library.xml */,
 			);
 			name = res;
+			sourceTree = "<group>";
+		};
+		4EF1BCB819ABE37A0060BD3B /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				4EFDF792192505A0007B7624 /* xml */,
+				4E1F09DD1958C59A00F8C945 /* compression */,
+			);
+			name = ThirdParty;
 			sourceTree = "<group>";
 		};
 		4EFB1A9B19666AA90099F295 /* layers */ = {

@@ -27,7 +27,7 @@ void MenuButton::draw(){
 void MenuButton::update(){
     Vector2D<double>* pMousePos = InputHandler::Instance()->getMousePosition();
     
-    double zoom = Game::Instance()->getZoom();
+    double zoom = Game::Instance()->getGlobalZoom();
 
     
     if (pMousePos->getX() < GetParams().getX() * zoom +

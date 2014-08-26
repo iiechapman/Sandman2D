@@ -73,10 +73,10 @@ void ObjectLayer::render(){
                 //Flip light depending on direction
                 if (m_gameObjects[i]->GetParams().getVelocity().getX() > 0){
                     TextureManager::Instance()->drawFrame
-                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_NONE, Game::Instance()->getZoom());
+                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_NONE, Game::Instance()->getGlobalZoom());
                 } else {
                     TextureManager::Instance()->drawFrame
-                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_HORIZONTAL, Game::Instance()->getZoom());
+                    (&cameraParams, Game::Instance()->getRenderer(),SDL_FLIP_HORIZONTAL, Game::Instance()->getGlobalZoom());
                 }
             }
         }

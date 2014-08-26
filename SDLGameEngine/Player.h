@@ -17,7 +17,15 @@
 
 class TileLayer;
 
-//inherit from sdlgameobject
+/**
+ * \class Player
+ * \brief Main player object in game
+ * \note Inherits from SDLGameObject
+ * \author Evan Chapman
+ * \version 1
+ * \date 9/23/14
+ * Contact: iiechapman\@gmail.com
+ */
 class Player : public SDLGameObject {
 public:
     Player();
@@ -28,18 +36,14 @@ public:
     virtual void load(GameObjectParams params);
     virtual void collision();
     
-    void setCollisionLayers(vector<TileLayer*> collisionLayers);
-    
 private:
     void handleEvents();
     void handleInput();
     void handlePhysics();
     void handleMovement();
     void handleAnimation();
-    //bool checkCollideTile(Vector2D<double> pos);
     
-    
-    //TODO MOVE ALL THIS STATE TO OBJECTS
+    //TODO MOVE ALL THIS STATE TO OBJECT STATE MACHINE
     
     Vector2D<double> m_acceleration{0,0};
 
@@ -93,7 +97,6 @@ private:
     
     bool m_bCheckCollision = true;
     
-    vector<TileLayer*> m_pCollisionLayers;
 
     
 };

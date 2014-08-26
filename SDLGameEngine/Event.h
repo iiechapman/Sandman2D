@@ -23,15 +23,10 @@ public:
           int argCount, vector<string> arguments);
     
     string getCaller();
-    
     EventHandler* getTarget();
-    
     string getEventName();
-    
     int getArgCount();
-    
     vector<string>* getArguments();
-    
     void printOut();
     
     ~Event();

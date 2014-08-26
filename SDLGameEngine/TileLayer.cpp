@@ -44,11 +44,11 @@ void TileLayer::render(){
                 - Camera::Instance()->getPosition().getX() < -m_tileSize ||
                 ((j * m_tileSize - x2) - Camera::Instance()->getPosition().getX()
                  > Game::Instance()->getGameWidth() -m_tileSize
-                 *Game::Instance()->getZoom()) ||
+                 *Game::Instance()->getGlobalZoom()) ||
                 
                 ((i * m_tileSize) - y2) - Camera::Instance()->getPosition().getY() < -m_tileSize ||
                 ((i * m_tileSize - y2) - Camera::Instance()->getPosition().getY()) >
-                Game::Instance()->getGameHeight() + m_tileSize * Game::Instance()->getZoom())
+                Game::Instance()->getGameHeight() + m_tileSize * Game::Instance()->getGlobalZoom())
             {
                 continue;
             }
@@ -64,7 +64,7 @@ void TileLayer::render(){
              (m_tileSize), (m_tileSize),
              (id - (tileset.firstGridID - 1)) / tileset.numColumns,
              (id - (tileset.firstGridID - 1)) % tileset.numColumns,
-             Game::Instance()->getZoom(),Game::Instance()->getRenderer());
+             Game::Instance()->getGlobalZoom(),Game::Instance()->getRenderer());
         }
     }
 }

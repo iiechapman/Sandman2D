@@ -35,11 +35,11 @@ void SDLGameObject::draw(){
     if (GetParams().dirRight()){
         TextureManager::Instance()->
         drawFrame(&m_params, Game::Instance()->getRenderer(),
-                  SDL_FLIP_NONE,Game::Instance()->getZoom());
+                  SDL_FLIP_NONE,Game::Instance()->getGlobalZoom());
     } else {
         TextureManager::Instance()->
         drawFrame(&m_params, Game::Instance()->getRenderer(),
-                  SDL_FLIP_HORIZONTAL,Game::Instance()->getZoom());
+                  SDL_FLIP_HORIZONTAL,Game::Instance()->getGlobalZoom());
     }
 }
 
