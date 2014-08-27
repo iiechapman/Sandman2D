@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Layer.h"
+#include "ILayer.h"
 #include "Player.h"
 #include "LevelParser.h"
 #include "Event.h"
@@ -21,9 +21,16 @@
 
 using namespace std;
 
-
 class TileLayer;
 
+/**
+ * \class Level
+ * \brief Handles level
+ * \note Needs cleanup
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
 class Level{
 public:
     ~Level();
@@ -32,29 +39,25 @@ public:
     void render();
     void clean();
     
-    void setPlayer(Player* player){
-        m_Player = player;
-        CollisionManager::Instance()->setCollisionLayers(m_collisionLayers);
-        cout << "Player set for level\n";
-    }
-    Player* getPlayer(){
-        return m_Player;
-    }
+    void setPlayer(Player* player);
+    
+    Player* getPlayer();
     
     vector<Tileset>* getTilesets();
-    vector<Layer*>* getLayers();
+    vector<ILayer*>* getLayers();
     
     vector<TileLayer*>* getCollisionLayers();
     const vector<TileLayer*>* getCollidableLayers();
     
 private:
+    /**< Used to allow LevelParser access to Level attributes */
     friend class LevelParser;
     Level();
     
     void checkCollisions();
     
     vector<Tileset> m_tilesets;
-    vector<Layer*> m_layers;
+    vector<ILayer*> m_layers;
     vector<TileLayer*> m_collisionLayers;
     
     Player* m_Player;

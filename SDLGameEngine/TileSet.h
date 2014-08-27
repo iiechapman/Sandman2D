@@ -9,7 +9,13 @@
 #ifndef SDLGameEngine_TileSet_h
 #define SDLGameEngine_TileSet_h
 
-
+/**
+ * \Struct Tileset
+ * \brief Handles tileset information
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
 struct Tileset{
     int firstGridID;
     int tileWidth;

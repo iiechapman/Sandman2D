@@ -12,11 +12,11 @@
 #include <iostream>
 #include <vector>
 #include "GameObject.h"
-#include "GameState.h"
+#include "IGameState.h"
 
 using namespace std;
 
-class MenuState : public GameState{
+class MenuState : public IGameState{
     
 protected:
     typedef void(*Callback)();

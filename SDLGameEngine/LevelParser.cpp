@@ -18,6 +18,10 @@
 #include "base64.h"
 
 
+LevelParser::LevelParser(){
+    //Default constructor, does nothing
+}
+
 Level* LevelParser::parseLevel(const char* levelFile, PlayState* newState){
     
     //Create the XML document and load from file
@@ -72,12 +76,6 @@ Level* LevelParser::parseLevel(const char* levelFile, PlayState* newState){
     return pLevel;
 }
 
-void LevelParser::parseLibrary(const char* levelFile){
-    cout << "Loading library file\n";
-    //    TextureManager::Instance()->load
-    //(pTextureRoot->Attribute("value"),
-    //pTextureRoot->Attribute("name"), Game::Instance()->getRenderer());
-}
 
 void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTilesets){
     
@@ -127,9 +125,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
         tileset.margin = 0;
     }
     
-    
     tileset.name = pTileSetRoot->Attribute("name");
-    
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
     
     cout << "Tileset info: " << endl;
@@ -140,7 +136,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
 }
 
 void LevelParser::parseTileLayer
-(TiXmlElement *pTileElement, vector<Layer *> *pLayers,
+(TiXmlElement *pTileElement, vector<ILayer *> *pLayers,
  vector<TileLayer*>* pCollisionLayers,vector<Tileset> *pTilesets){
     
     TileLayer* pTileLayer = new TileLayer(m_tileSize, m_width, m_height, *pTilesets);
@@ -254,7 +250,6 @@ void LevelParser::parseTileLayer
             data[index / m_width][index % m_width] = tileID;
             index++;
         }
-        
     }
     
     
@@ -284,7 +279,7 @@ void LevelParser::parseTextures(TiXmlElement *pTextureRoot){
 
 //For extracting objects from object layers
 void LevelParser::parseObjectLayer
-(TiXmlElement *pObjectElement, vector<Layer *> *pLayers,
+(TiXmlElement *pObjectElement, vector<ILayer *> *pLayers,
  string layerType, Level* pLevel ,PlayState* newState){
     
     //Create an object layer
@@ -433,8 +428,7 @@ void LevelParser::parseObjectLayer
                 }
             }
             
-            
-            
+
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
                 cout << "Adding player to object spot "

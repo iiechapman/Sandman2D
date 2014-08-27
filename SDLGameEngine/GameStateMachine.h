@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "GameState.h"
+#include "IGameState.h"
 
 class GameStateMachine{
 public:
@@ -19,16 +19,16 @@ public:
     void update();
     void render();
     
-    void pushState(GameState* pState);
-    void changeState(GameState* pState);
+    void pushState(IGameState* pState);
+    void changeState(IGameState* pState);
     void popState();
     
-    GameState* getCurrentState(){
+    IGameState* getCurrentState(){
         return m_gameStates.back();
     }
     
 private:
-    vector<GameState*> m_gameStates;
+    vector<IGameState*> m_gameStates;
 };
 
 

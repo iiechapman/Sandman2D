@@ -1,5 +1,5 @@
 //
-//  GameState.h
+//  IGameState.h
 //  SDLGameDevelopmentChapter1
 //
 //  Created by Evan Chapman on 5/11/14.
@@ -15,10 +15,10 @@
 
 using namespace std;
 
-class GameState{
+class IGameState{
     
 public:
-    virtual ~GameState() = 0;
+    virtual ~IGameState() = 0;
     virtual void update() = 0;
     virtual void render() = 0;
     

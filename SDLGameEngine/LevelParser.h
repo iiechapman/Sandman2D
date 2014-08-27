@@ -16,34 +16,37 @@
 
 class Level;
 struct Tileset;
-class Layer;
+class ILayer;
 class TileLayer;
 class PlayState;
 
 using namespace std;
 
-
+/**
+ * \class LevelParser
+ * \brief Handles reading the TMX and XML files to load assetts
+ * \note Can be broadened in later versions
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
 class LevelParser{
 public:
-    
+    LevelParser();
     Level* parseLevel(const char* levelFile , PlayState* newState);
     
 private:
-    
     void parseTilesets
     (TiXmlElement* pTileSetRoot, vector<Tileset>* pTilesets);
     
     void parseTileLayer
-    (TiXmlElement* pTileElement, vector<Layer*>* pLayers,
+    (TiXmlElement* pTileElement, vector<ILayer*>* pLayers,
     vector<TileLayer*>* pCollisionLayers, vector<Tileset>* pTilesets);
     
-    void parseLibrary(const char* fileName);
     void parseTextures(TiXmlElement* pTextureRoot);
-    //void parseSongs(TiXmlElement* pSongRoot);
-    //void parseSounds(TiXmlElement* pSoundRoot);
     
     void parseObjectLayer
-    (TiXmlElement* pObjectElement, vector<Layer*>* pLayers,string type, Level* pLevel,PlayState* newState);
+    (TiXmlElement* pObjectElement, vector<ILayer*>* pLayers,string type, Level* pLevel,PlayState* newState);
     
     TiXmlElement* findElement(string element,TiXmlElement* root);
     

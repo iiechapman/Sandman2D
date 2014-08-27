@@ -28,6 +28,9 @@ class TileLayer;
  */
 class Player : public SDLGameObject {
 public:
+    /*! \fn Player();
+     *  \brief Default ctor, used by object factory
+     */
     Player();
     Player(GameObjectParams params, int numberFrames);
     virtual void draw();

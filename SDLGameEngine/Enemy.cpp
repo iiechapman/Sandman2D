@@ -49,6 +49,7 @@ void Enemy::update(){
     }
     
     //Update AI state
+    //TODO Expand AI system
     if (GetParams().aiEnabled()){
         
         int switchState = rand() % 200;
@@ -69,7 +70,7 @@ void Enemy::update(){
                 
                 
             default:
-                GetParams().setAIState(MOVE_NONE);
+
                 break;
         }
         

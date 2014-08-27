@@ -15,13 +15,9 @@
 #include "GameObjectFactory.h"
 
 
-/*
- Parses the library XML file for state
- 
- Pass in stateID string and it looks for that state to load
- 
- */
 
+//TODO: need to remove old state parser code, and move to loadState()
+//Old state parser, used to actually load scenes
 bool StateParser::parseState(const char* stateFile,
                              string stateID, vector<GameObject *>* pObjects,
                              vector<string>* pTextureIDs, map<string,string>* pLevelFiles){
@@ -81,6 +77,7 @@ bool StateParser::parseState(const char* stateFile,
 }
 
 
+//New state parser, used to load levels
 bool StateParser::loadState(const char* stateFile, PlayState* newState){
     
     //Create an XML document
@@ -139,7 +136,6 @@ bool StateParser::loadState(const char* stateFile, PlayState* newState){
 }
 
 
-
 void StateParser::parseTextures(TiXmlElement* pStateRoot,
                                 vector<string>* pTextureIDs){
     
@@ -167,7 +163,7 @@ void StateParser::parseTextures(TiXmlElement* pStateRoot,
 
 void StateParser::parseLevels(TiXmlElement* pStateRoot,
                              map<string,string>* pLevelFiles){
-    
+    //TODO Add Error handling
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         string fileNameAttribute = e->Attribute("filename");
@@ -238,8 +234,9 @@ TiXmlElement* StateParser::findElement(string element,TiXmlElement* root){
 }
 
 
-
+    //TODO Add Error handling
 void StateParser::parseSongs(TiXmlElement *pStateRoot, PlayState *currentState){
+
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
         string fileName = "";
@@ -251,7 +248,7 @@ void StateParser::parseSongs(TiXmlElement *pStateRoot, PlayState *currentState){
         SoundManager::Instance()->loadSong(fileName, songID);
     }
 }
-
+    //TODO Add Error handling
 void StateParser::parseSounds(TiXmlElement *pStateRoot, PlayState *currentState){
     for (TiXmlElement* e = pStateRoot->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
@@ -265,6 +262,12 @@ void StateParser::parseSounds(TiXmlElement *pStateRoot, PlayState *currentState)
     }
 }
 
+/*
+ ====================
+ StateParser::parseElements
+ ====================
+ */
+///<Loads all elements from library file, injects them into new object state
 void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentState){
     //Load up prototype elements for later use in map loading
     for (TiXmlElement* e = pStateRoot->FirstChildElement();

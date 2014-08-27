@@ -13,14 +13,14 @@
 #include <vector>
 #include <map>
 #include "GameObject.h"
-#include "GameState.h"
+#include "IGameState.h"
 #include "Level.h"
 
 class EventHandler;
 
 using namespace std;
 
-class PlayState : public GameState{
+class PlayState : public IGameState{
     
 public:
     PlayState();

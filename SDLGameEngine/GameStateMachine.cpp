@@ -21,7 +21,7 @@ void GameStateMachine::render(){
     }
 }
 
-void GameStateMachine::pushState(GameState* pState){
+void GameStateMachine::pushState(IGameState* pState){
     m_gameStates.push_back(pState);
     m_gameStates.back()->onEnter();
 }
@@ -34,7 +34,7 @@ void GameStateMachine::popState(){
     }
 }
 
-void GameStateMachine::changeState(GameState* pState){
+void GameStateMachine::changeState(IGameState* pState){
     if (!m_gameStates.empty()){
         if (m_gameStates.back()->getStateID() == pState->getStateID()){
             //Same state, do nothing

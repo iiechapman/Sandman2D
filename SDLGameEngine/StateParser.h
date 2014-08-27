@@ -19,6 +19,14 @@ using namespace std;
 
 class GameObject;
 
+/**
+ * \class StateParser
+ * \brief Loads XML Library and creates objects in game
+ * \note Needs cleanup
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
 class StateParser{
 public:
     

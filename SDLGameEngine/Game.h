@@ -16,6 +16,16 @@
 #include "Camera.h"
 #include "GameStateMachine.h"
 
+
+/**
+ * \class Game
+ * \brief Handles game loop, delegates work to game engine elements
+ * \note <#Note#>
+ * \author Evan Chapman
+ * \version <#VersionNumber#>
+ * \date <#Date#>
+ * Contact: iiechapman\@gmail.com
+ */
 class Game{
 public:    
     static Game* Instance();

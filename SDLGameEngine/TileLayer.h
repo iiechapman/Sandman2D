@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Layer.h"
+#include "ILayer.h"
 #include "TileSet.h"
 #include "Vector2D.h"
 
@@ -19,8 +19,17 @@ using namespace std;
 
 class Level;
 
-class TileLayer : public Layer{
+/**
+ * \class TileLayer
+ * \brief Layer of tiles, handles tilemaps
+ * \note Inherits from Layer interface
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
+class TileLayer : public ILayer{
 public:
+    //Used to allow CollisionManager to test objects against tiles
     friend class CollisionManager;
     
     TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tileset> &tilesets);
@@ -29,12 +38,13 @@ public:
     void render();
     void clean();
     
+    /*! \fn setTileIDs;
+     *  \brief Populates each cell with int data loaded from a file
+     *  \param Takes a preloaded vectory array
+     */
     void setTileIDs(const vector<vector<int>>& data);
-    
     void setTileSize(int tileSize);
-    
     void setNumColumns(int numColumns);
-    
     void setNumRows(int numRows);
     
     Tileset getTilesetByID(int tileID);
@@ -42,7 +52,6 @@ public:
     vector<vector<int>> getTileIDs();
     
     Vector2D<double> getPosition();
-    
     Vector2D<double> getVelocity();
     
     int getTileSize();
@@ -50,7 +59,6 @@ public:
     int getNumRows();
     
 private:
-    
     int m_numColumns;
     int m_numRows;
     int m_tileSize;
@@ -62,7 +70,6 @@ private:
     
     const vector<Tileset> &m_tilesets;
     vector<vector<int>> m_tileIDs;
-    
 };
 
 

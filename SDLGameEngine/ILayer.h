@@ -14,21 +14,25 @@
 using namespace std;
 class Level;
 
-class Layer{
+/**
+ * \class Layer
+ * \brief Layer object Interface
+ * \note Meant to be overridden
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
+class ILayer{
 public:
-    
     virtual void render() = 0;
     virtual void clean() = 0;
     virtual void update(Level* pLevel) = 0;
     
-    void setType(string type) {
-        m_type = type;
-    }
-    string getType() const { return m_type; }
+    void setType(string type);
+    string getType() const;
     
 protected:
-    //virtual ~Layer();
-    
+    /**< Type of layer , ie object, lighting, tile */
     string m_type;
     
 };

@@ -6,4 +6,13 @@
 //  Copyright (c) 2014 Evan Chapman. All rights reserved.
 //
 
-#include "Layer.h"
+#include "ILayer.h"
+
+
+void ILayer::setType(string type) {
+    m_type = type;
+}
+
+string ILayer::getType() const {
+    return m_type;
+}

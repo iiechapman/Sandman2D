@@ -16,6 +16,16 @@
 
 using namespace std;
 
+
+/**
+ * \class SoundManager
+ * \brief Handles sounds and songs in game
+ * \note <#Note#>
+ * \author Evan Chapman
+ * \version <#VersionNumber#>
+ * \date <#Date#>
+ * Contact: iiechapman\@gmail.com
+ */
 class SoundManager{
 public:
     ~SoundManager();

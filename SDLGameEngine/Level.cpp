@@ -7,7 +7,7 @@
 //
 
 #include "Level.h"
-#include "Layer.h"
+#include "ILayer.h"
 #include "ObjectLayer.h"
 #include "CollisionHandler.h"
 #include "SoundManager.h"
@@ -19,7 +19,7 @@ vector<Tileset>* Level::getTilesets(){
     return &m_tilesets;
 }
 
-vector<Layer*>* Level::getLayers(){
+vector<ILayer*>* Level::getLayers(){
     return &m_layers;
 }
 
@@ -49,7 +49,6 @@ void Level::update(){
     
     checkCollisions();
 }
-
 
 void Level::checkCollisions(){
     //Check each layer for collision of objects
@@ -190,7 +189,15 @@ void Level::clean(){
     }
 }
 
+Player* Level::getPlayer(){
+    return m_Player;
+}
 
+void Level::setPlayer(Player* player){
+    m_Player = player;
+    CollisionManager::Instance()->setCollisionLayers(m_collisionLayers);
+    cout << "Player set for level\n";
+}
 
 
 

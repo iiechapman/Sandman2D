@@ -36,6 +36,7 @@ void Light::update(){
     
     GetParams().setFrame(0);
 
+    //TODO Add LockTo to SDLGameObject, allowing any object to lock to another
     //If the light has a lock, position it to the object
     if (GetParams().getLockTo() == string("player")){
 

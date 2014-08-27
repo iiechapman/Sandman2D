@@ -19,16 +19,12 @@ void TileLayer::render(){
     
     //Calculate left/top coord
     x = m_position.getX() / m_tileSize;
-    //y = m_position.getY() / m_tileSize;
     
     //Calculate right/bottom coord
     x2 = fmod(m_position.getX(), double(m_tileSize));
     y2 = fmod(m_position.getY(), double(m_tileSize));
     
-    //x2 = int(m_position.getX()) % m_tileSize;
-    //y2 = int(m_position.getY()) % m_tileSize;
-    
-    
+    //Parse through each column and row
     for (int i = 0 ; i < m_numRows; i++){
         for (int j = 0 ; j < m_numColumns; j++){
             
@@ -70,8 +66,7 @@ void TileLayer::render(){
 }
 
 void TileLayer::update(Level* pLevel){
-    //    m_position += m_velocity;
-    //    m_velocity.setX(1);
+    
 }
 
 TileLayer::TileLayer(int tileSize,int mapWidth, int mapHeight, const vector<Tileset> &tilesets)
@@ -105,8 +100,6 @@ Tileset TileLayer::getTilesetByID(int tileID){
 void TileLayer::clean(){
     //TODO: Fill this in and clean
 }
-
-
 
 void TileLayer::setTileIDs(const vector<vector<int>>& data){
     m_tileIDs = data;

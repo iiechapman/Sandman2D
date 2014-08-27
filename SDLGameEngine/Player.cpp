@@ -23,11 +23,25 @@
  
  ===============================================================================
  */
+
+/*
+ ====================
+ Player::Player
+ ====================
+ */
+///<Constructor used for object factory
 Player::Player(){
     cout << "Created player object\n";
     m_params.setType("Player");
 }
 
+
+/*
+ ====================
+ Player::Player
+ ====================
+ */
+///<Constructor for player, connects eventhandler and preloaded params
 Player::Player(GameObjectParams params , int numberFrames)
 :SDLGameObject(params){
     GetParams().setMaxFrames(numberFrames);
@@ -35,9 +49,11 @@ Player::Player(GameObjectParams params , int numberFrames)
     GetParams().getEvents()->registerEvent("set_position");
 }
 
+
 void Player::load(GameObjectParams params){
     SDLGameObject::load(params);
 }
+
 
 void Player::draw(){
     SDLGameObject::draw();

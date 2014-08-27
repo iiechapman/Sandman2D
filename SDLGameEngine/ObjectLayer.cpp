@@ -17,14 +17,6 @@ void ObjectLayer::update(Level* pLevel){
     for (int i = 0 ; i < m_gameObjects.size() ; i++){
         m_gameObjects[i]->update();
     }
-    
-    //    if (pLevel->getPlayer()){
-    //        CollisionManager::Instance()->
-    //        checkPlayerTileCollision(pLevel->getPlayer(),*pLevel->getCollidableLayers());
-    //    } else {
-    //        cout << "Could not find player\n";
-    //    }
-    
 }
 
 void ObjectLayer::render(){
@@ -116,4 +108,8 @@ void ObjectLayer::render(){
 
 void ObjectLayer::clean(){
     //TODO: Fill this in
+}
+
+vector<GameObject*>* ObjectLayer::getGameObjects(){
+    return &m_gameObjects;
 }
