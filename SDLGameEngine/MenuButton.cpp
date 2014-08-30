@@ -65,47 +65,7 @@ void MenuButton::collision(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int MenuButton::getCallbackID(){ return GetParams().getCallbackID();}
 
 
 

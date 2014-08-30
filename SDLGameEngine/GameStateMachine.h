@@ -23,9 +23,7 @@ public:
     void changeState(IGameState* pState);
     void popState();
     
-    IGameState* getCurrentState(){
-        return m_gameStates.back();
-    }
+    IGameState* getCurrentState();
     
 private:
     vector<IGameState*> m_gameStates;
@@ -33,3 +31,34 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__GameStateMachine__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

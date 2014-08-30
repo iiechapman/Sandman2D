@@ -46,7 +46,7 @@ private:
     void handleMovement();
     void handleAnimation();
     
-    //TODO MOVE ALL THIS STATE TO OBJECT STATE MACHINE
+    //TODO Move all state to state object that handles state transitions
     
     Vector2D<double> m_acceleration{0,0};
 
@@ -106,8 +106,8 @@ private:
 
 
 
-class PlayerCreator : public BaseCreator{
-    GameObject* createGameObject() const{
+class PlayerCreator : public IBaseCreator{
+    IGameObject* createGameObject() const{
         return new Player();
     }
     
@@ -116,3 +116,58 @@ class PlayerCreator : public BaseCreator{
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Player__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

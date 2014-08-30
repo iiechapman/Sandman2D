@@ -14,11 +14,11 @@
 #include "TileLayer.h"
 
 SDLGameObject::SDLGameObject()
-:GameObject(){
+:IGameObject(){
 }
 
 SDLGameObject::SDLGameObject(GameObjectParams params)
-:GameObject(params){
+:IGameObject(params){
 }
 
 void SDLGameObject::load(GameObjectParams params){
@@ -114,31 +114,6 @@ bool SDLGameObject::checkCollideWithTile(Vector2D<double> pos){
     }
     return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

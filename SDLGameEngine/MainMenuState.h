@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "MenuState.h"
-#include "GameObject.h" 
+#include "IGameObject.h"
 
 using namespace std;
 
@@ -39,10 +39,65 @@ private:
     
     static const string s_mainMenuID;
     
-    vector<GameObject*> m_gameObjects;
+    vector<IGameObject*> m_gameObjects;
     
 };
 
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__MainMenuState__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

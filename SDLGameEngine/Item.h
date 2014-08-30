@@ -32,10 +32,65 @@ private:
 };
 
 
-class ItemCreator : public BaseCreator{
-    GameObject* createGameObject() const {
+class ItemCreator : public IBaseCreator{
+    IGameObject* createGameObject() const {
         return new Item();
     }
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Item__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -214,39 +214,17 @@ void PlayState::loadNextLevel(){
 
 
 
+void PlayState::setLiveMode(bool liveMode){m_LiveMode = liveMode;}
+bool PlayState::liveModeOn(){return m_LiveMode;}
 
 
 
+Level* PlayState::getLevel(){return pLevel;}
 
+map<string,string>* PlayState::getLevelFiles(){return &pLevelFiles;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+vector<IGameObject*>* PlayState::getGameObjects(){return &m_gameObjects;}
+map<string,GameObjectParams*>* PlayState::getElements(){return &m_Elements;}
 
 
 

@@ -98,7 +98,7 @@ Tileset TileLayer::getTilesetByID(int tileID){
 }
 
 void TileLayer::clean(){
-    //TODO: Fill this in and clean
+    //TODO: Fill in all cleanup functions
 }
 
 void TileLayer::setTileIDs(const vector<vector<int>>& data){
@@ -134,21 +134,6 @@ int TileLayer::getNumColumns(){
 int TileLayer::getNumRows(){
     return m_numRows;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

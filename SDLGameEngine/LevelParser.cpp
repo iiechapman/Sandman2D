@@ -312,7 +312,7 @@ void LevelParser::parseObjectLayer
             
             
             //Check if object exists in element library
-            GameObject* pGameObject;
+            IGameObject* pGameObject;
             if ((*newState->getElements())[name]){
                 GameObjectParams* elementParams = (*newState->getElements())[name];
                 cout << "Loaded from library: " << elementParams->getName() << endl;
@@ -472,32 +472,6 @@ TiXmlElement* LevelParser::findElement(string element,TiXmlElement* root){
     }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

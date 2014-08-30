@@ -20,7 +20,7 @@
 		4E239BA4195A4DC70084874F /* ObjectLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E239BA2195A4DC70084874F /* ObjectLayer.cpp */; };
 		4E2CB06519649E7F00A6B8FF /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2CB06319649E7F00A6B8FF /* Light.cpp */; };
 		4E2D1239199D4A6000702F86 /* Event.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E2D1237199D4A6000702F86 /* Event.cpp */; };
-		4E458E5B1907E78100BE4CB3 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E591907E78100BE4CB3 /* GameObject.cpp */; };
+		4E458E5B1907E78100BE4CB3 /* IGameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E591907E78100BE4CB3 /* IGameObject.cpp */; };
 		4E458E5E1907EFA800BE4CB3 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E458E5C1907EFA800BE4CB3 /* Player.cpp */; };
 		4E5A75FF191186E300DB9464 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A75FD191186E300DB9464 /* Vector2D.cpp */; };
 		4E5A76021911872500DB9464 /* GameObjectParams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E5A76001911872500DB9464 /* GameObjectParams.cpp */; };
@@ -92,8 +92,8 @@
 		4E2CB06419649E7F00A6B8FF /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		4E2D1237199D4A6000702F86 /* Event.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Event.cpp; sourceTree = "<group>"; };
 		4E2D1238199D4A6000702F86 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
-		4E458E591907E78100BE4CB3 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
-		4E458E5A1907E78100BE4CB3 /* GameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameObject.h; sourceTree = "<group>"; };
+		4E458E591907E78100BE4CB3 /* IGameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IGameObject.cpp; sourceTree = "<group>"; };
+		4E458E5A1907E78100BE4CB3 /* IGameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGameObject.h; sourceTree = "<group>"; };
 		4E458E5C1907EFA800BE4CB3 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		4E458E5D1907EFA800BE4CB3 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		4E5A75FD191186E300DB9464 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2D.cpp; sourceTree = "<group>"; };
@@ -322,8 +322,8 @@
 				4EB8FD2419250CFC00C38B4F /* GameObjectFactory.h */,
 				4E5A76001911872500DB9464 /* GameObjectParams.cpp */,
 				4E5A76011911872500DB9464 /* GameObjectParams.h */,
-				4E458E591907E78100BE4CB3 /* GameObject.cpp */,
-				4E458E5A1907E78100BE4CB3 /* GameObject.h */,
+				4E458E591907E78100BE4CB3 /* IGameObject.cpp */,
+				4E458E5A1907E78100BE4CB3 /* IGameObject.h */,
 				4E5A76061911891E00DB9464 /* SDLGameObject.cpp */,
 				4E5A76071911891E00DB9464 /* SDLGameObject.h */,
 			);
@@ -497,7 +497,7 @@
 				4ECABB1E196B05E600CA4AB7 /* CollisionHandler.cpp in Sources */,
 				4E1F09DC1958B23A00F8C945 /* LevelParser.cpp in Sources */,
 				4EED8E6A192041FC00EE5E8F /* MenuButton.cpp in Sources */,
-				4E458E5B1907E78100BE4CB3 /* GameObject.cpp in Sources */,
+				4E458E5B1907E78100BE4CB3 /* IGameObject.cpp in Sources */,
 				4E1F09E01958C5A200F8C945 /* base64.cpp in Sources */,
 				4E5A76021911872500DB9464 /* GameObjectParams.cpp in Sources */,
 				4E0AEB54190421570031C463 /* main.cpp in Sources */,

@@ -53,48 +53,7 @@ void GameStateMachine::changeState(IGameState* pState){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+IGameState* GameStateMachine::getCurrentState(){return m_gameStates.back();}
 
 
 

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 #include "ILayer.h"
-#include "GameObject.h"
+#include "IGameObject.h"
 
 using namespace std;
 
@@ -30,10 +30,10 @@ public:
     virtual void render();
     virtual void clean();
     
-    vector<GameObject*>* getGameObjects();
+    vector<IGameObject*>* getGameObjects();
 
 private:
-    vector<GameObject*> m_gameObjects;
+    vector<IGameObject*> m_gameObjects;
     
     /**< Used to control darkness rendered on to layer */
     SDL_Color currentShade{100,100,100};
@@ -41,3 +41,58 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__ObjectLayer__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

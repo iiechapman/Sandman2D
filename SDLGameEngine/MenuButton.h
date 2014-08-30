@@ -26,7 +26,7 @@ public:
     virtual void clean();
     virtual void collision();
     
-    int getCallbackID() { return GetParams().getCallbackID();}
+    int getCallbackID();
     
 private:
     enum button_state{
@@ -41,11 +41,65 @@ private:
 };
 
 
-class MenuButtonCreator : public BaseCreator{
-    
-    GameObject* createGameObject() const {
+class MenuButtonCreator : public IBaseCreator{
+    IGameObject* createGameObject() const {
         return new MenuButton();
     }
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__MenuButton__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -1,5 +1,5 @@
 //
-//  GameObject.h
+//  IGameObject.h
 //  SDLGameDevelopmentChapter1
 //
 //  Created by Evan Chapman on 4/23/14.
@@ -17,9 +17,9 @@
 
 using namespace std;
 
-class GameObject{
+class IGameObject{
 public:
-    GameObject(GameObjectParams params);
+    IGameObject(GameObjectParams params);
     virtual void draw() = 0;
     virtual void update() = 0;
     virtual void clean() = 0;
@@ -29,8 +29,8 @@ public:
     GameObjectParams& GetParams();
     
 protected:
-    GameObject();
-    virtual ~GameObject();
+    IGameObject();
+    virtual ~IGameObject();
     
     GameObjectParams m_params;
     
@@ -38,3 +38,58 @@ protected:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__GameObject__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END
