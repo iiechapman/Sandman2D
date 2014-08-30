@@ -19,6 +19,14 @@
 
 using namespace std;
 
+/**
+ * \class TextureManager
+ * \brief Handles all textures and rendering
+ * \note
+ * \author Evan Chapman
+ * \version 1
+ * Contact: iiechapman\@gmail.com
+ */
 class TextureManager{
 public:
     ~TextureManager();
@@ -56,9 +64,7 @@ public:
 
     
     void clean();
-
     bool doesTextureExist(string id);
-    
     void clearFromTextureMap(string id);
     
 private:

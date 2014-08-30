@@ -20,10 +20,9 @@
 /**
  * \class Game
  * \brief Handles game loop, delegates work to game engine elements
- * \note <#Note#>
+ * \note
  * \author Evan Chapman
- * \version <#VersionNumber#>
- * \date <#Date#>
+ * \version 1
  * Contact: iiechapman\@gmail.com
  */
 class Game{
