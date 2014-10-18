@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "GameObject.h"
+#include "IGameObject.h"
 #include "IGameState.h"
 #include "Level.h"
 
@@ -30,36 +30,23 @@ public:
     
     virtual bool onEnter();
     virtual bool onExit();
-    
-    void setLiveMode(bool liveMode){
-        m_LiveMode = liveMode;
-    }
-    bool liveModeOn(){
-        return m_LiveMode;
-    }
-    
     virtual string getStateID() const { return s_playID; }
     
-    Level* getLevel(){
-        return pLevel;
-    }
+    void setLiveMode(bool liveMode);
+    bool liveModeOn();
     
-    map<string,string>* getLevelFiles(){
-        return &pLevelFiles;
-    }
+    Level* getLevel();
     
-    vector<GameObject*>* getGameObjects(){
-        return &m_gameObjects;
-    }
-    map<string,GameObjectParams*>* getElements(){
-        return &m_Elements;
-    }
+    map<string,string>* getLevelFiles();
+    
+    vector<IGameObject*>* getGameObjects();
+    map<string,GameObjectParams*>* getElements();
     
 private:
     void loadNextLevel();
     
     static const string s_playID;
-    vector<GameObject*> m_gameObjects;
+    vector<IGameObject*> m_gameObjects;
     map<string,GameObjectParams*> m_Elements;
     
     int m_currentLevel = 0;
@@ -81,3 +68,58 @@ private:
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__PlayState__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -31,14 +31,14 @@ class StateParser{
 public:
     
     bool parseState( const char* stateFile,
-                    string stateID, vector<GameObject*>* pObjects,
+                    string stateID, vector<IGameObject*>* pObjects,
                     vector<string>* pTextureIDs, map<string,string>* pLevelFiles);
     
     bool loadState(const char* stateFile, PlayState* newState);
     
 private:
     void parseObjects(TiXmlElement* pStateRoot,
-                      vector<GameObject*>* pObjects);
+                      vector<IGameObject*>* pObjects);
     
     void parseTextures(TiXmlElement* pStateRoot,
                        vector<string>* pTextureIDs);
@@ -59,3 +59,38 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__StateParser__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

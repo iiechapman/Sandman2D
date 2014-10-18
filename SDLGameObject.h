@@ -10,9 +10,9 @@
 #define __SDLGameDevelopmentChapter1__SDLGameObject__
 
 #include <iostream>
-#include "GameObject.h"
+#include "IGameObject.h"
 
-class SDLGameObject : public GameObject{
+class SDLGameObject : public IGameObject{
 public:
     SDLGameObject();
     SDLGameObject(GameObjectParams params);
@@ -28,3 +28,58 @@ public:
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__SDLGameObject__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

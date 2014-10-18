@@ -8,3 +8,4 @@
 
 #include "Vector2D.h"
 
+//Nothing here, class is template

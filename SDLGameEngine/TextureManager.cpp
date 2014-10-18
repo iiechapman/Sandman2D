@@ -12,6 +12,10 @@
 typedef map<string, SDL_Texture*>::iterator textureMapIterator;
 TextureManager* TextureManager::s_pInstance = 0;
 
+TextureManager::TextureManager(){
+    //Private unused ctor
+}
+
 TextureManager::~TextureManager(){
     cout << "Deleting texture manager\n";
     //m_textureMap.clear();
@@ -265,5 +269,15 @@ bool TextureManager::doesTextureExist(string id){
 //}
 
 
+
+
+
+
+
+
+
+
+
+//END
 
 

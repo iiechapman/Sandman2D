@@ -68,7 +68,7 @@ public:
     void clearFromTextureMap(string id);
     
 private:
-    TextureManager(){};
+    TextureManager();
     
     static TextureManager* s_pInstance;
     map<string, SDL_Texture*> m_textureMap;
@@ -78,3 +78,19 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__TextureManager__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

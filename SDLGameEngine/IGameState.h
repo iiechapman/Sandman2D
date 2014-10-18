@@ -27,9 +27,7 @@ public:
     
     virtual string getStateID() const = 0;
     
-    vector<string>* getTextureList(){
-        return &m_textureIDList;
-    }
+    vector<string>* getTextureList();
     
 protected:
     vector<string> m_textureIDList;
@@ -37,3 +35,58 @@ protected:
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__GameState__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

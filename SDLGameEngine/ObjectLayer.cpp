@@ -110,6 +110,60 @@ void ObjectLayer::clean(){
     //TODO: Fill this in
 }
 
-vector<GameObject*>* ObjectLayer::getGameObjects(){
+vector<IGameObject*>* ObjectLayer::getGameObjects(){
     return &m_gameObjects;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

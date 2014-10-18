@@ -25,7 +25,7 @@ enum AI_State{
     MOVE_STOP
 };
 
-//TODO: Seperate out functions to header file
+//TODO: Create seperate Param objects, ie AI params, RenderParams,MovementParams
 
 class GameObjectParams{
 public:
@@ -36,164 +36,105 @@ public:
     
     ~GameObjectParams();
     
+    //Helper Methods
+    void printOut();
     void operator=(GameObjectParams& rhs);
     
-    void printOut();
+    //Identity Methods
+    int getCallbackID() const;
+    void setCallBackID(int ID);
     
-    double getX() const { return m_position.getX(); }
-    double getY() const { return m_position.getY(); }
+    string getType() const;
+    void setType(string type);
     
-    double getWidth() const { return m_size.getX() * m_scale; }
-    double getHeight() const { return m_size.getY() * m_scale; }
+    string getName() const;
+    void setName(string name);
     
-    double getSourceWidth() const {return m_size.getX(); }
-    double getSourceHeight() const {return m_size.getY(); }
+    //Movement Methods
+    Vector2D<double>& getVelocity();
+    Vector2D<double>& getAcceleration();
+    Vector2D<double>& getPosition();
     
-    int getFrame() const { return m_currentCell.getX(); }
-    int getRow() const { return m_currentCell.getY(); }
+    void setLockTo(string lockTo);
+    string getLockTo();
     
-    int getTotalFrames() const { return m_frameMax.getX();}
-    int getTotalRows() const { return m_frameMax.getY();}
+    //Camera Methods
+    bool isScrolling();
+    void setScrolling(bool scrolling);
     
-    int getCallbackID() const { return m_callbackID;}
+    //Direction Methods
+    bool dirRight();
+    bool dirLeft();
+    bool dirUp();
+    bool dirDown();
+    void setRight(bool right);
+    void setLeft(bool left);
+    void setUp(bool up);
+    void setDown(bool down);
     
-    void setCallBackID(int ID) { m_callbackID = ID; } 
     
-    string getType() const { return m_type; }
+    //Render Methods
+    string getTextureID() const;
+    void setTextureID(string textureID);
+    void setVelocity(Vector2D<double> velocity);
     
-    void setType(string type){
-        m_type = type;
-    }
+    double getX() const;
+    double getY() const;
+    
+    double getWidth() const;
+    double getHeight() const;
+    
+    double getSourceWidth() const;
+    double getSourceHeight() const;
+    
+    int getFrame() const;
+    int getRow() const;
+    
+    int getTotalFrames() const;
+    int getTotalRows() const;
+    
+    void setX(double x);
+    void setY(double y);
+    
+    void setScale(double scale);
+    double getScale();
+    
+    void setWidth(double width);
+    void setHeight(double height);
+    
+    double getAngle();
+    void setAngle(double angle);
+    
+    void setColor(SDL_Color color);
+    SDL_Color getColor();
+    
+    void setBlendMode(SDL_BlendMode blendMode);
+    SDL_BlendMode getBlendMode();
+    
+    //Animation Params
+    void setFrame(int frame);
+    void setRow(int row);
+    
+    void setMaxFrames(int frames);
+    void setMaxRows(int rows);
 
-    Vector2D<double>& getVelocity(){ return m_velocity; }
-    Vector2D<double>& getAcceleration(){ return m_acceleration; }
-    Vector2D<double>& getPosition(){ return m_position; }
+    void setStartFrame(int frame);
+    int getStartFrame();
     
-    string getName() const { return m_name; }
-    void setName(string name){
-        m_name = name;
-    }
-    string getTextureID() const { return m_textureID; }
+    void setAnimSpeed(int speed);
+    int getAnimSpeed();
     
-    void setTextureID(string textureID){ m_textureID = textureID; }
-    void setVelocity(Vector2D<double> velocity){ m_velocity = velocity;}
     
-    void setX(double x){ m_position.setX(x);}
-    void setY(double y){ m_position.setY(y);}
+    //Event Methods
+    EventHandler* getEvents();
+    bool isCollidable();
+    void setCollidable(bool collidable);
     
-    void setScale(double scale){
-        m_scale = scale;
-    }
-    double getScale(){
-        return m_scale;
-    }
-    
-    void setWidth(double width){ m_size.setX(width); }
-    void setHeight(double height){ m_size.setY(height); }
-    
-    double getAngle(){
-        return m_Angle;
-    }
-    void setAngle(double angle){
-        m_Angle = angle;
-    }
-    
-    void setFrame(int frame){ m_currentCell.setX(frame); }
-    void setRow(int row){ m_currentCell.setY(row); }
-    
-    void setMaxFrames(int frames){ m_frameMax.setX(frames); }
-    void setMaxRows(int rows){ m_frameMax.setY(rows); }
-
-    void setStartFrame(int frame){
-        m_startFrame = frame;
-    }
-    int getStartFrame(){
-        return m_startFrame;
-    }
-    
-    void setAnimSpeed(int speed) { m_animSpeed = speed; }
-    int getAnimSpeed() { return m_animSpeed; }
-    
-    bool isCollidable(){
-        return m_bIsCollidable;
-    }
-    void setCollidable(bool collidable){
-        m_bIsCollidable = collidable;
-    }
-    
-    void setColor(SDL_Color color){
-        m_color = color;
-    }
-    
-    SDL_Color getColor() {
-        return m_color;
-    }
-    void setBlendMode(SDL_BlendMode blendMode){
-        m_blendMode = blendMode;
-    }
-    SDL_BlendMode getBlendMode(){
-        return m_blendMode;
-    }
-    
-    void setLockTo(string lockTo){
-        m_lockTo = lockTo;
-    }
-    string getLockTo(){
-        return m_lockTo;
-    }
-    
-    bool isScrolling(){
-        return m_bScrolling;
-    }
-    void setScrolling(bool scrolling){
-        m_bScrolling = scrolling;
-    }
-    
-    bool dirRight(){
-        return m_bDirRight;
-    }
-    bool dirLeft(){
-        return m_bDirLeft;
-    }
-    bool dirUp(){
-        return m_bDirUp;
-    }
-    bool dirDown(){
-        return m_bDirDown;
-    }
-    
-    void setRight(bool right){
-        m_bDirRight = right;
-    }
-    void setLeft(bool left){
-        m_bDirLeft = left;
-    }
-    void setUp(bool up){
-        m_bDirUp = up;
-    }
-    void setDown(bool down){
-        m_bDirDown = down;
-    }
-    
-    EventHandler* getEvents(){
-        return &m_EventHandler;
-    }
-    
-    bool aiEnabled(){
-        return m_bAI;
-    }
-    
-    AI_State getAIState(){
-        return m_AIState;
-    }
-    
-    void setAIState(AI_State newState){
-        m_AIState = newState;
-    }
-    
-    void setAI(bool AIFlag){
-        m_bAI = AIFlag;
-    }
+    //AI Methods
+    bool aiEnabled();
+    AI_State getAIState();
+    void setAIState(AI_State newState);
+    void setAI(bool AIFlag);
 
     friend class GameObject;
     
@@ -247,46 +188,6 @@ protected:
 };
 
 #endif /* defined(__LudumDare29__GameObjectParams__) */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

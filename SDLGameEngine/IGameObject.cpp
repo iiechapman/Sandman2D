@@ -6,23 +6,23 @@
 //  Copyright (c) 2014 Evan Chapman. All rights reserved.
 //
 
-#include "GameObject.h"
+#include "IGameObject.h"
 
-GameObject::GameObject(){
+IGameObject::IGameObject(){
 }
 
-GameObject::GameObject(GameObjectParams params){
+IGameObject::IGameObject(GameObjectParams params){
     m_params = params;
 }
 
-GameObject::~GameObject(){
+IGameObject::~IGameObject(){
     //cout << "Deleted game object\n";
 }
 
-GameObjectParams& GameObject::GetParams(){
+GameObjectParams& IGameObject::GetParams(){
     return m_params;
 }
 
-void GameObject::clean(){
+void IGameObject::clean(){
     cout << "Cleaning game object\n";
 }

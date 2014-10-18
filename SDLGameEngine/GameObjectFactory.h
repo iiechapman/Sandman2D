@@ -12,14 +12,14 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include "GameObject.h"
+#include "IGameObject.h"
 
 using namespace std;
 
-class BaseCreator{
+class IBaseCreator{
 public:
-    virtual GameObject* createGameObject() const = 0;
-    virtual ~BaseCreator(){}
+    virtual IGameObject* createGameObject() const = 0;
+    virtual ~IBaseCreator(){}
 };
 
 
@@ -28,13 +28,68 @@ class GameObjectFactory{
 public:
     static GameObjectFactory* Instance();
     
-    bool registerType(string typeID, BaseCreator* pCreator);
-    GameObject* create(string typeID);
+    bool registerType(string typeID, IBaseCreator* pCreator);
+    IGameObject* create(string typeID);
     
 private:
-    map<string, BaseCreator*> m_creators;
+    map<string, IBaseCreator*> m_creators;
     static GameObjectFactory* s_Instance;
 };
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__GameObjectFactory__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -33,10 +33,65 @@ private:
 };
 
 
-class EnemyCreator : public BaseCreator{
-    GameObject* createGameObject() const {
+class EnemyCreator : public IBaseCreator{
+    IGameObject* createGameObject() const {
         return new Enemy();
     }
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Enemy__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

@@ -160,30 +160,4 @@ vector<TileLayer*>* CollisionManager::getCollisionLayers(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //ENDs

@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "GameObject.h"
+#include "IGameObject.h"
 #include "IGameState.h"
 
 using namespace std;
@@ -28,19 +28,6 @@ protected:
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__MenuState__) */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

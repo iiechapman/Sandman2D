@@ -18,9 +18,9 @@ GameObjectFactory* GameObjectFactory::Instance(){
 }
 
 
-bool GameObjectFactory::registerType(string typeID, BaseCreator *pCreator){
+bool GameObjectFactory::registerType(string typeID, IBaseCreator *pCreator){
     
-    map<string,BaseCreator*>::iterator p_tempCreator;
+    map<string,IBaseCreator*>::iterator p_tempCreator;
     
     p_tempCreator = m_creators.find(typeID);
     
@@ -34,9 +34,9 @@ bool GameObjectFactory::registerType(string typeID, BaseCreator *pCreator){
     return true;
 }
 
-GameObject* GameObjectFactory::create(string typeID){
+IGameObject* GameObjectFactory::create(string typeID){
     
-    map<string,BaseCreator*>::iterator p_tempCreator;
+    map<string,IBaseCreator*>::iterator p_tempCreator;
     
     p_tempCreator =  m_creators.find(typeID);
     
@@ -45,6 +45,61 @@ GameObject* GameObjectFactory::create(string typeID){
         return 0;
     }
     
-    BaseCreator* pCreator = (*p_tempCreator).second;    
+    IBaseCreator* pCreator = (*p_tempCreator).second;    
     return pCreator->createGameObject();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

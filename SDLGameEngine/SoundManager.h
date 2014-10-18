@@ -20,10 +20,8 @@ using namespace std;
 /**
  * \class SoundManager
  * \brief Handles sounds and songs in game
- * \note <#Note#>
  * \author Evan Chapman
- * \version <#VersionNumber#>
- * \date <#Date#>
+ * \version 1
  * Contact: iiechapman\@gmail.com
  */
 class SoundManager{
@@ -62,3 +60,58 @@ private:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

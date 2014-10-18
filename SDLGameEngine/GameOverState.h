@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include "GameObject.h"
+#include "IGameObject.h"
 #include "MenuState.h"
 
 using namespace std;
@@ -32,7 +32,7 @@ public:
     
 private:
     static const string s_gameOverID;
-    vector<GameObject*> m_gameObjects;
+    vector<IGameObject*> m_gameObjects;
     
     static void s_RestartButton();
 
@@ -40,3 +40,58 @@ private:
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__GameOverState__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

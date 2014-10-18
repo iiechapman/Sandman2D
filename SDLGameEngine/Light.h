@@ -27,10 +27,65 @@ public:
 };
 
 
-class LightCreator : public BaseCreator{
-    GameObject* createGameObject() const {
+class LightCreator : public IBaseCreator{
+    IGameObject* createGameObject() const {
         return new Light();
     }
 };
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Light__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

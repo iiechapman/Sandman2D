@@ -64,8 +64,8 @@ void Level::checkCollisions(){
                     //Check objects in both layers
                     for (int x = 0 ; x < layer->getGameObjects()->size();x++){
                         for (int y = 0 ; y < layer2->getGameObjects()->size() ; y++){
-                            GameObject* object1 = (*layer->getGameObjects())[x];
-                            GameObject* object2 = (*layer2->getGameObjects())[y];
+                            IGameObject* object1 = (*layer->getGameObjects())[x];
+                            IGameObject* object2 = (*layer2->getGameObjects())[y];
                             
                             //If they are not the same, check if collided
                             if (object1 != object2 &&
@@ -198,46 +198,6 @@ void Level::setPlayer(Player* player){
     CollisionManager::Instance()->setCollisionLayers(m_collisionLayers);
     cout << "Player set for level\n";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

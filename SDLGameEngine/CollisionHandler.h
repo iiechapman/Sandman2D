@@ -10,15 +10,72 @@
 #define __SDLGameDevelopmentChapter1__CollisionHandler__
 
 #include <iostream>
-#include "GameObject.h"
+#include "IGameObject.h"
 
 
 class CollisionHandler{
 public:
-    static bool checkCollision(GameObject *p1, GameObject *p2);
+    static bool checkCollision(IGameObject *p1, IGameObject *p2);
     
 };
 
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__CollisionHandler__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

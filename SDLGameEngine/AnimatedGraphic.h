@@ -29,8 +29,8 @@ public:
 };
 
 
-class AnimatedGraphicCreator : public BaseCreator{
-    GameObject* createGameObject() const {
+class AnimatedGraphicCreator : public IBaseCreator{
+    IGameObject* createGameObject() const {
         return new AnimatedGraphic();
     }
 };
@@ -39,3 +39,58 @@ class AnimatedGraphicCreator : public BaseCreator{
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__AnimatedGraphic__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//END

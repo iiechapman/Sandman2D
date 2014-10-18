@@ -81,7 +81,7 @@ private:
     double m_zoom;
     
     
-    vector<GameObject*> m_gameObjects;
+    vector<IGameObject*> m_gameObjects;
     
     bool m_bRunning;
     bool m_bLiveMode = false;
@@ -94,6 +94,22 @@ private:
 
 
 #endif /* defined(__SDLGameDevelopmentChapter1__Game__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -19,7 +19,7 @@
 //TODO: need to remove old state parser code, and move to loadState()
 //Old state parser, used to actually load scenes
 bool StateParser::parseState(const char* stateFile,
-                             string stateID, vector<GameObject *>* pObjects,
+                             string stateID, vector<IGameObject *>* pObjects,
                              vector<string>* pTextureIDs, map<string,string>* pLevelFiles){
     
     
@@ -76,7 +76,7 @@ bool StateParser::parseState(const char* stateFile,
     return true;
 }
 
-
+//TODO Make generic to use any state
 //New state parser, used to load levels
 bool StateParser::loadState(const char* stateFile, PlayState* newState){
     
@@ -175,7 +175,7 @@ void StateParser::parseLevels(TiXmlElement* pStateRoot,
 }
 
 
-void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *pObjects){
+void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<IGameObject *> *pObjects){
     
     if (pStateRoot){
         for (TiXmlElement* e = pStateRoot->FirstChildElement();
@@ -205,7 +205,7 @@ void StateParser::parseObjects(TiXmlElement *pStateRoot, vector<GameObject *> *p
             params->setTextureID(textureID);
             params->setCallBackID(callBackID);
             
-            GameObject* pGameObject  =
+            IGameObject* pGameObject  =
             GameObjectFactory::Instance()->create(e->Attribute("type"));
             
             pGameObject->load(*params);
@@ -344,20 +344,6 @@ void StateParser::parseElements(TiXmlElement *pStateRoot, PlayState *currentStat
         (*currentState->getElements())[name] = params;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
