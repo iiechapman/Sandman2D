@@ -18,22 +18,28 @@ SoundManager* SoundManager::Instance(){
         s_pInstance = new SoundManager();
     }
     return s_pInstance;
-    
+
 }
 
 SoundManager::SoundManager(){
     cout << "Initializing sound Manager\n";
-    
+
 
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2,1024)==-1) {
         printf("Mix_OpenAudio: %s\n", Mix_GetError());
         exit(2);
     } else {
+<<<<<<< HEAD:SDLGameEngine/SoundManager.cpp
         cout << "opened audio" << "\n";
         cout << "Allocated " << Mix_AllocateChannels(m_totalChannels) << " channels of audio\n";
+=======
+        cout << "opened audio" << endl;
+        cout << "Allocated " << Mix_AllocateChannels(m_totalChannels)
+         << " channels of audio\n";
+>>>>>>> 301ae0cb8cf162c530d9f0f7f650df96a179f286:SDLGameEngine/systems/audio/SoundManager.cpp
     }
-    
-    
+
+
     int flags=MIX_INIT_OGG;
     int initted = Mix_Init(flags);
     if((initted & flags) != flags) {
@@ -43,12 +49,12 @@ SoundManager::SoundManager(){
     } else {
         cout << "mix init success\n";
     }
-    
+
     //Mix_VolumeMusic(100);
     Mix_Volume(0, 50);
     Mix_Volume(1, 50);
     Mix_Volume(2, 50);
-    
+
     m_eventHandler.registerHandler();
     m_eventHandler.registerEvent("play_sound");
     m_eventHandler.registerEvent("play_song");
@@ -65,7 +71,7 @@ bool SoundManager::loadSong(string fileName, string soundID){
     cout << "Loading song\n";
     if (fileName != ""){
         Mix_Music* pTempSong = Mix_LoadMUS(fileName.c_str());
-    
+
     if (pTempSong){
         m_songMap[soundID] = pTempSong;
         cout << "Loaded song succesfully\n";
@@ -74,15 +80,15 @@ bool SoundManager::loadSong(string fileName, string soundID){
     } else {
         cout << "failed to load song\n";
     }
-    
+
     }
     return false;
 }
 
 bool SoundManager::loadSound(string fileName, string soundID){
-    
+
     Mix_Chunk* pTempSound = Mix_LoadWAV(fileName.c_str());
-    
+
     if (pTempSound){
         m_soundMap[soundID] = pTempSound;
         cout << "Loaded sound succesfully\n";
@@ -90,7 +96,7 @@ bool SoundManager::loadSound(string fileName, string soundID){
     } else {
         cout << "failed to load sound\n";
     }
-    
+
     return false;
 }
 
@@ -106,7 +112,7 @@ void SoundManager::playSound(string ID){
     if (m_currentChannel >= m_totalChannels){
         m_currentChannel = 0;
     }
-    
+
     if (m_soundMap[ID]){
         Mix_PlayChannel(m_currentChannel, m_soundMap[ID], 0);
     } else {
@@ -138,33 +144,25 @@ void SoundManager::update(){
     while (m_eventHandler.hasEvents()) {
         //cout << "Handling event from SM!\n";
         Event* currentEvent = m_eventHandler.getTopEvent();
-        
+
         if (currentEvent->getEventName() == string("play_sound")){
             string argument = (*currentEvent->getArguments())[0];
             playSound(argument);
         }
-        
+
         if (currentEvent->getEventName() == string("play_song")){
             string argument = (*currentEvent->getArguments())[0];
             playSong(argument);
         }
-        
+
         if (currentEvent->getEventName() == string("song_volume")){
             string argument = (*currentEvent->getArguments())[0];
             setSongVolume(atoi(argument.c_str()));
         }
-        
-        
+
+
     }
 }
-
-
-
-
-
-
-
-
 
 
 
