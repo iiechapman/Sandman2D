@@ -29,14 +29,11 @@ SoundManager::SoundManager(){
         printf("Mix_OpenAudio: %s\n", Mix_GetError());
         exit(2);
     } else {
-<<<<<<< HEAD:SDLGameEngine/SoundManager.cpp
         cout << "opened audio" << "\n";
         cout << "Allocated " << Mix_AllocateChannels(m_totalChannels) << " channels of audio\n";
-=======
         cout << "opened audio" << endl;
         cout << "Allocated " << Mix_AllocateChannels(m_totalChannels)
          << " channels of audio\n";
->>>>>>> 301ae0cb8cf162c530d9f0f7f650df96a179f286:SDLGameEngine/systems/audio/SoundManager.cpp
     }
 
 
