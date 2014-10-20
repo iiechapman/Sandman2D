@@ -58,19 +58,19 @@ bool PauseState::onEnter(){
  
     setCallbacks(m_callbacks);
     
-    cout << "Game Objects on enter " << m_gameObjects.size() << endl;
+    cout << "Game Objects on enter " << m_gameObjects.size() << "\n";
     
     return true;
 }
 
 bool PauseState::onExit(){
     while (!m_gameObjects.empty()){
-        cout << "Game Objects size: " << m_gameObjects.size() << endl;
+        cout << "Game Objects size: " << m_gameObjects.size() << "\n";
         m_gameObjects.back()->clean();
         m_gameObjects.pop_back();
     }
     
-    cout << "Game Objects size: " << m_gameObjects.size() << endl;
+    cout << "Game Objects size: " << m_gameObjects.size() << "\n";
     
     m_gameObjects.clear();
     

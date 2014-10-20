@@ -89,8 +89,8 @@ void Player::update(){
     
     SDLGameObject::update();
     
-    //cout << "Posx: " << GetParams().getPosition().getX() << endl;
-    //cout << "Posy: " << GetParams().getPosition().getY() << endl;
+    //cout << "Posx: " << GetParams().getPosition().getX() << "\n";
+    //cout << "Posy: " << GetParams().getPosition().getY() << "\n";
 }
 
 void Player::handleEvents(){

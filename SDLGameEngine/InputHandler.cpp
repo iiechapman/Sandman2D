@@ -226,7 +226,7 @@ void InputHandler::initializeJoysticks(){
                 m_buttonStates.push_back(tempButtons);
                 m_bJoystickInitialized = true;
             } else {
-                cout << "Failed to init joystick: " << SDL_GetError() << endl;
+                cout << "Failed to init joystick: " << SDL_GetError() << "\n";
             }
         }
         SDL_JoystickEventState(SDL_ENABLE);
@@ -253,7 +253,7 @@ double InputHandler::xvalue(int joy, int stick){
 
 void InputHandler::printJoyStats(int joy){
     for (int i = 0 ; i < 15 ;i++){
-        cout << "Button " << i << ": " << getButtonState(0, i) << endl;
+        cout << "Button " << i << ": " << getButtonState(0, i) << "\n";
     }
 }
 

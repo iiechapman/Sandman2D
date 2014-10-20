@@ -27,7 +27,7 @@ void EventHandler::deregisterHandler(){
 }
 
 void EventHandler::handleEvent(Event* event){
-    //cout << "Handling event " << event << endl;
+    //cout << "Handling event " << event << "\n";
     m_events.push_back(event);
 }
 

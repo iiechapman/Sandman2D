@@ -30,7 +30,7 @@ bool StateParser::parseState(const char* stateFile,
     cout << "Loading XML file\n";
     if (! xmlDoc.LoadFile(stateFile)){
         cout << "XML ERROR-\n";
-        cout << xmlDoc.ErrorDesc() << endl;
+        cout << xmlDoc.ErrorDesc() << "\n";
         return false;
     }
     
@@ -87,7 +87,7 @@ bool StateParser::loadState(const char* stateFile, PlayState* newState){
     cout << "Loading XML file\n";
     if (! xmlDoc.LoadFile(stateFile)){
         cout << "XML ERROR-\n";
-        cout << xmlDoc.ErrorDesc() << endl;
+        cout << xmlDoc.ErrorDesc() << "\n";
         return false;
     }
     
@@ -145,8 +145,8 @@ void StateParser::parseTextures(TiXmlElement* pStateRoot,
             string fileNameAttribute = e->Attribute("filename");
             string idAttribute = e->Attribute("ID");
             
-            cout << "Found Filename: " << fileNameAttribute << endl;
-            cout << "Found ID: " << idAttribute << endl;
+            cout << "Found Filename: " << fileNameAttribute << "\n";
+            cout << "Found ID: " << idAttribute << "\n";
             
             
             pTextureIDs->push_back(idAttribute);

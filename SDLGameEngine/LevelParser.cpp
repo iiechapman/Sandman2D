@@ -96,7 +96,7 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
         finalSource = "res/art/til/" + tempSource;
     }
     
-    cout << "Final Source -\n" << finalSource << endl;
+    cout << "Final Source -\n" << finalSource << "\n";
     cout << "Loaded in as \"" << pTileSetRoot->Attribute("name") << "\"\n";
     
     //Add tileset to texture manager
@@ -128,8 +128,8 @@ void LevelParser::parseTilesets(TiXmlElement *pTileSetRoot, vector<Tileset> *pTi
     tileset.name = pTileSetRoot->Attribute("name");
     tileset.numColumns = tileset.width / (tileset.tileWidth + tileset.spacing);
     
-    cout << "Tileset info: " << endl;
-    cout << "numColumns: " << tileset.numColumns << endl;
+    cout << "Tileset info: " << "\n";
+    cout << "numColumns: " << tileset.numColumns << "\n";
     
     pTilesets->push_back(tileset);
     
@@ -147,12 +147,12 @@ void LevelParser::parseTileLayer
     
     for (TiXmlElement* e = pTileElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
-        //cout << "Checking " << e->Value() << endl;
+        //cout << "Checking " << e->Value() << "\n";
         if (e->Value() == string("properties")){
             for (TiXmlElement* p = e->FirstChildElement();
                  p != NULL; p = p->NextSiblingElement()){
                 if (p->Value() == string("property")){
-                    cout << "Now checking " << p->Value() << endl;
+                    cout << "Now checking " << p->Value() << "\n";
                     string currentProperty = p->Attribute("name");
                     
                     if (currentProperty == string("collidable")){
@@ -287,11 +287,11 @@ void LevelParser::parseObjectLayer
     pObjectLayer->setType(layerType);
     cout << "Created new " << pObjectLayer->getType() << " layer\n";
     //cout << "Current Value: ";
-    //cout << pObjectElement->FirstChildElement()->Value() << endl;
+    //cout << pObjectElement->FirstChildElement()->Value() << "\n";
     
     for (TiXmlElement* e = pObjectElement->FirstChildElement();
          e != NULL; e = e->NextSiblingElement()){
-        cout << "Checking " << e->Value() << endl;
+        cout << "Checking " << e->Value() << "\n";
         if (e->Value() == string("object")){
             int x(0), y(0), width(0), height(0), numFrames(1), callbackID(0), animSpeed(1);
             
@@ -304,7 +304,7 @@ void LevelParser::parseObjectLayer
             //Get initial values
             e->Attribute("x", &x);
             e->Attribute("y", &y);
-            //cout << "Y: " << x << "\nY: " << y << endl;
+            //cout << "Y: " << x << "\nY: " << y << "\n";
             name = e->Attribute("name");
             
             int GID = 0;
@@ -315,7 +315,7 @@ void LevelParser::parseObjectLayer
             IGameObject* pGameObject;
             if ((*newState->getElements())[name]){
                 GameObjectParams* elementParams = (*newState->getElements())[name];
-                cout << "Loaded from library: " << elementParams->getName() << endl;
+                cout << "Loaded from library: " << elementParams->getName() << "\n";
                 pGameObject = GameObjectFactory::Instance()->create(elementParams->getType());
             } else {
                 cout << "Object \"" << e->Attribute("name") << "\" not found in library!\n";
@@ -350,7 +350,7 @@ void LevelParser::parseObjectLayer
                             if (property->Attribute("name") == string("numFrames")){
                                 property->Attribute("value",&numFrames);
                                 pGameObject->GetParams().setMaxFrames(numFrames);
-                                cout << "Set frames to " << numFrames << endl;
+                                cout << "Set frames to " << numFrames << "\n";
                                 
                             } else if (property->Attribute("name") == string("lockTo")){
                                 lockTo = property->Attribute("value");
@@ -432,7 +432,7 @@ void LevelParser::parseObjectLayer
             //If object is player set game player pointer accordingly
             if (pObjectLayer->getType() == string("player")){
                 cout << "Adding player to object spot "
-                << pObjectLayer->getGameObjects()->size() << endl;
+                << pObjectLayer->getGameObjects()->size() << "\n";
                 
                 if (Game::Instance()->isLiveModeOn()){
                     pGameObject = 0;
@@ -454,7 +454,7 @@ void LevelParser::parseObjectLayer
             
             if (pGameObject){
                 pObjectLayer->getGameObjects()->push_back(pGameObject);
-                cout << "Created new " << pGameObject->GetParams().getType() << endl;
+                cout << "Created new " << pGameObject->GetParams().getType() << "\n";
             }
         }
     }

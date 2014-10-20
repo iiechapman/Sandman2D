@@ -44,11 +44,11 @@ vector<string>* Event::getArguments(){
 }
 
 void Event::printOut(){
-    cout << "Event--" << endl;
-    cout << "Name: " << m_eventName << endl;
-    cout << "Caller: " << m_caller << endl;
-    cout << "Target: " << m_target << endl;
-    cout << "ArgC: " << m_argCount << endl;
+    cout << "Event--\n" ;
+    cout << "Name: " << m_eventName << "\n";
+    cout << "Caller: " << m_caller << "\n";
+    cout << "Target: " << m_target << "\n";
+    cout << "ArgC: " << m_argCount << "\n";
 }
 
 

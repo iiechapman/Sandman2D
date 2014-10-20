@@ -62,10 +62,10 @@ void GameObjectParams::operator=(GameObjectParams& rhs){
 }
 
 void GameObjectParams::printOut(){
-    cout << "Parameters-" << endl;
-    cout << "X: " << getX() << " " << "Y: " << getY() << endl;
-    cout << "Texture ID: " << getTextureID() << endl;
-    cout << "Callback ID: " << getCallbackID() << endl;
+    cout << "Parameters-\n";
+    cout << "X: " << getX() << " " << "Y: " << getY() << "\n";
+    cout << "Texture ID: " << getTextureID() << "\n";
+    cout << "Callback ID: " << getCallbackID() << "\n";
     
 }
 

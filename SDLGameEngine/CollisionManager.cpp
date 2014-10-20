@@ -65,7 +65,7 @@ void CollisionManager::checkPlayerTileCollision
                         pTileLayer->getTileSize()));
             
             //Check tile bounds
-            //cout << pTileLayer->getNumColumns() << endl;
+            //cout << pTileLayer->getNumColumns() << "\n";
             
             if ((tileRow + y )< pTileLayer->getNumRows() &&
                 (tileColumn + x) < pTileLayer->getNumColumns()){
@@ -87,7 +87,7 @@ void CollisionManager::checkPlayerTileCollision
                        / pTileLayer->getTileSize());
             
             //Check tile bounds
-            //cout << pTileLayer->getNumColumns() << endl;
+            //cout << pTileLayer->getNumColumns() << "\n";
             
             if ((tileRow + y ) > 0 &&
                 (tileColumn + x) > 0){

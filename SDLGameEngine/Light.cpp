@@ -25,7 +25,7 @@ void Light::load(GameObjectParams params){
 
 void Light::draw(){
     SDLGameObject::draw();
-    //cout << "x: " << GetParams().getX() << endl;
+    //cout << "x: " << GetParams().getX() << "\n";
 }
 
 void Light::collision(){

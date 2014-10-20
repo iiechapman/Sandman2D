@@ -35,12 +35,12 @@ void Enemy::draw(){
 }
 
 void Enemy::update(){
-    //cout << "Total Frames: " << GetParams().getTotalFrames() << " Speed: " << GetParams().getAnimSpeed() << endl;
+    //cout << "Total Frames: " << GetParams().getTotalFrames() << " Speed: " << GetParams().getAnimSpeed() << "\n";
     
     //Check events
     while (GetParams().getEvents()->getSize() > 0) {
         Event* event = GetParams().getEvents()->getTopEvent();
-        cout << "Checking event " << event->getEventName() << endl;
+        cout << "Checking event " << event->getEventName() << "\n";
         //Collect event moves object away
         if (event->getEventName() == string("collect")){
             GetParams().getPosition().setX(-99999);

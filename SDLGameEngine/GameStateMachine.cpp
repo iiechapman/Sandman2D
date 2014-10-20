@@ -10,7 +10,7 @@
 
 void GameStateMachine::update(){
     if (!m_gameStates.empty()){
-        //cout << "!!Current State: " << m_gameStates.back()->getStateID() << endl;
+        //cout << "!!Current State: " << m_gameStates.back()->getStateID() << "\n";
         m_gameStates.back()->update();
     }
 }
@@ -41,14 +41,14 @@ void GameStateMachine::changeState(IGameState* pState){
             //cout << "Same state!\n";
             return;
         }
-        cout << "DELETING " << m_gameStates.back()->getStateID() << endl;
+        cout << "DELETING " << m_gameStates.back()->getStateID() << "\n";
         popState();
     }
     
     pState->onEnter();
     
     m_gameStates.push_back(pState);
-    cout << "STARTING " << m_gameStates.back()->getStateID() << endl;
+    cout << "STARTING " << m_gameStates.back()->getStateID() << "\n";
     
 }
 

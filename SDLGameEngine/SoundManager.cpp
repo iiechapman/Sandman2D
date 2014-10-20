@@ -29,7 +29,7 @@ SoundManager::SoundManager(){
         printf("Mix_OpenAudio: %s\n", Mix_GetError());
         exit(2);
     } else {
-        cout << "opened audio" << endl;
+        cout << "opened audio" << "\n";
         cout << "Allocated " << Mix_AllocateChannels(m_totalChannels) << " channels of audio\n";
     }
     

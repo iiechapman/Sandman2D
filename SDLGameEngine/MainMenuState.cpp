@@ -40,7 +40,7 @@ bool MainMenuState::onEnter(){
     
     setCallbacks(m_callbacks);
     
-    cout << "Game Objects on enter " << m_gameObjects.size() << endl;
+    cout << "Game Objects on enter " << m_gameObjects.size() << "\n";
     
     cout << "Entering Main Menu State\n";
 
@@ -69,7 +69,7 @@ void MainMenuState::setCallbacks(const vector<Callback> &callbacks){
         //Check if game object is a button, set callback appropriately
         if (dynamic_cast<MenuButton*>(m_gameObjects[i])){
             MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
-            cout << "Callback set to " << pButton->getCallbackID() << endl;
+            cout << "Callback set to " << pButton->getCallbackID() << "\n";
             pButton->setCallback(m_callbacks[pButton->getCallbackID()]);
         }
     }
@@ -84,12 +84,12 @@ bool MainMenuState::onExit(){
     }
     
     while (!m_gameObjects.empty()){
-        cout << "Game Objects size: " << m_gameObjects.size() << endl;
+        cout << "Game Objects size: " << m_gameObjects.size() << "\n";
         m_gameObjects.back()->clean();  
         m_gameObjects.pop_back();
     }
     
-    cout << "Game Objects size: " << m_gameObjects.size() << endl;
+    cout << "Game Objects size: " << m_gameObjects.size() << "\n";
     
     m_gameObjects.clear();
 

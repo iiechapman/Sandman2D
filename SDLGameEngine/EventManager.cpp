@@ -43,7 +43,7 @@ void EventManager::handleEvent
 
 void EventManager::handleEvent(vector<Event*>* events){
     for (int i = 0 ; i < events->size() ; i++){
-        //cout << "Num of Events: " << events->size() << endl;
+        //cout << "Num of Events: " << events->size() << "\n";
         //cout << "Handling #" << i << " ";
         //(*events)[i]->printOut();
         

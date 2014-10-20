@@ -27,10 +27,10 @@ bool TextureManager::load(string fileName, string id,
         SDL_Surface* pTempSurface = IMG_Load(fileName.c_str());
         
         if (pTempSurface == 0){
-            cout << "ERROR - Could not load " << fileName.c_str() << endl;
+            cout << "ERROR - Could not load " << fileName.c_str() << "\n";
             return false;
         } else {
-            cout << "Loaded Texture: " << fileName.c_str() << endl;
+            cout << "Loaded Texture: " << fileName.c_str() << "\n";
         }
         
         SDL_Texture* pTexture =

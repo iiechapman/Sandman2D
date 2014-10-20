@@ -164,9 +164,9 @@ bool PlayState::onExit(){
     cout << "Exiting play state\n";
     
     //    while (!m_gameObjects.empty()){
-    //        cout << "Game Objects size: " << m_gameObjects.size() << endl;
+    //        cout << "Game Objects size: " << m_gameObjects.size() << "\n";
     //        if (m_gameObjects.back()->GetParams().getName() != "Player"){
-    //            cout << "Deleting " <<m_gameObjects.back()->GetParams().getName() << endl;
+    //            cout << "Deleting " <<m_gameObjects.back()->GetParams().getName() << "\n";
     //            m_gameObjects.back()->clean();
     //            m_gameObjects.pop_back();
     //
@@ -181,7 +181,7 @@ bool PlayState::onExit(){
         //TextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
     }
     
-    cout << "Game Objects size: " << m_gameObjects.size() << endl;
+    cout << "Game Objects size: " << m_gameObjects.size() << "\n";
     
     //m_gameObjects.clear();
     
@@ -200,7 +200,7 @@ void PlayState::loadNextLevel(){
         
         m_currentLevel++;
         
-        cout << "Max Levels = " << pLevelFiles.size() << endl;
+        cout << "Max Levels = " << pLevelFiles.size() << "\n";
         if (m_currentLevel > pLevelFiles.size()-1){
             m_currentLevel = 0;
         }
