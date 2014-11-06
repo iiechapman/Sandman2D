@@ -1,3 +1,6 @@
+Note: This is the current project I am working on
+
+
 SDLEngine
 
 Welcome to the main page for the Sandman 2D Game Engine.
