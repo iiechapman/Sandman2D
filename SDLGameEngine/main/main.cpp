@@ -6,9 +6,14 @@
 #include <unistd.h>
 #include <cstdio>
 
+//This is needed to detect bundle information for mac app
+#ifdef __APPLE__
+#include "CoreFoundation/CoreFoundation.h"
+#endif
 
-const int VERSION_NUMBER = 0;
-const int BUILD_NUMBER = 3;
+
+//const int VERSION_NUMBER = 0;
+//const int BUILD_NUMBER = 3;
 const int DESIRED_FPS = 60;
 const int DELAY_TIME = 1000.0f / DESIRED_FPS;
 const int GAME_WIDTH = 1024;
@@ -21,14 +26,33 @@ int totalFrames = 0;
 int FPS = 0;
 
 void PrintWorkingDirectory();
+string GetWorkingDirectory();
 void CaptureStartTime();
 void CaptureTickTime();
 void Sync();
 
 int main(int argc, char* args[]){
     
+    // ----------------------------------------------------------------------------
+    // This makes relative paths work in C++ in Xcode by changing directory to the Resources folder inside the .app bundle
+#ifdef __APPLE__
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+    {
+        // error!
+    }
+    CFRelease(resourcesURL);
+    
+    chdir(path);
+    std::cout << "Current Path: " << path << std::endl;
+#endif
+    // ----------------------------------------------------------------------------
+    
+    
     //Capture and print the current working directory
-    PrintWorkingDirectory();
+    //PrintWorkingDirectory();
     
     //If Game Inititalizes, begin game loop
     if (Game::Instance()->init
@@ -39,10 +63,10 @@ int main(int argc, char* args[]){
             
             //Begin Game Loop
             while(Game::Instance()->isRunning()){
-                title = "Sandman Engine Build: "
-                + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
-                + " FPS: "+ to_string(FPS);
-                
+                //                title = "Sandman Engine Build: "
+                //                + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
+                //                + " FPS: "+ to_string(FPS);
+                title = GetWorkingDirectory();
                 CaptureStartTime();
                 
                 //Game Loop
@@ -73,6 +97,13 @@ void PrintWorkingDirectory(){
     getcwd(filenameMax, sizeof(filenameMax));
     cout << "Current working directory:\n" << filenameMax << "\n";
 }
+
+string GetWorkingDirectory(){
+    char filenameMax[FILENAME_MAX];
+    getcwd(filenameMax, sizeof(filenameMax));
+    return filenameMax;
+}
+
 
 
 //Capture time before update
