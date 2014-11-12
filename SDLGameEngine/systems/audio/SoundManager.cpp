@@ -30,7 +30,8 @@ SoundManager::SoundManager(){
         exit(2);
     } else {
         cout << "opened audio" << "\n";
-        cout << "Allocated " << Mix_AllocateChannels(m_totalChannels) << " channels of audio\n";
+        cout << "Allocated " << Mix_AllocateChannels(m_totalChannels);
+        cout << " channels of audio\n";
         cout << "opened audio" << endl;
         cout << "Allocated " << Mix_AllocateChannels(m_totalChannels)
          << " channels of audio\n";
