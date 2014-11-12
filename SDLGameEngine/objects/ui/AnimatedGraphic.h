@@ -30,7 +30,7 @@ public:
 
 
 class AnimatedGraphicCreator : public IBaseCreator{
-    IGameObject* createGameObject() const {
+    IGameObject* createGameObject() const final {
         return new AnimatedGraphic();
     }
 };
