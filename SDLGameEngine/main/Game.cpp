@@ -54,17 +54,18 @@ bool Game::init(const char* title,
                 return false; //Renderer init fail
             }
             
-        } else {
+        } else {//SDL_CreateWindow() fail
             cout << "Window Creation fail \n";
-            return false; //Window creation fail
+            return false;
         }
-    } else {
-        cout << "SDL Init fail\n";
-        return false; //SDL init fail
+    } else {//SDL_Init() fail
+        cout << "SDL_Init fail\n";
+        return false;
     }
     
     cout << "SDL Init success\n";
 
+    //Register Object Factories for use by scripts
     GameObjectFactory::Instance()->registerType("MenuButton", new MenuButtonCreator());
     GameObjectFactory::Instance()->registerType("Light", new LightCreator());
     GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());

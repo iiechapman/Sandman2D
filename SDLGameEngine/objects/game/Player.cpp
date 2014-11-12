@@ -60,7 +60,7 @@ void Player::draw(){
 }
 
 void Player::collision(){
-    //m_params.setX(m_params.getX() - m_params.getVelocity().getX());
+    //m_params.setX(m_params.g etX() - m_params.getVelocity().getX());
     m_params.setY(m_params.getY() - m_params.getVelocity().getY());
     
     //m_params.getVelocity().setX(0);
@@ -285,7 +285,7 @@ void Player::handlePhysics(){
     
     
     //Jetting
-    if (m_bIsJetting && !(GetParams().getVelocity().getY()==0) && m_currentFuel > m_fuelCost){
+    if (m_bIsJetting && !(GetParams().getVelocity().getY() == 0 ) && m_currentFuel > m_fuelCost){
         m_currentFuel -= m_fuelCost;
         m_currentGravity = m_jetGravity;
         GetParams().getVelocity().setY(GetParams().getVelocity().getY()-m_jetSpeed);

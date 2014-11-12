@@ -29,6 +29,7 @@ CollisionManager* CollisionManager::Instance(){
     return s_pInstance;
 }
 
+//This function needs to be broken down into smaller pieces
 void CollisionManager::checkPlayerTileCollision
 (Player* pPlayer, const vector<TileLayer*> &collisionLayers){
 
@@ -37,20 +38,22 @@ void CollisionManager::checkPlayerTileCollision
     for (vector<TileLayer*>::const_iterator it = collisionLayers.begin();
          it != collisionLayers.end() ; it++){
         
+        //Grab current tilelayer
         TileLayer* pTileLayer = (*it);
+        //Grab current tiles
         vector<vector<int>> tiles = pTileLayer->getTileIDs();
         
         //Get layers position
         Vector2D<double> layerPos = pTileLayer->getPosition();
 
-        double x,y,tileColumn,tileRow,tileID = 0;
-        
         //Calculate position on tile map
+        double x = 0, y = 0;
         x = ((layerPos.getX()) / pTileLayer->getTileSize());
         y = ((layerPos.getY()) / pTileLayer->getTileSize());
     
         
         //If moving upwards or rightwards
+        double tileColumn = 0, tileRow = 0,tileID = 0;
         if (pPlayer->GetParams().getVelocity().getX() > 0.0f ||
             pPlayer->GetParams().getVelocity().getY() > 0.0f ){
             
@@ -66,7 +69,6 @@ void CollisionManager::checkPlayerTileCollision
             
             //Check tile bounds
             //cout << pTileLayer->getNumColumns() << "\n";
-            
             if ((tileRow + y )< pTileLayer->getNumRows() &&
                 (tileColumn + x) < pTileLayer->getNumColumns()){
                 tileID = tiles[tileRow + y][tileColumn + x];
@@ -75,9 +77,10 @@ void CollisionManager::checkPlayerTileCollision
             }
         
             //If moving downwards or leftwards
+            //Change to get params new method "Moving Down
         } else if (pPlayer->GetParams().getVelocity().getX() < 0.0f ||
                    pPlayer->GetParams().getVelocity().getY() < 0.0f ){
-            
+            //Get Current TileColum
             tileColumn = ((pPlayer->GetParams().getX() +
                             Camera::Instance()->getPosition().getX())
                           / pTileLayer->getTileSize());
@@ -95,8 +98,6 @@ void CollisionManager::checkPlayerTileCollision
             } else {
                 tileID = 0;
             }
-            
-        
         }
         //If tileID is not blank, collision occured
         if (tileID != 0 ){

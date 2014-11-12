@@ -12,6 +12,7 @@
 /*
  TODO:
  Add SDL "GameController" code to update joystick
+ Fix Haptic feedback, rumble is not working
  
  */
 
@@ -40,7 +41,7 @@ public:
     void clean();
     
     //Keyboard Handling
-    bool isKeyDown(SDL_Scancode key) const;
+    const bool isKeyDown(SDL_Scancode key) const;
     
     //Mouse Handling
     Vector2D<double>* getMousePosition();

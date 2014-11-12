@@ -138,7 +138,7 @@ void InputHandler::updateKeys(){
     m_keystates = SDL_GetKeyboardState(0);
 }
 
-bool InputHandler::isKeyDown(SDL_Scancode key) const {
+const bool InputHandler::isKeyDown(SDL_Scancode key) const {
     if (m_keystates != NULL){
         return m_keystates[key];
     }
@@ -203,7 +203,7 @@ void InputHandler::initializeJoysticks(){
         SDL_InitSubSystem(SDL_INIT_JOYSTICK);
     }
     
-//    if (SDL_WasInit(SDL_INIT_HAPTIC)==0){
+//    if (SDL_WasInit(SDL_INIT_HAPTIC) == 0 ){
 //        SDL_InitSubSystem(SDL_INIT_HAPTIC);
 //    }
 //    
@@ -216,7 +216,8 @@ void InputHandler::initializeJoysticks(){
                 
                 m_joysticks.push_back(joy);
                 m_joystickValues.push_back
-                (make_pair(new Vector2D<double>(0,0), new Vector2D<double>(0,0)));
+                (make_pair(new Vector2D<double>(0,0),
+                           new Vector2D<double>(0,0)));
                 
                 vector<bool> tempButtons;
                 
@@ -335,8 +336,8 @@ void InputHandler::onJoystickMotion(SDL_Event &event){
     
 }
 
-
-
+//TODO: Fix Rumble
+//Rumble is not working currently
 int InputHandler::rumbleJoystick(){
 //    //Try to init haptic
 //    SDL_HapticEffect effect;
@@ -353,7 +354,7 @@ int InputHandler::rumbleJoystick(){
 //    }
 //    
 //    // See if it can do sine waves
-//    if ((SDL_HapticQuery(haptic) & SDL_HAPTIC_SINE)==0) {
+//    if ((SDL_HapticQuery(haptic) & SDL_HAPTIC_SINE)== 0 ) {
 //        SDL_HapticClose(haptic); // No sine effect
 //        cout << "No sine haptic!\n";
 //        return -1;
@@ -379,20 +380,6 @@ int InputHandler::rumbleJoystick(){
 //    SDL_HapticDestroyEffect(haptic, effect_id);
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

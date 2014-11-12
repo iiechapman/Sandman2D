@@ -15,7 +15,7 @@ Camera* Camera::s_pCamera = 0;
 void Camera::update(){
     
     //Set rumble factor
-    if (m_rumbleVertical != 0 && m_rumbleHorizontal !=0){
+    if (m_rumbleVertical != 0 && m_rumbleHorizontal != 0){
         
         m_currentHorRumble = -rand() % m_rumbleHorizontal + rand() % m_rumbleHorizontal;
         m_currentVertRumble =-rand() % m_rumbleVertical + rand() % m_rumbleVertical;
@@ -32,13 +32,11 @@ void Camera::reset(){
 const Vector2D<double> Camera::getPosition(){
     
     //If camera target is set, follow it
-    if (m_pTarget !=0){
+    if (m_pTarget != 0 ){
         Vector2D<double> pos(((m_pTarget->getX()) -
                               ((Game::Instance()->getGameWidth() / Game::Instance()->getGlobalZoom())/2)),
                      (m_pTarget->getY()) - ((Game::Instance()->getGameHeight() / Game::Instance()->getGlobalZoom())/2));
         
-        
-    
         //Bounds for camera
         if (pos.getX() < 0){
             pos.setX(0);
@@ -47,7 +45,6 @@ const Vector2D<double> Camera::getPosition(){
         if (pos.getY() < 0){
             pos.setY(0);
         }
-        
         
         //Check if camera has scrolled past tiles, rework this equation
         if (pos.getX() > Game::Instance()->getMapWidth() -
@@ -64,7 +61,7 @@ const Vector2D<double> Camera::getPosition(){
         }
     
         
-        //Add rumble
+        //Add rumble, this should be seperated as an object
         pos.setX(pos.getX() + m_currentHorRumble);
         pos.setY(pos.getY() + m_currentVertRumble);
         

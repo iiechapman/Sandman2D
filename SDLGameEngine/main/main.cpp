@@ -28,6 +28,7 @@ void Sync();
 int main(int argc, char* args[]){
     
     //Capture and print the current working directory
+    //For testing purposes
     PrintWorkingDirectory();
     
     //If Game Inititalizes, begin game loop
