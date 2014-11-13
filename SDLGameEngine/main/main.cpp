@@ -52,12 +52,9 @@ int main(int argc, char* args[]){
     
     
     //Capture and print the current working directory
-<<<<<<< HEAD
     //For testing purposes
     PrintWorkingDirectory();
-=======
     //PrintWorkingDirectory();
->>>>>>> fc025603d6e5b22bc300c29796db09996d84eb40
     
     //If Game Inititalizes, begin game loop
     if (Game::Instance()->init
