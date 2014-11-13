@@ -52,10 +52,8 @@ int main(int argc, char* args[]){
     
     
     //Capture and print the current working directory
-    //For testing purposes
     PrintWorkingDirectory();
-    //PrintWorkingDirectory();
-    
+
     //If Game Inititalizes, begin game loop
     if (Game::Instance()->init
         ("Sandman Engine",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
