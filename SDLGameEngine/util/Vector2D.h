@@ -65,8 +65,7 @@ private:
 template <class Type> Vector2D<Type>::Vector2D(): Vector2D<Type>(0,0){
 }
 
-template <class Type> Vector2D<Type>::~Vector2D(){
-
+template <class Type> Vector2D<Type>::~Vector2D() {
     
     //cout << "Deleted vector2d\n";
 }

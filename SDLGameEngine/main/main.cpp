@@ -23,46 +23,37 @@ const int DESIRED_FPS = 60;
 const int DELAY_TIME = 1000.0f / DESIRED_FPS;
 const int GAME_WIDTH = 1024;
 const int GAME_HEIGHT = 576;
+const int INIT_FAIL = -1;
+const int INIT_SUCCESS = 0;
 
-char*   title;
+char    title[FILENAME_MAX];
 Uint32  frameStart, frameTime;
 Uint32  secondTimer = 0;
 int     totalFrames = 0;
 int     FPS = 0;
 
 void  PrintWorkingDirectory();
-char* GetWorkingDirectory();
+void  GetWorkingDirectory();
 void  CaptureWorkingDirectory(char* buffer);
 void  CaptureStartTime();
 void  CaptureTickTime();
 void  Sync();
 
-// This makes relative paths work in C++ in Xcode by changing directory to the
-// Resources folder inside the .app bundle
+
 int main(int argc, char* args[]) {
 #ifdef __APPLE__
-  CFBundleRef mainBundle = CFBundleGetMainBundle();
-  CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
-  char path[PATH_MAX];
-  if (!CFURLGetFileSystemRepresentation
-      (resourcesURL, TRUE, reinterpret_cast<UInt8*>(path), PATH_MAX)) {
-    // error!
-  }
-  CFRelease(resourcesURL);
-
-  chdir(path);
-  std::cout << "Current Path: " << path << std::endl;
+  cout << "Checking Apple Directory structure\n";
+  GetWorkingDirectory();
 #endif
-
-  // Capture and print the current working directory
+  
   PrintWorkingDirectory();
-
+  
   // If Game Inititalizes, begin game loop
   if (Game::Instance()->init
       ("Sandman Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
        GAME_WIDTH, GAME_HEIGHT, SDL_RENDERER_ACCELERATED)) {
         cout << "Game init success\n";
-
+        
         // Begin Game Loop
         while (Game::Instance()->isRunning()) {
           // title = "Sandman Engine Build: "
@@ -70,26 +61,24 @@ int main(int argc, char* args[]) {
           // + " FPS: "+ to_string(FPS);
           CaptureWorkingDirectory(title);
           CaptureStartTime();
-
+          
           // Game Loop
           Game::Instance()->handleEvents();
           Game::Instance()->update();
           Camera::Instance()->update();
           Game::Instance()->render();
-
+          
           CaptureTickTime();
           Sync();
-        }
-        // End Game Loop
+        }  // End Game Loop
         cout << "Game ended, cleaning up\n";
         Game::Instance()->clean();
+        
       } else {
-        // If game doesn't initialize, exit
         cout << "Game init fail - " << SDL_GetError() << "\n";
-        return -1;
+        return INIT_FAIL;
       }
-
-  return 0;
+  return INIT_SUCCESS;
 }
 
 
@@ -114,11 +103,12 @@ void CaptureTickTime() {
   // Count frames and frametime after update
   totalFrames++;
   frameTime = SDL_GetTicks() - frameStart;
-
+  
   // Count seconds
   secondTimer += frameTime;
   if (secondTimer >= 1000) {
     FPS = totalFrames;
+    //printf("Title: %s", title);
     Game::Instance()->setTitle(title);
     secondTimer = 0;
     totalFrames = 0;
@@ -132,7 +122,21 @@ void Sync() {
   }
 }
 
-
+// This makes relative paths work in C++ in Xcode by changing directory to the
+// Resources folder inside the .app bundle
+void GetWorkingDirectory() {
+  CFBundleRef mainBundle = CFBundleGetMainBundle();
+  CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+  char path[PATH_MAX];
+  if (!CFURLGetFileSystemRepresentation
+      (resourcesURL, TRUE, reinterpret_cast<UInt8*>(path), PATH_MAX)) {
+    // error!
+  }
+  CFRelease(resourcesURL);
+  
+  chdir(path);
+  std::cout << "Current Path: " << path << std::endl;
+}
 
 
 
