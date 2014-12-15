@@ -25,7 +25,8 @@ bool Game::init(const char* title,
                 int width, int height, int flags){
 
     
-    if (SDL_Init(SDL_INIT_VIDEO) == 0) {
+    //Initialize video
+    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         //Successful init
         cout << "SDL Init successful\n";
         
