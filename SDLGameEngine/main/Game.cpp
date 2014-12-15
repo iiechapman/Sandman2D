@@ -14,6 +14,7 @@
 #include "MainMenuState.h"
 #include "PlayState.h"
 #include "SoundManager.h"
+#include "GameObjectFactory.h"
 
 
 using namespace std;
@@ -23,14 +24,46 @@ Game* Game::s_pInstance = 0;
 bool Game::init(const char* title,
                 int xpos, int ypos,
                 int width, int height, int flags){
-  
-  
-  if (SDL_Init(SDL_INIT_VIDEO) == 0) {
-    //Successful init
-    cout << "SDL Init successful\n";
+
     
-    m_gameWidth = width;
-    m_gameHeight = height;
+    //Initialize video
+    if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+        //Successful init
+        cout << "SDL Init successful\n";
+      
+        m_gameWidth = width;
+        m_gameHeight = height;
+        
+        setGlobalZoom(3.0);
+        
+        m_pWindow = SDL_CreateWindow(title, xpos, ypos,
+                                     width, height, flags);
+
+        //Window creation successful
+        if (m_pWindow != 0){
+            cout << "Window creation success\n";
+            m_pRenderer = SDL_CreateRenderer
+            (m_pWindow, -1, SDL_RENDERER_ACCELERATED |
+             SDL_RENDERER_PRESENTVSYNC
+             | SDL_RENDERER_TARGETTEXTURE);
+            
+            //Render creation successful
+            if (m_pRenderer != 0){
+                cout << "Renderer creation success\n";
+                SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
+            } else {
+                cout << "Renderer creation fail\n";
+                return false; //Renderer init fail
+            }
+            
+        } else {//SDL_CreateWindow() fail
+            cout << "Window Creation fail \n";
+            return false;
+        }
+    } else {//SDL_Init() fail
+        cout << "SDL_Init fail\n";
+        return false;
+    }
     
     setGlobalZoom(3.0);
     
@@ -58,12 +91,17 @@ bool Game::init(const char* title,
       cout << "Window Creation fail \n";
       return false;
     }
-  } else {//SDL_Init() fail
-    cout << "SDL_Init fail\n";
-    return false;
-  }
-  
+
   cout << "SDL Init success\n";
+  
+  //Hook to Lua environment
+  m_pScriptHandler = new ScriptHandler();
+  m_pScriptHandler->Init();
+  m_pScriptHandler->Load();
+  m_pScriptHandler->CallFunction("greet");
+  m_pScriptHandler->SendValue(22);
+  m_pScriptHandler->CallFunction("valueTest");
+  
   
   //Register Object Factories for use by scripts
   GameObjectFactory::Instance()->registerType

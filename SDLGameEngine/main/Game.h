@@ -15,7 +15,7 @@
 #include "Player.h"
 #include "Camera.h"
 #include "GameStateMachine.h"
-
+#include "ScriptHandler.h"
 
 /**
  * \class Game
@@ -89,6 +89,8 @@ private:
   Player* m_Player;
   
   GameStateMachine* m_pGameStateMachine;
+  
+  ScriptHandler* m_pScriptHandler;
 };
 
 
