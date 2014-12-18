@@ -27,7 +27,7 @@ public:
   void Init();
   void Load();
   void Close();
-  void SendValue(int value);
+  void SendValue(int value, const char* valueName);
   void CallFunction(const char* function);
   void ReportError();
   

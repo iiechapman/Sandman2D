@@ -27,18 +27,17 @@ const int INIT_FAIL = -1;
 const int INIT_SUCCESS = 0;
 
 char    title[FILENAME_MAX];
+char    FILE_PATH[FILENAME_MAX];
 Uint32  frameStart, frameTime;
 Uint32  secondTimer = 0;
 int     totalFrames = 0;
 int     FPS = 0;
 
 void  PrintWorkingDirectory();
-<<<<<<< HEAD
 void  CaptureAppleDirectory();
-char* GetWorkingDirectory();
-=======
+//char* GetWorkingDirectory();
+
 void  GetWorkingDirectory();
->>>>>>> b2baba4cf7e66a7143dc18936d9d961e2b2c24d2
 void  CaptureWorkingDirectory(char* buffer);
 void  CaptureStartTime();
 void  CaptureTickTime();
@@ -46,52 +45,15 @@ void  Sync();
 
 
 int main(int argc, char* args[]) {
-<<<<<<< HEAD
     
-    // Capture and print the current working directory
-    CaptureAppleDirectory();
-    PrintWorkingDirectory();
-    
-    // If Game Inititalizes, begin game loop
-    if (Game::Instance()->init
-        ("Sandman Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-         GAME_WIDTH, GAME_HEIGHT, SDL_RENDERER_ACCELERATED)) {
-            cout << "Game init success\n";
-            
-            // Begin Game Loop
-            while (Game::Instance()->isRunning()) {
-                // title = "Sandman Engine Build: "
-                // + to_string(VERSION_NUMBER) + "." + to_string(BUILD_NUMBER)
-                // + " FPS: "+ to_string(FPS);
-                CaptureWorkingDirectory(title);
-                CaptureStartTime();
-                
-                // Game Loop
-                Game::Instance()->handleEvents();
-                Game::Instance()->update();
-                Camera::Instance()->update();
-                Game::Instance()->render();
-                
-                CaptureTickTime();
-                Sync();
-            }
-            // End Game Loop
-            cout << "Game ended, cleaning up\n";
-            Game::Instance()->clean();
-        } else {
-            // If game doesn't initialize, exit
-            cout << "Game init fail - " << SDL_GetError() << "\n";
-            return -1;
-        }
-    
-    return 0;
-=======
+    //Check for apple directory
 #ifdef __APPLE__
-  cout << "Checking Apple Directory structure\n";
-  GetWorkingDirectory();
+    cout << "Checking Apple Directory structure\n";
+    CaptureAppleDirectory();
+    GetWorkingDirectory();
 #endif
-  
-  PrintWorkingDirectory();
+    
+    PrintWorkingDirectory();
   
   // If Game Inititalizes, begin game loop
   if (Game::Instance()->init
@@ -124,7 +86,7 @@ int main(int argc, char* args[]) {
         return INIT_FAIL;
       }
   return INIT_SUCCESS;
->>>>>>> b2baba4cf7e66a7143dc18936d9d961e2b2c24d2
+
 }
 
 
@@ -136,9 +98,12 @@ void PrintWorkingDirectory() {
 }
 
 void CaptureWorkingDirectory(char* buffer) {
+
     getcwd(buffer, sizeof(buffer));
-    if (!title){
-        title = 0;
+    
+    cout << "Directory: " << buffer << "\n";
+    if (!buffer){
+        buffer = 0;
     }
 }
 
@@ -149,7 +114,7 @@ void CaptureStartTime() {
 
 // Count frames, frametime, and seconds after update
 void CaptureTickTime() {
-<<<<<<< HEAD
+
     // Count frames and frametime after update
     totalFrames++;
     frameTime = SDL_GetTicks() - frameStart;
@@ -159,10 +124,11 @@ void CaptureTickTime() {
     if (secondTimer >= 1000) {
         FPS = totalFrames;
         Game::Instance()->setTitle(title);
+
         secondTimer = 0;
         totalFrames = 0;
     }
-=======
+
   // Count frames and frametime after update
   totalFrames++;
   frameTime = SDL_GetTicks() - frameStart;
@@ -176,7 +142,7 @@ void CaptureTickTime() {
     secondTimer = 0;
     totalFrames = 0;
   }
->>>>>>> b2baba4cf7e66a7143dc18936d9d961e2b2c24d2
+
 }
 
 // Delay processing to match desired FPS
@@ -186,7 +152,7 @@ void Sync() {
     }
 }
 
-<<<<<<< HEAD
+
 
 void CaptureAppleDirectory(){
 #ifdef __APPLE__
@@ -200,10 +166,12 @@ void CaptureAppleDirectory(){
     CFRelease(resourcesURL);
     
     chdir(path);
-    std::cout << "Current Path: " << path << std::endl;
+    std::cout << "Current Path: " << path << "\n";
 #endif
 }
-=======
+
+
+
 // This makes relative paths work in C++ in Xcode by changing directory to the
 // Resources folder inside the .app bundle
 void GetWorkingDirectory() {
@@ -216,11 +184,11 @@ void GetWorkingDirectory() {
   }
   CFRelease(resourcesURL);
   
-  chdir(path);
-  std::cout << "Current Path: " << path << std::endl;
+    chdir(path);
+  std::cout << "Current Path: " << path << "\n";
 }
 
->>>>>>> b2baba4cf7e66a7143dc18936d9d961e2b2c24d2
+
 
 
 
