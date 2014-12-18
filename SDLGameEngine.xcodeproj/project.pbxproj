@@ -10,8 +10,8 @@
 		4E1F09E31958CD2300F8C945 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E1F09E21958CD2300F8C945 /* libz.dylib */; };
 		4E7D79A5195B6FBE009A4353 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E7D79A4195B6FBE009A4353 /* SDL2_mixer.framework */; };
 		4E92176D1A3E9C65007074F4 /* luatest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E92176B1A3E9C65007074F4 /* luatest.cpp */; };
-		4EA606731A3F5641006668FD /* ScriptHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EA606711A3F5641006668FD /* ScriptHandler.cpp */; };
-		4EA606751A3F5AA4006668FD /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA606741A3F5AA4006668FD /* liblua.a */; };
+		4E92176E1A3E9C65007074F4 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E92176C1A3E9C65007074F4 /* liblua.a */; };
+		4E9217711A40CC07007074F4 /* ScriptHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4E92176F1A40CC07007074F4 /* ScriptHandler.cpp */; };
 		4ED5B7C519F4348C00042E67 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B7C219F4348C00042E67 /* Game.cpp */; };
 		4ED5B7C619F4348C00042E67 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B7C419F4348C00042E67 /* main.cpp */; };
 		4ED5B7C919F4349800042E67 /* StateParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B7C719F4349800042E67 /* StateParser.cpp */; };
@@ -80,9 +80,9 @@
 		4E9217691A3E9C65007074F4 /* luaconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = luaconf.h; path = script/3rdparty/lua/luaconf.h; sourceTree = "<group>"; };
 		4E92176A1A3E9C65007074F4 /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lualib.h; path = script/3rdparty/lua/lualib.h; sourceTree = "<group>"; };
 		4E92176B1A3E9C65007074F4 /* luatest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = luatest.cpp; path = script/3rdparty/lua/luatest.cpp; sourceTree = "<group>"; };
-		4EA606711A3F5641006668FD /* ScriptHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScriptHandler.cpp; path = script/ScriptHandler.cpp; sourceTree = "<group>"; };
-		4EA606721A3F5641006668FD /* ScriptHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScriptHandler.h; path = script/ScriptHandler.h; sourceTree = "<group>"; };
-		4EA606741A3F5AA4006668FD /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = script/3rdparty/lua/liblua.a; sourceTree = "<group>"; };
+		4E92176C1A3E9C65007074F4 /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = script/3rdparty/lua/liblua.a; sourceTree = "<group>"; };
+		4E92176F1A40CC07007074F4 /* ScriptHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScriptHandler.cpp; path = script/ScriptHandler.cpp; sourceTree = "<group>"; };
+		4E9217701A40CC07007074F4 /* ScriptHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScriptHandler.h; path = script/ScriptHandler.h; sourceTree = "<group>"; };
 		4EC0757C198ACA870055E3A9 /* library.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = library.xml; path = "../../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/res/lib/xml/library.xml"; sourceTree = "<group>"; };
 		4EC927DE198ECDAF00BEE30E /* Test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Test.xml; path = "../../../../../Library/Developer/Xcode/DerivedData/SDLGameEngine-cirhytxyimcfxyfnomzrvrnwccbl/Build/Products/Debug/res/lib/xml/Test.xml"; sourceTree = "<group>"; };
 		4ED5B7C219F4348C00042E67 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = main/Game.cpp; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EA606751A3F5AA4006668FD /* liblua.a in Frameworks */,
+				4E92176E1A3E9C65007074F4 /* liblua.a in Frameworks */,
 				4E7D79A5195B6FBE009A4353 /* SDL2_mixer.framework in Frameworks */,
 				4E1F09E31958CD2300F8C945 /* libz.dylib in Frameworks */,
 				4EFF5C43190741D3003074F9 /* SDL2_image.framework in Frameworks */,
@@ -254,8 +254,8 @@
 		4E5C789A192843B500005DE3 /* script */ = {
 			isa = PBXGroup;
 			children = (
-				4EA606711A3F5641006668FD /* ScriptHandler.cpp */,
-				4EA606721A3F5641006668FD /* ScriptHandler.h */,
+				4E92176F1A40CC07007074F4 /* ScriptHandler.cpp */,
+				4E9217701A40CC07007074F4 /* ScriptHandler.h */,
 				4ED5B7C719F4349800042E67 /* StateParser.cpp */,
 				4ED5B7C819F4349800042E67 /* StateParser.h */,
 				4EC0757B1989C7440055E3A9 /* res */,
@@ -361,7 +361,7 @@
 				4E9217691A3E9C65007074F4 /* luaconf.h */,
 				4E92176A1A3E9C65007074F4 /* lualib.h */,
 				4E92176B1A3E9C65007074F4 /* luatest.cpp */,
-				4EA606741A3F5AA4006668FD /* liblua.a */,
+				4E92176C1A3E9C65007074F4 /* liblua.a */,
 			);
 			name = lua;
 			sourceTree = "<group>";
@@ -565,9 +565,7 @@
 				4ED5B7C919F4349800042E67 /* StateParser.cpp in Sources */,
 				4ED5B7D219F434B900042E67 /* tinyxmlerror.cpp in Sources */,
 				4ED5B83419F4356F00042E67 /* LevelParser.cpp in Sources */,
-				4EA606731A3F5641006668FD /* ScriptHandler.cpp in Sources */,
 				4E9217711A40CC07007074F4 /* ScriptHandler.cpp in Sources */,
->>>>>>> 1d12c8720f329d9c588d8be8c988c385dd530164
 				4ED5B82D19F4355A00042E67 /* SDLGameObject.cpp in Sources */,
 				4ED5B81819F4354600042E67 /* Item.cpp in Sources */,
 				4ED5B80B19F4352B00042E67 /* MenuState.cpp in Sources */,
