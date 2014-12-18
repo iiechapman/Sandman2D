@@ -35,9 +35,9 @@ void ScriptHandler::CallFunction(const char *function){
   }
 }
 
-void ScriptHandler::SendValue(int value){
+void ScriptHandler::SendValue(int value, const char* valueName){
   lua_pushnumber(m_State, value);
-  lua_setglobal(m_State, "testValue");
+  lua_setglobal(m_State, valueName);
 }
 
 //initializes the Lua environment

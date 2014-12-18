@@ -64,33 +64,6 @@ bool Game::init(const char* title,
         cout << "SDL_Init fail\n";
         return false;
     }
-    
-    setGlobalZoom(3.0);
-    
-    m_pWindow = SDL_CreateWindow(title, xpos, ypos,
-                                 width, height, flags);
-    
-    //Window creation successful
-    if (m_pWindow != 0){
-      cout << "Window creation success\n";
-      m_pRenderer = SDL_CreateRenderer
-      (m_pWindow, -1, SDL_RENDERER_ACCELERATED |
-       SDL_RENDERER_PRESENTVSYNC
-       | SDL_RENDERER_TARGETTEXTURE);
-      
-      //Render creation successful
-      if (m_pRenderer != 0){
-        cout << "Renderer creation success\n";
-        SDL_SetRenderDrawColor(m_pRenderer, 0, 0, 0, 255);
-      } else {
-        cout << "Renderer creation fail\n";
-        return false; //Renderer init fail
-      }
-      
-    } else {//SDL_CreateWindow() fail
-      cout << "Window Creation fail \n";
-      return false;
-    }
 
   cout << "SDL Init success\n";
   
@@ -99,7 +72,7 @@ bool Game::init(const char* title,
   m_pScriptHandler->Init();
   m_pScriptHandler->Load();
   m_pScriptHandler->CallFunction("greet");
-  m_pScriptHandler->SendValue(22);
+  m_pScriptHandler->SendValue(12, "valueFromEngine");
   m_pScriptHandler->CallFunction("valueTest");
   
   

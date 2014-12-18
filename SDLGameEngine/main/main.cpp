@@ -27,12 +27,16 @@ const int INIT_FAIL = -1;
 const int INIT_SUCCESS = 0;
 
 char    title[FILENAME_MAX];
+char    FILE_PATH[FILENAME_MAX];
 Uint32  frameStart, frameTime;
 Uint32  secondTimer = 0;
 int     totalFrames = 0;
 int     FPS = 0;
 
 void  PrintWorkingDirectory();
+void  CaptureAppleDirectory();
+//char* GetWorkingDirectory();
+
 void  GetWorkingDirectory();
 void  CaptureWorkingDirectory(char* buffer);
 void  CaptureStartTime();
@@ -41,12 +45,15 @@ void  Sync();
 
 
 int main(int argc, char* args[]) {
+    
+    //Check for apple directory
 #ifdef __APPLE__
-  cout << "Checking Apple Directory structure\n";
-  GetWorkingDirectory();
+    cout << "Checking Apple Directory structure\n";
+    CaptureAppleDirectory();
+    GetWorkingDirectory();
 #endif
-  
-  PrintWorkingDirectory();
+    
+    PrintWorkingDirectory();
   
   // If Game Inititalizes, begin game loop
   if (Game::Instance()->init
@@ -79,27 +86,49 @@ int main(int argc, char* args[]) {
         return INIT_FAIL;
       }
   return INIT_SUCCESS;
+
 }
 
 
 // Prints current directory app is executed from
 void PrintWorkingDirectory() {
-  char filenameMax[FILENAME_MAX];
-  getcwd(filenameMax, sizeof(filenameMax));
-  cout << "Current working directory:\n" << filenameMax << "\n";
+    char filenameMax[FILENAME_MAX];
+    getcwd(filenameMax, sizeof(filenameMax));
+    cout << "Current working directory:\n" << filenameMax << "\n";
 }
 
 void CaptureWorkingDirectory(char* buffer) {
-  getcwd(buffer, sizeof(buffer));
+
+    getcwd(buffer, sizeof(buffer));
+    
+    cout << "Directory: " << buffer << "\n";
+    if (!buffer){
+        buffer = 0;
+    }
 }
 
 // Capture time before update
 void CaptureStartTime() {
-  frameStart = SDL_GetTicks();
+    frameStart = SDL_GetTicks();
 }
 
 // Count frames, frametime, and seconds after update
 void CaptureTickTime() {
+
+    // Count frames and frametime after update
+    totalFrames++;
+    frameTime = SDL_GetTicks() - frameStart;
+    
+    // Count seconds
+    secondTimer += frameTime;
+    if (secondTimer >= 1000) {
+        FPS = totalFrames;
+        Game::Instance()->setTitle(title);
+
+        secondTimer = 0;
+        totalFrames = 0;
+    }
+
   // Count frames and frametime after update
   totalFrames++;
   frameTime = SDL_GetTicks() - frameStart;
@@ -113,14 +142,35 @@ void CaptureTickTime() {
     secondTimer = 0;
     totalFrames = 0;
   }
+
 }
 
 // Delay processing to match desired FPS
 void Sync() {
-  if (frameTime < DELAY_TIME) {
-    SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
-  }
+    if (frameTime < DELAY_TIME) {
+        SDL_Delay(static_cast<int>(DELAY_TIME - frameTime));
+    }
 }
+
+
+
+void CaptureAppleDirectory(){
+#ifdef __APPLE__
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
+    CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+    char path[PATH_MAX];
+    if (!CFURLGetFileSystemRepresentation
+        (resourcesURL, TRUE, reinterpret_cast<UInt8*>(path), PATH_MAX)) {
+        // error!
+    }
+    CFRelease(resourcesURL);
+    
+    chdir(path);
+    std::cout << "Current Path: " << path << "\n";
+#endif
+}
+
+
 
 // This makes relative paths work in C++ in Xcode by changing directory to the
 // Resources folder inside the .app bundle
@@ -134,9 +184,10 @@ void GetWorkingDirectory() {
   }
   CFRelease(resourcesURL);
   
-  chdir(path);
-  std::cout << "Current Path: " << path << std::endl;
+    chdir(path);
+  std::cout << "Current Path: " << path << "\n";
 }
+
 
 
 

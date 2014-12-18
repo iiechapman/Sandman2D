@@ -566,6 +566,7 @@
 				4ED5B7D219F434B900042E67 /* tinyxmlerror.cpp in Sources */,
 				4ED5B83419F4356F00042E67 /* LevelParser.cpp in Sources */,
 				4EA606731A3F5641006668FD /* ScriptHandler.cpp in Sources */,
+				4E9217711A40CC07007074F4 /* ScriptHandler.cpp in Sources */,
 				4ED5B82D19F4355A00042E67 /* SDLGameObject.cpp in Sources */,
 				4ED5B81819F4354600042E67 /* Item.cpp in Sources */,
 				4ED5B80B19F4352B00042E67 /* MenuState.cpp in Sources */,
