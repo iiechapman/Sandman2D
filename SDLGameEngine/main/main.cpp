@@ -101,7 +101,7 @@ void CaptureWorkingDirectory(char* buffer) {
 
     getcwd(buffer, sizeof(buffer));
     
-    cout << "Directory: " << buffer << "\n";
+    //cout << "Directory: " << buffer << "\n";
     if (!buffer){
         buffer = 0;
     }
