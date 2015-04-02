@@ -54,6 +54,7 @@
 		4ED5B83C19F4357D00042E67 /* ObjectLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B83719F4357D00042E67 /* ObjectLayer.cpp */; };
 		4ED5B83D19F4357D00042E67 /* TileLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B83919F4357D00042E67 /* TileLayer.cpp */; };
 		4ED5B84019F4358600042E67 /* Vector2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5B83E19F4358600042E67 /* Vector2D.cpp */; };
+		4EFB63F41AC7249300BBE54A /* ISingleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4EFB63F21AC7249300BBE54A /* ISingleton.cpp */; };
 		4EFF5C43190741D3003074F9 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EFF5C42190741D3003074F9 /* SDL2_image.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +170,8 @@
 		4ED5B83A19F4357D00042E67 /* TileLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileLayer.h; path = level/layers/TileLayer.h; sourceTree = "<group>"; };
 		4ED5B83E19F4358600042E67 /* Vector2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector2D.cpp; path = util/Vector2D.cpp; sourceTree = "<group>"; };
 		4ED5B83F19F4358600042E67 /* Vector2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector2D.h; path = util/Vector2D.h; sourceTree = "<group>"; };
+		4EFB63F21AC7249300BBE54A /* ISingleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ISingleton.cpp; path = util/ISingleton.cpp; sourceTree = "<group>"; };
+		4EFB63F31AC7249300BBE54A /* ISingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ISingleton.h; path = util/ISingleton.h; sourceTree = "<group>"; };
 		4EFF5C42190741D3003074F9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = /Library/Frameworks/SDL2_image.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -288,6 +291,8 @@
 		4E5FFD5A1920318E002C1A3B /* util */ = {
 			isa = PBXGroup;
 			children = (
+				4EFB63F21AC7249300BBE54A /* ISingleton.cpp */,
+				4EFB63F31AC7249300BBE54A /* ISingleton.h */,
 				4ED5B83E19F4358600042E67 /* Vector2D.cpp */,
 				4ED5B83F19F4358600042E67 /* Vector2D.h */,
 			);
@@ -547,6 +552,7 @@
 				4ED5B7DD19F434F000042E67 /* Camera.cpp in Sources */,
 				4ED5B7D119F434B900042E67 /* tinyxml.cpp in Sources */,
 				4ED5B7DF19F434F000042E67 /* TilesetManager.cpp in Sources */,
+				4EFB63F41AC7249300BBE54A /* ISingleton.cpp in Sources */,
 				4ED5B82C19F4355A00042E67 /* IGameObject.cpp in Sources */,
 				4ED5B7C619F4348C00042E67 /* main.cpp in Sources */,
 				4ED5B7D019F434B900042E67 /* tinystr.cpp in Sources */,

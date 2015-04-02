@@ -25,6 +25,7 @@ bool TextureManager::load(string fileName, string id,
                           SDL_Renderer* pRenderer){
     if (!doesTextureExist(id)){
         SDL_Surface* pTempSurface = IMG_Load(fileName.c_str());
+
         
         if (pTempSurface == 0){
             cout << "ERROR - Could not load " << fileName.c_str() << "\n";
@@ -32,6 +33,8 @@ bool TextureManager::load(string fileName, string id,
         } else {
             cout << "Loaded Texture: " << fileName.c_str() << "\n";
         }
+
+
         
         SDL_Texture* pTexture =
         SDL_CreateTextureFromSurface(pRenderer, pTempSurface);

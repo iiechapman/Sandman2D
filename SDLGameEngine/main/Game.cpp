@@ -74,6 +74,8 @@ bool Game::init(const char* title,
   m_pScriptHandler->CallFunction("greet");
   m_pScriptHandler->SendValue(12, "valueFromEngine");
   m_pScriptHandler->CallFunction("valueTest");
+
+
   
   
   //Register Object Factories for use by scripts
@@ -82,7 +84,7 @@ bool Game::init(const char* title,
   
   GameObjectFactory::Instance()->registerType
   ("AnimatedGraphic", new AnimatedGraphicCreator());
-  
+
   GameObjectFactory::Instance()->registerType("Light", new LightCreator());
   GameObjectFactory::Instance()->registerType("Player", new PlayerCreator());
   GameObjectFactory::Instance()->registerType("Enemy", new EnemyCreator());
@@ -213,6 +215,7 @@ void Game::setPlayer(Player* player){
   m_Player = player;
 
   Camera::Instance()->setTarget(&player->GetParams().getPosition());
+
   cout << "Camera locked to player\n";
 }
 

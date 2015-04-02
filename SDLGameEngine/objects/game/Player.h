@@ -31,6 +31,7 @@ public:
     /*! \fn Player();
      *  \brief Default ctor, used by object factory
      */
+    typedef SDLGameObject super;
     Player();
     Player(GameObjectParams params, int numberFrames);
     virtual void draw();

@@ -43,7 +43,7 @@ Player::Player(){
  */
 ///<Constructor for player, connects eventhandler and preloaded params
 Player::Player(GameObjectParams params , int numberFrames)
-:SDLGameObject(params){
+:super(params){
     GetParams().setMaxFrames(numberFrames);
     EventManager::Instance()->addHandler(GetParams().getEvents());
     GetParams().getEvents()->registerEvent("set_position");
@@ -51,12 +51,12 @@ Player::Player(GameObjectParams params , int numberFrames)
 
 
 void Player::load(GameObjectParams params){
-    SDLGameObject::load(params);
+    super::load(params);
 }
 
 
 void Player::draw(){
-    SDLGameObject::draw();
+    super::draw();
 }
 
 void Player::collision(){
@@ -87,8 +87,9 @@ void Player::update(){
     handleMovement();
     handleAnimation();
     
-    SDLGameObject::update();
+    super::update();
     
+    //Debug
     //cout << "Posx: " << GetParams().getPosition().getX() << "\n";
     //cout << "Posy: " << GetParams().getPosition().getY() << "\n";
 }
@@ -128,14 +129,14 @@ void Player::handleInput(){
         InputHandler::Instance()->getButtonState(0, XB_DPAD_UP)){
         m_bIsJetting = true;
         
-
+        
         //Testing sending to event manager
         EventManager::Instance()->receiveEvent
         (new vector<Event*>
          {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
                     1, vector<string>{"jet_sound"})});
         
-    
+        
     } else {
         m_bIsJetting = false;
     }
@@ -163,8 +164,8 @@ void Player::handleInput(){
             //Testing sending to event manager
             EventManager::Instance()->receiveEvent
             (new vector<Event*>
-            {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
-                       1, vector<string>{"jump_sound"})});
+             {new Event("player", EVENT_TYPE_BROADCAST,"play_sound",
+                        1, vector<string>{"jump_sound"})});
         }
         m_bJumpHeld = true;
     } else {
@@ -187,7 +188,7 @@ void Player::handleInput(){
     }
     
     if (!(InputHandler::Instance()->isKeyDown(SDL_SCANCODE_Z) ||
-         InputHandler::Instance()->getButtonState(0, XB_B_BUTTON))) {
+          InputHandler::Instance()->getButtonState(0, XB_B_BUTTON))) {
         if (m_BoostTimer <= 0){
             m_bBoostHeld = false;
         }
@@ -537,7 +538,7 @@ void Player::handleMovement(){
 }
 
 void Player::clean(){
-    SDLGameObject::clean();
+    super::clean();
     cout << "Cleaning player\n";
 }
 
